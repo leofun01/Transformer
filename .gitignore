@@ -19,6 +19,13 @@ x64/
 x86/
 
 # Logs
-#[Ll]og/
-#*.log
-#*.LOG
+[Ll]og/
+*.log
+UpgradeLog.*
+_UpgradeReport_Files/
+
+# Backup files
+Backup/
+
+# Files under development
+Draft/
