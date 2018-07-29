@@ -1,0 +1,24 @@
+# Visual Studio files
+*.suo
+*.user
+*.cache
+.vs*/
+
+# Binary files
+*.exe
+*.dll
+*.manifest
+*.pdb
+
+# Build results
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+
+# Logs
+#[Ll]og/
+#*.log
+#*.LOG
