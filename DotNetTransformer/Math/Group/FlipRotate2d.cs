@@ -112,7 +112,7 @@ namespace DotNetTransformer.Math.Group {
 		/// <para>true for "FX", "FY", "D1", "D2";</para>
 		/// <para>false for "NO", "HT", "RC", "RN".</para>
 		/// </return></summary>
-		public bool IsReflection { get { return Value - 2 < 4; } }
+		public bool IsReflection { get { return (Value + 2 & 4) == 4; } }
 		/// <summary><return>
 		/// <para>true for "FX", "FY";</para>
 		/// <para>false for "NO", "HT", "D1", "D2", "RC", "RN".</para>
@@ -127,7 +127,7 @@ namespace DotNetTransformer.Math.Group {
 		/// <para>true for "NO", "HT", "RC", "RN";</para>
 		/// <para>false for "FX", "FY", "D1", "D2".</para>
 		/// </return></summary>
-		public bool IsRotation { get { return Value - 2 > 3; } }
+		public bool IsRotation { get { return (Value + 2 & 4) == 0; } }
 		/// <summary><return>
 		/// <para>true for "NO", "HT";</para>
 		/// <para>false for "FX", "FY", "D1", "D2", "RC", "RN".</para>
