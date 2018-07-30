@@ -13,6 +13,7 @@
 	[Wiki](../../wiki)
 </details>
 
+<<<<<<< HEAD
 <details open="open">
 	<summary><h2 id="dict-struct">Directory structure</h2></summary>
 	<ul>
@@ -115,4 +116,11 @@
 			</details>
 		</li>
 	</ul>
+=======
+<details>
+	<summary>
+		## Spoiler
+	</summary>
+	Details
+>>>>>>> 6b7b9d050efd29bcb205112ad0727175337463b7
 </details>
