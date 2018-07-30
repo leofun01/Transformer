@@ -45,8 +45,7 @@
 	- `Transformer_vs2010.sln`
 	- `Transformer_vs2013.sln`
 
-## Spoiler
 <details>
-	<summary>Summary</summary>
+	<summary><h2 id="spoiler">Spoiler</h2></summary>
 	Details
 </details>
