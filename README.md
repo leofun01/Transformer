@@ -74,7 +74,7 @@
 						</details>
 					</li>
 					<li>
-						<details open="open">
+						<details>
 							<summary><code>Properties</code></summary>
 							<ul>
 								<li><a href="DotNetTransformer/Properties/AssemblyInfo.cs"><code>AssemblyInfo.cs</code></a></li>
@@ -82,7 +82,7 @@
 						</details>
 					</li>
 					<li>
-						<details open="open">
+						<details>
 							<summary><code>System</code></summary>
 							<ul>
 								<li><a href="DotNetTransformer/System/ExtensionAttribute.cs"><code>ExtensionAttribute.cs</code></a></li>
