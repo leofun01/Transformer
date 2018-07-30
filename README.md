@@ -1,20 +1,20 @@
-# Transformer
+<h1>Transformer</h1>
 
 <details open="open">
-	<summary><h2 id="toc">Table of contetns</h2></summary>
+	<summary><h2>Table of contetns</h2></summary>
 	<ul>
 		<li><a href="#wiki">Wiki</a></li>
-		<li>[Directory structure](#dict-struct)</li>
+		<li><a href="#directory-structure">Directory structure</a></li>
 	</ul>
 </details>
 
 <details open="open">
-	<summary><h2 id="wiki">Wiki</h2></summary>
+	<summary><h2>Wiki</h2></summary>
 	<a href="../../wiki">Wiki</a>
 </details>
 
 <details open="open">
-	<summary><h2 id="dict-struct">Directory structure</h2></summary>
+	<summary><h2>Directory structure</h2></summary>
 	<ul>
 		<li>
 			<details open="open">
