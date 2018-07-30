@@ -3,71 +3,70 @@
 <details open="open">
 	<summary><h2 id="toc">Table of contetns</h2></summary>
 	<ul>
-		<li>[Wiki](#wiki)</li>
+		<li><a href="#wiki">Wiki</a></li>
 		<li>[Directory structure](#dict-struct)</li>
 	</ul>
 </details>
 
 <details open="open">
 	<summary><h2 id="wiki">Wiki</h2></summary>
-	[Wiki](../../wiki)
+	<a href="../../wiki">Wiki</a>
 </details>
 
-<<<<<<< HEAD
 <details open="open">
 	<summary><h2 id="dict-struct">Directory structure</h2></summary>
 	<ul>
 		<li>
 			<details open="open">
-				<summary>`DotNetTransformer`</summary>
+				<summary><code>DotNetTransformer</code></summary>
 				<ul>
 					<li>
 						<details open="open">
-							<summary>`Collections`</summary>
+							<summary><code>Collections</code></summary>
 							<ul>
-								<li>[`EnumerableConverter.cs`](DotNetTransformer/Collections/EnumerableConverter.cs)</li>
+								<li><a href="DotNetTransformer/Collections/EnumerableConverter.cs"><code>EnumerableConverter.cs</code></a></li>
 							</ul>
 						</details>
 					</li>
 					<li>
 						<details open="open">
-							<summary>`Extensions`</summary>
+							<summary><code>Extensions</code></summary>
 							<ul>
-								<li>[`ArrayExtension.cs`](DotNetTransformer/Extensions/ArrayExtension.cs)</li>
-								<li>[`EnumerableExtension.cs`](DotNetTransformer/Extensions/EnumerableExtension.cs)</li>
-								<li>[`RotateFlipTypeExtension.cs`](DotNetTransformer/Extensions/RotateFlipTypeExtension.cs)</li>
+								<li><a href="DotNetTransformer/Extensions/ArrayExtension.cs"><code>ArrayExtension.cs</code></a></li>
+								<li><a href="DotNetTransformer/Extensions/EnumerableExtension.cs"><code>EnumerableExtension.cs</code></a></li>
+								<li><a href="DotNetTransformer/Extensions/RotateFlipTypeExtension.cs"><code>RotateFlipTypeExtension.cs</code></a></li>
 							</ul>
 						</details>
 					</li>
 					<li>
 						<details open="open">
-							<summary>`Math`</summary>
+							<summary><code>Math</code></summary>
 							<ul>
 								<li>
 									<details open="open">
-										<summary>`Group`</summary>
+										<summary><code>Group</code></summary>
 										<ul>
-											<li>[`FiniteGroup.cs`](DotNetTransformer/Math/Group/FiniteGroup.cs)</li>
-											<li>[`FiniteGroupExtension.cs`](DotNetTransformer/Math/Group/FiniteGroupExtension.cs)</li>
-											<li>[`FlipRotate2d.cs`](DotNetTransformer/Math/Group/FlipRotate2d.cs)</li>
-											<li>[`IFiniteGroupElement.cs`](DotNetTransformer/Math/Group/IFiniteGroupElement.cs)</li>
-											<li>[`IGroup.cs`](DotNetTransformer/Math/Group/IGroup.cs)</li>
-											<li>[`IGroupElement.cs`](DotNetTransformer/Math/Group/IGroupElement.cs)</li>
+											<li><a href="DotNetTransformer/Math/Group/FiniteGroup.cs"><code>FiniteGroup.cs</code></a></li>
+											<li><a href="DotNetTransformer/Math/Group/FiniteGroupExtension.cs"><code>FiniteGroupExtension.cs</code></a></li>
+											<li><a href="DotNetTransformer/Math/Group/FlipRotate2d.cs"><code>FlipRotate2d.cs</code></a></li>
+											<li><a href="DotNetTransformer/Math/Group/IFiniteGroupElement.cs"><code>IFiniteGroupElement.cs</code></a></li>
+											<li><a href="DotNetTransformer/Math/Group/IGroup.cs"><code>IGroup.cs</code></a></li>
+											<li><a href="DotNetTransformer/Math/Group/IGroupElement.cs"><code>IGroupElement.cs</code></a></li>
 										</ul>
 									</details>
 								</li>
 								<li>
 									<details open="open">
-										<summary>`Set`</summary>
+										<summary><code>Set</code></summary>
 										<ul>
-											<li>[`EditableFiniteSet.cs`](DotNetTransformer/Math/Set/EditableFiniteSet.cs)</li>
-											<li>[`EmptySet.cs`](DotNetTransformer/Math/Set/EmptySet.cs)</li>
-											<li>[`FiniteSet.cs`](DotNetTransformer/Math/Set/FiniteSet.cs)</li>
-											<li>[`IEditableSet.cs`](DotNetTransformer/Math/Set/IEditableSet.cs)</li>
-											<li>[`ISet.cs`](DotNetTransformer/Math/Set/ISet.cs)</li>
-											<li>[`ISetExtension.cs`](DotNetTransformer/Math/Set/ISetExtension.cs)</li>
-											<li>[`ISubSet.cs`](DotNetTransformer/Math/Set/ISubSet.cs)</li>
-											<li>[`ISuperSet.cs`](DotNetTransformer/Math/Set/ISuperSet.cs)</li>
+											<li><a href="DotNetTransformer/Math/Set/EditableFiniteSet.cs"><code>EditableFiniteSet.cs</code></a></li>
+											<li><a href="DotNetTransformer/Math/Set/EmptySet.cs"><code>EmptySet.cs</code></a></li>
+											<li><a href="DotNetTransformer/Math/Set/FiniteSet.cs"><code>FiniteSet.cs</code></a></li>
+											<li><a href="DotNetTransformer/Math/Set/IEditableSet.cs"><code>IEditableSet.cs</code></a></li>
+											<li><a href="DotNetTransformer/Math/Set/ISet.cs"><code>ISet.cs</code></a></li>
+											<li><a href="DotNetTransformer/Math/Set/ISetExtension.cs"><code>ISetExtension.cs</code></a></li>
+											<li><a href="DotNetTransformer/Math/Set/ISubSet.cs"><code>ISubSet.cs</code></a></li>
+											<li><a href="DotNetTransformer/Math/Set/ISuperSet.cs"><code>ISuperSet.cs</code></a></li>
 										</ul>
 									</details>
 								</li>
@@ -76,51 +75,35 @@
 					</li>
 					<li>
 						<details open="open">
-							<summary>`Properties`</summary>
+							<summary><code>Properties</code></summary>
 							<ul>
-								<li>[`AssemblyInfo.cs`](DotNetTransformer/Properties/AssemblyInfo.cs)</li>
+								<li><a href="DotNetTransformer/Properties/AssemblyInfo.cs"><code>AssemblyInfo.cs</code></a></li>
 							</ul>
 						</details>
 					</li>
 					<li>
 						<details open="open">
-							<summary>`System`</summary>
+							<summary><code>System</code></summary>
 							<ul>
-								<li>[`ExtensionAttribute.cs`](DotNetTransformer/System/ExtensionAttribute.cs)</li>
+								<li><a href="DotNetTransformer/System/ExtensionAttribute.cs"><code>ExtensionAttribute.cs</code></a></li>
 							</ul>
 						</details>
 					</li>
-					<li>`DotNetTransformer_vs2008.csproj`</li>
-					<li>`DotNetTransformer_vs2010.csproj`</li>
-					<li>`DotNetTransformer_vs2013.csproj`</li>
+					<li><code>DotNetTransformer_vs2008.csproj</code></li>
+					<li><code>DotNetTransformer_vs2010.csproj</code></li>
+					<li><code>DotNetTransformer_vs2013.csproj</code></li>
 				</ul>
 			</details>
 		</li>
 		<li>
 			<details open="open">
-				<summary>`VS`</summary>
+				<summary><code>VS</code></summary>
 				<ul>
-					<li>`Transformer_vs2008.sln`</li>
-					<li>`Transformer_vs2010.sln`</li>
-					<li>`Transformer_vs2013.sln`</li>
-				</ul>
-			</details>
-		</li>
-		<li>
-			<details open="open">
-				<summary>``</summary>
-				<ul>
-					<li></li>
-					<li></li>
+					<li><code>Transformer_vs2008.sln</code></li>
+					<li><code>Transformer_vs2010.sln</code></li>
+					<li><code>Transformer_vs2013.sln</code></li>
 				</ul>
 			</details>
 		</li>
 	</ul>
-=======
-<details>
-	<summary>
-		## Spoiler
-	</summary>
-	Details
->>>>>>> 6b7b9d050efd29bcb205112ad0727175337463b7
 </details>
