@@ -1,1 +1,0 @@
-Default pull request template

@@ -1,1 +1,0 @@
-Issue template "temp2"
