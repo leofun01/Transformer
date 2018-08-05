@@ -7,7 +7,7 @@
 ## Wiki
 [Wiki](../../wiki)
 
-## Directory structure
+## Files tree
 <ul>
 	<li>
 		<details open="open">
