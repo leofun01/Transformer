@@ -2,12 +2,12 @@
 
 ## Table of contetns
 - [Wiki](#wiki)
-- [Files tree](#files-tree)
+- [Directory structure](#directory-structure)
 
 ## Wiki
 [Wiki](../../wiki)
 
-## Files tree
+## Directory structure
 <ul>
 	<li>
 		<details open="open">
