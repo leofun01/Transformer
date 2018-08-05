@@ -2,7 +2,7 @@
 
 ## Table of contetns
 - [Wiki](#wiki)
-- [Directory structure](#directory-structure)
+- [Files tree](#files-tree)
 
 ## Wiki
 [Wiki](../../wiki)
