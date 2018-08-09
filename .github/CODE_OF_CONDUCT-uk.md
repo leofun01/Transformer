@@ -1,13 +1,13 @@
-# Code of conduct
-This code of conduct define expectations for behavior.
+# Норми поведінки
+Ці норми визначають очікування стосовно поведінки.
 
-## License
-This repo is licensed under the **[GNU General Public License v2.0](../LICENSE)**
+## Ліцензія
+Цей репозиторій розповсюджується з ліцензією **[GNU General Public License v2.0](../LICENSE)**.
 
-## How to contribute
-To contribute, fork this repo, and submit a PR. We'll review, discuss, and merge changes as needed.
+## Як зробити внесок
+Для внеску, зробіть "fork" цього репозиторію, і відправте "Pull request". Ми переглянемо, обговоримо, і приєднаємо зміни, якщо вважатимемо за потрібне.
 
-## Translations available
-The Code of Conduct is currently available in:
-- English
-- 
+## Доступні переклади
+Норми поведінки зараз доступні такими мовами:
+- [English](CODE_OF_CONDUCT.md)
+- Українська
