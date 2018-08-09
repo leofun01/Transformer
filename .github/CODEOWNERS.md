@@ -1,7 +1,4 @@
-# Branch owners
+# CODEOWNERS
 
-| Branch  | Owner     |
-|---------|-----------|
-| master  | @leofun01 |
-| develop | @leofun01 |
-| draft   | @leofun01 |
+## Global owner
+*	@leofun01
