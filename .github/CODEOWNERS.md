@@ -1,6 +1,7 @@
 # Branch owners
----
-master: @leofun01
-develop: @leofun01
-draft: @leofun01
----
+
+| Branch  | Owner     |
+|---------|-----------|
+| master  | @leofun01 |
+| develop | @leofun01 |
+| draft   | @leofun01 |
