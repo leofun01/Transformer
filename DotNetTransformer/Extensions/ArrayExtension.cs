@@ -34,7 +34,7 @@ namespace DotNetTransformer.Extensions {
 			return result;
 		}
 		public static T[,] Transform<T>(this T[,] array, RotateFlipType transformation) {
-			return Transform(array, FlipRotate2d.FromRotateFlipType(transformation));
+			return Transform<T>(array, FlipRotate2d.FromRotateFlipType(transformation));
 		}
 		/*/
 		private static T[,] Transform<T>(T[,] array, int dimension, int dx, int dy) {
