@@ -1,13 +1,3 @@
-//	ISetExtension.cs
-//	
-//	Based on :
-//		Math
-//			Set theory
-//	
-//	Author   : leofun01
-//	Created  : 2018-07-02
-//	Modified : 2018-07-19
-
 using System;
 
 namespace DotNetTransformer.Math.Set {
@@ -19,11 +9,9 @@ namespace DotNetTransformer.Math.Set {
 
 			public InternalSet(Predicate<T> contains) { _contains = contains; }
 
-			//public bool IsEmpty { get { return false; } }	// хз як його описати ?
 			public bool Contains(T item) { return _contains(item); }
 		}
 
-		// Test those functions with temporary objects !
 		public static ISet<T> Union<T>(this ISet<T> _this, ISet<T> other)
 			where T : IEquatable<T>
 		{
