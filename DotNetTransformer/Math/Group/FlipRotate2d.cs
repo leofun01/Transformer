@@ -14,7 +14,7 @@
 //	
 //	Author   : leofun01
 //	Created  : 2018-05-02
-//	Modified : 2018-07-28
+//	Modified : 2018-08-14
 
 using System;
 using System.Collections.Generic;
@@ -22,6 +22,7 @@ using StringBuilder = System.Text.StringBuilder;
 using RotateFlipType = System.Drawing.RotateFlipType;
 
 namespace DotNetTransformer.Math.Group {
+	[Serializable]
 	public struct FlipRotate2d : IFiniteGroupElement<FlipRotate2d>
 	{
 		public readonly byte Value;
