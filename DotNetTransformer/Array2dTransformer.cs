@@ -94,6 +94,6 @@ namespace DotNetTransformer {
 		public static bool operator ==(Array2dTransformer<T> l, Array2dTransformer<T> r) { return l.Equals(r); }
 		public static bool operator !=(Array2dTransformer<T> l, Array2dTransformer<T> r) { return !l.Equals(r); }
 
-		public static implicit operator T[,](Array2dTransformer<T> o) { return o.ToArray(); }
+		public static explicit operator T[,](Array2dTransformer<T> o) { return o.ToArray(); }
 	}
 }
