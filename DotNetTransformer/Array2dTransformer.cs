@@ -28,25 +28,25 @@ namespace DotNetTransformer {
 		public int Rank { get { return _array.Rank; } }
 
 		public int GetLength(int dimension) {
-			if(dimension >> 1 != 0)
+			if((dimension & -2) != 0)
 				throw new IndexOutOfRangeException();
 			return _array.GetLength(_transformation.Value >> 2 ^ dimension);
 		}
 		[ComVisible(false)]
 		public long GetLongLength(int dimension) {
-			if(dimension >> 1 != 0)
+			if((dimension & -2) != 0)
 				throw new IndexOutOfRangeException();
 			return _array.GetLongLength(_transformation.Value >> 2 ^ dimension);
 		}
 		[ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
 		public int GetLowerBound(int dimension) {
-			if(dimension >> 1 != 0)
+			if((dimension & -2) != 0)
 				throw new IndexOutOfRangeException();
 			return _array.GetLowerBound(_transformation.Value >> 2 ^ dimension);
 		}
 		[ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
 		public int GetUpperBound(int dimension) {
-			if(dimension >> 1 != 0)
+			if((dimension & -2) != 0)
 				throw new IndexOutOfRangeException();
 			return _array.GetUpperBound(_transformation.Value >> 2 ^ dimension);
 		}
@@ -94,6 +94,6 @@ namespace DotNetTransformer {
 		public static bool operator ==(Array2dTransformer<T> l, Array2dTransformer<T> r) { return l.Equals(r); }
 		public static bool operator !=(Array2dTransformer<T> l, Array2dTransformer<T> r) { return !l.Equals(r); }
 
-		public static implicit operator T[,](Array2dTransformer<T> o) { return o.ToArray(); }
+		public static explicit operator T[,](Array2dTransformer<T> o) { return o.ToArray(); }
 	}
 }
