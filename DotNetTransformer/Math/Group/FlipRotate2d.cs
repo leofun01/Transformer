@@ -4,6 +4,7 @@ using StringBuilder = System.Text.StringBuilder;
 using RotateFlipType = System.Drawing.RotateFlipType;
 
 namespace DotNetTransformer.Math.Group {
+	[Serializable]
 	public struct FlipRotate2d : IFiniteGroupElement<FlipRotate2d>
 	{
 		public readonly byte Value;
