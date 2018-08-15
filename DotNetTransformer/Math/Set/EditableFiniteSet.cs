@@ -1,3 +1,13 @@
+//	EditableFiniteSet.cs
+//	
+//	Based on :
+//		Math
+//			Set theory
+//				Finite set
+//	
+//	Created  : 2018-07-02
+//	Modified : 2018-07-16
+
 using System;
 
 namespace DotNetTransformer.Math.Set {
