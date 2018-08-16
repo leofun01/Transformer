@@ -4,6 +4,15 @@ using FlipRotate2d = DotNetTransformer.Math.Group.FlipRotate2d;
 namespace DotNetTransformer.Extensions {
 	public static class ArrayExtension
 	{
+		public static T[] Transform<T>(this T[] array, bool flip) {
+			if(array == null) return null;
+			int len = array.GetLength(0);
+			int ai = flip ? len - 1 : 0, di = flip ? -1 : 1;
+			T[] result = new T[len];
+			for(int ri = 0; ri < len; ++ri, ai += di)
+				result[ri] = array[ai];
+			return result;
+		}
 		public static T[,] Transform<T>(this T[,] array, FlipRotate2d transformation) {
 			if(array == null) return null;
 			byte t = transformation.Value;
