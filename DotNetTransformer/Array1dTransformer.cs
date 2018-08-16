@@ -1,13 +1,3 @@
-//	Array1dTransformer.cs
-//	
-//	Based on :
-//		.Net
-//			System.Array
-//	
-//	Author   : leofun01
-//	Created  : 2018-08-16
-//	Modified : 2018-08-16
-
 using System;
 using System.Runtime.ConstrainedExecution;
 using System.Runtime.InteropServices;
@@ -80,14 +70,6 @@ namespace DotNetTransformer {
 		}
 		public T[] ToArray() {
 			return _array.Transform<T>(_flip);
-			/*//
-			int len = _array.GetLength(0);
-			int ai = _flip ? len - 1 : 0, di = _flip ? -1 : 1;
-			T[] result = new T[len];
-			for(int ri = 0; ri < len; ++ri, ai += di)
-				result[ri] = _array[ai];
-			return result;
-			//*/
 		}
 
 		public static bool operator ==(Array1dTransformer<T> l, Array1dTransformer<T> r) { return l.Equals(r); }
