@@ -5,8 +5,6 @@
 //			System.Collections.Generic.IEnumerable<T>
 //	
 //	Author   : leofun01
-//	Created  : 2018-07-27
-//	Modified : 2018-07-27
 
 using System.Collections.Generic;
 using FlipRotate2d = DotNetTransformer.Math.Group.FlipRotate2d;

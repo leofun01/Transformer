@@ -5,8 +5,6 @@
 //			Set theory
 //	
 //	Author   : leofun01
-//	Created  : 2018-07-02
-//	Modified : 2018-07-19
 
 using System;
 

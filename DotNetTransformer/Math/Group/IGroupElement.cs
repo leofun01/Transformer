@@ -6,8 +6,6 @@
 //				Group theory
 //	
 //	Author   : leofun01
-//	Created  : 2018-06-22
-//	Modified : 2018-07-02
 
 using System;
 

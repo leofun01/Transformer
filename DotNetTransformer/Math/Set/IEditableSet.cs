@@ -3,9 +3,6 @@
 //	Based on :
 //		Math
 //			Set theory
-//	
-//	Created  : 2018-07-02
-//	Modified : 2018-07-16
 
 using System;
 

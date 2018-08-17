@@ -5,8 +5,6 @@
 //			System.Array
 //	
 //	Author   : leofun01
-//	Created  : 2018-08-16
-//	Modified : 2018-08-16
 
 using System;
 using System.Runtime.ConstrainedExecution;

@@ -5,8 +5,6 @@
 //			System.Array
 //	
 //	Author   : leofun01
-//	Created  : 2018-07-25
-//	Modified : 2018-08-16
 
 using RotateFlipType = System.Drawing.RotateFlipType;
 using FlipRotate2d = DotNetTransformer.Math.Group.FlipRotate2d;

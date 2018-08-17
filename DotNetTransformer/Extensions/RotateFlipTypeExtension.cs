@@ -5,8 +5,6 @@
 //			System.Drawing.RotateFlipType
 //	
 //	Author   : leofun01
-//	Created  : 2018-07-27
-//	Modified : 2018-07-28
 
 using RotateFlipType = System.Drawing.RotateFlipType;
 

@@ -6,8 +6,6 @@
 //				Finite set
 //	
 //	Author   : leofun01
-//	Created  : 2018-07-02
-//	Modified : 2018-07-15
 
 using System;
 using System.Collections;

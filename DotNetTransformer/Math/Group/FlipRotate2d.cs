@@ -13,8 +13,6 @@
 //					Non-commutative group (non-abelian group)
 //	
 //	Author   : leofun01
-//	Created  : 2018-05-02
-//	Modified : 2018-08-14
 
 using System;
 using System.Collections.Generic;
