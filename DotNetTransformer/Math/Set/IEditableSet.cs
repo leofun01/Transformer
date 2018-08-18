@@ -1,3 +1,9 @@
+//	IEditableSet.cs
+//	
+//	Based on :
+//		Math
+//			Set theory
+
 using System;
 
 namespace DotNetTransformer.Math.Set {

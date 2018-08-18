@@ -1,3 +1,11 @@
+//	ArrayExtension.cs
+//	
+//	Based on :
+//		.Net
+//			System.Array
+//	
+//	Author   : leofun01
+
 using RotateFlipType = System.Drawing.RotateFlipType;
 using FlipRotate2d = DotNetTransformer.Math.Group.FlipRotate2d;
 

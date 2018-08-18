@@ -1,3 +1,11 @@
+//	ISetExtension.cs
+//	
+//	Based on :
+//		Math
+//			Set theory
+//	
+//	Author   : leofun01
+
 using System;
 
 namespace DotNetTransformer.Math.Set {
@@ -41,13 +49,13 @@ namespace DotNetTransformer.Math.Set {
 			where T : IEquatable<T>
 			where TSet : ISet<T>
 		{
-			return other.IsSupersetOf(_this);
+			return !ReferenceEquals(other, null) && other.IsSupersetOf(_this);
 		}
 		public static bool IsSupersetOf<T, TSet>(this TSet _this, ISubSet<T, TSet> other)
 			where T : IEquatable<T>
 			where TSet : ISet<T>
 		{
-			return other.IsSubsetOf(_this);
+			return !ReferenceEquals(other, null) && other.IsSubsetOf(_this);
 		}
 	}
 }

@@ -1,3 +1,12 @@
+//	FiniteSet.cs
+//	
+//	Based on :
+//		Math
+//			Set theory
+//				Finite set
+//	
+//	Author   : leofun01
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -23,10 +32,10 @@ namespace DotNetTransformer.Math.Set {
 			return GetEnumerator();
 		}
 		public virtual bool IsSubsetOf(ISet<T> other) {
-			return !Exist(e => !other.Contains(e));
+			return !ReferenceEquals(other, null) && !Exist(e => !other.Contains(e));
 		}
 		public bool IsSupersetOf(ISubSet<T, FiniteSet<T>> other) {
-			return other.IsSubsetOf(this);
+			return !ReferenceEquals(other, null) && other.IsSubsetOf(this);
 		}
 	}
 }

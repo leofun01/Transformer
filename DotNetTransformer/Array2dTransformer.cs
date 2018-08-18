@@ -1,3 +1,11 @@
+//	Array2dTransformer.cs
+//	
+//	Based on :
+//		.Net
+//			System.Array
+//	
+//	Author   : leofun01
+
 using System;
 using System.Runtime.ConstrainedExecution;
 using System.Runtime.InteropServices;
