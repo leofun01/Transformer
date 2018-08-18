@@ -62,7 +62,7 @@ namespace DotNetTransformer.Math.Group {
 		public static bool IsGeneratingSetOf<T>(this IEnumerable<T> list, FiniteGroup<T> group)
 			where T : IFiniteGroupElement<T>
 		{
-			return group.IsSubsetOf(CreateGroup<T>(list));
+			return !ReferenceEquals(group, null) && group.IsSubsetOf(CreateGroup<T>(list));
 		}
 	}
 }
