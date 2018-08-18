@@ -17,9 +17,11 @@ namespace DotNetTransformer.Math.Set {
 
 			public InternalSet(Predicate<T> contains) { _contains = contains; }
 
+			//public bool IsEmpty { get { return false; } }	// хз як його описати ?
 			public bool Contains(T item) { return _contains(item); }
 		}
 
+		// Test those functions with temporary objects !
 		public static ISet<T> Union<T>(this ISet<T> _this, ISet<T> other)
 			where T : IEquatable<T>
 		{
