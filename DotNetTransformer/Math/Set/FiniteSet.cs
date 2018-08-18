@@ -13,15 +13,10 @@ using System.Collections.Generic;
 
 namespace DotNetTransformer.Math.Set {
 	public abstract partial class FiniteSet<T> : ISet<T>, IEnumerable<T>
-		//, ISubSet<T, FiniteSet<T>>, ISubSet<T, FiniteSet<T>, FiniteSet<T>>
-		, ISubSet<T, ISet<T>>//, ISubSet<T, ISet<T>, ISet<T>>
-		//, ISuperSet<T, FiniteSet<T>>, ISuperSet<T, FiniteSet<T>, FiniteSet<T>>
+		, ISubSet<T, ISet<T>>
 		, ISuperSet<T, ISubSet<T, FiniteSet<T>>>
 		where T : IEquatable<T>
 	{
-		//public bool IsCountable { get { return true; } }
-		//public bool IsFinite { get { return true; } }
-		//public virtual bool IsEmpty { get { return !GetEnumerator().MoveNext(); } }
 		public abstract int Count { get; }
 		public virtual bool Contains(T item) {
 			return Exist(e => e.Equals(item));
