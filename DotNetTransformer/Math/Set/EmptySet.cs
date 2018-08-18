@@ -1,11 +1,3 @@
-//	EmptySet.cs
-//	
-//	Based on :
-//		Math
-//			Set theory
-//	
-//	Author   : leofun01
-
 using System;
 using System.Collections.Generic;
 

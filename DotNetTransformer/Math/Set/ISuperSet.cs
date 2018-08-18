@@ -1,11 +1,3 @@
-//	ISuperSet.cs
-//	
-//	Based on :
-//		Math
-//			Set theory
-//	
-//	Author   : leofun01
-
 using System;
 
 namespace DotNetTransformer.Math.Set {

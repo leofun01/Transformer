@@ -1,19 +1,3 @@
-//	FlipRotate2d.cs
-//	
-//	Based on :
-//		Math
-//			Abstract algebra
-//				Group theory
-//					Discrete group
-//					Finite group
-//					Dihedral group { D_4 D_8 ?, C_2, C_4, SO(2) }
-//					Symmetry group
-//					Isometry group
-//					Orthogonal group
-//					Non-commutative group (non-abelian group)
-//	
-//	Author   : leofun01
-
 using System;
 using System.Collections.Generic;
 using StringBuilder = System.Text.StringBuilder;

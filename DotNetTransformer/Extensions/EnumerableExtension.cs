@@ -1,11 +1,3 @@
-//	EnumerableExtension.cs
-//	
-//	Based on :
-//		.Net
-//			System.Collections.Generic.IEnumerable<T>
-//	
-//	Author   : leofun01
-
 using System.Collections.Generic;
 using FlipRotate2d = DotNetTransformer.Math.Group.FlipRotate2d;
 using RotateFlipType = System.Drawing.RotateFlipType;

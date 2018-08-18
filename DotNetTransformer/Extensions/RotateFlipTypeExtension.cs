@@ -1,11 +1,3 @@
-//	RotateFlipTypeExtension.cs
-//	
-//	Based on :
-//		.Net
-//			System.Drawing.RotateFlipType
-//	
-//	Author   : leofun01
-
 using RotateFlipType = System.Drawing.RotateFlipType;
 
 namespace DotNetTransformer.Extensions {

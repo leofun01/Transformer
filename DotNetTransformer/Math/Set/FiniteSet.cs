@@ -1,12 +1,3 @@
-//	FiniteSet.cs
-//	
-//	Based on :
-//		Math
-//			Set theory
-//				Finite set
-//	
-//	Author   : leofun01
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
