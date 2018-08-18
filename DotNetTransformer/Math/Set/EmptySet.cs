@@ -22,7 +22,7 @@ namespace DotNetTransformer.Math.Set {
 			public override int Count { get { return 0; } }
 			public override bool Contains(T item) { return false; }
 			public override IEnumerator<T> GetEnumerator() { yield break; }
-			public override bool IsSubsetOf(ISet<T> other) { return true; }
+			public override bool IsSubsetOf(ISet<T> other) { return !ReferenceEquals(other, null); }
 		}
 	}
 }

@@ -57,7 +57,7 @@ namespace DotNetTransformer.Math.Group {
 		public static FiniteGroup<T> CreateGroup<T>(this IEnumerable<T> list)
 			where T : IFiniteGroupElement<T>
 		{
-			return new InternalGroup<T>(list);
+			return ReferenceEquals(list, null) ? null : new InternalGroup<T>(list);
 		}
 		public static bool IsGeneratingSetOf<T>(this IEnumerable<T> list, FiniteGroup<T> group)
 			where T : IFiniteGroupElement<T>
