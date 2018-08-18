@@ -5,8 +5,6 @@
 //			System.Collections.Generic.IEnumerable<T>
 //	
 //	Author   : leofun01
-//	Created  : 2018-06-24
-//	Modified : 2018-07-25
 
 using System;
 using System.Collections;
