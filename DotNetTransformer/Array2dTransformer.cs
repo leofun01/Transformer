@@ -6,7 +6,7 @@ using FlipRotate2d = DotNetTransformer.Math.Group.FlipRotate2d;
 
 namespace DotNetTransformer {
 	[Serializable]
-	public sealed class Array2dTransformer<T> : IEquatable<Array2dTransformer<T>>, ICloneable
+	public class Array2dTransformer<T> : IEquatable<Array2dTransformer<T>>, ICloneable
 	{
 		private readonly T[,] _array;
 		private FlipRotate2d _transformation;
@@ -52,14 +52,16 @@ namespace DotNetTransformer {
 		}
 		#endregion // System.Array members
 
-		public T this[int x, int y] {
+		public virtual T this[int x, int y] {
 			get {
 				int[] i = _getIndexes(x, y);
 				return _array[i[0], i[1]];
+				//return (T)_array.GetValue(i);
 			}
 			set {
 				int[] i = _getIndexes(x, y);
 				_array[i[0], i[1]] = value;
+				//_array.SetValue(value, i);
 			}
 		}
 		private int[] _getIndexes(int x, int y) {
@@ -70,10 +72,10 @@ namespace DotNetTransformer {
 				i[dim ^ 1] = (t & 1) == 0 ? y : _array.GetUpperBound(dim ^ 1) - y;
 				return i;
 		}
-		public void Apply(FlipRotate2d transformation) {
+		public virtual void Apply(FlipRotate2d transformation) {
 			_transformation += transformation;
 		}
-		public Array2dTransformer<T> Transform(FlipRotate2d transformation) {
+		public virtual Array2dTransformer<T> Transform(FlipRotate2d transformation) {
 			return new Array2dTransformer<T>(_array, _transformation + transformation);
 		}
 		public Array2dTransformer<T> Clone() { return (Array2dTransformer<T>)MemberwiseClone(); }
@@ -81,14 +83,32 @@ namespace DotNetTransformer {
 		public override bool Equals(object o) {
 			return Equals(o as Array2dTransformer<T>);
 		}
-		public bool Equals(Array2dTransformer<T> o) {
+		public virtual bool Equals(Array2dTransformer<T> o) {
 			return !ReferenceEquals(o, null) && ReferenceEquals(_array, o._array) && _transformation == o._transformation;
 		}
 		public override int GetHashCode() {
 			return 0x11111111 * _transformation.Value ^ _array.GetHashCode();
 		}
-		public T[,] ToArray() {
+		public virtual T[,] ToArray() {
 			return _array.Transform<T>(_transformation);
+			/*//
+			byte t = _transformation.Value;
+			int dim = t >> 2;
+			int w = _array.GetLength(dim);
+			int h = _array.GetLength(dim ^ 1);
+			int dx = (t >> 1 ^ t) & 1, dy = t & 1;
+			int x_init = dx * (w - 1); dx = 1 - (dx << 1);
+			int y_init = dy * (h - 1); dy = 1 - (dy << 1);
+			T[,] result = new T[w, h];
+			int[] i = new int[2];
+			i[dim ^ 1] = x_init;
+			for(int rx = 0; rx < w; ++rx, i[dim ^ 1] += dx) {
+				i[dim] = y_init;
+				for(int ry = 0; ry < h; ++ry, i[dim] += dy)
+					result[rx, ry] = _array[i[1], i[0]];
+			}
+			return result;
+			//*/
 		}
 
 		public static bool operator ==(Array2dTransformer<T> l, Array2dTransformer<T> r) { return l.Equals(r); }

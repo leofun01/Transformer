@@ -1,3 +1,11 @@
+//	EnumerableConverter.cs
+//	
+//	Based on :
+//		.Net
+//			System.Collections.Generic.IEnumerable<T>
+//	
+//	Author   : leofun01
+
 using System;
 using System.Collections;
 using System.Collections.Generic;

@@ -5,5 +5,6 @@ namespace DotNetTransformer.Math.Group {
 		where T : IGroupElement<T>
 	{
 		T IdentityElement { get; }
+		//bool IsCyclic { get; }
 	}
 }
