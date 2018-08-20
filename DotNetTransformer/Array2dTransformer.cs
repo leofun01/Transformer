@@ -16,10 +16,6 @@ namespace DotNetTransformer {
 				throw new ArgumentNullException("array");
 			_array = array;
 		}
-		private Array2dTransformer(T[,] array, FlipRotate2d transformation) {
-			_array = array;
-			_transformation = transformation;
-		}
 
 		#region System.Array members
 		public int Length { get { return _array.Length; } }
@@ -73,8 +69,10 @@ namespace DotNetTransformer {
 		public virtual void Apply(FlipRotate2d transformation) {
 			_transformation += transformation;
 		}
-		public virtual Array2dTransformer<T> Transform(FlipRotate2d transformation) {
-			return new Array2dTransformer<T>(_array, _transformation + transformation);
+		public Array2dTransformer<T> Transform(FlipRotate2d transformation) {
+			Array2dTransformer<T> o = Clone();
+			o.Apply(transformation);
+			return o;
 		}
 		public Array2dTransformer<T> Clone() { return (Array2dTransformer<T>)MemberwiseClone(); }
 		object ICloneable.Clone() { return Clone(); }

@@ -15,10 +15,6 @@ namespace DotNetTransformer {
 				throw new ArgumentNullException("array");
 			_array = array;
 		}
-		private Array1dTransformer(T[] array, bool flip) {
-			_array = array;
-			_flip = flip;
-		}
 
 		#region System.Array members
 		public int Length { get { return _array.Length; } }
@@ -54,8 +50,10 @@ namespace DotNetTransformer {
 		public virtual void Apply(bool flip) {
 			_flip ^= flip;
 		}
-		public virtual Array1dTransformer<T> Transform(bool flip) {
-			return new Array1dTransformer<T>(_array, _flip ^ flip);
+		public Array1dTransformer<T> Transform(bool flip) {
+			Array1dTransformer<T> o = Clone();
+			o.Apply(flip);
+			return o;
 		}
 		public Array1dTransformer<T> Clone() { return (Array1dTransformer<T>)MemberwiseClone(); }
 		object ICloneable.Clone() { return Clone(); }
