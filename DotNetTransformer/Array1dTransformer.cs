@@ -5,7 +5,7 @@ using DotNetTransformer.Extensions;
 
 namespace DotNetTransformer {
 	[Serializable]
-	public sealed class Array1dTransformer<T> : IEquatable<Array1dTransformer<T>>, ICloneable
+	public class Array1dTransformer<T> : IEquatable<Array1dTransformer<T>>, ICloneable
 	{
 		private readonly T[] _array;
 		private bool _flip;
@@ -43,7 +43,7 @@ namespace DotNetTransformer {
 		}
 		#endregion // System.Array members
 
-		public T this[int i] {
+		public virtual T this[int i] {
 			get {
 				return _array[_flip ? _array.GetUpperBound(0) - i : i];
 			}
@@ -51,10 +51,10 @@ namespace DotNetTransformer {
 				_array[_flip ? _array.GetUpperBound(0) - i : i] = value;
 			}
 		}
-		public void Apply(bool flip) {
+		public virtual void Apply(bool flip) {
 			_flip ^= flip;
 		}
-		public Array1dTransformer<T> Transform(bool flip) {
+		public virtual Array1dTransformer<T> Transform(bool flip) {
 			return new Array1dTransformer<T>(_array, _flip ^ flip);
 		}
 		public Array1dTransformer<T> Clone() { return (Array1dTransformer<T>)MemberwiseClone(); }
@@ -62,13 +62,13 @@ namespace DotNetTransformer {
 		public override bool Equals(object o) {
 			return Equals(o as Array1dTransformer<T>);
 		}
-		public bool Equals(Array1dTransformer<T> o) {
+		public virtual bool Equals(Array1dTransformer<T> o) {
 			return !ReferenceEquals(o, null) && ReferenceEquals(_array, o._array) && (_flip == o._flip);
 		}
 		public override int GetHashCode() {
 			return (_flip ? -1 : 0) ^ _array.GetHashCode();
 		}
-		public T[] ToArray() {
+		public virtual T[] ToArray() {
 			return _array.Transform<T>(_flip);
 		}
 

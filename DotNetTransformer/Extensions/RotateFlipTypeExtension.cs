@@ -182,6 +182,7 @@ namespace DotNetTransformer.Extensions {
 		public static RotateFlipType GetInverseElement(this RotateFlipType _this) {
 			byte t = (byte)_this;
 			return (RotateFlipType)(0x76541230 >> (t << 2) & 7);
+			//return (RotateFlipType)(((t >> 2 ^ 1) & t) << 1 ^ t);
 		}
 		public static int GetCycleLength(this RotateFlipType _this) {
 			byte t = (byte)_this;

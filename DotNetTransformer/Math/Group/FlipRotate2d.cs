@@ -129,11 +129,13 @@ namespace DotNetTransformer.Math.Group {
 		public FlipRotate2d InverseElement {
 			get {
 				return new FlipRotate2d(0x67543210 >> (Value << 2) & 7);
+				//return new FlipRotate2d((Value >> 1) & (Value >> 2) ^ Value);
 			}
 		}
 		public int CycleLength {
 			get {
 				return 0x44222221 >> (Value << 2) & 7;
+				//return 1 << ((Value + 3 - (Value >> 2)) >> 2);
 			}
 		}
 		public FlipRotate2d Add(FlipRotate2d other) {
@@ -152,6 +154,7 @@ namespace DotNetTransformer.Math.Group {
 		public override string ToString() { return _names[Value]; }
 		public RotateFlipType ToRotateFlipType() {
 			return (RotateFlipType)(0x31756420 >> (Value << 2) & 7);
+			//return (RotateFlipType)((Value << 1 & 6) ^ (Value >> 2) ^ (Value & 4));
 		}
 
 		/// <exception cref="ArgumentException">
@@ -174,6 +177,8 @@ namespace DotNetTransformer.Math.Group {
 		public static FlipRotate2d FromInt(int value) { return new FlipRotate2d(value & 7); }
 		public static FlipRotate2d FromRotateFlipType(RotateFlipType value) {
 			return new FlipRotate2d(0x53427160 >> ((byte)value << 2) & 7);
+			//byte v = (byte)value;
+			//return new FlipRotate2d((v << 2 & 4) ^ (v << 1 & 2) ^ (v >> 1));
 		}
 
 		public static bool operator ==(FlipRotate2d l, FlipRotate2d r) { return l.Equals(r); }
