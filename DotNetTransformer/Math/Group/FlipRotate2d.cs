@@ -82,7 +82,6 @@ namespace DotNetTransformer.Math.Group {
 			public DihedralGroup() { }
 
 			public override FlipRotate2d IdentityElement { get { return None; } }
-			//public override bool IsCyclic { get { return false; } }
 			public override int Count { get { return _count; } }
 			public override bool Contains(FlipRotate2d item) { return true; }
 			public override IEnumerator<FlipRotate2d> GetEnumerator() {
@@ -131,29 +130,19 @@ namespace DotNetTransformer.Math.Group {
 			get {
 				return new FlipRotate2d(0x67543210 >> (Value << 2) & 7);
 				//return new FlipRotate2d((Value >> 1) & (Value >> 2) ^ Value);
-				//return Value > 5 ? new FlipRotate2d(Value ^ 1) : this;
-				//return IsRightAngleRotation ? new FlipRotate2d(Value ^ 1) : this;
-				//return this.Add(this.Add(this));
-				//return this.Add(this).Add(this);
-				//return this.Compose(this.Compose(this));
-				//return this.Compose(this).Compose(this);
 			}
 		}
 		public int CycleLength {
 			get {
 				return 0x44222221 >> (Value << 2) & 7;
-				//return 1 << (0xA554 >> (Value << 1) & 3);
 				//return 1 << ((Value + 3 - (Value >> 2)) >> 2);
-				//return 1 << (((Value * 15) >> 3) & 1) << ((Value >> 2) & (Value >> 1));
 			}
 		}
 		public FlipRotate2d Add(FlipRotate2d other) {
 			return new FlipRotate2d((Value >> 1) & (other.Value >> 2) ^ Value ^ other.Value);
-			//return other.Compose(this);
 		}
 		public FlipRotate2d Compose(FlipRotate2d other) {
 			return new FlipRotate2d((Value >> 2) & (other.Value >> 1) ^ Value ^ other.Value);
-			//return other.Add(this);
 		}
 		public FlipRotate2d Times(int count) {
 			return new FlipRotate2d((Value >> 1 & Value & count) >> 1 ^ ((count & 1) * Value));
