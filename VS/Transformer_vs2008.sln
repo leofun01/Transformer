@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetTransformer", "..\DotNetTransformer\DotNetTransformer_vs2008.csproj", "{09AD5107-2437-4B3A-81DB-0C882615BB88}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "..\DotNetTransformer\Test_vs2008.csproj", "{A4BA1E3B-4C96-4280-ABA1-1A1747E2038A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "..\DotNetTransformer\Test\Test_vs2008.csproj", "{A4BA1E3B-4C96-4280-ABA1-1A1747E2038A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
