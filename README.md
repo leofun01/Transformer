@@ -1,11 +1,7 @@
 # Transformer
 
 ## Table of contetns
-- [Wiki](#wiki)
 - [Directory structure](#directory-structure)
-
-## Wiki
-[Wiki](../../wiki)
 
 ## Directory structure
 <ul>
@@ -79,6 +75,16 @@
 						<summary><code>System</code></summary>
 						<ul>
 							<li><a href="DotNetTransformer/System/ExtensionAttribute.cs"><code>ExtensionAttribute.cs</code></a></li>
+						</ul>
+					</details>
+				</li>
+				<li>
+					<details>
+						<summary><code>Test</code></summary>
+						<ul>
+							<li><code>Test_vs2008.csproj</code></li>
+							<li><code>Test_vs2010.csproj</code></li>
+							<li><code>Test_vs2013.csproj</code></li>
 						</ul>
 					</details>
 				</li>
