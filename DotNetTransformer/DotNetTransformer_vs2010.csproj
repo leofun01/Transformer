@@ -11,11 +11,11 @@
 		<TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
 		<FileAlignment>512</FileAlignment>
 	</PropertyGroup>
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
 		<PlatformTarget>AnyCPU</PlatformTarget>
 		<OutputPath>bin\Debug\</OutputPath>
 	</PropertyGroup>
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
 		<PlatformTarget>AnyCPU</PlatformTarget>
 		<OutputPath>bin\Release\</OutputPath>
 	</PropertyGroup>
