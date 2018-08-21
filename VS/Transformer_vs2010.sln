@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetTransformer", "..\DotNetTransformer\DotNetTransformer_vs2010.csproj", "{09AD5107-2437-4B3A-81DB-0C882615BB88}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "..\DotNetTransformer\Test_vs2010.csproj", "{A4BA1E3B-4C96-4280-ABA1-1A1747E2038A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{09AD5107-2437-4B3A-81DB-0C882615BB88}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{09AD5107-2437-4B3A-81DB-0C882615BB88}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{09AD5107-2437-4B3A-81DB-0C882615BB88}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4BA1E3B-4C96-4280-ABA1-1A1747E2038A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4BA1E3B-4C96-4280-ABA1-1A1747E2038A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4BA1E3B-4C96-4280-ABA1-1A1747E2038A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4BA1E3B-4C96-4280-ABA1-1A1747E2038A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
