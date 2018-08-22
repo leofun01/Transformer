@@ -7,8 +7,8 @@
 //	Author   : leofun01
 
 using System.Collections.Generic;
-using FlipRotate2d = DotNetTransformer.Math.Group.FlipRotate2d;
 using RotateFlipType = System.Drawing.RotateFlipType;
+using FlipRotate2d = DotNetTransformer.Math.Group.FlipRotate2d;
 
 namespace DotNetTransformer.Extensions {
 	public static class EnumerableExtension
