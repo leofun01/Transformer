@@ -200,6 +200,8 @@ namespace DotNetTransformer.Extensions {
 		public static int GetCycleLength(this RotateFlipType _this) {
 			return 0x22224241 >> ((byte)_this << 2) & 7;
 			//return 1 << (0x5598 >> ((byte)_this << 1) & 3);
+			//byte t = (byte)_this;
+			//return 1 << (20 >> t & 3 | (t >> 2));
 		}
 		public static RotateFlipType Add(this RotateFlipType _this, RotateFlipType other) {
 			byte t = (byte)_this, o = (byte)other;
