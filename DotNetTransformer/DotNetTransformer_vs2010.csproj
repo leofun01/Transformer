@@ -24,7 +24,7 @@
 		<Reference Include="System.Drawing" />
 	</ItemGroup>
 	<ItemGroup>
-		<Compile Include="**\*.cs" Exclude="Test\**\*.cs" />
+		<Compile Include="**\*.cs" Exclude="Test\**" />
 	</ItemGroup>
 	<Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
