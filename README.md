@@ -85,6 +85,7 @@
 							<li><code>Test_vs2008.csproj</code></li>
 							<li><code>Test_vs2010.csproj</code></li>
 							<li><code>Test_vs2013.csproj</code></li>
+							<li><code>Test_vs2015.csproj</code></li>
 						</ul>
 					</details>
 				</li>
@@ -93,6 +94,7 @@
 				<li><code>DotNetTransformer_vs2008.csproj</code></li>
 				<li><code>DotNetTransformer_vs2010.csproj</code></li>
 				<li><code>DotNetTransformer_vs2013.csproj</code></li>
+				<li><code>DotNetTransformer_vs2015.csproj</code></li>
 			</ul>
 		</details>
 	</li>
@@ -103,6 +105,7 @@
 				<li><code>Transformer_vs2008.sln</code></li>
 				<li><code>Transformer_vs2010.sln</code></li>
 				<li><code>Transformer_vs2013.sln</code></li>
+				<li><code>Transformer_vs2015.sln</code></li>
 			</ul>
 		</details>
 	</li>
