@@ -82,6 +82,14 @@
 					<details>
 						<summary><code>Test</code></summary>
 						<ul>
+							<li>
+								<details>
+									<summary><code>Properties</code></summary>
+									<ul>
+										<li><a href="DotNetTransformer/Test/Properties/AssemblyInfo.cs"><code>AssemblyInfo.cs</code></a></li>
+									</ul>
+								</details>
+							</li>
 							<li><code>Test_vs2008.csproj</code></li>
 							<li><code>Test_vs2010.csproj</code></li>
 							<li><code>Test_vs2013.csproj</code></li>
