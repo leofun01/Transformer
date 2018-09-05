@@ -1,5 +1,3 @@
-//	AssemblyInfo.cs
-
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
@@ -17,10 +15,5 @@ using System.Runtime.InteropServices;
 
 [assembly: Guid("10c7802e-080d-4b00-a3c7-d33bc9e47b97")]
 
-// Version information for an assembly consists of the following four values:
-//		Major Version
-//		Minor Version 
-//		Build Number
-//		Revision
 [assembly: AssemblyVersion("0.8.0.1")]
 [assembly: AssemblyFileVersion("0.8.0.1")]
