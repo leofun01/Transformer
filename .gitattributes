@@ -1,18 +1,18 @@
 # https://mirrors.edge.kernel.org/pub/software/scm/git/docs/gitattributes.html
 # https://git-scm.com/docs/gitattributes
 
-*			text=auto
+*	text=auto
 
 # Text
 *.cs		text	eol=crlf	diff=csharp
-*.sln		text	eol=crlf				merge=union
-*.csproj	text	eol=crlf				merge=union
+*.sln		text	eol=crlf
+*.csproj	text	eol=crlf
 
 # Binary
-#*.exe		binary				diff=exif
-#*.dll		binary				diff=exif
-#*.jpg		binary				diff=exif
-#*.png		binary				diff=exif
+#*.exe		binary	diff=exif
+#*.dll		binary	diff=exif
+#*.jpg		binary	diff=exif
+#*.png		binary	diff=exif
 
 # Resolve conflicts
 #*	merge=ours
