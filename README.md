@@ -90,19 +90,33 @@
 									</ul>
 								</details>
 							</li>
-							<li><code>Test_vs2008.csproj</code></li>
-							<li><code>Test_vs2010.csproj</code></li>
-							<li><code>Test_vs2013.csproj</code></li>
-							<li><code>Test_vs2015.csproj</code></li>
+							<li>
+								<details>
+									<summary><code>*.csproj</code></summary>
+									<ul>
+										<li><a href="DotNetTransformer/Test/Test_vs2008.csproj"><code>Test_vs2008.csproj</code></a></li>
+										<li><a href="DotNetTransformer/Test/Test_vs2010.csproj"><code>Test_vs2010.csproj</code></a></li>
+										<li><a href="DotNetTransformer/Test/Test_vs2013.csproj"><code>Test_vs2013.csproj</code></a></li>
+										<li><a href="DotNetTransformer/Test/Test_vs2015.csproj"><code>Test_vs2015.csproj</code></a></li>
+									</ul>
+								</details>
+							</li>
 						</ul>
 					</details>
 				</li>
 				<li><a href="DotNetTransformer/Array1dTransformer.cs"><code>Array1dTransformer.cs</code></a></li>
 				<li><a href="DotNetTransformer/Array2dTransformer.cs"><code>Array2dTransformer.cs</code></a></li>
-				<li><code>DotNetTransformer_vs2008.csproj</code></li>
-				<li><code>DotNetTransformer_vs2010.csproj</code></li>
-				<li><code>DotNetTransformer_vs2013.csproj</code></li>
-				<li><code>DotNetTransformer_vs2015.csproj</code></li>
+				<li>
+					<details>
+						<summary><code>*.csproj</code></summary>
+						<ul>
+							<li><a href="DotNetTransformer/DotNetTransformer_vs2008.csproj"><code>DotNetTransformer_vs2008.csproj</code></a></li>
+							<li><a href="DotNetTransformer/DotNetTransformer_vs2010.csproj"><code>DotNetTransformer_vs2010.csproj</code></a></li>
+							<li><a href="DotNetTransformer/DotNetTransformer_vs2013.csproj"><code>DotNetTransformer_vs2013.csproj</code></a></li>
+							<li><a href="DotNetTransformer/DotNetTransformer_vs2015.csproj"><code>DotNetTransformer_vs2015.csproj</code></a></li>
+						</ul>
+					</details>
+				</li>
 			</ul>
 		</details>
 	</li>
@@ -123,13 +137,13 @@
 		</details>
 	</li>
 	<li>
-		<details open="open">
+		<details>
 			<summary><code>VS</code></summary>
 			<ul>
-				<li><code>Transformer_vs2008.sln</code></li>
-				<li><code>Transformer_vs2010.sln</code></li>
-				<li><code>Transformer_vs2013.sln</code></li>
-				<li><code>Transformer_vs2015.sln</code></li>
+				<li><a href="VS/Transformer_vs2008.sln"><code>Transformer_vs2008.sln</code></a></li>
+				<li><a href="VS/Transformer_vs2010.sln"><code>Transformer_vs2010.sln</code></a></li>
+				<li><a href="VS/Transformer_vs2013.sln"><code>Transformer_vs2013.sln</code></a></li>
+				<li><a href="VS/Transformer_vs2015.sln"><code>Transformer_vs2015.sln</code></a></li>
 			</ul>
 		</details>
 	</li>
