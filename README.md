@@ -96,6 +96,7 @@
 									<ul>
 										<li><a href="DotNetTransformer/Test/Test_vs2008.csproj"><code>Test_vs2008.csproj</code></a></li>
 										<li><a href="DotNetTransformer/Test/Test_vs2010.csproj"><code>Test_vs2010.csproj</code></a></li>
+										<li><a href="DotNetTransformer/Test/Test_vs2012.csproj"><code>Test_vs2012.csproj</code></a></li>
 										<li><a href="DotNetTransformer/Test/Test_vs2013.csproj"><code>Test_vs2013.csproj</code></a></li>
 										<li><a href="DotNetTransformer/Test/Test_vs2015.csproj"><code>Test_vs2015.csproj</code></a></li>
 										<li><a href="DotNetTransformer/Test/Test_vs2017.csproj"><code>Test_vs2017.csproj</code></a></li>
@@ -113,6 +114,7 @@
 						<ul>
 							<li><a href="DotNetTransformer/DotNetTransformer_vs2008.csproj"><code>DotNetTransformer_vs2008.csproj</code></a></li>
 							<li><a href="DotNetTransformer/DotNetTransformer_vs2010.csproj"><code>DotNetTransformer_vs2010.csproj</code></a></li>
+							<li><a href="DotNetTransformer/DotNetTransformer_vs2012.csproj"><code>DotNetTransformer_vs2012.csproj</code></a></li>
 							<li><a href="DotNetTransformer/DotNetTransformer_vs2013.csproj"><code>DotNetTransformer_vs2013.csproj</code></a></li>
 							<li><a href="DotNetTransformer/DotNetTransformer_vs2015.csproj"><code>DotNetTransformer_vs2015.csproj</code></a></li>
 							<li><a href="DotNetTransformer/DotNetTransformer_vs2017.csproj"><code>DotNetTransformer_vs2017.csproj</code></a></li>
@@ -144,6 +146,7 @@
 			<ul>
 				<li><a href="VS/Transformer_vs2008.sln"><code>Transformer_vs2008.sln</code></a></li>
 				<li><a href="VS/Transformer_vs2010.sln"><code>Transformer_vs2010.sln</code></a></li>
+				<li><a href="VS/Transformer_vs2012.sln"><code>Transformer_vs2012.sln</code></a></li>
 				<li><a href="VS/Transformer_vs2013.sln"><code>Transformer_vs2013.sln</code></a></li>
 				<li><a href="VS/Transformer_vs2015.sln"><code>Transformer_vs2015.sln</code></a></li>
 				<li><a href="VS/Transformer_vs2017.sln"><code>Transformer_vs2017.sln</code></a></li>
