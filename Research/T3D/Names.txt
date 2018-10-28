@@ -1,5 +1,6 @@
+48 :
 Name       Permutat    ~ InvName   InvPermut BitSeq C	2x			3x	4x					|
-=============================================================================================
+---------------------------------------------------------------------------------------------
 NO______ + 01234567 == ~ NO______  01234567  000000 1										|
 FX______ + 10325476 == ~ FX______  10325476         2				v				FA		|
 FY______ + 32107654 == ~ FY______  32107654         2				v				FA		|
@@ -48,3 +49,814 @@ RN_D0_RE - 56123074 == ~ RC_D0_RE  52347016         6	RC_D0___  REV	RN_D0___	 R	
 RN_D1_RE - 34521670 == ~ RC_D1_RE  74301256         6	RC_D1___  REV	RN_D1___	 R		|
 RC_D0_RE - 52347016 == ~ RN_D0_RE  56123074         6	RN_D0___  REV	RC_D0___	 R		|
 RC_D1_RE - 74301256 == ~ RN_D1_RE  34521670         6	RN_D1___  REV	RC_D1___	 R		|
+=============================================================================================
+
+
+24 :
+Name       Permutat    ~ InvName   InvPermut BitSeq C	2x			3x	4x					|
+---------------------------------------------------------------------------------------------
+NO______ + 01234567 == ~ NO______  01234567  000000 1										|
+HT_XY___ + 23016745 == ~ HT_XY___  23016745         2				v					HA	|
+HT_YZ___   45670123 == ~ HT_YZ___  45670123         2				v					HA	|
+HT_ZX___   67452301 == ~ HT_ZX___  67452301         2				v					HA	|
+RC_XY___ + 30125674 == ~ RN_XY___  12307456         4	HT_XY___	i				R		|
+RN_XY___ + 12307456 == ~ RC_XY___  30125674         4	HT_XY___	i				R		|
+RC_YZ___   76103254 == ~ RN_YZ___  32547610         4	HT_YZ___	i				R		|
+RN_YZ___   32547610 == ~ RC_YZ___  76103254         4	HT_YZ___	i				R		|
+RC_ZX___   16523470 == ~ RN_ZX___  70345216         4	HT_ZX___	i				R		|
+RN_ZX___   70345216 == ~ RC_ZX___  16523470         4	HT_ZX___	i				R		|
+RC_D0___ - 07612543 == ~ RN_D0___  03476521         3	i				v			R		|
+RN_D0___ - 03476521 == ~ RC_D0___  07612543         3	i				v			R		|
+RC_D1___ - 21654703 == ~ RN_D1___  61074325         3	i				v			R		|
+RN_D1___ - 61074325 == ~ RC_D1___  21654703         3	i				v			R		|
+RC_D2___ - 47032165 == ~ RN_D2___  25430761         3	i				v			R		|
+RN_D2___ - 25430761 == ~ RC_D2___  47032165         3	i				v			R		|
+RC_D3___ - 43256107 == ~ RN_D3___  65210347         3	i				v			R		|
+RN_D3___ - 65210347 == ~ RC_D3___  43256107         3	i				v			R		|
+HT_XY_D1   56743012 == ~ HT_XY_D1  56743012         2				v					HD	|
+HT_XY_D2   74561230 == ~ HT_XY_D2  74561230         2				v					HD	|
+HT_YZ_D1   54321076 == ~ HT_YZ_D1  54321076         2				v					HD	|
+HT_YZ_D2   10765432 == ~ HT_YZ_D2  10765432         2				v					HD	|
+HT_ZX_D1   52167034 == ~ HT_ZX_D1  52167034         2				v					HD	|
+HT_ZX_D2   34701652 == ~ HT_ZX_D2  34701652         2				v					HD	|
+=============================================================================================
+
+
+12 :
+Name       Permutat    ~ InvName   InvPermut BitSeq C	2x			3x	4x					|
+---------------------------------------------------------------------------------------------
+NO______ + 01234567 == ~ NO______  01234567  000000 1										|
+HT_XY___ + 23016745 == ~ HT_XY___  23016745         2				v					HA	|
+HT_YZ___   45670123 == ~ HT_YZ___  45670123         2				v					HA	|
+HT_ZX___   67452301 == ~ HT_ZX___  67452301         2				v					HA	|
+RC_D0___ - 07612543 == ~ RN_D0___  03476521         3	i				v			R		|
+RN_D0___ - 03476521 == ~ RC_D0___  07612543         3	i				v			R		|
+RC_D1___ - 21654703 == ~ RN_D1___  61074325         3	i				v			R		|
+RN_D1___ - 61074325 == ~ RC_D1___  21654703         3	i				v			R		|
+RC_D2___ - 47032165 == ~ RN_D2___  25430761         3	i				v			R		|
+RN_D2___ - 25430761 == ~ RC_D2___  47032165         3	i				v			R		|
+RC_D3___ - 43256107 == ~ RN_D3___  65210347         3	i				v			R		|
+RN_D3___ - 65210347 == ~ RC_D3___  43256107         3	i				v			R		|
+=============================================================================================
+
+
+12 Table 0123 :
+      | NO___ HT_YZ HT_ZX HT_XY   RC_D0 RN_D1 RN_D2 RC_D3   RN_D0 RC_D1 RC_D2 RN_D3
+------+----------------------------------------------------------------------------
+NO___ | NO___ HT_YZ HT_ZX HT_XY   RC_D0 RN_D1 RN_D2 RC_D3   RN_D0 RC_D1 RC_D2 RN_D3
+HT_YZ | HT_YZ NO___ HT_XY HT_ZX   RC_D3 RN_D2 RN_D1 RC_D0   RC_D2 RN_D3 RN_D0 RC_D1
+HT_ZX | HT_ZX HT_XY NO___ HT_YZ   RN_D1 RC_D0 RC_D3 RN_D2   RN_D3 RC_D2 RC_D1 RN_D0
+HT_XY | HT_XY HT_ZX HT_YZ NO___   RN_D2 RC_D3 RC_D0 RN_D1   RC_D1 RN_D0 RN_D3 RC_D2
+      |                                                                            
+RC_D0 | RC_D0 RN_D2 RC_D3 RN_D1   RN_D0 RC_D2 RN_D3 RC_D1   NO___ HT_ZX HT_XY HT_YZ
+RN_D1 | RN_D1 RC_D3 RN_D2 RC_D0   RN_D3 RC_D1 RN_D0 RC_D2   HT_ZX NO___ HT_YZ HT_XY
+RN_D2 | RN_D2 RC_D0 RN_D1 RC_D3   RC_D1 RN_D3 RC_D2 RN_D0   HT_XY HT_YZ NO___ HT_ZX
+RC_D3 | RC_D3 RN_D1 RC_D0 RN_D2   RC_D2 RN_D0 RC_D1 RN_D3   HT_YZ HT_XY HT_ZX NO___
+      |                                                                            
+RN_D0 | RN_D0 RN_D3 RC_D1 RC_D2   NO___ HT_XY HT_YZ HT_ZX   RC_D0 RC_D3 RN_D1 RN_D2
+RC_D1 | RC_D1 RC_D2 RN_D0 RN_D3   HT_XY NO___ HT_ZX HT_YZ   RN_D2 RN_D1 RC_D3 RC_D0
+RC_D2 | RC_D2 RC_D1 RN_D3 RN_D0   HT_YZ HT_ZX NO___ HT_XY   RC_D3 RC_D0 RN_D2 RN_D1
+RN_D3 | RN_D3 RN_D0 RC_D2 RC_D1   HT_ZX HT_YZ HT_XY NO___   RN_D1 RN_D2 RC_D0 RC_D3
+
+
+
+
+
+NO___ 00 00
+HT_YZ 00 01
+HT_ZX 00 10
+HT_XY 00 11
+
+RC_D0 01 00
+RN_D1 01 01
+RN_D2 01 10
+RC_D3 01 11
+
+RN_D0 10 00
+RC_D1 10 01
+RC_D2 10 10
+RN_D3 10 11
+
+result                                               result ^ (A ^ B)                               
+    B | 00 00 00 00   01 01 01 01   10 10 10 10          B | 00 00 00 00   01 01 01 01   10 10 10 10
+A     | 00 01 10 11   00 01 10 11   00 01 10 11      A     | 00 01 10 11   00 01 10 11   00 01 10 11
+------+----------------------------------------      ------+----------------------------------------
+00 00 | 00 01 10 11   00 01 10 11   00 01 10 11      00 00 |               __ __ __ __   __ __ __ __
+00 01 | 01 00 11 10   11 10 01 00   10 11 00 01      00 01 |               1_ 1_ 1_ 1_   11 11 11 11
+00 10 | 10 11 00 01   01 00 11 10   11 10 01 00      00 10 |               11 11 11 11   _1 _1 _1 _1
+00 11 | 11 10 01 00   10 11 00 01   01 00 11 10      00 11 |               _1 _1 _1 _1   1_ 1_ 1_ 1_
+      |                                                    |                                        
+01 00 | 00 10 11 01   00 10 11 01   00 10 11 01      01 00 | __ 11 _1 1_   __ 11 _1 1_   __ 11 _1 1_
+01 01 | 01 11 10 00   11 01 00 10   10 00 01 11      01 01 | __ 11 _1 1_   1_ _1 11 __   11 __ 1_ _1
+01 10 | 10 00 01 11   01 11 10 00   11 01 00 10      01 10 | __ 11 _1 1_   11 __ 1_ _1   _1 1_ __ 11
+01 11 | 11 01 00 10   10 00 01 11   01 11 10 00      01 11 | __ 11 _1 1_   _1 1_ __ 11   1_ _1 11 __
+      |                                                    |                                        
+10 00 | 00 11 01 10   00 11 01 10   00 11 01 10      10 00 | __ 1_ 11 _1   __ 1_ 11 _1   __ 1_ 11 _1
+10 01 | 01 10 00 11   11 00 10 01   10 01 11 00      10 01 | __ 1_ 11 _1   1_ __ _1 11   11 _1 __ 1_
+10 10 | 10 01 11 00   01 10 00 11   11 00 10 01      10 10 | __ 1_ 11 _1   11 _1 __ 1_   _1 11 1_ __
+10 11 | 11 00 10 01   10 01 11 00   01 10 00 11      10 11 | __ 1_ 11 _1   _1 11 1_ __   1_ __ _1 11
+
+result                                               result ^ (A ^ B) ^ ()
+    B | 00 00 00 00   01 01 01 01   10 10 10 10          B | 00 00 00 00   01 01 01 01   10 10 10 10   54
+A     | 00 01 10 11   00 01 10 11   00 01 10 11      A     | 00 01 10 11   00 01 10 11   00 01 10 11   10
+------+----------------------------------------      ------+----------------------------------------
+00 00 | 00 01 10 11   00 01 10 11   00 01 10 11      00 00 |               __ __ __ __   __ __ __ __
+00 01 | 01 00 11 10   11 10 01 00   10 11 00 01      00 01 |               1_ 1_ 1_ 1_   11 11 11 11
+00 10 | 10 11 00 01   01 00 11 10   11 10 01 00      00 10 |               11 11 11 11   _1 _1 _1 _1
+00 11 | 11 10 01 00   10 11 00 01   01 00 11 10      00 11 |               _1 _1 _1 _1   1_ 1_ 1_ 1_
+      |                                                    |               .. .. .. ..   .. .. .. ..
+01 00 | 00 10 11 01   00 10 11 01   00 10 11 01      01 00 | __ 11 _1 1_ - ++ ++ ++ ++ - ++ ++ ++ ++
+01 01 | 01 11 10 00   11 01 00 10   10 00 01 11      01 01 | __ 11 _1 1_ - ++ ++ ++ ++ - ++ ++ ++ ++
+01 10 | 10 00 01 11   01 11 10 00   11 01 00 10      01 10 | __ 11 _1 1_ - ++ ++ ++ ++ - ++ ++ ++ ++
+01 11 | 11 01 00 10   10 00 01 11   01 11 10 00      01 11 | __ 11 _1 1_ - ++ ++ ++ ++ - ++ ++ ++ ++
+      |                                                    |               .. .. .. ..   .. .. .. ..
+10 00 | 00 11 01 10   00 11 01 10   00 11 01 10      10 00 | __ 1_ 11 _1 - ++ ++ ++ ++ - ++ ++ ++ ++
+10 01 | 01 10 00 11   11 00 10 01   10 01 11 00      10 01 | __ 1_ 11 _1 - ++ ++ ++ ++ - ++ ++ ++ ++
+10 10 | 10 01 11 00   01 10 00 11   11 00 10 01      10 10 | __ 1_ 11 _1 - ++ ++ ++ ++ - ++ ++ ++ ++
+10 11 | 11 00 10 01   10 01 11 00   01 10 00 11      10 11 | __ 1_ 11 _1 - ++ ++ ++ ++ - ++ ++ ++ ++
+------+----------------------------------------      ------+----------------------------------------
+54 10                                                54 10                                          
+
+result ^ (A ^ B)
+                 ^ (A[1] & B[4] & 1) ^ ((A[0] & B[5] & 1) << 1)
+				 ^ ()
+                 ^ (B[1] & A[5] & 1) ^ ((B[0] & A[4] & 1) << 1)
+				 ^ ()
+    B | 00 00 00 00   01 01 01 01   10 10 10 10   54
+A     | 00 01 10 11   00 01 10 11   00 01 10 11   10
+------+----------------------------------------
+00 00 |               __ __ __ __   __ __ __ __
+00 01 |               1_ 1_ 1_ 1_   _1 _1 _1 _1
+00 10 |               1_ 1_ 1_ 1_   _1 _1 _1 _1
+00 11 |               __ __ __ __   __ __ __ __
+      |               .. .. .. ..   .. .. .. ..
+01 00 | __ _1 _1 __ - ++ ++ ++ ++ - ++ ++ ++ ++
+01 01 | __ _1 _1 __ - ++ ++ ++ ++ - ++ ++ ++ ++
+01 10 | __ _1 _1 __ - ++ ++ ++ ++ - ++ ++ ++ ++
+01 11 | __ _1 _1 __ - ++ ++ ++ ++ - ++ ++ ++ ++
+      |               .. .. .. ..   .. .. .. ..
+10 00 | __ 1_ 1_ __ - ++ ++ ++ ++ - ++ ++ ++ ++
+10 01 | __ 1_ 1_ __ - ++ ++ ++ ++ - ++ ++ ++ ++
+10 10 | __ 1_ 1_ __ - ++ ++ ++ ++ - ++ ++ ++ ++
+10 11 | __ 1_ 1_ __ - ++ ++ ++ ++ - ++ ++ ++ ++
+------+----------------------------------------
+54 10
+
+
+
+
+
+
+result                                               result ^ (A ^ B) ^ ()
+    B | 00 00 00 00   01 01 01 01   10 10 10 10          B | 00 00 00 00   01 01 01 01   10 10 10 10   54
+A     | 00 01 10 11   00 01 10 11   00 01 10 11      A     | 00 01 10 11   00 01 10 11   00 01 10 11   10
+------+----------------------------------------      ------+----------------------------------------
+00 00 | 00 01 10 11   00 01 10 11   00 01 10 11      00 00 |               __ __ __ __   __ __ __ __
+00 01 | 01 00 11 10   11 10 01 00   10 11 00 01      00 01 |               1_ 1_ 1_ 1_   11 11 11 11
+00 10 | 10 11 00 01   01 00 11 10   11 10 01 00      00 10 |               11 11 11 11   _1 _1 _1 _1
+00 11 | 11 10 01 00   10 11 00 01   01 00 11 10      00 11 |               _1 _1 _1 _1   1_ 1_ 1_ 1_
+      |                                                    |               .. .. .. ..   .. .. .. ..
+01 00 | 00 10 11 01   00 10 11 01   00 10 11 01      01 00 | __ 11 _1 1_ - ++ ++ ++ ++ - ++ ++ ++ ++
+01 01 | 01 11 10 00   11 01 00 10   10 00 01 11      01 01 | __ 11 _1 1_ - ++ ++ ++ ++ - ++ ++ ++ ++
+01 10 | 10 00 01 11   01 11 10 00   11 01 00 10      01 10 | __ 11 _1 1_ - ++ ++ ++ ++ - ++ ++ ++ ++
+01 11 | 11 01 00 10   10 00 01 11   01 11 10 00      01 11 | __ 11 _1 1_ - ++ ++ ++ ++ - ++ ++ ++ ++
+      |                                                    |               .. .. .. ..   .. .. .. ..
+10 00 | 00 11 01 10   00 11 01 10   00 11 01 10      10 00 | __ 1_ 11 _1 - ++ ++ ++ ++ - ++ ++ ++ ++
+10 01 | 01 10 00 11   11 00 10 01   10 01 11 00      10 01 | __ 1_ 11 _1 - ++ ++ ++ ++ - ++ ++ ++ ++
+10 10 | 10 01 11 00   01 10 00 11   11 00 10 01      10 10 | __ 1_ 11 _1 - ++ ++ ++ ++ - ++ ++ ++ ++
+10 11 | 11 00 10 01   10 01 11 00   01 10 00 11      10 11 | __ 1_ 11 _1 - ++ ++ ++ ++ - ++ ++ ++ ++
+------+----------------------------------------      ------+----------------------------------------
+54 10                                                54 10                                          
+
+result ^ (A ^ B)
+                 ^ ((12 >> (A & 3)) & (((B + 16) >> 5) * 3))
+                 ^ ((12 >> (B & 3)) & (((A + 16) >> 5) * 3))
+				 ^ ((A & 3) & ((B >> 5    ) * 3))
+				 ^ ((B & 3) & ((A >> 4 & 1) * 3))
+				 
+    B | 00 00 00 00   01 01 01 01   10 10 10 10   54
+A     | 00 01 10 11   00 01 10 11   00 01 10 11   10
+------+----------------------------------------
+00 00 |               __ __ __ __   __ __ __ __
+00 01 |               __ __ 1_ 1_   __ _1 11 11
+00 10 |               __ __ 11 11   __ 1_ _1 _1
+00 11 |               __ __ _1 _1   __ 11 1_ 1_
+      |               .. .. .. ..   .. .. .. ..
+01 00 | __ __ __ __ - ++ ++ ++ ++ - ++ ++ ++ ++
+01 01 | __ _1 1_ 11 - ++ ++ ++ ++ - ++ ++ ++ ++
+01 10 | __ 11 _1 1_ - ++ ++ ++ ++ - ++ ++ ++ ++
+01 11 | __ 11 _1 1_ - ++ ++ ++ ++ - ++ ++ ++ ++
+      |               .. .. .. ..   .. .. .. ..
+10 00 | __ __ __ __ - ++ ++ ++ ++ - ++ ++ ++ ++
+10 01 | __ __ __ __ - ++ ++ ++ ++ - ++ ++ ++ ++
+10 10 | __ 1_ 11 _1 - ++ ++ ++ ++ - ++ ++ ++ ++
+10 11 | __ 1_ 11 _1 - ++ ++ ++ ++ - ++ ++ ++ ++
+------+----------------------------------------
+54 10                                          
+
+
+
+result XX__        A ^ B        
+   | 00 01 10         | 00 01 10 54
+---+---------      ---+---------
+00 | 00 01 10      00 | 00 01 10
+01 | 01 10 00      01 | 01 00 11
+10 | 10 00 01      10 | 10 11 00
+=============      =============
+54
+
+result ^ (A + B)   result ^ (A ^ B)   result ^ ((A + B) % 3)
+   | 00 01 10         | 00 01 10         | 00 01 10
+---+---------      ---+---------      ---+---------
+00 |               00 |               00 |         
+01 |       11      01 |    1_ 11      01 |         
+10 |    11 _1      10 |    11 _1      10 |         
+=============      =============      =============
+
+
+
+
+
+
+
+
+
+
+
+NO______ No_
+HT_YZ___ Hyz
+HT_ZX___ Hzx
+HT_XY___ Hxy
+HT_XY_D2 xy2
+HT_XY_D1 xy1
+RN_XY___ Nxy
+RC_XY___ Cxy
+RC_D0___ Cd0
+RN_D1___ Nd1
+RN_D2___ Nd2
+RC_D3___ Cd3
+RN_YZ___ Nyz
+HT_YZ_D1 yz1
+RC_YZ___ Cyz
+HT_YZ_D2 yz2
+RN_D0___ Nd0
+RC_D1___ Cd1
+RC_D2___ Cd2
+RN_D3___ Nd3
+RC_ZX___ Czx
+RN_ZX___ Nzx
+HT_ZX_D1 zx1
+HT_ZX_D2 zx2
+
+24 Table :
+      |  +   +   +   +                      +   +   +   +                      +   +   +   +                  
+      | No_ Hyz Hzx Hxy  yz1 yz2 Cyz Nyz   Cd0 Nd1 Nd2 Cd3  zx1 zx2 Czx Nzx   Nd0 Cd1 Cd2 Nd3  xy1 xy2 Cxy Nxy
+------+-------------------------------------------------------------------------------------------------------
++ No_ | No_ Hyz Hzx Hxy  yz1 yz2 Cyz Nyz   Cd0 Nd1 Nd2 Cd3  zx1 zx2 Czx Nzx   Nd0 Cd1 Cd2 Nd3  xy1 xy2 Cxy Nxy
++ Hyz | Hyz No_ Hxy Hzx  yz2 yz1 Nyz Cyz   Cd3 Nd2 Nd1 Cd0  Czx Nzx zx1 zx2   Cd2 Nd3 Nd0 Cd1  Nxy Cxy xy2 xy1
++ Hzx | Hzx Hxy No_ Hyz  Nyz Cyz yz2 yz1   Nd1 Cd0 Cd3 Nd2  zx2 zx1 Nzx Czx   Nd3 Cd2 Cd1 Nd0  Cxy Nxy xy1 xy2
++ Hxy | Hxy Hzx Hyz No_  Cyz Nyz yz1 yz2   Nd2 Cd3 Cd0 Nd1  Nzx Czx zx2 zx1   Cd1 Nd0 Nd3 Cd2  xy2 xy1 Nxy Cxy
+  yz1 | yz1 yz2 Cyz Nyz  No_ Hyz Hzx Hxy   xy1 xy2 Cxy Nxy  Nd0 Cd1 Cd2 Nd3   zx1 zx2 Czx Nzx  Cd0 Nd1 Nd2 Cd3
+  yz2 | yz2 yz1 Nyz Cyz  Hyz No_ Hxy Hzx   Nxy Cxy xy2 xy1  Cd2 Nd3 Nd0 Cd1   Czx Nzx zx1 zx2  Cd3 Nd2 Nd1 Cd0
+  Cyz | Cyz Nyz yz1 yz2  Hxy Hzx Hyz No_   xy2 xy1 Nxy Cxy  Cd1 Nd0 Nd3 Cd2   Nzx Czx zx2 zx1  Nd2 Cd3 Cd0 Nd1
+  Nyz | Nyz Cyz yz2 yz1  Hzx Hxy No_ Hyz   Cxy Nxy xy1 xy2  Nd3 Cd2 Cd1 Nd0   zx2 zx1 Nzx Czx  Nd1 Cd0 Cd3 Nd2
+      |                                                                                                       
++ Cd0 | Cd0 Nd2 Cd3 Nd1  zx1 Nzx zx2 Czx   Nd0 Cd2 Nd3 Cd1  xy1 Nxy xy2 Cxy   No_ Hzx Hxy Hyz  yz1 Nyz yz2 Cyz
++ Nd1 | Nd1 Cd3 Nd2 Cd0  zx2 Czx zx1 Nzx   Nd3 Cd1 Nd0 Cd2  Cxy xy2 Nxy xy1   Hzx No_ Hyz Hxy  Nyz yz1 Cyz yz2
++ Nd2 | Nd2 Cd0 Nd1 Cd3  Nzx zx1 Czx zx2   Cd1 Nd3 Cd2 Nd0  xy2 Cxy xy1 Nxy   Hxy Hyz No_ Hzx  Cyz yz2 Nyz yz1
++ Cd3 | Cd3 Nd1 Cd0 Nd2  Czx zx2 Nzx zx1   Cd2 Nd0 Cd1 Nd3  Nxy xy1 Cxy xy2   Hyz Hxy Hzx No_  yz2 Cyz yz1 Nyz
+  zx1 | zx1 Nzx zx2 Czx  Cd0 Nd2 Cd3 Nd1   yz1 Nyz yz2 Cyz  No_ Hzx Hxy Hyz   xy1 Nxy xy2 Cxy  Nd0 Cd2 Nd3 Cd1
+  zx2 | zx2 Czx zx1 Nzx  Nd1 Cd3 Nd2 Cd0   Nyz yz1 Cyz yz2  Hzx No_ Hyz Hxy   Cxy xy2 Nxy xy1  Nd3 Cd1 Nd0 Cd2
+  Czx | Czx zx2 Nzx zx1  Cd3 Nd1 Cd0 Nd2   yz2 Cyz yz1 Nyz  Hyz Hxy Hzx No_   Nxy xy1 Cxy xy2  Cd2 Nd0 Cd1 Nd3
+  Nzx | Nzx zx1 Czx zx2  Nd2 Cd0 Nd1 Cd3   Cyz yz2 Nyz yz1  Hxy Hyz No_ Hzx   xy2 Cxy xy1 Nxy  Cd1 Nd3 Cd2 Nd0
+      |                                                                                                       
++ Nd0 | Nd0 Nd3 Cd1 Cd2  xy1 Cxy Nxy xy2   No_ Hxy Hyz Hzx  yz1 Cyz Nyz yz2   Cd0 Cd3 Nd1 Nd2  zx1 Czx Nzx zx2
++ Cd1 | Cd1 Cd2 Nd0 Nd3  xy2 Nxy Cxy xy1   Hxy No_ Hzx Hyz  Cyz yz1 yz2 Nyz   Nd2 Nd1 Cd3 Cd0  Nzx zx2 zx1 Czx
++ Cd2 | Cd2 Cd1 Nd3 Nd0  Nxy xy2 xy1 Cxy   Hyz Hzx No_ Hxy  yz2 Nyz Cyz yz1   Cd3 Cd0 Nd2 Nd1  Czx zx1 zx2 Nzx
++ Nd3 | Nd3 Nd0 Cd2 Cd1  Cxy xy1 xy2 Nxy   Hzx Hyz Hxy No_  Nyz yz2 yz1 Cyz   Nd1 Nd2 Cd0 Cd3  zx2 Nzx Czx zx1
+  xy1 | xy1 Cxy Nxy xy2  Nd0 Nd3 Cd1 Cd2   zx1 Czx Nzx zx2  Cd0 Cd3 Nd1 Nd2   yz1 Cyz Nyz yz2  No_ Hxy Hyz Hzx
+  xy2 | xy2 Nxy Cxy xy1  Cd1 Cd2 Nd0 Nd3   Nzx zx2 zx1 Czx  Nd2 Nd1 Cd3 Cd0   Cyz yz1 yz2 Nyz  Hxy No_ Hzx Hyz
+  Cxy | Cxy xy1 xy2 Nxy  Nd3 Nd0 Cd2 Cd1   zx2 Nzx Czx zx1  Nd1 Nd2 Cd0 Cd3   Nyz yz2 yz1 Cyz  Hzx Hyz Hxy No_
+  Nxy | Nxy xy2 xy1 Cxy  Cd2 Cd1 Nd3 Nd0   Czx zx1 zx2 Nzx  Cd3 Cd0 Nd2 Nd1   yz2 Nyz Cyz yz1  Hyz Hzx No_ Hxy
+==============================================================================================================
+
+
+
+MyDictionary dict3 = new MyDictionary(48) {
+
+	{ "NO______",	"01234567", 'a',  0 },		//	[xyz]	000	000 +
+	{ "HT_YZ___",	"45670123", 'b',  1 },		//	[xyz]	000	001 +
+	{ "HT_ZX___",	"67452301", 'c',  2 },		//	[xyz]	000	010 +
+	{ "HT_XY___",	"23016745", 'd',  3 },		//	[xyz]	000	011	+
+	{ "REVERSED",	"54761032", 'e',  4 },		//	[xyz]	000	100		+
+	{ "FX______",	"10325476", 'f',  5 },		//	[xyz]	000	101		+
+	{ "FY______",	"32107654", 'g',  6 },		//	[xyz]	000	110		+
+	{ "FZ______",	"76543210", 'h',  7 },		//	[xyz]	000	111		+
+
+	{ "HT_YZ_D1",	"54321076", 'A',  8 },		//	[xzy]	001	000 +
+	{ "HT_YZ_D2",	"10765432", 'B',  9 },		//	[xzy]	001	001 +
+	{ "RC_YZ___",	"76103254", 'C', 10 },		//	[xzy]	001	010 +
+	{ "RN_YZ___",	"32547610", 'D', 11 },		//	[xzy]	001	011	+
+	{ "FL_YZ_D2",	"01674523", 'E', 12 },		//	[xzy]	001	100		+
+	{ "FL_YZ_D1",	"45230167", 'F', 13 },		//	[xzy]	001	101		+
+	{ "FX_RN_YZ",	"23456701", 'G', 14 },		//	[xzy]	001	110		+
+	{ "FX_RC_YZ",	"67012345", 'H', 15 },		//	[xzy]	001	111		+
+
+	{ "RC_D0___",	"07612543", 'i', 16 },		//	[zxy]	010	000 +
+	{ "RN_D1___",	"61074325", 'j', 17 },		//	[zxy]	010	001 +
+	{ "RN_D2___",	"25430761", 'k', 18 },		//	[zxy]	010	010 +
+	{ "RC_D3___",	"43256107", 'l', 19 },		//	[zxy]	010	011	+
+	{ "RC_D0_RE",	"52347016", 'm', 20 },		//	[zxy]	010	100		+
+	{ "RN_D1_RE",	"34521670", 'n', 21 },		//	[zxy]	010	101		+
+	{ "RN_D2_RE",	"70165234", 'o', 22 },		//	[zxy]	010	110		+
+	{ "RC_D3_RE",	"16703452", 'p', 23 },		//	[zxy]	010	111		+
+
+	{ "HT_XY_D1",	"56743012", 'I', 24 },		//	[yxz]	011	000 +
+	{ "HT_XY_D2",	"74561230", 'J', 25 },		//	[yxz]	011	001 +
+	{ "RC_XY___",	"30125674", 'K', 26 },		//	[yxz]	011	010 +
+	{ "RN_XY___",	"12307456", 'L', 27 },		//	[yxz]	011	011	+
+	{ "FL_XY_D2",	"03216547", 'P', 28 },		//	[yxz]	011	100		+
+	{ "FL_XY_D1",	"21034765", 'O', 29 },		//	[yxz]	011	101		+
+	{ "FZ_RN_XY",	"65470321", 'N', 30 },		//	[yxz]	011	110		+
+	{ "FZ_RC_XY",	"47652103", 'M', 31 },		//	[yxz]	011	111		+
+
+	{ "RN_D0___",	"03476521", 'q', 32 },		//	[yzx]	100	000 +
+	{ "RC_D1___",	"21654703", 'r', 33 },		//	[yzx]	100	001 +
+	{ "RC_D2___",	"47032165", 's', 34 },		//	[yzx]	100	010 +
+	{ "RN_D3___",	"65210347", 't', 35 },		//	[yzx]	100	011	+
+	{ "RN_D0_RE",	"56123074", 'u', 36 },		//	[yzx]	100	100		+
+	{ "RC_D1_RE",	"74301256", 'v', 37 },		//	[yzx]	100	101		+
+	{ "RC_D2_RE",	"12567430", 'w', 38 },		//	[yzx]	100	110		+
+	{ "RN_D3_RE",	"30745612", 'x', 39 },		//	[yzx]	100	111		+
+
+	{ "HT_ZX_D1",	"52167034", 'Q', 40 },		//	[zyx]	101	000 +
+	{ "HT_ZX_D2",	"34701652", 'R', 41 },		//	[zyx]	101	001 +
+	{ "RC_ZX___",	"16523470", 'S', 42 },		//	[zyx]	101	010 +
+	{ "RN_ZX___",	"70345216", 'T', 43 },		//	[zyx]	101	011	+
+	{ "FL_ZX_D2",	"07432561", 'X', 44 },		//	[zyx]	101	100		+
+	{ "FL_ZX_D1",	"61254307", 'W', 45 },		//	[zyx]	101	101		+
+	{ "FY_RN_ZX",	"43076125", 'V', 46 },		//	[zyx]	101	110		+
+	{ "FY_RC_ZX",	"25610743", 'U', 47 },		//	[zyx]	101	111		+
+};
+
+48 Table :
+         | NO______ HT_YZ___ HT_ZX___ HT_XY___ REVERSED FX______ FY______ FZ______ HT_YZ_D1 HT_YZ_D2 RC_YZ___ RN_YZ___ FL_YZ_D2 FL_YZ_D1 FX_RN_YZ FX_RC_YZ RC_D0___ RN_D1___ RN_D2___ RC_D3___ RC_D0_RE RN_D1_RE RN_D2_RE RC_D3_RE HT_XY_D1 HT_XY_D2 RC_XY___ RN_XY___ FL_XY_D2 FL_XY_D1 FZ_RN_XY FZ_RC_XY RN_D0___ RC_D1___ RC_D2___ RN_D3___ RN_D0_RE RC_D1_RE RC_D2_RE RN_D3_RE HT_ZX_D1 HT_ZX_D2 RC_ZX___ RN_ZX___ FL_ZX_D2 FL_ZX_D1 FY_RN_ZX FY_RC_ZX
+---------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+NO______ | NO______ HT_YZ___ HT_ZX___ HT_XY___ REVERSED FX______ FY______ FZ______ HT_YZ_D1 HT_YZ_D2 RC_YZ___ RN_YZ___ FL_YZ_D2 FL_YZ_D1 FX_RN_YZ FX_RC_YZ RC_D0___ RN_D1___ RN_D2___ RC_D3___ RC_D0_RE RN_D1_RE RN_D2_RE RC_D3_RE HT_XY_D1 HT_XY_D2 RC_XY___ RN_XY___ FL_XY_D2 FL_XY_D1 FZ_RN_XY FZ_RC_XY RN_D0___ RC_D1___ RC_D2___ RN_D3___ RN_D0_RE RC_D1_RE RC_D2_RE RN_D3_RE HT_ZX_D1 HT_ZX_D2 RC_ZX___ RN_ZX___ FL_ZX_D2 FL_ZX_D1 FY_RN_ZX FY_RC_ZX
+HT_YZ___ | HT_YZ___ NO______ HT_XY___ HT_ZX___ FX______ REVERSED FZ______ FY______ HT_YZ_D2 HT_YZ_D1 RN_YZ___ RC_YZ___ FL_YZ_D1 FL_YZ_D2 FX_RC_YZ FX_RN_YZ RC_D3___ RN_D2___ RN_D1___ RC_D0___ RC_D3_RE RN_D2_RE RN_D1_RE RC_D0_RE RN_XY___ RC_XY___ HT_XY_D2 HT_XY_D1 FZ_RC_XY FZ_RN_XY FL_XY_D1 FL_XY_D2 RC_D2___ RN_D3___ RN_D0___ RC_D1___ RC_D2_RE RN_D3_RE RN_D0_RE RC_D1_RE RC_ZX___ RN_ZX___ HT_ZX_D1 HT_ZX_D2 FY_RN_ZX FY_RC_ZX FL_ZX_D2 FL_ZX_D1
+HT_ZX___ | HT_ZX___ HT_XY___ NO______ HT_YZ___ FY______ FZ______ REVERSED FX______ RN_YZ___ RC_YZ___ HT_YZ_D2 HT_YZ_D1 FX_RC_YZ FX_RN_YZ FL_YZ_D1 FL_YZ_D2 RN_D1___ RC_D0___ RC_D3___ RN_D2___ RN_D1_RE RC_D0_RE RC_D3_RE RN_D2_RE RC_XY___ RN_XY___ HT_XY_D1 HT_XY_D2 FZ_RN_XY FZ_RC_XY FL_XY_D2 FL_XY_D1 RN_D3___ RC_D2___ RC_D1___ RN_D0___ RN_D3_RE RC_D2_RE RC_D1_RE RN_D0_RE HT_ZX_D2 HT_ZX_D1 RN_ZX___ RC_ZX___ FL_ZX_D1 FL_ZX_D2 FY_RC_ZX FY_RN_ZX
+HT_XY___ | HT_XY___ HT_ZX___ HT_YZ___ NO______ FZ______ FY______ FX______ REVERSED RC_YZ___ RN_YZ___ HT_YZ_D1 HT_YZ_D2 FX_RN_YZ FX_RC_YZ FL_YZ_D2 FL_YZ_D1 RN_D2___ RC_D3___ RC_D0___ RN_D1___ RN_D2_RE RC_D3_RE RC_D0_RE RN_D1_RE HT_XY_D2 HT_XY_D1 RN_XY___ RC_XY___ FL_XY_D1 FL_XY_D2 FZ_RC_XY FZ_RN_XY RC_D1___ RN_D0___ RN_D3___ RC_D2___ RC_D1_RE RN_D0_RE RN_D3_RE RC_D2_RE RN_ZX___ RC_ZX___ HT_ZX_D2 HT_ZX_D1 FY_RC_ZX FY_RN_ZX FL_ZX_D1 FL_ZX_D2
+REVERSED | REVERSED FX______ FY______ FZ______ NO______ HT_YZ___ HT_ZX___ HT_XY___ FL_YZ_D2 FL_YZ_D1 FX_RN_YZ FX_RC_YZ HT_YZ_D1 HT_YZ_D2 RC_YZ___ RN_YZ___ RC_D0_RE RN_D1_RE RN_D2_RE RC_D3_RE RC_D0___ RN_D1___ RN_D2___ RC_D3___ FL_XY_D2 FL_XY_D1 FZ_RN_XY FZ_RC_XY HT_XY_D1 HT_XY_D2 RC_XY___ RN_XY___ RN_D0_RE RC_D1_RE RC_D2_RE RN_D3_RE RN_D0___ RC_D1___ RC_D2___ RN_D3___ FL_ZX_D2 FL_ZX_D1 FY_RN_ZX FY_RC_ZX HT_ZX_D1 HT_ZX_D2 RC_ZX___ RN_ZX___
+FX______ | FX______ REVERSED FZ______ FY______ HT_YZ___ NO______ HT_XY___ HT_ZX___ FL_YZ_D1 FL_YZ_D2 FX_RC_YZ FX_RN_YZ HT_YZ_D2 HT_YZ_D1 RN_YZ___ RC_YZ___ RC_D3_RE RN_D2_RE RN_D1_RE RC_D0_RE RC_D3___ RN_D2___ RN_D1___ RC_D0___ FZ_RC_XY FZ_RN_XY FL_XY_D1 FL_XY_D2 RN_XY___ RC_XY___ HT_XY_D2 HT_XY_D1 RC_D2_RE RN_D3_RE RN_D0_RE RC_D1_RE RC_D2___ RN_D3___ RN_D0___ RC_D1___ FY_RN_ZX FY_RC_ZX FL_ZX_D2 FL_ZX_D1 RC_ZX___ RN_ZX___ HT_ZX_D1 HT_ZX_D2
+FY______ | FY______ FZ______ REVERSED FX______ HT_ZX___ HT_XY___ NO______ HT_YZ___ FX_RC_YZ FX_RN_YZ FL_YZ_D1 FL_YZ_D2 RN_YZ___ RC_YZ___ HT_YZ_D2 HT_YZ_D1 RN_D1_RE RC_D0_RE RC_D3_RE RN_D2_RE RN_D1___ RC_D0___ RC_D3___ RN_D2___ FZ_RN_XY FZ_RC_XY FL_XY_D2 FL_XY_D1 RC_XY___ RN_XY___ HT_XY_D1 HT_XY_D2 RN_D3_RE RC_D2_RE RC_D1_RE RN_D0_RE RN_D3___ RC_D2___ RC_D1___ RN_D0___ FL_ZX_D1 FL_ZX_D2 FY_RC_ZX FY_RN_ZX HT_ZX_D2 HT_ZX_D1 RN_ZX___ RC_ZX___
+FZ______ | FZ______ FY______ FX______ REVERSED HT_XY___ HT_ZX___ HT_YZ___ NO______ FX_RN_YZ FX_RC_YZ FL_YZ_D2 FL_YZ_D1 RC_YZ___ RN_YZ___ HT_YZ_D1 HT_YZ_D2 RN_D2_RE RC_D3_RE RC_D0_RE RN_D1_RE RN_D2___ RC_D3___ RC_D0___ RN_D1___ FL_XY_D1 FL_XY_D2 FZ_RC_XY FZ_RN_XY HT_XY_D2 HT_XY_D1 RN_XY___ RC_XY___ RC_D1_RE RN_D0_RE RN_D3_RE RC_D2_RE RC_D1___ RN_D0___ RN_D3___ RC_D2___ FY_RC_ZX FY_RN_ZX FL_ZX_D1 FL_ZX_D2 RN_ZX___ RC_ZX___ HT_ZX_D2 HT_ZX_D1
+HT_YZ_D1 | HT_YZ_D1 HT_YZ_D2 RC_YZ___ RN_YZ___ FL_YZ_D2 FL_YZ_D1 FX_RN_YZ FX_RC_YZ NO______ HT_YZ___ HT_ZX___ HT_XY___ REVERSED FX______ FY______ FZ______ HT_XY_D1 HT_XY_D2 RC_XY___ RN_XY___ FL_XY_D2 FL_XY_D1 FZ_RN_XY FZ_RC_XY RC_D0___ RN_D1___ RN_D2___ RC_D3___ RC_D0_RE RN_D1_RE RN_D2_RE RC_D3_RE HT_ZX_D1 HT_ZX_D2 RC_ZX___ RN_ZX___ FL_ZX_D2 FL_ZX_D1 FY_RN_ZX FY_RC_ZX RN_D0___ RC_D1___ RC_D2___ RN_D3___ RN_D0_RE RC_D1_RE RC_D2_RE RN_D3_RE
+HT_YZ_D2 | HT_YZ_D2 HT_YZ_D1 RN_YZ___ RC_YZ___ FL_YZ_D1 FL_YZ_D2 FX_RC_YZ FX_RN_YZ HT_YZ___ NO______ HT_XY___ HT_ZX___ FX______ REVERSED FZ______ FY______ RN_XY___ RC_XY___ HT_XY_D2 HT_XY_D1 FZ_RC_XY FZ_RN_XY FL_XY_D1 FL_XY_D2 RC_D3___ RN_D2___ RN_D1___ RC_D0___ RC_D3_RE RN_D2_RE RN_D1_RE RC_D0_RE RC_ZX___ RN_ZX___ HT_ZX_D1 HT_ZX_D2 FY_RN_ZX FY_RC_ZX FL_ZX_D2 FL_ZX_D1 RC_D2___ RN_D3___ RN_D0___ RC_D1___ RC_D2_RE RN_D3_RE RN_D0_RE RC_D1_RE
+RC_YZ___ | RC_YZ___ RN_YZ___ HT_YZ_D1 HT_YZ_D2 FX_RN_YZ FX_RC_YZ FL_YZ_D2 FL_YZ_D1 HT_XY___ HT_ZX___ HT_YZ___ NO______ FZ______ FY______ FX______ REVERSED HT_XY_D2 HT_XY_D1 RN_XY___ RC_XY___ FL_XY_D1 FL_XY_D2 FZ_RC_XY FZ_RN_XY RN_D2___ RC_D3___ RC_D0___ RN_D1___ RN_D2_RE RC_D3_RE RC_D0_RE RN_D1_RE RN_ZX___ RC_ZX___ HT_ZX_D2 HT_ZX_D1 FY_RC_ZX FY_RN_ZX FL_ZX_D1 FL_ZX_D2 RC_D1___ RN_D0___ RN_D3___ RC_D2___ RC_D1_RE RN_D0_RE RN_D3_RE RC_D2_RE
+RN_YZ___ | RN_YZ___ RC_YZ___ HT_YZ_D2 HT_YZ_D1 FX_RC_YZ FX_RN_YZ FL_YZ_D1 FL_YZ_D2 HT_ZX___ HT_XY___ NO______ HT_YZ___ FY______ FZ______ REVERSED FX______ RC_XY___ RN_XY___ HT_XY_D1 HT_XY_D2 FZ_RN_XY FZ_RC_XY FL_XY_D2 FL_XY_D1 RN_D1___ RC_D0___ RC_D3___ RN_D2___ RN_D1_RE RC_D0_RE RC_D3_RE RN_D2_RE HT_ZX_D2 HT_ZX_D1 RN_ZX___ RC_ZX___ FL_ZX_D1 FL_ZX_D2 FY_RC_ZX FY_RN_ZX RN_D3___ RC_D2___ RC_D1___ RN_D0___ RN_D3_RE RC_D2_RE RC_D1_RE RN_D0_RE
+FL_YZ_D2 | FL_YZ_D2 FL_YZ_D1 FX_RN_YZ FX_RC_YZ HT_YZ_D1 HT_YZ_D2 RC_YZ___ RN_YZ___ REVERSED FX______ FY______ FZ______ NO______ HT_YZ___ HT_ZX___ HT_XY___ FL_XY_D2 FL_XY_D1 FZ_RN_XY FZ_RC_XY HT_XY_D1 HT_XY_D2 RC_XY___ RN_XY___ RC_D0_RE RN_D1_RE RN_D2_RE RC_D3_RE RC_D0___ RN_D1___ RN_D2___ RC_D3___ FL_ZX_D2 FL_ZX_D1 FY_RN_ZX FY_RC_ZX HT_ZX_D1 HT_ZX_D2 RC_ZX___ RN_ZX___ RN_D0_RE RC_D1_RE RC_D2_RE RN_D3_RE RN_D0___ RC_D1___ RC_D2___ RN_D3___
+FL_YZ_D1 | FL_YZ_D1 FL_YZ_D2 FX_RC_YZ FX_RN_YZ HT_YZ_D2 HT_YZ_D1 RN_YZ___ RC_YZ___ FX______ REVERSED FZ______ FY______ HT_YZ___ NO______ HT_XY___ HT_ZX___ FZ_RC_XY FZ_RN_XY FL_XY_D1 FL_XY_D2 RN_XY___ RC_XY___ HT_XY_D2 HT_XY_D1 RC_D3_RE RN_D2_RE RN_D1_RE RC_D0_RE RC_D3___ RN_D2___ RN_D1___ RC_D0___ FY_RN_ZX FY_RC_ZX FL_ZX_D2 FL_ZX_D1 RC_ZX___ RN_ZX___ HT_ZX_D1 HT_ZX_D2 RC_D2_RE RN_D3_RE RN_D0_RE RC_D1_RE RC_D2___ RN_D3___ RN_D0___ RC_D1___
+FX_RN_YZ | FX_RN_YZ FX_RC_YZ FL_YZ_D2 FL_YZ_D1 RC_YZ___ RN_YZ___ HT_YZ_D1 HT_YZ_D2 FZ______ FY______ FX______ REVERSED HT_XY___ HT_ZX___ HT_YZ___ NO______ FL_XY_D1 FL_XY_D2 FZ_RC_XY FZ_RN_XY HT_XY_D2 HT_XY_D1 RN_XY___ RC_XY___ RN_D2_RE RC_D3_RE RC_D0_RE RN_D1_RE RN_D2___ RC_D3___ RC_D0___ RN_D1___ FY_RC_ZX FY_RN_ZX FL_ZX_D1 FL_ZX_D2 RN_ZX___ RC_ZX___ HT_ZX_D2 HT_ZX_D1 RC_D1_RE RN_D0_RE RN_D3_RE RC_D2_RE RC_D1___ RN_D0___ RN_D3___ RC_D2___
+FX_RC_YZ | FX_RC_YZ FX_RN_YZ FL_YZ_D1 FL_YZ_D2 RN_YZ___ RC_YZ___ HT_YZ_D2 HT_YZ_D1 FY______ FZ______ REVERSED FX______ HT_ZX___ HT_XY___ NO______ HT_YZ___ FZ_RN_XY FZ_RC_XY FL_XY_D2 FL_XY_D1 RC_XY___ RN_XY___ HT_XY_D1 HT_XY_D2 RN_D1_RE RC_D0_RE RC_D3_RE RN_D2_RE RN_D1___ RC_D0___ RC_D3___ RN_D2___ FL_ZX_D1 FL_ZX_D2 FY_RC_ZX FY_RN_ZX HT_ZX_D2 HT_ZX_D1 RN_ZX___ RC_ZX___ RN_D3_RE RC_D2_RE RC_D1_RE RN_D0_RE RN_D3___ RC_D2___ RC_D1___ RN_D0___
+RC_D0___ | RC_D0___ RN_D2___ RC_D3___ RN_D1___ RC_D0_RE RN_D2_RE RC_D3_RE RN_D1_RE HT_ZX_D1 RN_ZX___ HT_ZX_D2 RC_ZX___ FL_ZX_D2 FY_RC_ZX FL_ZX_D1 FY_RN_ZX RN_D0___ RC_D2___ RN_D3___ RC_D1___ RN_D0_RE RC_D2_RE RN_D3_RE RC_D1_RE HT_YZ_D1 RN_YZ___ HT_YZ_D2 RC_YZ___ FL_YZ_D2 FX_RC_YZ FL_YZ_D1 FX_RN_YZ NO______ HT_ZX___ HT_XY___ HT_YZ___ REVERSED FY______ FZ______ FX______ HT_XY_D1 RN_XY___ HT_XY_D2 RC_XY___ FL_XY_D2 FZ_RC_XY FL_XY_D1 FZ_RN_XY
+RN_D1___ | RN_D1___ RC_D3___ RN_D2___ RC_D0___ RN_D1_RE RC_D3_RE RN_D2_RE RC_D0_RE HT_ZX_D2 RC_ZX___ HT_ZX_D1 RN_ZX___ FL_ZX_D1 FY_RN_ZX FL_ZX_D2 FY_RC_ZX RN_D3___ RC_D1___ RN_D0___ RC_D2___ RN_D3_RE RC_D1_RE RN_D0_RE RC_D2_RE RN_YZ___ HT_YZ_D1 RC_YZ___ HT_YZ_D2 FX_RC_YZ FL_YZ_D2 FX_RN_YZ FL_YZ_D1 HT_ZX___ NO______ HT_YZ___ HT_XY___ FY______ REVERSED FX______ FZ______ RC_XY___ HT_XY_D2 RN_XY___ HT_XY_D1 FZ_RN_XY FL_XY_D1 FZ_RC_XY FL_XY_D2
+RN_D2___ | RN_D2___ RC_D0___ RN_D1___ RC_D3___ RN_D2_RE RC_D0_RE RN_D1_RE RC_D3_RE RN_ZX___ HT_ZX_D1 RC_ZX___ HT_ZX_D2 FY_RC_ZX FL_ZX_D2 FY_RN_ZX FL_ZX_D1 RC_D1___ RN_D3___ RC_D2___ RN_D0___ RC_D1_RE RN_D3_RE RC_D2_RE RN_D0_RE RC_YZ___ HT_YZ_D2 RN_YZ___ HT_YZ_D1 FX_RN_YZ FL_YZ_D1 FX_RC_YZ FL_YZ_D2 HT_XY___ HT_YZ___ NO______ HT_ZX___ FZ______ FX______ REVERSED FY______ HT_XY_D2 RC_XY___ HT_XY_D1 RN_XY___ FL_XY_D1 FZ_RN_XY FL_XY_D2 FZ_RC_XY
+RC_D3___ | RC_D3___ RN_D1___ RC_D0___ RN_D2___ RC_D3_RE RN_D1_RE RC_D0_RE RN_D2_RE RC_ZX___ HT_ZX_D2 RN_ZX___ HT_ZX_D1 FY_RN_ZX FL_ZX_D1 FY_RC_ZX FL_ZX_D2 RC_D2___ RN_D0___ RC_D1___ RN_D3___ RC_D2_RE RN_D0_RE RC_D1_RE RN_D3_RE HT_YZ_D2 RC_YZ___ HT_YZ_D1 RN_YZ___ FL_YZ_D1 FX_RN_YZ FL_YZ_D2 FX_RC_YZ HT_YZ___ HT_XY___ HT_ZX___ NO______ FX______ FZ______ FY______ REVERSED RN_XY___ HT_XY_D1 RC_XY___ HT_XY_D2 FZ_RC_XY FL_XY_D2 FZ_RN_XY FL_XY_D1
+RC_D0_RE | RC_D0_RE RN_D2_RE RC_D3_RE RN_D1_RE RC_D0___ RN_D2___ RC_D3___ RN_D1___ FL_ZX_D2 FY_RC_ZX FL_ZX_D1 FY_RN_ZX HT_ZX_D1 RN_ZX___ HT_ZX_D2 RC_ZX___ RN_D0_RE RC_D2_RE RN_D3_RE RC_D1_RE RN_D0___ RC_D2___ RN_D3___ RC_D1___ FL_YZ_D2 FX_RC_YZ FL_YZ_D1 FX_RN_YZ HT_YZ_D1 RN_YZ___ HT_YZ_D2 RC_YZ___ REVERSED FY______ FZ______ FX______ NO______ HT_ZX___ HT_XY___ HT_YZ___ FL_XY_D2 FZ_RC_XY FL_XY_D1 FZ_RN_XY HT_XY_D1 RN_XY___ HT_XY_D2 RC_XY___
+RN_D1_RE | RN_D1_RE RC_D3_RE RN_D2_RE RC_D0_RE RN_D1___ RC_D3___ RN_D2___ RC_D0___ FL_ZX_D1 FY_RN_ZX FL_ZX_D2 FY_RC_ZX HT_ZX_D2 RC_ZX___ HT_ZX_D1 RN_ZX___ RN_D3_RE RC_D1_RE RN_D0_RE RC_D2_RE RN_D3___ RC_D1___ RN_D0___ RC_D2___ FX_RC_YZ FL_YZ_D2 FX_RN_YZ FL_YZ_D1 RN_YZ___ HT_YZ_D1 RC_YZ___ HT_YZ_D2 FY______ REVERSED FX______ FZ______ HT_ZX___ NO______ HT_YZ___ HT_XY___ FZ_RN_XY FL_XY_D1 FZ_RC_XY FL_XY_D2 RC_XY___ HT_XY_D2 RN_XY___ HT_XY_D1
+RN_D2_RE | RN_D2_RE RC_D0_RE RN_D1_RE RC_D3_RE RN_D2___ RC_D0___ RN_D1___ RC_D3___ FY_RC_ZX FL_ZX_D2 FY_RN_ZX FL_ZX_D1 RN_ZX___ HT_ZX_D1 RC_ZX___ HT_ZX_D2 RC_D1_RE RN_D3_RE RC_D2_RE RN_D0_RE RC_D1___ RN_D3___ RC_D2___ RN_D0___ FX_RN_YZ FL_YZ_D1 FX_RC_YZ FL_YZ_D2 RC_YZ___ HT_YZ_D2 RN_YZ___ HT_YZ_D1 FZ______ FX______ REVERSED FY______ HT_XY___ HT_YZ___ NO______ HT_ZX___ FL_XY_D1 FZ_RN_XY FL_XY_D2 FZ_RC_XY HT_XY_D2 RC_XY___ HT_XY_D1 RN_XY___
+RC_D3_RE | RC_D3_RE RN_D1_RE RC_D0_RE RN_D2_RE RC_D3___ RN_D1___ RC_D0___ RN_D2___ FY_RN_ZX FL_ZX_D1 FY_RC_ZX FL_ZX_D2 RC_ZX___ HT_ZX_D2 RN_ZX___ HT_ZX_D1 RC_D2_RE RN_D0_RE RC_D1_RE RN_D3_RE RC_D2___ RN_D0___ RC_D1___ RN_D3___ FL_YZ_D1 FX_RN_YZ FL_YZ_D2 FX_RC_YZ HT_YZ_D2 RC_YZ___ HT_YZ_D1 RN_YZ___ FX______ FZ______ FY______ REVERSED HT_YZ___ HT_XY___ HT_ZX___ NO______ FZ_RC_XY FL_XY_D2 FZ_RN_XY FL_XY_D1 RN_XY___ HT_XY_D1 RC_XY___ HT_XY_D2
+HT_XY_D1 | HT_XY_D1 RC_XY___ RN_XY___ HT_XY_D2 FL_XY_D2 FZ_RN_XY FZ_RC_XY FL_XY_D1 RN_D0___ RN_D3___ RC_D1___ RC_D2___ RN_D0_RE RN_D3_RE RC_D1_RE RC_D2_RE HT_ZX_D1 RC_ZX___ RN_ZX___ HT_ZX_D2 FL_ZX_D2 FY_RN_ZX FY_RC_ZX FL_ZX_D1 NO______ HT_XY___ HT_YZ___ HT_ZX___ REVERSED FZ______ FX______ FY______ HT_YZ_D1 RC_YZ___ RN_YZ___ HT_YZ_D2 FL_YZ_D2 FX_RN_YZ FX_RC_YZ FL_YZ_D1 RC_D0___ RC_D3___ RN_D1___ RN_D2___ RC_D0_RE RC_D3_RE RN_D1_RE RN_D2_RE
+HT_XY_D2 | HT_XY_D2 RN_XY___ RC_XY___ HT_XY_D1 FL_XY_D1 FZ_RC_XY FZ_RN_XY FL_XY_D2 RC_D1___ RC_D2___ RN_D0___ RN_D3___ RC_D1_RE RC_D2_RE RN_D0_RE RN_D3_RE RN_ZX___ HT_ZX_D2 HT_ZX_D1 RC_ZX___ FY_RC_ZX FL_ZX_D1 FL_ZX_D2 FY_RN_ZX HT_XY___ NO______ HT_ZX___ HT_YZ___ FZ______ REVERSED FY______ FX______ RC_YZ___ HT_YZ_D1 HT_YZ_D2 RN_YZ___ FX_RN_YZ FL_YZ_D2 FL_YZ_D1 FX_RC_YZ RN_D2___ RN_D1___ RC_D3___ RC_D0___ RN_D2_RE RN_D1_RE RC_D3_RE RC_D0_RE
+RC_XY___ | RC_XY___ HT_XY_D1 HT_XY_D2 RN_XY___ FZ_RN_XY FL_XY_D2 FL_XY_D1 FZ_RC_XY RN_D3___ RN_D0___ RC_D2___ RC_D1___ RN_D3_RE RN_D0_RE RC_D2_RE RC_D1_RE HT_ZX_D2 RN_ZX___ RC_ZX___ HT_ZX_D1 FL_ZX_D1 FY_RC_ZX FY_RN_ZX FL_ZX_D2 HT_ZX___ HT_YZ___ HT_XY___ NO______ FY______ FX______ FZ______ REVERSED RN_YZ___ HT_YZ_D2 HT_YZ_D1 RC_YZ___ FX_RC_YZ FL_YZ_D1 FL_YZ_D2 FX_RN_YZ RN_D1___ RN_D2___ RC_D0___ RC_D3___ RN_D1_RE RN_D2_RE RC_D0_RE RC_D3_RE
+RN_XY___ | RN_XY___ HT_XY_D2 HT_XY_D1 RC_XY___ FZ_RC_XY FL_XY_D1 FL_XY_D2 FZ_RN_XY RC_D2___ RC_D1___ RN_D3___ RN_D0___ RC_D2_RE RC_D1_RE RN_D3_RE RN_D0_RE RC_ZX___ HT_ZX_D1 HT_ZX_D2 RN_ZX___ FY_RN_ZX FL_ZX_D2 FL_ZX_D1 FY_RC_ZX HT_YZ___ HT_ZX___ NO______ HT_XY___ FX______ FY______ REVERSED FZ______ HT_YZ_D2 RN_YZ___ RC_YZ___ HT_YZ_D1 FL_YZ_D1 FX_RC_YZ FX_RN_YZ FL_YZ_D2 RC_D3___ RC_D0___ RN_D2___ RN_D1___ RC_D3_RE RC_D0_RE RN_D2_RE RN_D1_RE
+FL_XY_D2 | FL_XY_D2 FZ_RN_XY FZ_RC_XY FL_XY_D1 HT_XY_D1 RC_XY___ RN_XY___ HT_XY_D2 RN_D0_RE RN_D3_RE RC_D1_RE RC_D2_RE RN_D0___ RN_D3___ RC_D1___ RC_D2___ FL_ZX_D2 FY_RN_ZX FY_RC_ZX FL_ZX_D1 HT_ZX_D1 RC_ZX___ RN_ZX___ HT_ZX_D2 REVERSED FZ______ FX______ FY______ NO______ HT_XY___ HT_YZ___ HT_ZX___ FL_YZ_D2 FX_RN_YZ FX_RC_YZ FL_YZ_D1 HT_YZ_D1 RC_YZ___ RN_YZ___ HT_YZ_D2 RC_D0_RE RC_D3_RE RN_D1_RE RN_D2_RE RC_D0___ RC_D3___ RN_D1___ RN_D2___
+FL_XY_D1 | FL_XY_D1 FZ_RC_XY FZ_RN_XY FL_XY_D2 HT_XY_D2 RN_XY___ RC_XY___ HT_XY_D1 RC_D1_RE RC_D2_RE RN_D0_RE RN_D3_RE RC_D1___ RC_D2___ RN_D0___ RN_D3___ FY_RC_ZX FL_ZX_D1 FL_ZX_D2 FY_RN_ZX RN_ZX___ HT_ZX_D2 HT_ZX_D1 RC_ZX___ FZ______ REVERSED FY______ FX______ HT_XY___ NO______ HT_ZX___ HT_YZ___ FX_RN_YZ FL_YZ_D2 FL_YZ_D1 FX_RC_YZ RC_YZ___ HT_YZ_D1 HT_YZ_D2 RN_YZ___ RN_D2_RE RN_D1_RE RC_D3_RE RC_D0_RE RN_D2___ RN_D1___ RC_D3___ RC_D0___
+FZ_RN_XY | FZ_RN_XY FL_XY_D2 FL_XY_D1 FZ_RC_XY RC_XY___ HT_XY_D1 HT_XY_D2 RN_XY___ RN_D3_RE RN_D0_RE RC_D2_RE RC_D1_RE RN_D3___ RN_D0___ RC_D2___ RC_D1___ FL_ZX_D1 FY_RC_ZX FY_RN_ZX FL_ZX_D2 HT_ZX_D2 RN_ZX___ RC_ZX___ HT_ZX_D1 FY______ FX______ FZ______ REVERSED HT_ZX___ HT_YZ___ HT_XY___ NO______ FX_RC_YZ FL_YZ_D1 FL_YZ_D2 FX_RN_YZ RN_YZ___ HT_YZ_D2 HT_YZ_D1 RC_YZ___ RN_D1_RE RN_D2_RE RC_D0_RE RC_D3_RE RN_D1___ RN_D2___ RC_D0___ RC_D3___
+FZ_RC_XY | FZ_RC_XY FL_XY_D1 FL_XY_D2 FZ_RN_XY RN_XY___ HT_XY_D2 HT_XY_D1 RC_XY___ RC_D2_RE RC_D1_RE RN_D3_RE RN_D0_RE RC_D2___ RC_D1___ RN_D3___ RN_D0___ FY_RN_ZX FL_ZX_D2 FL_ZX_D1 FY_RC_ZX RC_ZX___ HT_ZX_D1 HT_ZX_D2 RN_ZX___ FX______ FY______ REVERSED FZ______ HT_YZ___ HT_ZX___ NO______ HT_XY___ FL_YZ_D1 FX_RC_YZ FX_RN_YZ FL_YZ_D2 HT_YZ_D2 RN_YZ___ RC_YZ___ HT_YZ_D1 RC_D3_RE RC_D0_RE RN_D2_RE RN_D1_RE RC_D3___ RC_D0___ RN_D2___ RN_D1___
+RN_D0___ | RN_D0___ RN_D3___ RC_D1___ RC_D2___ RN_D0_RE RN_D3_RE RC_D1_RE RC_D2_RE HT_XY_D1 RC_XY___ RN_XY___ HT_XY_D2 FL_XY_D2 FZ_RN_XY FZ_RC_XY FL_XY_D1 NO______ HT_XY___ HT_YZ___ HT_ZX___ REVERSED FZ______ FX______ FY______ HT_ZX_D1 RC_ZX___ RN_ZX___ HT_ZX_D2 FL_ZX_D2 FY_RN_ZX FY_RC_ZX FL_ZX_D1 RC_D0___ RC_D3___ RN_D1___ RN_D2___ RC_D0_RE RC_D3_RE RN_D1_RE RN_D2_RE HT_YZ_D1 RC_YZ___ RN_YZ___ HT_YZ_D2 FL_YZ_D2 FX_RN_YZ FX_RC_YZ FL_YZ_D1
+RC_D1___ | RC_D1___ RC_D2___ RN_D0___ RN_D3___ RC_D1_RE RC_D2_RE RN_D0_RE RN_D3_RE HT_XY_D2 RN_XY___ RC_XY___ HT_XY_D1 FL_XY_D1 FZ_RC_XY FZ_RN_XY FL_XY_D2 HT_XY___ NO______ HT_ZX___ HT_YZ___ FZ______ REVERSED FY______ FX______ RN_ZX___ HT_ZX_D2 HT_ZX_D1 RC_ZX___ FY_RC_ZX FL_ZX_D1 FL_ZX_D2 FY_RN_ZX RN_D2___ RN_D1___ RC_D3___ RC_D0___ RN_D2_RE RN_D1_RE RC_D3_RE RC_D0_RE RC_YZ___ HT_YZ_D1 HT_YZ_D2 RN_YZ___ FX_RN_YZ FL_YZ_D2 FL_YZ_D1 FX_RC_YZ
+RC_D2___ | RC_D2___ RC_D1___ RN_D3___ RN_D0___ RC_D2_RE RC_D1_RE RN_D3_RE RN_D0_RE RN_XY___ HT_XY_D2 HT_XY_D1 RC_XY___ FZ_RC_XY FL_XY_D1 FL_XY_D2 FZ_RN_XY HT_YZ___ HT_ZX___ NO______ HT_XY___ FX______ FY______ REVERSED FZ______ RC_ZX___ HT_ZX_D1 HT_ZX_D2 RN_ZX___ FY_RN_ZX FL_ZX_D2 FL_ZX_D1 FY_RC_ZX RC_D3___ RC_D0___ RN_D2___ RN_D1___ RC_D3_RE RC_D0_RE RN_D2_RE RN_D1_RE HT_YZ_D2 RN_YZ___ RC_YZ___ HT_YZ_D1 FL_YZ_D1 FX_RC_YZ FX_RN_YZ FL_YZ_D2
+RN_D3___ | RN_D3___ RN_D0___ RC_D2___ RC_D1___ RN_D3_RE RN_D0_RE RC_D2_RE RC_D1_RE RC_XY___ HT_XY_D1 HT_XY_D2 RN_XY___ FZ_RN_XY FL_XY_D2 FL_XY_D1 FZ_RC_XY HT_ZX___ HT_YZ___ HT_XY___ NO______ FY______ FX______ FZ______ REVERSED HT_ZX_D2 RN_ZX___ RC_ZX___ HT_ZX_D1 FL_ZX_D1 FY_RC_ZX FY_RN_ZX FL_ZX_D2 RN_D1___ RN_D2___ RC_D0___ RC_D3___ RN_D1_RE RN_D2_RE RC_D0_RE RC_D3_RE RN_YZ___ HT_YZ_D2 HT_YZ_D1 RC_YZ___ FX_RC_YZ FL_YZ_D1 FL_YZ_D2 FX_RN_YZ
+RN_D0_RE | RN_D0_RE RN_D3_RE RC_D1_RE RC_D2_RE RN_D0___ RN_D3___ RC_D1___ RC_D2___ FL_XY_D2 FZ_RN_XY FZ_RC_XY FL_XY_D1 HT_XY_D1 RC_XY___ RN_XY___ HT_XY_D2 REVERSED FZ______ FX______ FY______ NO______ HT_XY___ HT_YZ___ HT_ZX___ FL_ZX_D2 FY_RN_ZX FY_RC_ZX FL_ZX_D1 HT_ZX_D1 RC_ZX___ RN_ZX___ HT_ZX_D2 RC_D0_RE RC_D3_RE RN_D1_RE RN_D2_RE RC_D0___ RC_D3___ RN_D1___ RN_D2___ FL_YZ_D2 FX_RN_YZ FX_RC_YZ FL_YZ_D1 HT_YZ_D1 RC_YZ___ RN_YZ___ HT_YZ_D2
+RC_D1_RE | RC_D1_RE RC_D2_RE RN_D0_RE RN_D3_RE RC_D1___ RC_D2___ RN_D0___ RN_D3___ FL_XY_D1 FZ_RC_XY FZ_RN_XY FL_XY_D2 HT_XY_D2 RN_XY___ RC_XY___ HT_XY_D1 FZ______ REVERSED FY______ FX______ HT_XY___ NO______ HT_ZX___ HT_YZ___ FY_RC_ZX FL_ZX_D1 FL_ZX_D2 FY_RN_ZX RN_ZX___ HT_ZX_D2 HT_ZX_D1 RC_ZX___ RN_D2_RE RN_D1_RE RC_D3_RE RC_D0_RE RN_D2___ RN_D1___ RC_D3___ RC_D0___ FX_RN_YZ FL_YZ_D2 FL_YZ_D1 FX_RC_YZ RC_YZ___ HT_YZ_D1 HT_YZ_D2 RN_YZ___
+RC_D2_RE | RC_D2_RE RC_D1_RE RN_D3_RE RN_D0_RE RC_D2___ RC_D1___ RN_D3___ RN_D0___ FZ_RC_XY FL_XY_D1 FL_XY_D2 FZ_RN_XY RN_XY___ HT_XY_D2 HT_XY_D1 RC_XY___ FX______ FY______ REVERSED FZ______ HT_YZ___ HT_ZX___ NO______ HT_XY___ FY_RN_ZX FL_ZX_D2 FL_ZX_D1 FY_RC_ZX RC_ZX___ HT_ZX_D1 HT_ZX_D2 RN_ZX___ RC_D3_RE RC_D0_RE RN_D2_RE RN_D1_RE RC_D3___ RC_D0___ RN_D2___ RN_D1___ FL_YZ_D1 FX_RC_YZ FX_RN_YZ FL_YZ_D2 HT_YZ_D2 RN_YZ___ RC_YZ___ HT_YZ_D1
+RN_D3_RE | RN_D3_RE RN_D0_RE RC_D2_RE RC_D1_RE RN_D3___ RN_D0___ RC_D2___ RC_D1___ FZ_RN_XY FL_XY_D2 FL_XY_D1 FZ_RC_XY RC_XY___ HT_XY_D1 HT_XY_D2 RN_XY___ FY______ FX______ FZ______ REVERSED HT_ZX___ HT_YZ___ HT_XY___ NO______ FL_ZX_D1 FY_RC_ZX FY_RN_ZX FL_ZX_D2 HT_ZX_D2 RN_ZX___ RC_ZX___ HT_ZX_D1 RN_D1_RE RN_D2_RE RC_D0_RE RC_D3_RE RN_D1___ RN_D2___ RC_D0___ RC_D3___ FX_RC_YZ FL_YZ_D1 FL_YZ_D2 FX_RN_YZ RN_YZ___ HT_YZ_D2 HT_YZ_D1 RC_YZ___
+HT_ZX_D1 | HT_ZX_D1 RN_ZX___ HT_ZX_D2 RC_ZX___ FL_ZX_D2 FY_RC_ZX FL_ZX_D1 FY_RN_ZX RC_D0___ RN_D2___ RC_D3___ RN_D1___ RC_D0_RE RN_D2_RE RC_D3_RE RN_D1_RE HT_YZ_D1 RN_YZ___ HT_YZ_D2 RC_YZ___ FL_YZ_D2 FX_RC_YZ FL_YZ_D1 FX_RN_YZ RN_D0___ RC_D2___ RN_D3___ RC_D1___ RN_D0_RE RC_D2_RE RN_D3_RE RC_D1_RE HT_XY_D1 RN_XY___ HT_XY_D2 RC_XY___ FL_XY_D2 FZ_RC_XY FL_XY_D1 FZ_RN_XY NO______ HT_ZX___ HT_XY___ HT_YZ___ REVERSED FY______ FZ______ FX______
+HT_ZX_D2 | HT_ZX_D2 RC_ZX___ HT_ZX_D1 RN_ZX___ FL_ZX_D1 FY_RN_ZX FL_ZX_D2 FY_RC_ZX RN_D1___ RC_D3___ RN_D2___ RC_D0___ RN_D1_RE RC_D3_RE RN_D2_RE RC_D0_RE RN_YZ___ HT_YZ_D1 RC_YZ___ HT_YZ_D2 FX_RC_YZ FL_YZ_D2 FX_RN_YZ FL_YZ_D1 RN_D3___ RC_D1___ RN_D0___ RC_D2___ RN_D3_RE RC_D1_RE RN_D0_RE RC_D2_RE RC_XY___ HT_XY_D2 RN_XY___ HT_XY_D1 FZ_RN_XY FL_XY_D1 FZ_RC_XY FL_XY_D2 HT_ZX___ NO______ HT_YZ___ HT_XY___ FY______ REVERSED FX______ FZ______
+RC_ZX___ | RC_ZX___ HT_ZX_D2 RN_ZX___ HT_ZX_D1 FY_RN_ZX FL_ZX_D1 FY_RC_ZX FL_ZX_D2 RC_D3___ RN_D1___ RC_D0___ RN_D2___ RC_D3_RE RN_D1_RE RC_D0_RE RN_D2_RE HT_YZ_D2 RC_YZ___ HT_YZ_D1 RN_YZ___ FL_YZ_D1 FX_RN_YZ FL_YZ_D2 FX_RC_YZ RC_D2___ RN_D0___ RC_D1___ RN_D3___ RC_D2_RE RN_D0_RE RC_D1_RE RN_D3_RE RN_XY___ HT_XY_D1 RC_XY___ HT_XY_D2 FZ_RC_XY FL_XY_D2 FZ_RN_XY FL_XY_D1 HT_YZ___ HT_XY___ HT_ZX___ NO______ FX______ FZ______ FY______ REVERSED
+RN_ZX___ | RN_ZX___ HT_ZX_D1 RC_ZX___ HT_ZX_D2 FY_RC_ZX FL_ZX_D2 FY_RN_ZX FL_ZX_D1 RN_D2___ RC_D0___ RN_D1___ RC_D3___ RN_D2_RE RC_D0_RE RN_D1_RE RC_D3_RE RC_YZ___ HT_YZ_D2 RN_YZ___ HT_YZ_D1 FX_RN_YZ FL_YZ_D1 FX_RC_YZ FL_YZ_D2 RC_D1___ RN_D3___ RC_D2___ RN_D0___ RC_D1_RE RN_D3_RE RC_D2_RE RN_D0_RE HT_XY_D2 RC_XY___ HT_XY_D1 RN_XY___ FL_XY_D1 FZ_RN_XY FL_XY_D2 FZ_RC_XY HT_XY___ HT_YZ___ NO______ HT_ZX___ FZ______ FX______ REVERSED FY______
+FL_ZX_D2 | FL_ZX_D2 FY_RC_ZX FL_ZX_D1 FY_RN_ZX HT_ZX_D1 RN_ZX___ HT_ZX_D2 RC_ZX___ RC_D0_RE RN_D2_RE RC_D3_RE RN_D1_RE RC_D0___ RN_D2___ RC_D3___ RN_D1___ FL_YZ_D2 FX_RC_YZ FL_YZ_D1 FX_RN_YZ HT_YZ_D1 RN_YZ___ HT_YZ_D2 RC_YZ___ RN_D0_RE RC_D2_RE RN_D3_RE RC_D1_RE RN_D0___ RC_D2___ RN_D3___ RC_D1___ FL_XY_D2 FZ_RC_XY FL_XY_D1 FZ_RN_XY HT_XY_D1 RN_XY___ HT_XY_D2 RC_XY___ REVERSED FY______ FZ______ FX______ NO______ HT_ZX___ HT_XY___ HT_YZ___
+FL_ZX_D1 | FL_ZX_D1 FY_RN_ZX FL_ZX_D2 FY_RC_ZX HT_ZX_D2 RC_ZX___ HT_ZX_D1 RN_ZX___ RN_D1_RE RC_D3_RE RN_D2_RE RC_D0_RE RN_D1___ RC_D3___ RN_D2___ RC_D0___ FX_RC_YZ FL_YZ_D2 FX_RN_YZ FL_YZ_D1 RN_YZ___ HT_YZ_D1 RC_YZ___ HT_YZ_D2 RN_D3_RE RC_D1_RE RN_D0_RE RC_D2_RE RN_D3___ RC_D1___ RN_D0___ RC_D2___ FZ_RN_XY FL_XY_D1 FZ_RC_XY FL_XY_D2 RC_XY___ HT_XY_D2 RN_XY___ HT_XY_D1 FY______ REVERSED FX______ FZ______ HT_ZX___ NO______ HT_YZ___ HT_XY___
+FY_RN_ZX | FY_RN_ZX FL_ZX_D1 FY_RC_ZX FL_ZX_D2 RC_ZX___ HT_ZX_D2 RN_ZX___ HT_ZX_D1 RC_D3_RE RN_D1_RE RC_D0_RE RN_D2_RE RC_D3___ RN_D1___ RC_D0___ RN_D2___ FL_YZ_D1 FX_RN_YZ FL_YZ_D2 FX_RC_YZ HT_YZ_D2 RC_YZ___ HT_YZ_D1 RN_YZ___ RC_D2_RE RN_D0_RE RC_D1_RE RN_D3_RE RC_D2___ RN_D0___ RC_D1___ RN_D3___ FZ_RC_XY FL_XY_D2 FZ_RN_XY FL_XY_D1 RN_XY___ HT_XY_D1 RC_XY___ HT_XY_D2 FX______ FZ______ FY______ REVERSED HT_YZ___ HT_XY___ HT_ZX___ NO______
+FY_RC_ZX | FY_RC_ZX FL_ZX_D2 FY_RN_ZX FL_ZX_D1 RN_ZX___ HT_ZX_D1 RC_ZX___ HT_ZX_D2 RN_D2_RE RC_D0_RE RN_D1_RE RC_D3_RE RN_D2___ RC_D0___ RN_D1___ RC_D3___ FX_RN_YZ FL_YZ_D1 FX_RC_YZ FL_YZ_D2 RC_YZ___ HT_YZ_D2 RN_YZ___ HT_YZ_D1 RC_D1_RE RN_D3_RE RC_D2_RE RN_D0_RE RC_D1___ RN_D3___ RC_D2___ RN_D0___ FL_XY_D1 FZ_RN_XY FL_XY_D2 FZ_RC_XY HT_XY_D2 RC_XY___ HT_XY_D1 RN_XY___ FZ______ FX______ REVERSED FY______ HT_XY___ HT_YZ___ NO______ HT_ZX___
+
+48 Table :
+  | a b c d e f g h   A B C D E F G H   i j k l m n o p   I J K L P O N M   q r s t u v w x   Q R S T X W V U
+--|----------------------------------------------------------------------------------------------------------
+a | a b c d e f g h   A B C D E F G H   i j k l m n o p   I J K L P O N M   q r s t u v w x   Q R S T X W V U
+b | b a d c f e h g   B A D C F E H G   l k j i p o n m   L K J I M N O P   s t q r w x u v   S T Q R V U X W
+c | c d a b g h e f   D C B A H G F E   j i l k n m p o   K L I J N M P O   t s r q x w v u   R Q T S W X U V
+d | d c b a h g f e   C D A B G H E F   k l i j o p m n   J I L K O P M N   r q t s v u x w   T S R Q U V W X
+e | e f g h a b c d   E F G H A B C D   m n o p i j k l   P O N M I J K L   u v w x q r s t   X W V U Q R S T
+f | f e h g b a d c   F E H G B A D C   p o n m l k j i   M N O P L K J I   w x u v s t q r   V U X W S T Q R
+g | g h e f c d a b   H G F E D C B A   n m p o j i l k   N M P O K L I J   x w v u t s r q   W X U V R Q T S
+h | h g f e d c b a   G H E F C D A B   o p m n k l i j   O P M N J I L K   v u x w r q t s   U V W X T S R Q
+  |                                                                                                          
+A | A B C D E F G H   a b c d e f g h   I J K L P O N M   i j k l m n o p   Q R S T X W V U   q r s t u v w x
+B | B A D C F E H G   b a d c f e h g   L K J I M N O P   l k j i p o n m   S T Q R V U X W   s t q r w x u v
+C | C D A B G H E F   d c b a h g f e   J I L K O P M N   k l i j o p m n   T S R Q U V W X   r q t s v u x w
+D | D C B A H G F E   c d a b g h e f   K L I J N M P O   j i l k n m p o   R Q T S W X U V   t s r q x w v u
+E | E F G H A B C D   e f g h a b c d   P O N M I J K L   m n o p i j k l   X W V U Q R S T   u v w x q r s t
+F | F E H G B A D C   f e h g b a d c   M N O P L K J I   p o n m l k j i   V U X W S T Q R   w x u v s t q r
+G | G H E F C D A B   h g f e d c b a   O P M N J I L K   o p m n k l i j   U V W X T S R Q   v u x w r q t s
+H | H G F E D C B A   g h e f c d a b   N M P O K L I J   n m p o j i l k   W X U V R Q T S   x w v u t s r q
+  |                                                                                                          
+i | i k l j m o p n   Q T R S X U W V   q s t r u w x v   A D B C E H F G   a c d b e g h f   I L J K P M O N
+j | j l k i n p o m   R S Q T W V X U   t r q s x v u w   D A C B H E G F   c a b d g e f h   K J L I N O M P
+k | k i j l o m n p   T Q S R U X V W   r t s q v x w u   C B D A G F H E   d b a c h f e g   J K I L O N P M
+l | l j i k p n m o   S R T Q V W U X   s q r t w u v x   B C A D F G E H   b d c a f h g e   L I K J M P N O
+m | m o p n i k l j   X U W V Q T R S   u w x v q s t r   E H F G A D B C   e g h f a c d b   P M O N I L J K
+n | n p o m j l k i   W V X U R S Q T   x v u w t r q s   H E G F D A C B   g e f h c a b d   N O M P K J L I
+o | o m n p k i j l   U X V W T Q S R   v x w u r t s q   G F H E C B D A   h f e g d b a c   O N P M J K I L
+p | p n m o l j i k   V W U X S R T Q   w u v x s q r t   F G E H B C A D   f h g e b d c a   M P N O L I K J
+  |                                                                                                          
+I | I K L J P N M O   q t r s u x v w   Q S T R X V U W   a d b c e h f g   A C D B E G H F   i l j k m p n o
+J | J L K I O M N P   r s q t v w u x   T R Q S U W X V   d a c b h e g f   C A B D G E F H   k j l i o n p m
+K | K I J L N P O M   t q s r x u w v   R T S Q W U V X   c b d a g f h e   D B A C H F E G   j k i l n o m p
+L | L J I K M O P N   s r t q w v x u   S Q R T V X W U   b c a d f g e h   B D C A F H G E   l i k j p m o n
+P | P N M O I K L J   u x v w q t r s   X V U W Q S T R   e h f g a d b c   E G H F A C D B   m p n o i l j k
+O | O M N P J L K I   v w u x r s q t   U W X V T R Q S   h e g f d a c b   G E F H C A B D   o n p m k j l i
+N | N P O M K I J L   x u w v t q s r   W U V X R T S Q   g f h e c b d a   H F E G D B A C   n o m p j k i l
+M | M O P N L J I K   w v x u s r t q   V X W U S Q R T   f g e h b c a d   F H G E B D C A   p m o n l i k j
+  |                                                                                                          
+q | q t r s u x v w   I K L J P N M O   a d b c e h f g   Q S T R X V U W   i l j k m p n o   A C D B E G H F
+r | r s q t v w u x   J L K I O M N P   d a c b h e g f   T R Q S U W X V   k j l i o n p m   C A B D G E F H
+s | s r t q w v x u   L J I K M O P N   b c a d f g e h   S Q R T V X W U   l i k j p m o n   B D C A F H G E
+t | t q s r x u w v   K I J L N P O M   c b d a g f h e   R T S Q W U V X   j k i l n o m p   D B A C H F E G
+u | u x v w q t r s   P N M O I K L J   e h f g a d b c   X V U W Q S T R   m p n o i l j k   E G H F A C D B
+v | v w u x r s q t   O M N P J L K I   h e g f d a c b   U W X V T R Q S   o n p m k j l i   G E F H C A B D
+w | w v x u s r t q   M O P N L J I K   f g e h b c a d   V X W U S Q R T   p m o n l i k j   F H G E B D C A
+x | x u w v t q s r   N P O M K I J L   g f h e c b d a   W U V X R T S Q   n o m p j k i l   H F E G D B A C
+  |                                                                                                          
+Q | Q T R S X U W V   i k l j m o p n   A D B C E H F G   q s t r u w x v   I L J K P M O N   a c d b e g h f
+R | R S Q T W V X U   j l k i n p o m   D A C B H E G F   t r q s x v u w   K J L I N O M P   c a b d g e f h
+S | S R T Q V W U X   l j i k p n m o   B C A D F G E H   s q r t w u v x   L I K J M P N O   b d c a f h g e
+T | T Q S R U X V W   k i j l o m n p   C B D A G F H E   r t s q v x w u   J K I L O N P M   d b a c h f e g
+X | X U W V Q T R S   m o p n i k l j   E H F G A D B C   u w x v q s t r   P M O N I L J K   e g h f a c d b
+W | W V X U R S Q T   n p o m j l k i   H E G F D A C B   x v u w t r q s   N O M P K J L I   g e f h c a b d
+V | V W U X S R T Q   p n m o l j i k   F G E H B C A D   w u v x s q r t   M P N O L I K J   f h g e b d c a
+U | U X V W T Q S R   o m n p k i j l   G F H E C B D A   v x w u r t s q   O N P M J K I L   h f e g d b a c
+=============================================================================================================
+
+48 BitSeq table :
+        |  000 000  000 001  000 010  000 011  000 100  000 101  000 110  000 111  001 000  001 001  001 010  001 011  001 100  001 101  001 110  001 111  010 000  010 001  010 010  010 011  010 100  010 101  010 110  010 111  011 000  011 001  011 010  011 011  011 100  011 101  011 110  011 111  100 000  100 001  100 010  100 011  100 100  100 101  100 110  100 111  101 000  101 001  101 010  101 011  101 100  101 101  101 110  101 111
+--------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+000 000 |  000 000  000 001  000 010  000 011  000 100  000 101  000 110  000 111  001 000  001 001  001 010  001 011  001 100  001 101  001 110  001 111  010 000  010 001  010 010  010 011  010 100  010 101  010 110  010 111  011 000  011 001  011 010  011 011  011 100  011 101  011 110  011 111  100 000  100 001  100 010  100 011  100 100  100 101  100 110  100 111  101 000  101 001  101 010  101 011  101 100  101 101  101 110  101 111
+000 001 |  000 001  000 000  000 011  000 010  000 101  000 100  000 111  000 110  001 001  001 000  001 011  001 010  001 101  001 100  001 111  001 110  010 011  010 010  010 001  010 000  010 111  010 110  010 101  010 100  011 011  011 010  011 001  011 000  011 111  011 110  011 101  011 100  100 010  100 011  100 000  100 001  100 110  100 111  100 100  100 101  101 010  101 011  101 000  101 001  101 110  101 111  101 100  101 101
+000 010 |  000 010  000 011  000 000  000 001  000 110  000 111  000 100  000 101  001 011  001 010  001 001  001 000  001 111  001 110  001 101  001 100  010 001  010 000  010 011  010 010  010 101  010 100  010 111  010 110  011 010  011 011  011 000  011 001  011 110  011 111  011 100  011 101  100 011  100 010  100 001  100 000  100 111  100 110  100 101  100 100  101 001  101 000  101 011  101 010  101 101  101 100  101 111  101 110
+000 011 |  000 011  000 010  000 001  000 000  000 111  000 110  000 101  000 100  001 010  001 011  001 000  001 001  001 110  001 111  001 100  001 101  010 010  010 011  010 000  010 001  010 110  010 111  010 100  010 101  011 001  011 000  011 011  011 010  011 101  011 100  011 111  011 110  100 001  100 000  100 011  100 010  100 101  100 100  100 111  100 110  101 011  101 010  101 001  101 000  101 111  101 110  101 101  101 100
+000 100 |  000 100  000 101  000 110  000 111  000 000  000 001  000 010  000 011  001 100  001 101  001 110  001 111  001 000  001 001  001 010  001 011  010 100  010 101  010 110  010 111  010 000  010 001  010 010  010 011  011 100  011 101  011 110  011 111  011 000  011 001  011 010  011 011  100 100  100 101  100 110  100 111  100 000  100 001  100 010  100 011  101 100  101 101  101 110  101 111  101 000  101 001  101 010  101 011
+000 101 |  000 101  000 100  000 111  000 110  000 001  000 000  000 011  000 010  001 101  001 100  001 111  001 110  001 001  001 000  001 011  001 010  010 111  010 110  010 101  010 100  010 011  010 010  010 001  010 000  011 111  011 110  011 101  011 100  011 011  011 010  011 001  011 000  100 110  100 111  100 100  100 101  100 010  100 011  100 000  100 001  101 110  101 111  101 100  101 101  101 010  101 011  101 000  101 001
+000 110 |  000 110  000 111  000 100  000 101  000 010  000 011  000 000  000 001  001 111  001 110  001 101  001 100  001 011  001 010  001 001  001 000  010 101  010 100  010 111  010 110  010 001  010 000  010 011  010 010  011 110  011 111  011 100  011 101  011 010  011 011  011 000  011 001  100 111  100 110  100 101  100 100  100 011  100 010  100 001  100 000  101 101  101 100  101 111  101 110  101 001  101 000  101 011  101 010
+000 111 |  000 111  000 110  000 101  000 100  000 011  000 010  000 001  000 000  001 110  001 111  001 100  001 101  001 010  001 011  001 000  001 001  010 110  010 111  010 100  010 101  010 010  010 011  010 000  010 001  011 101  011 100  011 111  011 110  011 001  011 000  011 011  011 010  100 101  100 100  100 111  100 110  100 001  100 000  100 011  100 010  101 111  101 110  101 101  101 100  101 011  101 010  101 001  101 000
+001 000 |  001 000  001 001  001 010  001 011  001 100  001 101  001 110  001 111  000 000  000 001  000 010  000 011  000 100  000 101  000 110  000 111  011 000  011 001  011 010  011 011  011 100  011 101  011 110  011 111  010 000  010 001  010 010  010 011  010 100  010 101  010 110  010 111  101 000  101 001  101 010  101 011  101 100  101 101  101 110  101 111  100 000  100 001  100 010  100 011  100 100  100 101  100 110  100 111
+001 001 |  001 001  001 000  001 011  001 010  001 101  001 100  001 111  001 110  000 001  000 000  000 011  000 010  000 101  000 100  000 111  000 110  011 011  011 010  011 001  011 000  011 111  011 110  011 101  011 100  010 011  010 010  010 001  010 000  010 111  010 110  010 101  010 100  101 010  101 011  101 000  101 001  101 110  101 111  101 100  101 101  100 010  100 011  100 000  100 001  100 110  100 111  100 100  100 101
+001 010 |  001 010  001 011  001 000  001 001  001 110  001 111  001 100  001 101  000 011  000 010  000 001  000 000  000 111  000 110  000 101  000 100  011 001  011 000  011 011  011 010  011 101  011 100  011 111  011 110  010 010  010 011  010 000  010 001  010 110  010 111  010 100  010 101  101 011  101 010  101 001  101 000  101 111  101 110  101 101  101 100  100 001  100 000  100 011  100 010  100 101  100 100  100 111  100 110
+001 011 |  001 011  001 010  001 001  001 000  001 111  001 110  001 101  001 100  000 010  000 011  000 000  000 001  000 110  000 111  000 100  000 101  011 010  011 011  011 000  011 001  011 110  011 111  011 100  011 101  010 001  010 000  010 011  010 010  010 101  010 100  010 111  010 110  101 001  101 000  101 011  101 010  101 101  101 100  101 111  101 110  100 011  100 010  100 001  100 000  100 111  100 110  100 101  100 100
+001 100 |  001 100  001 101  001 110  001 111  001 000  001 001  001 010  001 011  000 100  000 101  000 110  000 111  000 000  000 001  000 010  000 011  011 100  011 101  011 110  011 111  011 000  011 001  011 010  011 011  010 100  010 101  010 110  010 111  010 000  010 001  010 010  010 011  101 100  101 101  101 110  101 111  101 000  101 001  101 010  101 011  100 100  100 101  100 110  100 111  100 000  100 001  100 010  100 011
+001 101 |  001 101  001 100  001 111  001 110  001 001  001 000  001 011  001 010  000 101  000 100  000 111  000 110  000 001  000 000  000 011  000 010  011 111  011 110  011 101  011 100  011 011  011 010  011 001  011 000  010 111  010 110  010 101  010 100  010 011  010 010  010 001  010 000  101 110  101 111  101 100  101 101  101 010  101 011  101 000  101 001  100 110  100 111  100 100  100 101  100 010  100 011  100 000  100 001
+001 110 |  001 110  001 111  001 100  001 101  001 010  001 011  001 000  001 001  000 111  000 110  000 101  000 100  000 011  000 010  000 001  000 000  011 101  011 100  011 111  011 110  011 001  011 000  011 011  011 010  010 110  010 111  010 100  010 101  010 010  010 011  010 000  010 001  101 111  101 110  101 101  101 100  101 011  101 010  101 001  101 000  100 101  100 100  100 111  100 110  100 001  100 000  100 011  100 010
+001 111 |  001 111  001 110  001 101  001 100  001 011  001 010  001 001  001 000  000 110  000 111  000 100  000 101  000 010  000 011  000 000  000 001  011 110  011 111  011 100  011 101  011 010  011 011  011 000  011 001  010 101  010 100  010 111  010 110  010 001  010 000  010 011  010 010  101 101  101 100  101 111  101 110  101 001  101 000  101 011  101 010  100 111  100 110  100 101  100 100  100 011  100 010  100 001  100 000
+010 000 |  010 000  010 010  010 011  010 001  010 100  010 110  010 111  010 101  101 000  101 011  101 001  101 010  101 100  101 111  101 101  101 110  100 000  100 010  100 011  100 001  100 100  100 110  100 111  100 101  001 000  001 011  001 001  001 010  001 100  001 111  001 101  001 110  000 000  000 010  000 011  000 001  000 100  000 110  000 111  000 101  011 000  011 011  011 001  011 010  011 100  011 111  011 101  011 110
+010 001 |  010 001  010 011  010 010  010 000  010 101  010 111  010 110  010 100  101 001  101 010  101 000  101 011  101 101  101 110  101 100  101 111  100 011  100 001  100 000  100 010  100 111  100 101  100 100  100 110  001 011  001 000  001 010  001 001  001 111  001 100  001 110  001 101  000 010  000 000  000 001  000 011  000 110  000 100  000 101  000 111  011 010  011 001  011 011  011 000  011 110  011 101  011 111  011 100
+010 010 |  010 010  010 000  010 001  010 011  010 110  010 100  010 101  010 111  101 011  101 000  101 010  101 001  101 111  101 100  101 110  101 101  100 001  100 011  100 010  100 000  100 101  100 111  100 110  100 100  001 010  001 001  001 011  001 000  001 110  001 101  001 111  001 100  000 011  000 001  000 000  000 010  000 111  000 101  000 100  000 110  011 001  011 010  011 000  011 011  011 101  011 110  011 100  011 111
+010 011 |  010 011  010 001  010 000  010 010  010 111  010 101  010 100  010 110  101 010  101 001  101 011  101 000  101 110  101 101  101 111  101 100  100 010  100 000  100 001  100 011  100 110  100 100  100 101  100 111  001 001  001 010  001 000  001 011  001 101  001 110  001 100  001 111  000 001  000 011  000 010  000 000  000 101  000 111  000 110  000 100  011 011  011 000  011 010  011 001  011 111  011 100  011 110  011 101
+010 100 |  010 100  010 110  010 111  010 101  010 000  010 010  010 011  010 001  101 100  101 111  101 101  101 110  101 000  101 011  101 001  101 010  100 100  100 110  100 111  100 101  100 000  100 010  100 011  100 001  001 100  001 111  001 101  001 110  001 000  001 011  001 001  001 010  000 100  000 110  000 111  000 101  000 000  000 010  000 011  000 001  011 100  011 111  011 101  011 110  011 000  011 011  011 001  011 010
+010 101 |  010 101  010 111  010 110  010 100  010 001  010 011  010 010  010 000  101 101  101 110  101 100  101 111  101 001  101 010  101 000  101 011  100 111  100 101  100 100  100 110  100 011  100 001  100 000  100 010  001 111  001 100  001 110  001 101  001 011  001 000  001 010  001 001  000 110  000 100  000 101  000 111  000 010  000 000  000 001  000 011  011 110  011 101  011 111  011 100  011 010  011 001  011 011  011 000
+010 110 |  010 110  010 100  010 101  010 111  010 010  010 000  010 001  010 011  101 111  101 100  101 110  101 101  101 011  101 000  101 010  101 001  100 101  100 111  100 110  100 100  100 001  100 011  100 010  100 000  001 110  001 101  001 111  001 100  001 010  001 001  001 011  001 000  000 111  000 101  000 100  000 110  000 011  000 001  000 000  000 010  011 101  011 110  011 100  011 111  011 001  011 010  011 000  011 011
+010 111 |  010 111  010 101  010 100  010 110  010 011  010 001  010 000  010 010  101 110  101 101  101 111  101 100  101 010  101 001  101 011  101 000  100 110  100 100  100 101  100 111  100 010  100 000  100 001  100 011  001 101  001 110  001 100  001 111  001 001  001 010  001 000  001 011  000 101  000 111  000 110  000 100  000 001  000 011  000 010  000 000  011 111  011 100  011 110  011 101  011 011  011 000  011 010  011 001
+011 000 |  011 000  011 010  011 011  011 001  011 100  011 110  011 111  011 101  100 000  100 011  100 001  100 010  100 100  100 111  100 101  100 110  101 000  101 010  101 011  101 001  101 100  101 110  101 111  101 101  000 000  000 011  000 001  000 010  000 100  000 111  000 101  000 110  001 000  001 010  001 011  001 001  001 100  001 110  001 111  001 101  010 000  010 011  010 001  010 010  010 100  010 111  010 101  010 110
+011 001 |  011 001  011 011  011 010  011 000  011 101  011 111  011 110  011 100  100 001  100 010  100 000  100 011  100 101  100 110  100 100  100 111  101 011  101 001  101 000  101 010  101 111  101 101  101 100  101 110  000 011  000 000  000 010  000 001  000 111  000 100  000 110  000 101  001 010  001 000  001 001  001 011  001 110  001 100  001 101  001 111  010 010  010 001  010 011  010 000  010 110  010 101  010 111  010 100
+011 010 |  011 010  011 000  011 001  011 011  011 110  011 100  011 101  011 111  100 011  100 000  100 010  100 001  100 111  100 100  100 110  100 101  101 001  101 011  101 010  101 000  101 101  101 111  101 110  101 100  000 010  000 001  000 011  000 000  000 110  000 101  000 111  000 100  001 011  001 001  001 000  001 010  001 111  001 101  001 100  001 110  010 001  010 010  010 000  010 011  010 101  010 110  010 100  010 111
+011 011 |  011 011  011 001  011 000  011 010  011 111  011 101  011 100  011 110  100 010  100 001  100 011  100 000  100 110  100 101  100 111  100 100  101 010  101 000  101 001  101 011  101 110  101 100  101 101  101 111  000 001  000 010  000 000  000 011  000 101  000 110  000 100  000 111  001 001  001 011  001 010  001 000  001 101  001 111  001 110  001 100  010 011  010 000  010 010  010 001  010 111  010 100  010 110  010 101
+011 100 |  011 100  011 110  011 111  011 101  011 000  011 010  011 011  011 001  100 100  100 111  100 101  100 110  100 000  100 011  100 001  100 010  101 100  101 110  101 111  101 101  101 000  101 010  101 011  101 001  000 100  000 111  000 101  000 110  000 000  000 011  000 001  000 010  001 100  001 110  001 111  001 101  001 000  001 010  001 011  001 001  010 100  010 111  010 101  010 110  010 000  010 011  010 001  010 010
+011 101 |  011 101  011 111  011 110  011 100  011 001  011 011  011 010  011 000  100 101  100 110  100 100  100 111  100 001  100 010  100 000  100 011  101 111  101 101  101 100  101 110  101 011  101 001  101 000  101 010  000 111  000 100  000 110  000 101  000 011  000 000  000 010  000 001  001 110  001 100  001 101  001 111  001 010  001 000  001 001  001 011  010 110  010 101  010 111  010 100  010 010  010 001  010 011  010 000
+011 110 |  011 110  011 100  011 101  011 111  011 010  011 000  011 001  011 011  100 111  100 100  100 110  100 101  100 011  100 000  100 010  100 001  101 101  101 111  101 110  101 100  101 001  101 011  101 010  101 000  000 110  000 101  000 111  000 100  000 010  000 001  000 011  000 000  001 111  001 101  001 100  001 110  001 011  001 001  001 000  001 010  010 101  010 110  010 100  010 111  010 001  010 010  010 000  010 011
+011 111 |  011 111  011 101  011 100  011 110  011 011  011 001  011 000  011 010  100 110  100 101  100 111  100 100  100 010  100 001  100 011  100 000  101 110  101 100  101 101  101 111  101 010  101 000  101 001  101 011  000 101  000 110  000 100  000 111  000 001  000 010  000 000  000 011  001 101  001 111  001 110  001 100  001 001  001 011  001 010  001 000  010 111  010 100  010 110  010 101  010 011  010 000  010 010  010 001
+100 000 |  100 000  100 011  100 001  100 010  100 100  100 111  100 101  100 110  011 000  011 010  011 011  011 001  011 100  011 110  011 111  011 101  000 000  000 011  000 001  000 010  000 100  000 111  000 101  000 110  101 000  101 010  101 011  101 001  101 100  101 110  101 111  101 101  010 000  010 011  010 001  010 010  010 100  010 111  010 101  010 110  001 000  001 010  001 011  001 001  001 100  001 110  001 111  001 101
+100 001 |  100 001  100 010  100 000  100 011  100 101  100 110  100 100  100 111  011 001  011 011  011 010  011 000  011 101  011 111  011 110  011 100  000 011  000 000  000 010  000 001  000 111  000 100  000 110  000 101  101 011  101 001  101 000  101 010  101 111  101 101  101 100  101 110  010 010  010 001  010 011  010 000  010 110  010 101  010 111  010 100  001 010  001 000  001 001  001 011  001 110  001 100  001 101  001 111
+100 010 |  100 010  100 001  100 011  100 000  100 110  100 101  100 111  100 100  011 011  011 001  011 000  011 010  011 111  011 101  011 100  011 110  000 001  000 010  000 000  000 011  000 101  000 110  000 100  000 111  101 010  101 000  101 001  101 011  101 110  101 100  101 101  101 111  010 011  010 000  010 010  010 001  010 111  010 100  010 110  010 101  001 001  001 011  001 010  001 000  001 101  001 111  001 110  001 100
+100 011 |  100 011  100 000  100 010  100 001  100 111  100 100  100 110  100 101  011 010  011 000  011 001  011 011  011 110  011 100  011 101  011 111  000 010  000 001  000 011  000 000  000 110  000 101  000 111  000 100  101 001  101 011  101 010  101 000  101 101  101 111  101 110  101 100  010 001  010 010  010 000  010 011  010 101  010 110  010 100  010 111  001 011  001 001  001 000  001 010  001 111  001 101  001 100  001 110
+100 100 |  100 100  100 111  100 101  100 110  100 000  100 011  100 001  100 010  011 100  011 110  011 111  011 101  011 000  011 010  011 011  011 001  000 100  000 111  000 101  000 110  000 000  000 011  000 001  000 010  101 100  101 110  101 111  101 101  101 000  101 010  101 011  101 001  010 100  010 111  010 101  010 110  010 000  010 011  010 001  010 010  001 100  001 110  001 111  001 101  001 000  001 010  001 011  001 001
+100 101 |  100 101  100 110  100 100  100 111  100 001  100 010  100 000  100 011  011 101  011 111  011 110  011 100  011 001  011 011  011 010  011 000  000 111  000 100  000 110  000 101  000 011  000 000  000 010  000 001  101 111  101 101  101 100  101 110  101 011  101 001  101 000  101 010  010 110  010 101  010 111  010 100  010 010  010 001  010 011  010 000  001 110  001 100  001 101  001 111  001 010  001 000  001 001  001 011
+100 110 |  100 110  100 101  100 111  100 100  100 010  100 001  100 011  100 000  011 111  011 101  011 100  011 110  011 011  011 001  011 000  011 010  000 101  000 110  000 100  000 111  000 001  000 010  000 000  000 011  101 110  101 100  101 101  101 111  101 010  101 000  101 001  101 011  010 111  010 100  010 110  010 101  010 011  010 000  010 010  010 001  001 101  001 111  001 110  001 100  001 001  001 011  001 010  001 000
+100 111 |  100 111  100 100  100 110  100 101  100 011  100 000  100 010  100 001  011 110  011 100  011 101  011 111  011 010  011 000  011 001  011 011  000 110  000 101  000 111  000 100  000 010  000 001  000 011  000 000  101 101  101 111  101 110  101 100  101 001  101 011  101 010  101 000  010 101  010 110  010 100  010 111  010 001  010 010  010 000  010 011  001 111  001 101  001 100  001 110  001 011  001 001  001 000  001 010
+101 000 |  101 000  101 011  101 001  101 010  101 100  101 111  101 101  101 110  010 000  010 010  010 011  010 001  010 100  010 110  010 111  010 101  001 000  001 011  001 001  001 010  001 100  001 111  001 101  001 110  100 000  100 010  100 011  100 001  100 100  100 110  100 111  100 101  011 000  011 011  011 001  011 010  011 100  011 111  011 101  011 110  000 000  000 010  000 011  000 001  000 100  000 110  000 111  000 101
+101 001 |  101 001  101 010  101 000  101 011  101 101  101 110  101 100  101 111  010 001  010 011  010 010  010 000  010 101  010 111  010 110  010 100  001 011  001 000  001 010  001 001  001 111  001 100  001 110  001 101  100 011  100 001  100 000  100 010  100 111  100 101  100 100  100 110  011 010  011 001  011 011  011 000  011 110  011 101  011 111  011 100  000 010  000 000  000 001  000 011  000 110  000 100  000 101  000 111
+101 010 |  101 010  101 001  101 011  101 000  101 110  101 101  101 111  101 100  010 011  010 001  010 000  010 010  010 111  010 101  010 100  010 110  001 001  001 010  001 000  001 011  001 101  001 110  001 100  001 111  100 010  100 000  100 001  100 011  100 110  100 100  100 101  100 111  011 011  011 000  011 010  011 001  011 111  011 100  011 110  011 101  000 001  000 011  000 010  000 000  000 101  000 111  000 110  000 100
+101 011 |  101 011  101 000  101 010  101 001  101 111  101 100  101 110  101 101  010 010  010 000  010 001  010 011  010 110  010 100  010 101  010 111  001 010  001 001  001 011  001 000  001 110  001 101  001 111  001 100  100 001  100 011  100 010  100 000  100 101  100 111  100 110  100 100  011 001  011 010  011 000  011 011  011 101  011 110  011 100  011 111  000 011  000 001  000 000  000 010  000 111  000 101  000 100  000 110
+101 100 |  101 100  101 111  101 101  101 110  101 000  101 011  101 001  101 010  010 100  010 110  010 111  010 101  010 000  010 010  010 011  010 001  001 100  001 111  001 101  001 110  001 000  001 011  001 001  001 010  100 100  100 110  100 111  100 101  100 000  100 010  100 011  100 001  011 100  011 111  011 101  011 110  011 000  011 011  011 001  011 010  000 100  000 110  000 111  000 101  000 000  000 010  000 011  000 001
+101 101 |  101 101  101 110  101 100  101 111  101 001  101 010  101 000  101 011  010 101  010 111  010 110  010 100  010 001  010 011  010 010  010 000  001 111  001 100  001 110  001 101  001 011  001 000  001 010  001 001  100 111  100 101  100 100  100 110  100 011  100 001  100 000  100 010  011 110  011 101  011 111  011 100  011 010  011 001  011 011  011 000  000 110  000 100  000 101  000 111  000 010  000 000  000 001  000 011
+101 110 |  101 110  101 101  101 111  101 100  101 010  101 001  101 011  101 000  010 111  010 101  010 100  010 110  010 011  010 001  010 000  010 010  001 101  001 110  001 100  001 111  001 001  001 010  001 000  001 011  100 110  100 100  100 101  100 111  100 010  100 000  100 001  100 011  011 111  011 100  011 110  011 101  011 011  011 000  011 010  011 001  000 101  000 111  000 110  000 100  000 001  000 011  000 010  000 000
+101 111 |  101 111  101 100  101 110  101 101  101 011  101 000  101 010  101 001  010 110  010 100  010 101  010 111  010 010  010 000  010 001  010 011  001 110  001 101  001 111  001 100  001 010  001 001  001 011  001 000  100 101  100 111  100 110  100 100  100 001  100 011  100 010  100 000  011 101  011 110  011 100  011 111  011 001  011 010  011 000  011 011  000 111  000 101  000 100  000 110  000 011  000 001  000 000  000 010
+
+public static byte AddByBitSeq(byte a, byte b) {
+	int result = ((a & 48) + (b & 48)) % 48;
+	result |= (a ^ b) & 15;
+	if((a & 48) != 0) {
+		result ^= (12 >> (b & 3)) & 3;
+		if((a & 16) != 0)
+			result ^= b & 3;
+	}
+	if((b & 48) != 0) {
+		result ^= (12 >> (a & 3)) & 3;
+		if((b & 32) != 0)
+			result ^= a & 3;
+	}
+	if((((a + 16) >> 2) & b & 8) != 0) {
+		result ^= 48;
+		result ^= b & 48;
+		result ^= b & 3;
+	}
+	if((b >> 2 & a & 2) != 0) {
+		result ^= 12 >> (b >> 4 ^ 3) & 3;
+	}
+	return (byte)result;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+No_
+Hyz
+Hzx
+Hxy
+xy2
+xy1
+Nxy
+Cxy
+Cd0
+Nd1
+Nd2
+Cd3
+Nyz
+yz1
+Cyz
+yz2
+Nd0
+Cd1
+Cd2
+Nd3
+Czx
+Nzx
+zx1
+zx2
+
+
+result ^ (A ^ B)
+                 ^ ((12 >> (A & 3)) & (((B + 16) >> 5) * 3))
+                 ^ ((12 >> (B & 3)) & (((A + 16) >> 5) * 3))
+				 ^ ((A & 3) & ((B >> 5    ) * 3))
+				 ^ ((B & 3) & ((A >> 4 & 1) * 3))
+                 
+result
+      |  +   +   +   +                      +   +   +   +                      +   +   +   +                  
+      | No_ Hyz Hzx Hxy  yz1 yz2 Cyz Nyz   Cd0 Nd1 Nd2 Cd3  zx1 zx2 Czx Nzx   Nd0 Cd1 Cd2 Nd3  xy1 xy2 Cxy Nxy
+------+-------------------------------------------------------------------------------------------------------
++ No_ | No_ Hyz Hzx Hxy  yz1 yz2 Cyz Nyz   Cd0 Nd1 Nd2 Cd3  zx1 zx2 Czx Nzx   Nd0 Cd1 Cd2 Nd3  xy1 xy2 Cxy Nxy
++ Hyz | Hyz No_ Hxy Hzx  yz2 yz1 Nyz Cyz   Cd3 Nd2 Nd1 Cd0  Czx Nzx zx1 zx2   Cd2 Nd3 Nd0 Cd1  Nxy Cxy xy2 xy1
++ Hzx | Hzx Hxy No_ Hyz  Nyz Cyz yz2 yz1   Nd1 Cd0 Cd3 Nd2  zx2 zx1 Nzx Czx   Nd3 Cd2 Cd1 Nd0  Cxy Nxy xy1 xy2
++ Hxy | Hxy Hzx Hyz No_  Cyz Nyz yz1 yz2   Nd2 Cd3 Cd0 Nd1  Nzx Czx zx2 zx1   Cd1 Nd0 Nd3 Cd2  xy2 xy1 Nxy Cxy
+  yz1 | yz1 yz2 Cyz Nyz  No_ Hyz Hzx Hxy   xy1 xy2 Cxy Nxy  Nd0 Cd1 Cd2 Nd3   zx1 zx2 Czx Nzx  Cd0 Nd1 Nd2 Cd3
+  yz2 | yz2 yz1 Nyz Cyz  Hyz No_ Hxy Hzx   Nxy Cxy xy2 xy1  Cd2 Nd3 Nd0 Cd1   Czx Nzx zx1 zx2  Cd3 Nd2 Nd1 Cd0
+  Cyz | Cyz Nyz yz1 yz2  Hxy Hzx Hyz No_   xy2 xy1 Nxy Cxy  Cd1 Nd0 Nd3 Cd2   Nzx Czx zx2 zx1  Nd2 Cd3 Cd0 Nd1
+  Nyz | Nyz Cyz yz2 yz1  Hzx Hxy No_ Hyz   Cxy Nxy xy1 xy2  Nd3 Cd2 Cd1 Nd0   zx2 zx1 Nzx Czx  Nd1 Cd0 Cd3 Nd2
+      |                                                                                                       
++ Cd0 | Cd0 Nd2 Cd3 Nd1  zx1 Nzx zx2 Czx   Nd0 Cd2 Nd3 Cd1  xy1 Nxy xy2 Cxy   No_ Hzx Hxy Hyz  yz1 Nyz yz2 Cyz
++ Nd1 | Nd1 Cd3 Nd2 Cd0  zx2 Czx zx1 Nzx   Nd3 Cd1 Nd0 Cd2  Cxy xy2 Nxy xy1   Hzx No_ Hyz Hxy  Nyz yz1 Cyz yz2
++ Nd2 | Nd2 Cd0 Nd1 Cd3  Nzx zx1 Czx zx2   Cd1 Nd3 Cd2 Nd0  xy2 Cxy xy1 Nxy   Hxy Hyz No_ Hzx  Cyz yz2 Nyz yz1
++ Cd3 | Cd3 Nd1 Cd0 Nd2  Czx zx2 Nzx zx1   Cd2 Nd0 Cd1 Nd3  Nxy xy1 Cxy xy2   Hyz Hxy Hzx No_  yz2 Cyz yz1 Nyz
+  zx1 | zx1 Nzx zx2 Czx  Cd0 Nd2 Cd3 Nd1   yz1 Nyz yz2 Cyz  No_ Hzx Hxy Hyz   xy1 Nxy xy2 Cxy  Nd0 Cd2 Nd3 Cd1
+  zx2 | zx2 Czx zx1 Nzx  Nd1 Cd3 Nd2 Cd0   Nyz yz1 Cyz yz2  Hzx No_ Hyz Hxy   Cxy xy2 Nxy xy1  Nd3 Cd1 Nd0 Cd2
+  Czx | Czx zx2 Nzx zx1  Cd3 Nd1 Cd0 Nd2   yz2 Cyz yz1 Nyz  Hyz Hxy Hzx No_   Nxy xy1 Cxy xy2  Cd2 Nd0 Cd1 Nd3
+  Nzx | Nzx zx1 Czx zx2  Nd2 Cd0 Nd1 Cd3   Cyz yz2 Nyz yz1  Hxy Hyz No_ Hzx   xy2 Cxy xy1 Nxy  Cd1 Nd3 Cd2 Nd0
+      |                                                                                                       
++ Nd0 | Nd0 Nd3 Cd1 Cd2  xy1 Cxy Nxy xy2   No_ Hxy Hyz Hzx  yz1 Cyz Nyz yz2   Cd0 Cd3 Nd1 Nd2  zx1 Czx Nzx zx2
++ Cd1 | Cd1 Cd2 Nd0 Nd3  xy2 Nxy Cxy xy1   Hxy No_ Hzx Hyz  Cyz yz1 yz2 Nyz   Nd2 Nd1 Cd3 Cd0  Nzx zx2 zx1 Czx
++ Cd2 | Cd2 Cd1 Nd3 Nd0  Nxy xy2 xy1 Cxy   Hyz Hzx No_ Hxy  yz2 Nyz Cyz yz1   Cd3 Cd0 Nd2 Nd1  Czx zx1 zx2 Nzx
++ Nd3 | Nd3 Nd0 Cd2 Cd1  Cxy xy1 xy2 Nxy   Hzx Hyz Hxy No_  Nyz yz2 yz1 Cyz   Nd1 Nd2 Cd0 Cd3  zx2 Nzx Czx zx1
+  xy1 | xy1 Cxy Nxy xy2  Nd0 Nd3 Cd1 Cd2   zx1 Czx Nzx zx2  Cd0 Cd3 Nd1 Nd2   yz1 Cyz Nyz yz2  No_ Hxy Hyz Hzx
+  xy2 | xy2 Nxy Cxy xy1  Cd1 Cd2 Nd0 Nd3   Nzx zx2 zx1 Czx  Nd2 Nd1 Cd3 Cd0   Cyz yz1 yz2 Nyz  Hxy No_ Hzx Hyz
+  Cxy | Cxy xy1 xy2 Nxy  Nd3 Nd0 Cd2 Cd1   zx2 Nzx Czx zx1  Nd1 Nd2 Cd0 Cd3   Nyz yz2 yz1 Cyz  Hzx Hyz Hxy No_
+  Nxy | Nxy xy2 xy1 Cxy  Cd2 Cd1 Nd3 Nd0   Czx zx1 zx2 Nzx  Cd3 Cd0 Nd2 Nd1   yz2 Nyz Cyz yz1  Hyz Hzx No_ Hxy
+==============================================================================================================
+
+
+
+result
+      |  +   +   +   +                   
+      | No_ Hyz Hzx Hxy   yz1 yz2 Cyz Nyz
+------+----------------------------------
++ No_ | No_ Hyz Hzx Hxy   yz1 yz2 Cyz Nyz
++ Hyz | Hyz No_ Hxy Hzx   yz2 yz1 Nyz Cyz
++ Hzx | Hzx Hxy No_ Hyz   Nyz Cyz yz2 yz1
++ Hxy | Hxy Hzx Hyz No_   Cyz Nyz yz1 yz2
+      |                                  
+  yz1 | yz1 yz2 Cyz Nyz   No_ Hyz Hzx Hxy
+  yz2 | yz2 yz1 Nyz Cyz   Hyz No_ Hxy Hzx
+  Cyz | Cyz Nyz yz1 yz2   Hxy Hzx Hyz No_
+  Nyz | Nyz Cyz yz2 yz1   Hzx Hxy No_ Hyz
+=========================================
+
+No_ 0 00
+Hyz 0 01
+Hzx 0 10
+Hxy 0 11
+yz1 1 00
+yz2 1 01
+Cyz 1 10
+Nyz 1 11
+
+result ^ (A ^ B)
+                 ^ (A[1] & B[3] & 1)
+                 
+     | 00            00          54
+   B | 0  0  0  0    1  1  1  1  3
+A    | 00 01 10 11   00 01 10 11 10
+-----+--------------------------
+0 00 |               __ __ __ __
+0 01 |               __ __ __ __
+0 10 |               _1 _1 _1 _1
+0 11 |               _1 _1 _1 _1
+     |                          
+1 00 |               __ __ __ __
+1 01 |               __ __ __ __
+1 10 |               _1 _1 _1 _1
+1 11 |               _1 _1 _1 _1
+================================
+3 10
+
+
+
+
+
+
+
+
+
+result
+      |  +   +   +   +                   
+      | No_ Hyz Hzx Hxy   xy1 xy2 Cxy Nxy
+------+----------------------------------
++ No_ | No_ Hyz Hzx Hxy   xy1 xy2 Cxy Nxy
++ Hyz | Hyz No_ Hxy Hzx   Nxy Cxy xy2 xy1
++ Hzx | Hzx Hxy No_ Hyz   Cxy Nxy xy1 xy2
++ Hxy | Hxy Hzx Hyz No_   xy2 xy1 Nxy Cxy
+      |                                  
+  xy1 | xy1 Cxy Nxy xy2   No_ Hxy Hyz Hzx
+  xy2 | xy2 Nxy Cxy xy1   Hxy No_ Hzx Hyz
+  Cxy | Cxy xy1 xy2 Nxy   Hzx Hyz Hxy No_
+  Nxy | Nxy xy2 xy1 Cxy   Hyz Hzx No_ Hxy
+=========================================
+
+No_ 0 00
+Hyz 0 01
+Hzx 0 10
+Hxy 0 11
+xy1 1 00
+xy2 1 01
+Cxy 1 10
+Nxy 1 11
+
+result ^ (A ^ B)
+                 ^ (A[1] & B[3] & 1)  --
+                 
+     | 00            01          54
+   B | 0  0  0  0    1  1  1  1  3
+A    | 00 01 10 11   00 01 10 11 10
+-----+--------------------------
+0 00 |               __ __ __ __
+0 01 |               __ __ __ __
+0 10 |               11 11 11 11
+0 11 |               11 11 11 11
+     |                          
+1 00 | __ 11 _1 1_   __ 1_ 11 _1
+1 01 | __ 11 _1 1_   1_ __ _1 11
+1 10 | __ 11 _1 1_   __ 1_ 11 _1
+1 11 | __ 11 _1 1_   1_ __ _1 11
+================================
+3 10
+
+__ __    __ __
+1_ 1_    11 11
+11 11    _1 _1
+_1 _1    1_ 1_
+
+
+
+
+
+
+
+result
+      | No_ Hyz Hzx Hxy   zx1 zx2 Czx Nzx
+------+----------------------------------
++ No_ | No_ Hyz Hzx Hxy   zx1 zx2 Czx Nzx
++ Hyz | Hyz No_ Hxy Hzx   Czx Nzx zx1 zx2
++ Hzx | Hzx Hxy No_ Hyz   zx2 zx1 Nzx Czx
++ Hxy | Hxy Hzx Hyz No_   Nzx Czx zx2 zx1
+      |                                  
+  zx1 | zx1 Nzx zx2 Czx   No_ Hzx Hxy Hyz
+  zx2 | zx2 Czx zx1 Nzx   Hzx No_ Hyz Hxy
+  Czx | Czx zx2 Nzx zx1   Hyz Hxy Hzx No_
+  Nzx | Nzx zx1 Czx zx2   Hxy Hyz No_ Hzx
+=========================================
+
+No_ 0 00
+Hyz 0 01
+Hzx 0 10
+Hxy 0 11
+zx1 1 00
+zx2 1 01
+Czx 1 10
+Nzx 1 11
+
+result ^ (A ^ B)
+                 ^ (A[1] & B[3] & 1)  --
+                 
+     | 00            10          54
+   B | 0  0  0  0    1  1  1  1  3
+A    | 00 01 10 11   00 01 10 11 10
+-----+--------------------------
+0 00 |               __ __ __ __
+0 01 |               __ __ __ __
+0 10 |               11 11 11 11
+0 11 |               11 11 11 11
+     |                          
+1 00 | __ 1_ 11 _1   __ 11 _1 1_
+1 01 | __ 1_ 11 _1   __ 11 _1 1_
+1 10 | __ 1_ 11 _1   __ 11 _1 1_
+1 11 | __ 1_ 11 _1   __ 11 _1 1_
+================================
+3 10
+
+__ __    __ __
+1_ 1_    11 11
+11 11    _1 _1
+_1 _1    1_ 1_
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
