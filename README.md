@@ -125,22 +125,6 @@
 		</details>
 	</li>
 	<li>
-		<details open="open">
-			<summary><code>Research</code></summary>
-			<ul>
-				<li>
-					<details open="open">
-						<summary><code>T3D</code></summary>
-						<ul>
-							<li><a href="Research/T3D/Keys.txt"><code>Keys.txt</code></a></li>
-							<li><a href="Research/T3D/Names.txt"><code>Names.txt</code></a></li>
-						</ul>
-					</details>
-				</li>
-			</ul>
-		</details>
-	</li>
-	<li>
 		<details>
 			<summary><code>VS</code></summary>
 			<ul>

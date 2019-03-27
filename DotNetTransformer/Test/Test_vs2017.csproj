@@ -24,7 +24,7 @@
 		<Reference Include="System.Drawing" />
 	</ItemGroup>
 	<ItemGroup>
-		<ProjectReference Include="..\DotNetTransformer_vs2015.csproj">
+		<ProjectReference Include="..\DotNetTransformer_vs2017.csproj">
 			<Project>{09ad5107-2437-4b3a-81db-0c882615bb88}</Project>
 			<Name>DotNetTransformer</Name>
 		</ProjectReference>

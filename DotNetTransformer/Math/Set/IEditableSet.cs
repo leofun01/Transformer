@@ -1,9 +1,3 @@
-//	IEditableSet.cs
-//	
-//	Based on :
-//		Math
-//			Set theory
-
 using System;
 
 namespace DotNetTransformer.Math.Set {
@@ -11,8 +5,6 @@ namespace DotNetTransformer.Math.Set {
 		where T : IEquatable<T>
 		where TSet : ISet<T>
 	{
-		//bool Add(T item);
-		//bool Remove(T item);
 		void UnionWith(TSet other);
 		void IntersectWith(TSet other);
 		void ExceptWith(TSet other);
