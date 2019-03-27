@@ -96,8 +96,10 @@
 									<ul>
 										<li><a href="DotNetTransformer/Test/Test_vs2008.csproj"><code>Test_vs2008.csproj</code></a></li>
 										<li><a href="DotNetTransformer/Test/Test_vs2010.csproj"><code>Test_vs2010.csproj</code></a></li>
+										<li><a href="DotNetTransformer/Test/Test_vs2012.csproj"><code>Test_vs2012.csproj</code></a></li>
 										<li><a href="DotNetTransformer/Test/Test_vs2013.csproj"><code>Test_vs2013.csproj</code></a></li>
 										<li><a href="DotNetTransformer/Test/Test_vs2015.csproj"><code>Test_vs2015.csproj</code></a></li>
+										<li><a href="DotNetTransformer/Test/Test_vs2017.csproj"><code>Test_vs2017.csproj</code></a></li>
 									</ul>
 								</details>
 							</li>
@@ -112,24 +114,10 @@
 						<ul>
 							<li><a href="DotNetTransformer/DotNetTransformer_vs2008.csproj"><code>DotNetTransformer_vs2008.csproj</code></a></li>
 							<li><a href="DotNetTransformer/DotNetTransformer_vs2010.csproj"><code>DotNetTransformer_vs2010.csproj</code></a></li>
+							<li><a href="DotNetTransformer/DotNetTransformer_vs2012.csproj"><code>DotNetTransformer_vs2012.csproj</code></a></li>
 							<li><a href="DotNetTransformer/DotNetTransformer_vs2013.csproj"><code>DotNetTransformer_vs2013.csproj</code></a></li>
 							<li><a href="DotNetTransformer/DotNetTransformer_vs2015.csproj"><code>DotNetTransformer_vs2015.csproj</code></a></li>
-						</ul>
-					</details>
-				</li>
-			</ul>
-		</details>
-	</li>
-	<li>
-		<details open="open">
-			<summary><code>Research</code></summary>
-			<ul>
-				<li>
-					<details open="open">
-						<summary><code>T3D</code></summary>
-						<ul>
-							<li><a href="Research/T3D/Keys.txt"><code>Keys.txt</code></a></li>
-							<li><a href="Research/T3D/Names.txt"><code>Names.txt</code></a></li>
+							<li><a href="DotNetTransformer/DotNetTransformer_vs2017.csproj"><code>DotNetTransformer_vs2017.csproj</code></a></li>
 						</ul>
 					</details>
 				</li>
@@ -142,8 +130,10 @@
 			<ul>
 				<li><a href="VS/Transformer_vs2008.sln"><code>Transformer_vs2008.sln</code></a></li>
 				<li><a href="VS/Transformer_vs2010.sln"><code>Transformer_vs2010.sln</code></a></li>
+				<li><a href="VS/Transformer_vs2012.sln"><code>Transformer_vs2012.sln</code></a></li>
 				<li><a href="VS/Transformer_vs2013.sln"><code>Transformer_vs2013.sln</code></a></li>
 				<li><a href="VS/Transformer_vs2015.sln"><code>Transformer_vs2015.sln</code></a></li>
+				<li><a href="VS/Transformer_vs2017.sln"><code>Transformer_vs2017.sln</code></a></li>
 			</ul>
 		</details>
 	</li>
