@@ -82,27 +82,68 @@
 					<details>
 						<summary><code>Test</code></summary>
 						<ul>
-							<li><code>Test_vs2008.csproj</code></li>
-							<li><code>Test_vs2010.csproj</code></li>
-							<li><code>Test_vs2013.csproj</code></li>
+							<li>
+								<details>
+									<summary><code>Properties</code></summary>
+									<ul>
+										<li><a href="DotNetTransformer/Test/Properties/AssemblyInfo.cs"><code>AssemblyInfo.cs</code></a></li>
+									</ul>
+								</details>
+							</li>
+							<li>
+								<details>
+									<summary><code>*.csproj</code></summary>
+									<ul>
+										<li><a href="DotNetTransformer/Test/Test_vs2008.csproj"><code>Test_vs2008.csproj</code></a></li>
+										<li><a href="DotNetTransformer/Test/Test_vs2010.csproj"><code>Test_vs2010.csproj</code></a></li>
+										<li><a href="DotNetTransformer/Test/Test_vs2013.csproj"><code>Test_vs2013.csproj</code></a></li>
+										<li><a href="DotNetTransformer/Test/Test_vs2015.csproj"><code>Test_vs2015.csproj</code></a></li>
+									</ul>
+								</details>
+							</li>
 						</ul>
 					</details>
 				</li>
 				<li><a href="DotNetTransformer/Array1dTransformer.cs"><code>Array1dTransformer.cs</code></a></li>
 				<li><a href="DotNetTransformer/Array2dTransformer.cs"><code>Array2dTransformer.cs</code></a></li>
-				<li><code>DotNetTransformer_vs2008.csproj</code></li>
-				<li><code>DotNetTransformer_vs2010.csproj</code></li>
-				<li><code>DotNetTransformer_vs2013.csproj</code></li>
+				<li>
+					<details>
+						<summary><code>*.csproj</code></summary>
+						<ul>
+							<li><a href="DotNetTransformer/DotNetTransformer_vs2008.csproj"><code>DotNetTransformer_vs2008.csproj</code></a></li>
+							<li><a href="DotNetTransformer/DotNetTransformer_vs2010.csproj"><code>DotNetTransformer_vs2010.csproj</code></a></li>
+							<li><a href="DotNetTransformer/DotNetTransformer_vs2013.csproj"><code>DotNetTransformer_vs2013.csproj</code></a></li>
+							<li><a href="DotNetTransformer/DotNetTransformer_vs2015.csproj"><code>DotNetTransformer_vs2015.csproj</code></a></li>
+						</ul>
+					</details>
+				</li>
 			</ul>
 		</details>
 	</li>
 	<li>
 		<details open="open">
+			<summary><code>Research</code></summary>
+			<ul>
+				<li>
+					<details open="open">
+						<summary><code>T3D</code></summary>
+						<ul>
+							<li><a href="Research/T3D/Keys.txt"><code>Keys.txt</code></a></li>
+							<li><a href="Research/T3D/Names.txt"><code>Names.txt</code></a></li>
+						</ul>
+					</details>
+				</li>
+			</ul>
+		</details>
+	</li>
+	<li>
+		<details>
 			<summary><code>VS</code></summary>
 			<ul>
-				<li><code>Transformer_vs2008.sln</code></li>
-				<li><code>Transformer_vs2010.sln</code></li>
-				<li><code>Transformer_vs2013.sln</code></li>
+				<li><a href="VS/Transformer_vs2008.sln"><code>Transformer_vs2008.sln</code></a></li>
+				<li><a href="VS/Transformer_vs2010.sln"><code>Transformer_vs2010.sln</code></a></li>
+				<li><a href="VS/Transformer_vs2013.sln"><code>Transformer_vs2013.sln</code></a></li>
+				<li><a href="VS/Transformer_vs2015.sln"><code>Transformer_vs2015.sln</code></a></li>
 			</ul>
 		</details>
 	</li>
