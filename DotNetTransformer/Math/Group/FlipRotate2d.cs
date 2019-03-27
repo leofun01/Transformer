@@ -146,7 +146,7 @@ namespace DotNetTransformer.Math.Group {
 		public FlipRotate2d InverseElement {
 			get {
 				return new FlipRotate2d(0x67543210 >> (Value << 2) & 7);
-				//return new FlipRotate2d((Value >> 1) & (Value >> 2) ^ Value);
+				// return new FlipRotate2d((Value >> 1) & (Value >> 2) ^ Value);
 				// return Value > 5 ? new FlipRotate2d(Value ^ 1) : this;
 				// return IsRightAngleRotation ? new FlipRotate2d(Value ^ 1) : this;
 				// return this.Add(this.Add(this));
@@ -159,7 +159,7 @@ namespace DotNetTransformer.Math.Group {
 			get {
 				return 0x44222221 >> (Value << 2) & 7;
 				// return 1 << (0xA554 >> (Value << 1) & 3);
-				//return 1 << ((Value + 3 - (Value >> 2)) >> 2);
+				// return 1 << ((Value + 3 - (Value >> 2)) >> 2);
 				// return 1 << (((Value * 15) >> 3) & 1) << ((Value >> 2) & (Value >> 1));
 			}
 		}
@@ -172,7 +172,8 @@ namespace DotNetTransformer.Math.Group {
 			// return other.Add(this);
 		}
 		public FlipRotate2d Times(int count) {
-			return new FlipRotate2d((Value >> 1 & Value & count) >> 1 ^ ((count & 1) * Value));
+			return new FlipRotate2d((count & 1) * Value ^ ((Value >> 1 & Value & count) >> 1));
+			// return new FlipRotate2d((count & 1) * Value ^ ((0xC0 >> Value) & (count >> 1) & 1));
 		}
 
 		public override int GetHashCode() { return Value; }
@@ -181,7 +182,7 @@ namespace DotNetTransformer.Math.Group {
 		public override string ToString() { return _names[Value]; }
 		public RotateFlipType ToRotateFlipType() {
 			return (RotateFlipType)(0x31756420 >> (Value << 2) & 7);
-			//return (RotateFlipType)((Value << 1 & 6) ^ (Value >> 2) ^ (Value & 4));
+			// return (RotateFlipType)((Value << 1 & 6) ^ (Value >> 2) ^ (Value & 4));
 		}
 
 		/// <exception cref="ArgumentException">
@@ -204,8 +205,8 @@ namespace DotNetTransformer.Math.Group {
 		public static FlipRotate2d FromInt(int value) { return new FlipRotate2d(value & 7); }
 		public static FlipRotate2d FromRotateFlipType(RotateFlipType value) {
 			return new FlipRotate2d(0x53427160 >> ((byte)value << 2) & 7);
-			//byte v = (byte)value;
-			//return new FlipRotate2d((v << 2 & 4) ^ (v << 1 & 2) ^ (v >> 1));
+			// byte v = (byte)value;
+			// return new FlipRotate2d((v << 2 & 4) ^ (v << 1 & 2) ^ (v >> 1));
 		}
 
 		public static bool operator ==(FlipRotate2d l, FlipRotate2d r) { return l.Equals(r); }
