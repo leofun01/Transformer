@@ -24,8 +24,11 @@ namespace DotNetTransformer.Math.Set {
 			return GetEnumerator();
 		}
 		public bool Equals(FiniteSet<T> other) {
-			return ReferenceEquals(this, other) || (IsSubsetOf(other) && other.IsSubsetOf(this));
-			// return ReferenceEquals(this, other) || (IsSubsetOf(other) && !other.Exist(e => !Contains(e)));
+			return ReferenceEquals(this, other) || (
+				Count == other.Count
+				&& IsSubsetOf(other)
+				&& other.IsSubsetOf(this)
+			);
 		}
 		public virtual bool IsSubsetOf(ISet<T> other) {
 			return !ReferenceEquals(other, null) && !Exist(e => !other.Contains(e));
