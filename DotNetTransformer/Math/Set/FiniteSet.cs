@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 namespace DotNetTransformer.Math.Set {
 	public abstract partial class FiniteSet<T> : ISet<T>, IEnumerable<T>
+		, IEquatable<FiniteSet<T>>
 		, ISubSet<T, ISet<T>>
 		, ISuperSet<T, ISubSet<T, FiniteSet<T>>>
 		where T : IEquatable<T>
@@ -21,6 +22,10 @@ namespace DotNetTransformer.Math.Set {
 		public abstract IEnumerator<T> GetEnumerator();
 		IEnumerator IEnumerable.GetEnumerator() {
 			return GetEnumerator();
+		}
+		public bool Equals(FiniteSet<T> other) {
+			return ReferenceEquals(this, other) || (IsSubsetOf(other) && other.IsSubsetOf(this));
+			// return ReferenceEquals(this, other) || (IsSubsetOf(other) && !other.Exist(e => !Contains(e)));
 		}
 		public virtual bool IsSubsetOf(ISet<T> other) {
 			return !ReferenceEquals(other, null) && !Exist(e => !other.Contains(e));
