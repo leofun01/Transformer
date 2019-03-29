@@ -13,6 +13,7 @@ using System.Collections.Generic;
 
 namespace DotNetTransformer.Math.Set {
 	public abstract partial class FiniteSet<T> : ISet<T>, IEnumerable<T>
+		, IEquatable<FiniteSet<T>>
 		// , ISubSet<T, FiniteSet<T>>, ISubSet<T, FiniteSet<T>, FiniteSet<T>>
 		, ISubSet<T, ISet<T>>
 		// , ISuperSet<T, FiniteSet<T>>, ISuperSet<T, FiniteSet<T>, FiniteSet<T>>
@@ -35,6 +36,13 @@ namespace DotNetTransformer.Math.Set {
 		public abstract IEnumerator<T> GetEnumerator();
 		IEnumerator IEnumerable.GetEnumerator() {
 			return GetEnumerator();
+		}
+		public bool Equals(FiniteSet<T> other) {
+			return ReferenceEquals(this, other) || (
+				Count == other.Count
+				&& IsSubsetOf(other)
+				&& other.IsSubsetOf(this)
+			);
 		}
 		public virtual bool IsSubsetOf(ISet<T> other) {
 			return !ReferenceEquals(other, null) && !Exist(e => !other.Contains(e));

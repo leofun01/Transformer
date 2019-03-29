@@ -1,7 +1,6 @@
 //	ExtensionAttribute.cs
 
-namespace System.Runtime.CompilerServices
-{
+namespace System.Runtime.CompilerServices {
 	[AttributeUsage(
 		AttributeTargets.Assembly |
 		AttributeTargets.Class |
