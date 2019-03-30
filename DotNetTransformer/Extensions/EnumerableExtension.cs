@@ -19,9 +19,8 @@ namespace DotNetTransformer.Extensions {
 		private delegate T Func<T>(T l, T r);
 		private static T CollectAll<T>(this IEnumerable<T> collection, Func<T> func) where T : struct {
 			T result = default(T);
-			if(collection != null)
-				foreach(T item in collection)
-					result = func(result, item);
+			foreach(T item in collection)
+				result = func(result, item);
 			return result;
 		}
 		public static FlipRotate2d AddAll(this IEnumerable<FlipRotate2d> collection) {
