@@ -10,6 +10,7 @@
 		<AssemblyName>DotNetTransformer</AssemblyName>
 		<TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
 		<FileAlignment>512</FileAlignment>
+		<ExternalCompileRoot>$(MSBuildProjectDirectory)\..\External</ExternalCompileRoot>
 	</PropertyGroup>
 	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
 		<PlatformTarget>AnyCPU</PlatformTarget>
@@ -24,7 +25,11 @@
 		<Reference Include="System.Drawing" />
 	</ItemGroup>
 	<ItemGroup>
-		<Compile Include="**\*.cs" Exclude="Test\**" />
+		<Compile Include="**\*.cs" Exclude="Test\**;Draft\**" />
+		<Compile Include="Draft\**\*.cs" />
+		<Compile Include="$(ExternalCompileRoot)\**\*.cs">
+			<Link>$([MSBuild]::MakeRelative('$(ExternalCompileRoot)', '%(FullPath)'))</Link>
+		</Compile>
 	</ItemGroup>
 	<Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
