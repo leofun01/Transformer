@@ -1,7 +1,7 @@
 using System;
 
 namespace DotNetTransformer.Math.Set {
-	public static class ISetExtension {
+	public static class SetExtension {
 		private sealed class InternalSet<T> : ISet<T>
 			where T : IEquatable<T>
 		{
