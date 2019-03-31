@@ -65,12 +65,14 @@ namespace DotNetTransformer.Math.Group {
 		public static FiniteGroup<T> CreateGroup<T>(this IEnumerable<T> collection)
 			where T : IFiniteGroupElement<T>
 		{
-			return ReferenceEquals(collection, null) ? null : new InternalGroup<T>(collection);
+			return new InternalGroup<T>(collection);
 		}
 		public static bool IsGeneratingSetOf<T>(this IEnumerable<T> collection, FiniteGroup<T> group)
 			where T : IFiniteGroupElement<T>
 		{
-			return !ReferenceEquals(group, null) && group.IsSubsetOf(CreateGroup<T>(collection));
+			return !ReferenceEquals(collection, null)
+				&& !ReferenceEquals(group, null)
+				&& group.IsSubsetOf(CreateGroup<T>(collection));
 		}
 	}
 }

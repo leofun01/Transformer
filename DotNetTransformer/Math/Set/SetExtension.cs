@@ -9,7 +9,7 @@
 using System;
 
 namespace DotNetTransformer.Math.Set {
-	public static class ISetExtension {
+	public static class SetExtension {
 		private sealed class InternalSet<T> : ISet<T>
 			where T : IEquatable<T>
 		{
@@ -57,6 +57,35 @@ namespace DotNetTransformer.Math.Set {
 			where TSet : ISet<T>
 		{
 			return !ReferenceEquals(other, null) && other.IsSubsetOf(_this);
+		}
+
+		public static bool EqualsSubsets<T, TSet>(this TSet _this, TSet other)
+			where T : IEquatable<T>
+			where TSet : ISubSet<T, TSet>
+		{
+			return ReferenceEquals(_this, other) || (
+				other.IsSupersetOf<T, TSet>(_this)
+				&& _this.IsSupersetOf<T, TSet>(other)
+			);
+		}
+		public static bool EqualsSupersets<T, TSet>(this TSet _this, TSet other)
+			where T : IEquatable<T>
+			where TSet : ISuperSet<T, TSet>
+		{
+			return ReferenceEquals(_this, other) || (
+				other.IsSubsetOf<T, TSet>(_this)
+				&& _this.IsSubsetOf<T, TSet>(other)
+			);
+		}
+		public static bool Equals<T, TSS, TSet>(this TSS _this, TSet other)
+			where T: IEquatable<T>
+			where TSS : ISubSet<T, TSet>, ISuperSet<T, TSet>
+			where TSet : ISet<T>
+		{
+			return ReferenceEquals(_this, other) || (
+				other.IsSupersetOf<T, TSet>(_this)
+				&& _this.IsSupersetOf(other)
+			);
 		}
 	}
 }
