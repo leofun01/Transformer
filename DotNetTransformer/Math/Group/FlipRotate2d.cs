@@ -40,17 +40,17 @@ namespace DotNetTransformer.Math.Group {
 		/// </summary>
 		public static readonly FlipRotate2d FlipY;
 		/// <summary>
-		/// "D1": Reflection across primary diagonal line.
+		/// "PD": Reflection across primary diagonal line.
 		/// <para> 0 1  -->  0 3 </para>
 		/// <para> 3 2  -->  1 2 </para>
 		/// </summary>
-		public static readonly FlipRotate2d ReflectOverDiagonal1;
+		public static readonly FlipRotate2d ReflectOverPrimaryDiagonal;
 		/// <summary>
-		/// "D2": Reflection across secondary diagonal line.
+		/// "SD": Reflection across secondary diagonal line.
 		/// <para> 0 1  -->  2 1 </para>
 		/// <para> 3 2  -->  3 0 </para>
 		/// </summary>
-		public static readonly FlipRotate2d ReflectOverDiagonal2;
+		public static readonly FlipRotate2d ReflectOverSecondaryDiagonal;
 		/// <summary>
 		/// "RC": 90 degree clockwise rotation.
 		/// <para> 0 1  -->  3 0 </para>
@@ -65,15 +65,15 @@ namespace DotNetTransformer.Math.Group {
 		public static readonly FlipRotate2d RotateCounterClockwise;
 
 		static FlipRotate2d() {
-			_names = new string[_count] { "NO", "HT", "FX", "FY", "D1", "D2", "RC", "RN" };
-			None                   = new FlipRotate2d(0); // = FromString("NO");	// 000
-			HalfTurn               = new FlipRotate2d(1); // = FromString("HT");	// 001
-			FlipX                  = new FlipRotate2d(2); // = FromString("FX");	// 010
-			FlipY                  = new FlipRotate2d(3); // = FromString("FY");	// 011
-			ReflectOverDiagonal1   = new FlipRotate2d(4); // = FromString("D1");	// 100
-			ReflectOverDiagonal2   = new FlipRotate2d(5); // = FromString("D2");	// 101
-			RotateClockwise        = new FlipRotate2d(6); // = FromString("RC");	// 110
-			RotateCounterClockwise = new FlipRotate2d(7); // = FromString("RN");	// 111
+			_names = new string[_count] { "NO", "HT", "FX", "FY", "PD", "SD", "RC", "RN" };
+			None                         = new FlipRotate2d(0);	// = FromString("NO");	// 000
+			HalfTurn                     = new FlipRotate2d(1);	// = FromString("HT");	// 001
+			FlipX                        = new FlipRotate2d(2);	// = FromString("FX");	// 010
+			FlipY                        = new FlipRotate2d(3);	// = FromString("FY");	// 011
+			ReflectOverPrimaryDiagonal   = new FlipRotate2d(4);	// = FromString("PD");	// 100
+			ReflectOverSecondaryDiagonal = new FlipRotate2d(5);	// = FromString("SD");	// 101
+			RotateClockwise              = new FlipRotate2d(6);	// = FromString("RC");	// 110
+			RotateCounterClockwise       = new FlipRotate2d(7);	// = FromString("RN");	// 111
 			AllValues = new DihedralGroup();
 		}
 
@@ -91,37 +91,37 @@ namespace DotNetTransformer.Math.Group {
 		}
 
 		/// <summary><return>
-		/// <para>true for "FX", "FY", "D1", "D2";</para>
+		/// <para>true for "FX", "FY", "PD", "SD";</para>
 		/// <para>false for "NO", "HT", "RC", "RN".</para>
 		/// </return></summary>
 		public bool IsReflection { get { return (Value + 2 & 4) == 4; } }
 		/// <summary><return>
 		/// <para>true for "FX", "FY";</para>
-		/// <para>false for "NO", "HT", "D1", "D2", "RC", "RN".</para>
+		/// <para>false for "NO", "HT", "PD", "SD", "RC", "RN".</para>
 		/// </return></summary>
 		public bool IsAxisReflection { get { return (Value & 6) == 2; } }
 		/// <summary><return>
-		/// <para>true for "D1", "D2";</para>
+		/// <para>true for "PD", "SD";</para>
 		/// <para>false for "NO", "HT", "FX", "FY", "RC", "RN".</para>
 		/// </return></summary>
 		public bool IsDiagonalReflection { get { return (Value & 6) == 4; } }
 		/// <summary><return>
 		/// <para>true for "NO", "HT", "RC", "RN";</para>
-		/// <para>false for "FX", "FY", "D1", "D2".</para>
+		/// <para>false for "FX", "FY", "PD", "SD".</para>
 		/// </return></summary>
 		public bool IsRotation { get { return (Value + 2 & 4) == 0; } }
 		/// <summary><return>
 		/// <para>true for "NO", "HT";</para>
-		/// <para>false for "FX", "FY", "D1", "D2", "RC", "RN".</para>
+		/// <para>false for "FX", "FY", "PD", "SD", "RC", "RN".</para>
 		/// </return></summary>
 		public bool IsStraightAngleRotation { get { return Value < 2; } }
 		/// <summary><return>
 		/// <para>true for "RC", "RN";</para>
-		/// <para>false for "NO", "HT", "FX", "FY", "D1", "D2".</para>
+		/// <para>false for "NO", "HT", "FX", "FY", "PD", "SD".</para>
 		/// </return></summary>
 		public bool IsRightAngleRotation { get { return Value > 5; } }
 		/// <summary><return>
-		/// <para>true for "D1", "D2", "RC", "RN";</para>
+		/// <para>true for "PD", "SD", "RC", "RN";</para>
 		/// <para>false for "NO", "HT", "FX", "FY".</para>
 		/// </return></summary>
 		public bool IsSwapDimensions { get { return Value > 3; } }
@@ -162,9 +162,7 @@ namespace DotNetTransformer.Math.Group {
 		}
 
 		/// <exception cref="ArgumentException">
-		/// <exception cref="KeyNotFoundException">
 		/// Invalid <paramref name="name"/>.
-		/// </exception>
 		/// </exception>
 		public static FlipRotate2d FromString(string name) {
 			int index = Array.IndexOf<string>(_names, name);
@@ -176,7 +174,7 @@ namespace DotNetTransformer.Math.Group {
 				sb.Append(_names[i]);
 			}
 			sb.Append(".");
-			throw new ArgumentException(sb.ToString(), "name", new KeyNotFoundException());
+			throw new ArgumentException(sb.ToString(), "name");
 		}
 		public static FlipRotate2d FromInt(int value) { return new FlipRotate2d(value & 7); }
 		public static FlipRotate2d FromRotateFlipType(RotateFlipType value) {
