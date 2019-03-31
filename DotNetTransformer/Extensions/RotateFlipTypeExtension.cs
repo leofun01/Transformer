@@ -190,7 +190,7 @@ namespace DotNetTransformer.Extensions {
 		public static RotateFlipType GetInverseElement(this RotateFlipType _this) {
 			byte t = (byte)_this;
 			return (RotateFlipType)(0x76541230 >> (t << 2) & 7);
-			//return (RotateFlipType)(((t >> 2 ^ 1) & t) << 1 ^ t);
+			// return (RotateFlipType)(((t >> 2 ^ 1) & t) << 1 ^ t);
 			// return IsRightAngleRotation(_this) ? _this ^ RotateFlipType.RotateNoneFlipXY : _this;
 			// return Add(_this, Add(_this, _this));
 			// return Add(Add(_this, _this), _this);
