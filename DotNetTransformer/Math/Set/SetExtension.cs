@@ -1,4 +1,4 @@
-//	ISetExtension.cs
+//	SetExtension.cs
 //	
 //	Based on :
 //		Math
