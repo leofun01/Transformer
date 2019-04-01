@@ -53,9 +53,9 @@
 										<li><a href="DotNetTransformer/Math/Set/FiniteSet.cs"><code>FiniteSet.cs</code></a></li>
 										<li><a href="DotNetTransformer/Math/Set/IEditableSet.cs"><code>IEditableSet.cs</code></a></li>
 										<li><a href="DotNetTransformer/Math/Set/ISet.cs"><code>ISet.cs</code></a></li>
-										<li><a href="DotNetTransformer/Math/Set/ISetExtension.cs"><code>ISetExtension.cs</code></a></li>
 										<li><a href="DotNetTransformer/Math/Set/ISubSet.cs"><code>ISubSet.cs</code></a></li>
 										<li><a href="DotNetTransformer/Math/Set/ISuperSet.cs"><code>ISuperSet.cs</code></a></li>
+										<li><a href="DotNetTransformer/Math/Set/SetExtension.cs"><code>SetExtension.cs</code></a></li>
 									</ul>
 								</details>
 							</li>
@@ -67,14 +67,6 @@
 						<summary><code>Properties</code></summary>
 						<ul>
 							<li><a href="DotNetTransformer/Properties/AssemblyInfo.cs"><code>AssemblyInfo.cs</code></a></li>
-						</ul>
-					</details>
-				</li>
-				<li>
-					<details>
-						<summary><code>System</code></summary>
-						<ul>
-							<li><a href="DotNetTransformer/System/ExtensionAttribute.cs"><code>ExtensionAttribute.cs</code></a></li>
 						</ul>
 					</details>
 				</li>
@@ -118,6 +110,21 @@
 							<li><a href="DotNetTransformer/DotNetTransformer_vs2013.csproj"><code>DotNetTransformer_vs2013.csproj</code></a></li>
 							<li><a href="DotNetTransformer/DotNetTransformer_vs2015.csproj"><code>DotNetTransformer_vs2015.csproj</code></a></li>
 							<li><a href="DotNetTransformer/DotNetTransformer_vs2017.csproj"><code>DotNetTransformer_vs2017.csproj</code></a></li>
+						</ul>
+					</details>
+				</li>
+			</ul>
+		</details>
+	</li>
+	<li>
+		<details>
+			<summary><code>External</code></summary>
+			<ul>
+				<li>
+					<details open="open">
+						<summary><code>System.Core</code></summary>
+						<ul>
+							<li><a href="External/System.Core/ExtensionAttribute.cs"><code>ExtensionAttribute.cs</code></a></li>
 						</ul>
 					</details>
 				</li>
