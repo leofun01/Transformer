@@ -56,5 +56,8 @@ namespace DotNetTransformer.Math.Set {
 				&& !other.Exist<T>(e => !Contains(e))
 			);
 		}
+
+		public static bool operator ==(FiniteSet<T> l, FiniteSet<T> r) { return l.Equals(r); }
+		public static bool operator !=(FiniteSet<T> l, FiniteSet<T> r) { return !l.Equals(r); }
 	}
 }
