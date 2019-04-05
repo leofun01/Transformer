@@ -153,6 +153,7 @@ namespace DotNetTransformer.Math.Group {
 				// return this.Add(this).Add(this);
 				// return this.Compose(this.Compose(this));
 				// return this.Compose(this).Compose(this);
+				// return None.Subtract(this);
 			}
 		}
 		/// <summary>
@@ -169,20 +170,29 @@ namespace DotNetTransformer.Math.Group {
 		public FlipRotate2d Add(FlipRotate2d other) {
 			return new FlipRotate2d((Value >> 1) & (other.Value >> 2) ^ Value ^ other.Value);
 			// return other.Compose(this);
+			// return InverseElement.Compose(other.InverseElement).InverseElement;
+			// return Subtract(other.InverseElement);
+			// return other.InverseElement.Subtract(this).InverseElement;
 		}
 		public FlipRotate2d Compose(FlipRotate2d other) {
 			return new FlipRotate2d((Value >> 2) & (other.Value >> 1) ^ Value ^ other.Value);
 			// return other.Add(this);
+			// return InverseElement.Add(other.InverseElement).InverseElement;
+			// return other.Subtract(InverseElement);
+			// return InverseElement.Subtract(other).InverseElement;
 		}
 		public FlipRotate2d Subtract(FlipRotate2d other) {
 			return new FlipRotate2d((Value ^ other.Value) >> 1 & (other.Value >> 2) ^ Value ^ other.Value);
 			// return new FlipRotate2d(((Value ^ other.Value) & (other.Value >> 1)) >> 1 ^ Value ^ other.Value);
 			// return Add(other.InverseElement);
 			// return other.Add(InverseElement).InverseElement;
+			// return other.InverseElement.Compose(this);
+			// return InverseElement.Compose(other).InverseElement;
 		}
 		public FlipRotate2d Times(int count) {
 			return new FlipRotate2d((count & 1) * Value ^ ((Value >> 1 & Value & count) >> 1));
 			// return new FlipRotate2d((count & 1) * Value ^ ((0xC0 >> Value) & (count >> 1) & 1));
+			// return ((count & 1) == 1 ? this : None).Add((count & 2) == 2 && IsRightAngleRotation ? HalfTurn : None);
 		}
 
 		public override int GetHashCode() { return Value; }
