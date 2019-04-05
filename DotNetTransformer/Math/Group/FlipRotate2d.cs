@@ -177,6 +177,8 @@ namespace DotNetTransformer.Math.Group {
 		public FlipRotate2d Subtract(FlipRotate2d other) {
 			return new FlipRotate2d((Value ^ other.Value) >> 1 & (other.Value >> 2) ^ Value ^ other.Value);
 			// return new FlipRotate2d(((Value ^ other.Value) & (other.Value >> 1)) >> 1 ^ Value ^ other.Value);
+			// return Add(other.InverseElement);
+			// return other.Add(InverseElement).InverseElement;
 		}
 		public FlipRotate2d Times(int count) {
 			return new FlipRotate2d((count & 1) * Value ^ ((Value >> 1 & Value & count) >> 1));
