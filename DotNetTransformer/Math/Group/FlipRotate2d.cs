@@ -193,7 +193,7 @@ namespace DotNetTransformer.Math.Group {
 		public static FlipRotate2d operator +(FlipRotate2d o) { return o; }
 		public static FlipRotate2d operator -(FlipRotate2d o) { return o.InverseElement; }
 		public static FlipRotate2d operator +(FlipRotate2d l, FlipRotate2d r) { return l.Add(r); }
-		public static FlipRotate2d operator -(FlipRotate2d l, FlipRotate2d r) { return l.Add(r.InverseElement); }
+		public static FlipRotate2d operator -(FlipRotate2d l, FlipRotate2d r) { return l.Subtract(r); }
 		public static FlipRotate2d operator *(FlipRotate2d l, int r) { return l.Times(r); }
 		public static FlipRotate2d operator *(int l, FlipRotate2d r) { return r.Times(l); }
 
