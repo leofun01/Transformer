@@ -88,6 +88,7 @@ namespace DotNetTransformer.Math.Group {
 				for(byte i = 0; i < _count; ++i)
 					yield return new FlipRotate2d(i);
 			}
+			public override int GetHashCode() { return _count; }
 		}
 
 		/// <summary><return>
