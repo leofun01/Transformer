@@ -1,5 +1,5 @@
 using RotateFlipType = System.Drawing.RotateFlipType;
-using FlipRotate2d = DotNetTransformer.Math.Group.FlipRotate2d;
+using FlipRotate2D = DotNetTransformer.Math.Group.FlipRotate2D;
 
 namespace DotNetTransformer.Extensions {
 	public static class ArrayExtension
@@ -13,7 +13,7 @@ namespace DotNetTransformer.Extensions {
 				result[ri] = array[ai];
 			return result;
 		}
-		public static T[,] Transform<T>(this T[,] array, FlipRotate2d transformation) {
+		public static T[,] Transform<T>(this T[,] array, FlipRotate2D transformation) {
 			if(array == null) return null;
 			byte t = transformation.Value;
 			int dim = t >> 2;
@@ -33,7 +33,7 @@ namespace DotNetTransformer.Extensions {
 			return result;
 		}
 		public static T[,] Transform<T>(this T[,] array, RotateFlipType transformation) {
-			return Transform<T>(array, FlipRotate2d.FromRotateFlipType(transformation));
+			return Transform<T>(array, FlipRotate2D.FromRotateFlipType(transformation));
 		}
 	}
 }

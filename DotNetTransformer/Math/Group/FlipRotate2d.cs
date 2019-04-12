@@ -5,88 +5,88 @@ using RotateFlipType = System.Drawing.RotateFlipType;
 
 namespace DotNetTransformer.Math.Group {
 	[Serializable]
-	public struct FlipRotate2d : IFiniteGroupElement<FlipRotate2d>
+	public struct FlipRotate2D : IFiniteGroupElement<FlipRotate2D>
 	{
 		public readonly byte Value;
-		private FlipRotate2d(byte value) { Value = value; }
-		private FlipRotate2d(int value) { Value = (byte)value; }
+		private FlipRotate2D(byte value) { Value = value; }
+		private FlipRotate2D(int value) { Value = (byte)value; }
 
 		private const byte _count = 8;
 		private static readonly string[] _names;
-		public static readonly FiniteGroup<FlipRotate2d> AllValues;
+		public static readonly FiniteGroup<FlipRotate2D> AllValues;
 
 		/// <summary>
 		/// "NO": No changes.
 		/// <para> 0 1  -->  0 1 </para>
 		/// <para> 3 2  -->  3 2 </para>
 		/// </summary>
-		public static readonly FlipRotate2d None;
+		public static readonly FlipRotate2D None;
 		/// <summary>
 		/// "HT": 180 degree rotation.
 		/// <para> 0 1  -->  2 3 </para>
 		/// <para> 3 2  -->  1 0 </para>
 		/// </summary>
-		public static readonly FlipRotate2d HalfTurn;
+		public static readonly FlipRotate2D HalfTurn;
 		/// <summary>
 		/// "FX": Horizontal flip. Reflection across y-axis.
 		/// <para> 0 1  -->  1 0 </para>
 		/// <para> 3 2  -->  2 3 </para>
 		/// </summary>
-		public static readonly FlipRotate2d FlipX;
+		public static readonly FlipRotate2D FlipX;
 		/// <summary>
 		/// "FY": Vertical flip. Reflection across x-axis.
 		/// <para> 0 1  -->  3 2 </para>
 		/// <para> 3 2  -->  0 1 </para>
 		/// </summary>
-		public static readonly FlipRotate2d FlipY;
+		public static readonly FlipRotate2D FlipY;
 		/// <summary>
 		/// "PD": Reflection across primary diagonal line.
 		/// <para> 0 1  -->  0 3 </para>
 		/// <para> 3 2  -->  1 2 </para>
 		/// </summary>
-		public static readonly FlipRotate2d ReflectOverPrimaryDiagonal;
+		public static readonly FlipRotate2D ReflectOverPrimaryDiagonal;
 		/// <summary>
 		/// "SD": Reflection across secondary diagonal line.
 		/// <para> 0 1  -->  2 1 </para>
 		/// <para> 3 2  -->  3 0 </para>
 		/// </summary>
-		public static readonly FlipRotate2d ReflectOverSecondaryDiagonal;
+		public static readonly FlipRotate2D ReflectOverSecondaryDiagonal;
 		/// <summary>
 		/// "RC": 90 degree clockwise rotation.
 		/// <para> 0 1  -->  3 0 </para>
 		/// <para> 3 2  -->  2 1 </para>
 		/// </summary>
-		public static readonly FlipRotate2d RotateClockwise;
+		public static readonly FlipRotate2D RotateClockwise;
 		/// <summary>
 		/// "RN": 90 degree counter clockwise rotation.
 		/// <para> 0 1  -->  1 2 </para>
 		/// <para> 3 2  -->  0 3 </para>
 		/// </summary>
-		public static readonly FlipRotate2d RotateCounterClockwise;
+		public static readonly FlipRotate2D RotateCounterClockwise;
 
-		static FlipRotate2d() {
+		static FlipRotate2D() {
 			_names = new string[_count] { "NO", "HT", "FX", "FY", "PD", "SD", "RC", "RN" };
-			None                         = new FlipRotate2d(0);	// = FromString("NO");	// 000
-			HalfTurn                     = new FlipRotate2d(1);	// = FromString("HT");	// 001
-			FlipX                        = new FlipRotate2d(2);	// = FromString("FX");	// 010
-			FlipY                        = new FlipRotate2d(3);	// = FromString("FY");	// 011
-			ReflectOverPrimaryDiagonal   = new FlipRotate2d(4);	// = FromString("PD");	// 100
-			ReflectOverSecondaryDiagonal = new FlipRotate2d(5);	// = FromString("SD");	// 101
-			RotateClockwise              = new FlipRotate2d(6);	// = FromString("RC");	// 110
-			RotateCounterClockwise       = new FlipRotate2d(7);	// = FromString("RN");	// 111
-			AllValues = new DihedralGroup();
+			None                         = new FlipRotate2D(0);	// = FromString("NO");	// 000
+			HalfTurn                     = new FlipRotate2D(1);	// = FromString("HT");	// 001
+			FlipX                        = new FlipRotate2D(2);	// = FromString("FX");	// 010
+			FlipY                        = new FlipRotate2D(3);	// = FromString("FY");	// 011
+			ReflectOverPrimaryDiagonal   = new FlipRotate2D(4);	// = FromString("PD");	// 100
+			ReflectOverSecondaryDiagonal = new FlipRotate2D(5);	// = FromString("SD");	// 101
+			RotateClockwise              = new FlipRotate2D(6);	// = FromString("RC");	// 110
+			RotateCounterClockwise       = new FlipRotate2D(7);	// = FromString("RN");	// 111
+			AllValues = new DihedralGroupD4();
 		}
 
-		private sealed class DihedralGroup : FiniteGroup<FlipRotate2d>
+		private sealed class DihedralGroupD4 : FiniteGroup<FlipRotate2D>
 		{
-			public DihedralGroup() { }
+			public DihedralGroupD4() { }
 
-			public override FlipRotate2d IdentityElement { get { return None; } }
+			public override FlipRotate2D IdentityElement { get { return None; } }
 			public override int Count { get { return _count; } }
-			public override bool Contains(FlipRotate2d item) { return true; }
-			public override IEnumerator<FlipRotate2d> GetEnumerator() {
+			public override bool Contains(FlipRotate2D item) { return true; }
+			public override IEnumerator<FlipRotate2D> GetEnumerator() {
 				for(byte i = 0; i < _count; ++i)
-					yield return new FlipRotate2d(i);
+					yield return new FlipRotate2D(i);
 			}
 			public override int GetHashCode() { return _count; }
 		}
@@ -127,10 +127,10 @@ namespace DotNetTransformer.Math.Group {
 		/// </return></summary>
 		public bool IsSwapDimensions { get { return Value > 3; } }
 
-		public FlipRotate2d InverseElement {
+		public FlipRotate2D InverseElement {
 			get {
-				return new FlipRotate2d(0x67543210 >> (Value << 2) & 7);
-				// return new FlipRotate2d((Value >> 1) & (Value >> 2) ^ Value);
+				return new FlipRotate2D(0x67543210 >> (Value << 2) & 7);
+				// return new FlipRotate2D((Value >> 1) & (Value >> 2) ^ Value);
 			}
 		}
 		/// <summary>
@@ -142,24 +142,24 @@ namespace DotNetTransformer.Math.Group {
 				// return 1 << ((Value + 3 - (Value >> 2)) >> 2);
 			}
 		}
-		public FlipRotate2d Add(FlipRotate2d other) {
-			return new FlipRotate2d((Value >> 1) & (other.Value >> 2) ^ Value ^ other.Value);
+		public FlipRotate2D Add(FlipRotate2D other) {
+			return new FlipRotate2D((Value >> 1) & (other.Value >> 2) ^ Value ^ other.Value);
 		}
-		public FlipRotate2d Compose(FlipRotate2d other) {
-			return new FlipRotate2d((Value >> 2) & (other.Value >> 1) ^ Value ^ other.Value);
+		public FlipRotate2D Compose(FlipRotate2D other) {
+			return new FlipRotate2D((Value >> 2) & (other.Value >> 1) ^ Value ^ other.Value);
 		}
-		public FlipRotate2d Subtract(FlipRotate2d other) {
-			return new FlipRotate2d((Value ^ other.Value) >> 1 & (other.Value >> 2) ^ Value ^ other.Value);
-			// return new FlipRotate2d(((Value ^ other.Value) & (other.Value >> 1)) >> 1 ^ Value ^ other.Value);
+		public FlipRotate2D Subtract(FlipRotate2D other) {
+			return new FlipRotate2D((Value ^ other.Value) >> 1 & (other.Value >> 2) ^ Value ^ other.Value);
+			// return new FlipRotate2D(((Value ^ other.Value) & (other.Value >> 1)) >> 1 ^ Value ^ other.Value);
 		}
-		public FlipRotate2d Times(int count) {
-			return new FlipRotate2d((count & 1) * Value ^ ((Value >> 1 & Value & count) >> 1));
-			// return new FlipRotate2d((count & 1) * Value ^ ((0xC0 >> Value) & (count >> 1) & 1));
+		public FlipRotate2D Times(int count) {
+			return new FlipRotate2D((count & 1) * Value ^ ((Value >> 1 & Value & count) >> 1));
+			// return new FlipRotate2D((count & 1) * Value ^ ((0xC0 >> Value) & (count >> 1) & 1));
 		}
 
 		public override int GetHashCode() { return Value; }
-		public override bool Equals(object o) { return o is FlipRotate2d && Equals((FlipRotate2d)o); }
-		public bool Equals(FlipRotate2d o) { return Value == o.Value; }
+		public override bool Equals(object o) { return o is FlipRotate2D && Equals((FlipRotate2D)o); }
+		public bool Equals(FlipRotate2D o) { return Value == o.Value; }
 		public override string ToString() { return _names[Value]; }
 		public RotateFlipType ToRotateFlipType() {
 			return (RotateFlipType)(0x31756420 >> (Value << 2) & 7);
@@ -169,9 +169,9 @@ namespace DotNetTransformer.Math.Group {
 		/// <exception cref="ArgumentException">
 		/// Invalid <paramref name="name"/>.
 		/// </exception>
-		public static FlipRotate2d FromString(string name) {
+		public static FlipRotate2D FromString(string name) {
 			int index = Array.IndexOf<string>(_names, name);
-			if(index >= 0) return new FlipRotate2d(index);
+			if(index >= 0) return new FlipRotate2D(index);
 			StringBuilder sb = new StringBuilder("Acceptible values : ");
 			sb.Append(_names[0]);
 			for(int i = 1; i < _count; ++i) {
@@ -181,25 +181,25 @@ namespace DotNetTransformer.Math.Group {
 			sb.Append(".");
 			throw new ArgumentException(sb.ToString(), "name");
 		}
-		public static FlipRotate2d FromInt(int value) { return new FlipRotate2d(value & 7); }
-		public static FlipRotate2d FromRotateFlipType(RotateFlipType value) {
-			return new FlipRotate2d(0x53427160 >> ((byte)value << 2) & 7);
+		public static FlipRotate2D FromInt(int value) { return new FlipRotate2D(value & 7); }
+		public static FlipRotate2D FromRotateFlipType(RotateFlipType value) {
+			return new FlipRotate2D(0x53427160 >> ((byte)value << 2) & 7);
 			// byte v = (byte)value;
-			// return new FlipRotate2d((v << 2 & 4) ^ (v << 1 & 2) ^ (v >> 1));
+			// return new FlipRotate2D((v << 2 & 4) ^ (v << 1 & 2) ^ (v >> 1));
 		}
 
-		public static bool operator ==(FlipRotate2d l, FlipRotate2d r) { return l.Equals(r); }
-		public static bool operator !=(FlipRotate2d l, FlipRotate2d r) { return !l.Equals(r); }
+		public static bool operator ==(FlipRotate2D l, FlipRotate2D r) { return l.Equals(r); }
+		public static bool operator !=(FlipRotate2D l, FlipRotate2D r) { return !l.Equals(r); }
 
-		public static FlipRotate2d operator +(FlipRotate2d o) { return o; }
-		public static FlipRotate2d operator -(FlipRotate2d o) { return o.InverseElement; }
-		public static FlipRotate2d operator +(FlipRotate2d l, FlipRotate2d r) { return l.Add(r); }
-		public static FlipRotate2d operator -(FlipRotate2d l, FlipRotate2d r) { return l.Subtract(r); }
-		public static FlipRotate2d operator *(FlipRotate2d l, int r) { return l.Times(r); }
-		public static FlipRotate2d operator *(int l, FlipRotate2d r) { return r.Times(l); }
+		public static FlipRotate2D operator +(FlipRotate2D o) { return o; }
+		public static FlipRotate2D operator -(FlipRotate2D o) { return o.InverseElement; }
+		public static FlipRotate2D operator +(FlipRotate2D l, FlipRotate2D r) { return l.Add(r); }
+		public static FlipRotate2D operator -(FlipRotate2D l, FlipRotate2D r) { return l.Subtract(r); }
+		public static FlipRotate2D operator *(FlipRotate2D l, int r) { return l.Times(r); }
+		public static FlipRotate2D operator *(int l, FlipRotate2D r) { return r.Times(l); }
 
-		public static explicit operator FlipRotate2d(int o) { return FromInt(o); }
-		public static implicit operator FlipRotate2d(RotateFlipType o) { return FromRotateFlipType(o); }
-		public static implicit operator RotateFlipType(FlipRotate2d o) { return o.ToRotateFlipType(); }
+		public static explicit operator FlipRotate2D(int o) { return FromInt(o); }
+		public static implicit operator FlipRotate2D(RotateFlipType o) { return FromRotateFlipType(o); }
+		public static implicit operator RotateFlipType(FlipRotate2D o) { return o.ToRotateFlipType(); }
 	}
 }
