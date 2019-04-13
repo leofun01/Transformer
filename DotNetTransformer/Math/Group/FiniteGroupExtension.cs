@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using DotNetTransformer.Extensions;
 
 namespace DotNetTransformer.Math.Group {
 	public static class FiniteGroupExtension
@@ -63,6 +64,16 @@ namespace DotNetTransformer.Math.Group {
 			return !ReferenceEquals(collection, null)
 				&& !ReferenceEquals(group, null)
 				&& group.IsSubsetOf(CreateGroup<T>(collection));
+		}
+		public static T AddAll<T>(this IEnumerable<T> collection)
+			where T : IFiniteGroupElement<T>
+		{
+			return collection.CollectAll<T>((l, r) => l.Add(r));
+		}
+		public static T ComposeAll<T>(this IEnumerable<T> collection)
+			where T : IFiniteGroupElement<T>
+		{
+			return collection.CollectAll<T>((l, r) => Compose<T>(l, r));
 		}
 
 		public static T Compose<T>(this T _this, T other)

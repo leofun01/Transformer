@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
+using DotNetTransformer.Math.Group;
 using RotateFlipType = System.Drawing.RotateFlipType;
-using FlipRotate2D = DotNetTransformer.Math.Group.FlipRotate2D;
 
 namespace DotNetTransformer.Extensions {
 	public static class EnumerableExtension
@@ -16,18 +16,12 @@ namespace DotNetTransformer.Extensions {
 			return !collection.Exist<T>(e => !match(e));
 		}
 
-		private delegate T Func<T>(T l, T r);
-		private static T CollectAll<T>(this IEnumerable<T> collection, Func<T> func) where T : struct {
+		public delegate T Func<T>(T l, T r);
+		public static T CollectAll<T>(this IEnumerable<T> collection, Func<T> func) {
 			T result = default(T);
 			foreach(T item in collection)
 				result = func(result, item);
 			return result;
-		}
-		public static FlipRotate2D AddAll(this IEnumerable<FlipRotate2D> collection) {
-			return CollectAll<FlipRotate2D>(collection, (l, r) => l.Add(r));
-		}
-		public static FlipRotate2D ComposeAll(this IEnumerable<FlipRotate2D> collection) {
-			return CollectAll<FlipRotate2D>(collection, (l, r) => l.Compose(r));
 		}
 		public static RotateFlipType AddAll(this IEnumerable<RotateFlipType> collection) {
 			return CollectAll<RotateFlipType>(collection, (l, r) => l.Add(r));
