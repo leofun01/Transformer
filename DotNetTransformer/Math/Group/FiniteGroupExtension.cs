@@ -64,5 +64,10 @@ namespace DotNetTransformer.Math.Group {
 				&& !ReferenceEquals(group, null)
 				&& group.IsSubsetOf(CreateGroup<T>(collection));
 		}
+		public static T Compose<T>(this T _this, T other)
+			where T : IFiniteGroupElement<T>
+		{
+			return other.Add(_this);
+		}
 	}
 }

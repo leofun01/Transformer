@@ -145,9 +145,6 @@ namespace DotNetTransformer.Math.Group {
 		public FlipRotate2D Add(FlipRotate2D other) {
 			return new FlipRotate2D((Value >> 1) & (other.Value >> 2) ^ Value ^ other.Value);
 		}
-		public FlipRotate2D Compose(FlipRotate2D other) {
-			return new FlipRotate2D((Value >> 2) & (other.Value >> 1) ^ Value ^ other.Value);
-		}
 		public FlipRotate2D Subtract(FlipRotate2D other) {
 			return new FlipRotate2D((Value ^ other.Value) >> 1 & (other.Value >> 2) ^ Value ^ other.Value);
 			// return new FlipRotate2D(((Value ^ other.Value) & (other.Value >> 1)) >> 1 ^ Value ^ other.Value);
