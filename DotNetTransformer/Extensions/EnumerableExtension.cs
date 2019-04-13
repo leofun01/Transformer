@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using DotNetTransformer.Math.Group;
-using RotateFlipType = System.Drawing.RotateFlipType;
 
 namespace DotNetTransformer.Extensions {
 	public static class EnumerableExtension
@@ -22,12 +20,6 @@ namespace DotNetTransformer.Extensions {
 			foreach(T item in collection)
 				result = func(result, item);
 			return result;
-		}
-		public static RotateFlipType AddAll(this IEnumerable<RotateFlipType> collection) {
-			return CollectAll<RotateFlipType>(collection, (l, r) => l.Add(r));
-		}
-		public static RotateFlipType ComposeAll(this IEnumerable<RotateFlipType> collection) {
-			return CollectAll<RotateFlipType>(collection, (l, r) => l.Compose(r));
 		}
 	}
 }
