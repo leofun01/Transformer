@@ -37,6 +37,14 @@
 									<ul>
 										<li>
 											<details open="open">
+												<summary><code>Permutation</code></summary>
+												<ul>
+													<li><a href="DotNetTransformer/Math/Group/Permutation/PermutationInt32.cs"><code>PermutationInt32.cs</code></a></li>
+												</ul>
+											</details>
+										</li>
+										<li>
+											<details open="open">
 												<summary><code>Transform2D</code></summary>
 												<ul>
 													<li><a href="DotNetTransformer/Math/Group/Transform2D/FlipRotate2D.cs"><code>FlipRotate2D.cs</code></a></li>
