@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using StringBuilder = System.Text.StringBuilder;
 
-namespace DotNetTransformer.Math.Group {
+namespace DotNetTransformer.Math.Group.Permutation {
 	[Serializable]
 	public struct PermutationInt32 : IFiniteGroupElement<PermutationInt32>
 		, IEnumerable<byte>
