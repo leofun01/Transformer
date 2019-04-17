@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using StringBuilder = System.Text.StringBuilder;
 using RotateFlipType = System.Drawing.RotateFlipType;
 
-namespace DotNetTransformer.Math.Group {
+namespace DotNetTransformer.Math.Group.Transform2D {
 	[Serializable]
 	public struct FlipRotate2D : IFiniteGroupElement<FlipRotate2D>
 	{

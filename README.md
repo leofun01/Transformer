@@ -35,9 +35,16 @@
 								<details open="open">
 									<summary><code>Group</code></summary>
 									<ul>
+										<li>
+											<details open="open">
+												<summary><code>Transform2D</code></summary>
+												<ul>
+													<li><a href="DotNetTransformer/Math/Group/Transform2D/FlipRotate2D.cs"><code>FlipRotate2D.cs</code></a></li>
+												</ul>
+											</details>
+										</li>
 										<li><a href="DotNetTransformer/Math/Group/FiniteGroup.cs"><code>FiniteGroup.cs</code></a></li>
 										<li><a href="DotNetTransformer/Math/Group/FiniteGroupExtension.cs"><code>FiniteGroupExtension.cs</code></a></li>
-										<li><a href="DotNetTransformer/Math/Group/FlipRotate2D.cs"><code>FlipRotate2D.cs</code></a></li>
 										<li><a href="DotNetTransformer/Math/Group/IFiniteGroupElement.cs"><code>IFiniteGroupElement.cs</code></a></li>
 										<li><a href="DotNetTransformer/Math/Group/IGroup.cs"><code>IGroup.cs</code></a></li>
 										<li><a href="DotNetTransformer/Math/Group/IGroupElement.cs"><code>IGroupElement.cs</code></a></li>
