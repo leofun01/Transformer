@@ -178,7 +178,7 @@ namespace DotNetTransformer.Math.Group {
 			sb.Append(".");
 			throw new ArgumentException(sb.ToString(), "name");
 		}
-		public static FlipRotate2D FromInt(int value) { return new FlipRotate2D(value & 7); }
+		public static FlipRotate2D FromInt32(int value) { return new FlipRotate2D(value & 7); }
 		public static FlipRotate2D FromRotateFlipType(RotateFlipType value) {
 			return new FlipRotate2D(0x53427160 >> ((byte)value << 2) & 7);
 			// byte v = (byte)value;
@@ -195,7 +195,7 @@ namespace DotNetTransformer.Math.Group {
 		public static FlipRotate2D operator *(FlipRotate2D l, int r) { return l.Times(r); }
 		public static FlipRotate2D operator *(int l, FlipRotate2D r) { return r.Times(l); }
 
-		public static explicit operator FlipRotate2D(int o) { return FromInt(o); }
+		public static explicit operator FlipRotate2D(int o) { return FromInt32(o); }
 		public static implicit operator FlipRotate2D(RotateFlipType o) { return FromRotateFlipType(o); }
 		public static implicit operator RotateFlipType(FlipRotate2D o) { return o.ToRotateFlipType(); }
 	}
