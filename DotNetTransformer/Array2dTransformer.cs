@@ -2,7 +2,7 @@ using System;
 using System.Runtime.ConstrainedExecution;
 using System.Runtime.InteropServices;
 using DotNetTransformer.Extensions;
-using FlipRotate2D = DotNetTransformer.Math.Group.FlipRotate2D;
+using FlipRotate2D = DotNetTransformer.Math.Group.Transform2D.FlipRotate2D;
 
 namespace DotNetTransformer {
 	[Serializable]
