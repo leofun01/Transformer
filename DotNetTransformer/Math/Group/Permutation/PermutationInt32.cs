@@ -151,9 +151,9 @@ namespace DotNetTransformer.Math.Group.Permutation {
 		}
 		public static PermutationInt32 FromInt32(int value) {
 			if((value & -0x77777778) != 0) _throwInt32();
-			int startIndex = -1;
+			sbyte startIndex = -1;
 			for(int digit = 0; digit < _count; ++digit) {
-				int i = -1;
+				sbyte i = -1;
 				while(++i < _count && (value >> (i << 2) & 7) != digit) ;
 				if(i == _count)
 					if(startIndex >= digit || (value & (-1 << (digit << 2))) != 0) _throwInt32();
