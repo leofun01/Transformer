@@ -131,9 +131,9 @@ namespace DotNetTransformer.Math.Group.Permutation {
 		/// Invalid <paramref name="s"/>.
 		/// </exception>
 		public static PermutationInt32 FromString(string s) {
+			if(ReferenceEquals(s, null)) throw new ArgumentNullException();
 			if(s.Length > _count) _throwString();
-			if(string.IsNullOrEmpty(s))
-				return new PermutationInt32();
+			if(s.Length < 1) return new PermutationInt32();
 			int startIndex = -1, value = 0;
 			for(int digit = 0; digit < _count; ++digit) {
 				int i = 0;
