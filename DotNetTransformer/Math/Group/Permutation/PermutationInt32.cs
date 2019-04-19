@@ -22,7 +22,8 @@ namespace DotNetTransformer.Math.Group.Permutation {
 		}
 		public PermutationInt32 InverseElement {
 			get {
-				int t = Value, r = 0, i = 0;
+				int t = Value, r = 0;
+				byte i = 0;
 				do
 					r |= i << ((t >> (i << 2) & 7) << 2);
 				while(++i < _count);
@@ -53,7 +54,8 @@ namespace DotNetTransformer.Math.Group.Permutation {
 			}
 		}
 		public PermutationInt32 Add(PermutationInt32 other) {
-			int t = Value, o = other.Value, r = 0, i = 0;
+			int t = Value, o = other.Value, r = 0;
+			byte i = 0;
 			do {
 				r |= (t >> ((o >> i & 7) << 2) & 7) << i;
 				i += 4;
@@ -61,7 +63,8 @@ namespace DotNetTransformer.Math.Group.Permutation {
 			return new PermutationInt32(r ^ _mix);
 		}
 		public PermutationInt32 Subtract(PermutationInt32 other) {
-			int t = Value, o = other.Value, r = 0, i = 0;
+			int t = Value, o = other.Value, r = 0;
+			byte i = 0;
 			do {
 				r |= (t >> i & 7) << ((o >> i & 7) << 2);
 				i += 4;
@@ -91,14 +94,16 @@ namespace DotNetTransformer.Math.Group.Permutation {
 		}
 		public string ToString(byte minLength) {
 			if(minLength > _count) minLength = _count;
-			int t = Value, i = _count;
+			int t = Value;
+			byte i = _count;
 			if(minLength > 0) --minLength;
 			while(--i > minLength && (t >> (i << 2) & 7) == i) ;
-			if(++minLength < ++i) minLength = (byte)i;
+			if(++minLength < ++i) minLength = i;
 			return _toString(minLength);
 		}
 		private string _toString(byte length) {
-			int t = Value, i = 0;
+			int t = Value;
+			byte i = 0;
 			StringBuilder sb = new StringBuilder(length, length);
 			length <<= 2;
 			do {
@@ -108,7 +113,8 @@ namespace DotNetTransformer.Math.Group.Permutation {
 			return sb.ToString();
 		}
 		public IEnumerator<byte> GetEnumerator() {
-			int t = Value, i = 0;
+			int t = Value;
+			byte i = 0;
 			do {
 				yield return (byte)(t >> i & 7);
 				i += 4;
@@ -123,9 +129,10 @@ namespace DotNetTransformer.Math.Group.Permutation {
 			if(ReferenceEquals(s, null)) throw new ArgumentNullException();
 			if(s.Length > _count) _throwString();
 			if(s.Length < 1) return new PermutationInt32();
-			int startIndex = -1, value = 0;
-			for(int digit = 0; digit < _count; ++digit) {
-				int i = 0;
+			int value = 0;
+			sbyte startIndex = -1;
+			for(byte digit = 0; digit < _count; ++digit) {
+				sbyte i = 0;
 				do
 					if((-_count & s[i]) != '0') _throwString();
 				while((s[i] & 7) != digit && ++i < s.Length);
