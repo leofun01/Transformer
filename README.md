@@ -35,9 +35,24 @@
 								<details open="open">
 									<summary><code>Group</code></summary>
 									<ul>
+										<li>
+											<details open="open">
+												<summary><code>Permutation</code></summary>
+												<ul>
+													<li><a href="DotNetTransformer/Math/Group/Permutation/PermutationInt32.cs"><code>PermutationInt32.cs</code></a></li>
+												</ul>
+											</details>
+										</li>
+										<li>
+											<details open="open">
+												<summary><code>Transform2D</code></summary>
+												<ul>
+													<li><a href="DotNetTransformer/Math/Group/Transform2D/FlipRotate2D.cs"><code>FlipRotate2D.cs</code></a></li>
+												</ul>
+											</details>
+										</li>
 										<li><a href="DotNetTransformer/Math/Group/FiniteGroup.cs"><code>FiniteGroup.cs</code></a></li>
 										<li><a href="DotNetTransformer/Math/Group/FiniteGroupExtension.cs"><code>FiniteGroupExtension.cs</code></a></li>
-										<li><a href="DotNetTransformer/Math/Group/FlipRotate2d.cs"><code>FlipRotate2d.cs</code></a></li>
 										<li><a href="DotNetTransformer/Math/Group/IFiniteGroupElement.cs"><code>IFiniteGroupElement.cs</code></a></li>
 										<li><a href="DotNetTransformer/Math/Group/IGroup.cs"><code>IGroup.cs</code></a></li>
 										<li><a href="DotNetTransformer/Math/Group/IGroupElement.cs"><code>IGroupElement.cs</code></a></li>
@@ -98,8 +113,8 @@
 						</ul>
 					</details>
 				</li>
-				<li><a href="DotNetTransformer/Array1dTransformer.cs"><code>Array1dTransformer.cs</code></a></li>
-				<li><a href="DotNetTransformer/Array2dTransformer.cs"><code>Array2dTransformer.cs</code></a></li>
+				<li><a href="DotNetTransformer/Array1DTransformer.cs"><code>Array1DTransformer.cs</code></a></li>
+				<li><a href="DotNetTransformer/Array2DTransformer.cs"><code>Array2DTransformer.cs</code></a></li>
 				<li>
 					<details>
 						<summary><code>*.csproj</code></summary>

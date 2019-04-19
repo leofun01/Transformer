@@ -13,12 +13,12 @@ using DotNetTransformer.Extensions;
 
 namespace DotNetTransformer {
 	[Serializable]
-	public class Array1dTransformer<T> : IEquatable<Array1dTransformer<T>>, ICloneable
+	public class Array1DTransformer<T> : IEquatable<Array1DTransformer<T>>, ICloneable
 	{
 		private readonly T[] _array;
 		private bool _flip;
 
-		public Array1dTransformer(T[] array) {
+		public Array1DTransformer(T[] array) {
 			if(ReferenceEquals(array, null))
 				throw new ArgumentNullException("array");
 			_array = array;
@@ -58,17 +58,17 @@ namespace DotNetTransformer {
 		public virtual void Apply(bool flip) {
 			_flip ^= flip;
 		}
-		public Array1dTransformer<T> Transform(bool flip) {
-			Array1dTransformer<T> o = Clone();
+		public Array1DTransformer<T> Transform(bool flip) {
+			Array1DTransformer<T> o = Clone();
 			o.Apply(flip);
 			return o;
 		}
-		public Array1dTransformer<T> Clone() { return (Array1dTransformer<T>)MemberwiseClone(); }
+		public Array1DTransformer<T> Clone() { return (Array1DTransformer<T>)MemberwiseClone(); }
 		object ICloneable.Clone() { return Clone(); }
 		public override bool Equals(object o) {
-			return Equals(o as Array1dTransformer<T>);
+			return Equals(o as Array1DTransformer<T>);
 		}
-		public virtual bool Equals(Array1dTransformer<T> o) {
+		public virtual bool Equals(Array1DTransformer<T> o) {
 			return !ReferenceEquals(o, null) && ReferenceEquals(_array, o._array) && (_flip == o._flip);
 		}
 		public override int GetHashCode() {
@@ -86,9 +86,9 @@ namespace DotNetTransformer {
 			//*/
 		}
 
-		public static bool operator ==(Array1dTransformer<T> l, Array1dTransformer<T> r) { return l.Equals(r); }
-		public static bool operator !=(Array1dTransformer<T> l, Array1dTransformer<T> r) { return !l.Equals(r); }
+		public static bool operator ==(Array1DTransformer<T> l, Array1DTransformer<T> r) { return l.Equals(r); }
+		public static bool operator !=(Array1DTransformer<T> l, Array1DTransformer<T> r) { return !l.Equals(r); }
 
-		public static explicit operator T[](Array1dTransformer<T> o) { return o.ToArray(); }
+		public static explicit operator T[](Array1DTransformer<T> o) { return o.ToArray(); }
 	}
 }

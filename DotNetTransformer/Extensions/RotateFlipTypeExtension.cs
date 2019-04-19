@@ -6,6 +6,7 @@
 //	
 //	Author   : leofun01
 
+using System.Collections.Generic;
 using RotateFlipType = System.Drawing.RotateFlipType;
 
 namespace DotNetTransformer.Extensions {
@@ -216,6 +217,13 @@ namespace DotNetTransformer.Extensions {
 		public static RotateFlipType Times(this RotateFlipType _this, int count) {
 			byte t = (byte)_this;
 			return (RotateFlipType)((count & 1) * t ^ ((t >> 1 ^ 2) & (t << 1) & count));
+		}
+
+		public static RotateFlipType AddAll(this IEnumerable<RotateFlipType> collection) {
+			return collection.CollectAll<RotateFlipType>((l, r) => l.Add(r));
+		}
+		public static RotateFlipType ComposeAll(this IEnumerable<RotateFlipType> collection) {
+			return collection.CollectAll<RotateFlipType>((l, r) => l.Compose(r));
 		}
 	}
 }

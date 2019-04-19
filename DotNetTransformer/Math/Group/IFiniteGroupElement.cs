@@ -13,5 +13,6 @@ namespace DotNetTransformer.Math.Group {
 		where T : IFiniteGroupElement<T>
 	{
 		int CycleLength { get; }
+		T Subtract(T other);
 	}
 }
