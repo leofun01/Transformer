@@ -10,22 +10,24 @@ namespace DotNetTransformer.Math.Group {
 			private readonly T _ident;
 			private readonly List<T> _list;
 
-			public InternalGroup(IEnumerable<T> collection) {
+			public InternalGroup(IEnumerable<T> collection, bool checkIdentity) {
 				_list = new List<T>(collection);
 				if(_list.Count < 1)
 					throw new ArgumentException("Parameter \"collection\" is empty.\r\nGroup cannot be empty.", "collection");
 				T outer = _list[0], inner, new_e;
 				_ident = outer.Add(outer.InverseElement);
-				if(_ident.CycleLength != 1)
+				if(checkIdentity && _ident.CycleLength != 1)
 					throw new ArgumentOutOfRangeException("collection",
 						"CycleLength of identity element must be equal to 1.");
 				int count, outer_i = 0, inner_i;
 				do {
 					for(count = _list.Count; outer_i < count; ++outer_i) {
 						outer = _list[outer_i];
-						new_e = outer.InverseElement;
-						CheckIdentity(outer, new_e);
-						CheckIdentity(new_e, outer);
+						if(checkIdentity) {
+							new_e = outer.InverseElement;
+							CheckIdentity(outer, new_e);
+							CheckIdentity(new_e, outer);
+						}
 						for(inner_i = 0; inner_i < count; ++inner_i) {
 							inner = _list[inner_i];
 							if(!_list.Contains(new_e = outer.Add(inner))) _list.Add(new_e);
@@ -55,7 +57,12 @@ namespace DotNetTransformer.Math.Group {
 		public static FiniteGroup<T> CreateGroup<T>(this IEnumerable<T> collection)
 			where T : IFiniteGroupElement<T>
 		{
-			return new InternalGroup<T>(collection);
+			return new InternalGroup<T>(collection, true);
+		}
+		public static FiniteGroup<T> CreateGroup<T>(this IEnumerable<T> collection, bool checkIdentity)
+			where T : IFiniteGroupElement<T>
+		{
+			return new InternalGroup<T>(collection, checkIdentity);
 		}
 		public static bool IsGeneratingSetOf<T>(this IEnumerable<T> collection, FiniteGroup<T> group)
 			where T : IFiniteGroupElement<T>
