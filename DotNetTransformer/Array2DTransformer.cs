@@ -1,4 +1,4 @@
-//	Array2dTransformer.cs
+//	Array2DTransformer.cs
 //	
 //	Based on :
 //		.Net

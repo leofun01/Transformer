@@ -1,4 +1,4 @@
-//	Array1dTransformer.cs
+//	Array1DTransformer.cs
 //	
 //	Based on :
 //		.Net

@@ -1,4 +1,4 @@
-//	FlipRotate2d.cs
+//	FlipRotate2D.cs
 //	
 //	Based on :
 //		Math
@@ -203,7 +203,7 @@ namespace DotNetTransformer.Math.Group.Transform2D {
 		/// </exception>
 		public static FlipRotate2D FromString(string name) {
 			int index = Array.IndexOf<string>(_names, name);
-			if(index >= 0) return new FlipRotate2d(index);
+			if(index >= 0) return new FlipRotate2D(index);
 			StringBuilder sb = new StringBuilder("Acceptable values : ");
 			sb.Append(_names[0]);
 			for(int i = 1; i < _count; ++i) {
