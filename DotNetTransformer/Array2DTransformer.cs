@@ -2,16 +2,16 @@ using System;
 using System.Runtime.ConstrainedExecution;
 using System.Runtime.InteropServices;
 using DotNetTransformer.Extensions;
-using FlipRotate2d = DotNetTransformer.Math.Group.FlipRotate2d;
+using FlipRotate2D = DotNetTransformer.Math.Group.Transform2D.FlipRotate2D;
 
 namespace DotNetTransformer {
 	[Serializable]
-	public class Array2dTransformer<T> : IEquatable<Array2dTransformer<T>>, ICloneable
+	public class Array2DTransformer<T> : IEquatable<Array2DTransformer<T>>, ICloneable
 	{
 		private readonly T[,] _array;
-		private FlipRotate2d _transformation;
+		private FlipRotate2D _transformation;
 
-		public Array2dTransformer(T[,] array) {
+		public Array2DTransformer(T[,] array) {
 			if(ReferenceEquals(array, null))
 				throw new ArgumentNullException("array");
 			_array = array;
@@ -66,20 +66,20 @@ namespace DotNetTransformer {
 				i[dim ^ 1] = (t & 1) == 0 ? y : _array.GetUpperBound(dim ^ 1) - y;
 				return i;
 		}
-		public virtual void Apply(FlipRotate2d transformation) {
+		public virtual void Apply(FlipRotate2D transformation) {
 			_transformation += transformation;
 		}
-		public Array2dTransformer<T> Transform(FlipRotate2d transformation) {
-			Array2dTransformer<T> o = Clone();
+		public Array2DTransformer<T> Transform(FlipRotate2D transformation) {
+			Array2DTransformer<T> o = Clone();
 			o.Apply(transformation);
 			return o;
 		}
-		public Array2dTransformer<T> Clone() { return (Array2dTransformer<T>)MemberwiseClone(); }
+		public Array2DTransformer<T> Clone() { return (Array2DTransformer<T>)MemberwiseClone(); }
 		object ICloneable.Clone() { return Clone(); }
 		public override bool Equals(object o) {
-			return Equals(o as Array2dTransformer<T>);
+			return Equals(o as Array2DTransformer<T>);
 		}
-		public virtual bool Equals(Array2dTransformer<T> o) {
+		public virtual bool Equals(Array2DTransformer<T> o) {
 			return !ReferenceEquals(o, null) && ReferenceEquals(_array, o._array) && _transformation == o._transformation;
 		}
 		public override int GetHashCode() {
@@ -89,9 +89,9 @@ namespace DotNetTransformer {
 			return _array.Transform<T>(_transformation);
 		}
 
-		public static bool operator ==(Array2dTransformer<T> l, Array2dTransformer<T> r) { return l.Equals(r); }
-		public static bool operator !=(Array2dTransformer<T> l, Array2dTransformer<T> r) { return !l.Equals(r); }
+		public static bool operator ==(Array2DTransformer<T> l, Array2DTransformer<T> r) { return l.Equals(r); }
+		public static bool operator !=(Array2DTransformer<T> l, Array2DTransformer<T> r) { return !l.Equals(r); }
 
-		public static explicit operator T[,](Array2dTransformer<T> o) { return o.ToArray(); }
+		public static explicit operator T[,](Array2DTransformer<T> o) { return o.ToArray(); }
 	}
 }
