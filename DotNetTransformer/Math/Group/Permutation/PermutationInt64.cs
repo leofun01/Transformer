@@ -31,7 +31,31 @@ namespace DotNetTransformer.Math.Group.Permutation {
 		}
 		public int CycleLength {
 			get {
-				throw new NotImplementedException();
+				long t = Value;
+				short digitFlag = 0, multFlag = 0;
+				for(byte i = 0; i < _count; ++i) {
+					if((1 << i & digitFlag) != 0) continue;
+					byte digit = i, mult = 0;
+					do {
+						++mult;
+						digitFlag |= (short)(1 << digit);
+						digit = (byte)(t >> (digit << 2) & 0xFL);
+					} while((1 << digit & digitFlag) == 0);
+					multFlag |= (short)(1 << --mult);
+				}
+				if(multFlag == 1) return 1;
+				if((multFlag & -0x2000) != 0) return ((multFlag >> 14) & 3) + 14;
+				byte r = 1;
+				if((multFlag & 0x0AAA) != 0) r *= 2;
+				if((multFlag & 0x0924) != 0) r *= 3;
+				if((multFlag & 0x0888) != 0) r *= 2;
+				if((multFlag & 0x0210) != 0) r *= 5;
+				if((multFlag & 0x0040) != 0) r *= 7;
+				if((multFlag & 0x0080) != 0) r *= 2;
+				if((multFlag & 0x0100) != 0) r *= 3;
+				if((multFlag & 0x0400) != 0) r *= 11;
+				if((multFlag & 0x1000) != 0) r *= 13;
+				return r;
 			}
 		}
 		public PermutationInt64 Add(PermutationInt64 other) {
