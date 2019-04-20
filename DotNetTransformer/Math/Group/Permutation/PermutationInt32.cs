@@ -44,8 +44,8 @@ namespace DotNetTransformer.Math.Group.Permutation {
 					multFlag |= (sbyte)(1 << --mult);
 				}
 				if(multFlag == 1) return 1;
-				if((multFlag & 0xE0) != 0) return ((multFlag >> 6) & 3) + 6;
-				byte r = 1;
+				if((multFlag & -0x20) != 0) return ((multFlag >> 6) & 3) + 6;
+				int r = 1;
 				if((multFlag & 0x0A) != 0) r *= 2;
 				if((multFlag & 0x04) != 0) r *= 3;
 				if((multFlag & 0x08) != 0) r *= 2;
