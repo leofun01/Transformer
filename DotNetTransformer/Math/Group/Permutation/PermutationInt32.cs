@@ -121,22 +121,29 @@ namespace DotNetTransformer.Math.Group.Permutation {
 		}
 		IEnumerator IEnumerable.GetEnumerator() { return GetEnumerator(); }
 
-		/// <exception cref="ArgumentException">
-		/// Invalid <paramref name="s"/>.
-		/// </exception>
+		///	<exception cref="ArgumentException">
+		///		<exception cref="ArgumentNullException">
+		///			Invalid <paramref name="s"/>.
+		///		</exception>
+		///	</exception>
 		public static PermutationInt32 FromString(string s) {
 			if(ReferenceEquals(s, null)) throw new ArgumentNullException();
-			if(s.Length > _count) _throwString();
+			if(s.Length > _count)
+				_throwString("String length is out of range (0, 8).");
 			if(s.Length < 1) return new PermutationInt32();
 			int value = 0;
 			sbyte startIndex = -1;
 			for(byte digit = 0; digit < _count; ++digit) {
 				sbyte i = 0;
-				do
-					if((-_count & s[i]) != '0') _throwString();
-				while((s[i] & 7) != digit && ++i < s.Length);
+				char c;
+				do {
+					c = s[i];
+					if((-_count & c) != '0')
+						_throwString(string.Concat("\'", c, "\' is not a digit from [0-7]."));
+				} while((c & 7) != digit && ++i < s.Length);
 				if(i == s.Length)
-					if(startIndex >= digit || s.Length > digit) _throwString();
+					if(startIndex >= digit || s.Length > digit)
+						_throwString(string.Concat("Digit \'", (char)(digit | '0'), "\' is not found."));
 					else return new PermutationInt32(((1 << (digit << 2)) - 1) & _mix ^ value);
 				else {
 					value |= (int)digit << (i << 2);
@@ -145,24 +152,28 @@ namespace DotNetTransformer.Math.Group.Permutation {
 			}
 			return new PermutationInt32(_mix ^ value);
 		}
-		private static void _throwString() {
-			throw new ArgumentException("Bad string. Use unique digits from [0-7], like \"01234567\".");
+		private static void _throwString(string message) {
+			throw new ArgumentException(message
+				+ " Use unique digits from [0-7], like \"01234567\".");
 		}
 		public static PermutationInt32 FromInt32(int value) {
-			if((value & -0x77777778) != 0) _throwInt32();
+			if((value & -0x77777778) != 0)
+				_throwInt32("Some digits is out of range [0-7].");
 			sbyte startIndex = -1;
 			for(byte digit = 0; digit < _count; ++digit) {
 				sbyte i = -1;
 				while(++i < _count && (value >> (i << 2) & 7) != digit) ;
 				if(i == _count)
-					if(startIndex >= digit || (value & (-1 << (digit << 2))) != 0) _throwInt32();
+					if(startIndex >= digit || (value & (-1 << (digit << 2))) != 0)
+						_throwInt32(string.Concat("Digit \'", (char)(digit | '0'), "\' is not found."));
 					else return new PermutationInt32(((1 << (digit << 2)) - 1) & _mix ^ value);
 				else if(startIndex < i) startIndex = i;
 			}
 			return new PermutationInt32(_mix ^ value);
 		}
-		private static void _throwInt32() {
-			throw new ArgumentException("Bad value. Use hexadecimal format and unique digits from [0-7], like 0x76543210.");
+		private static void _throwInt32(string message) {
+			throw new ArgumentException(message
+				+ " Use hexadecimal format and unique digits from [0-7], like 0x76543210.");
 		}
 
 		public static bool operator ==(PermutationInt32 l, PermutationInt32 r) { return l.Equals(r); }
