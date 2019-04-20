@@ -98,8 +98,8 @@ namespace DotNetTransformer.Math.Group.Permutation {
 			byte i = _count;
 			if(minLength > 0) --minLength;
 			while(--i > minLength && (t >> (i << 2) & 7) == i) ;
-			if(++minLength < ++i) minLength = i;
-			return _toString(minLength);
+			if(minLength < i) minLength = i;
+			return _toString(++minLength);
 		}
 		private string _toString(byte length) {
 			int t = Value;
@@ -107,7 +107,7 @@ namespace DotNetTransformer.Math.Group.Permutation {
 			StringBuilder sb = new StringBuilder(length, length);
 			length <<= 2;
 			do {
-				sb.Append(t >> i & 7);
+				sb.Append((char)(t >> i & 7 | '0'));
 				i += 4;
 			} while(i < length);
 			return sb.ToString();
@@ -140,7 +140,7 @@ namespace DotNetTransformer.Math.Group.Permutation {
 					if(startIndex >= digit || s.Length > digit) _throwString();
 					else return new PermutationInt32(((1 << (digit << 2)) - 1) & _mix ^ value);
 				else {
-					value |= digit << (i << 2);
+					value |= (int)digit << (i << 2);
 					if(startIndex < i) startIndex = i;
 				}
 			}
@@ -152,7 +152,7 @@ namespace DotNetTransformer.Math.Group.Permutation {
 		public static PermutationInt32 FromInt32(int value) {
 			if((value & -0x77777778) != 0) _throwInt32();
 			sbyte startIndex = -1;
-			for(int digit = 0; digit < _count; ++digit) {
+			for(byte digit = 0; digit < _count; ++digit) {
 				sbyte i = -1;
 				while(++i < _count && (value >> (i << 2) & 7) != digit) ;
 				if(i == _count)
