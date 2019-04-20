@@ -5,8 +5,7 @@ using StringBuilder = System.Text.StringBuilder;
 
 namespace DotNetTransformer.Math.Group.Permutation {
 	[Serializable]
-	public struct PermutationInt32 : IFiniteGroupElement<PermutationInt32>
-		, IEnumerable<byte>
+	public struct PermutationInt32 : IPermutation<PermutationInt32>
 	{
 		private readonly int _value;
 		private PermutationInt32(int value) { _value = value; }
