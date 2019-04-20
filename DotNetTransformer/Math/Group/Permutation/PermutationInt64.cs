@@ -104,11 +104,42 @@ namespace DotNetTransformer.Math.Group.Permutation {
 		}
 		IEnumerator IEnumerable.GetEnumerator() { return GetEnumerator(); }
 
+		///	<exception cref="ArgumentException">
+		///		<exception cref="ArgumentNullException">
+		///			Invalid <paramref name="s"/>.
+		///		</exception>
+		///	</exception>
 		public static PermutationInt64 FromString(string s) {
-			throw new NotImplementedException();
+			if(ReferenceEquals(s, null)) throw new ArgumentNullException();
+			if(s.Length > _count)
+				_throwString("String length is out of range (0, 16).");
+			if(s.Length < 1) return new PermutationInt64();
+			long value = 0L;
+			sbyte startIndex = -1;
+			for(byte digit = 0; digit < _count; ++digit) {
+				sbyte i = 0;
+				char c;
+				do {
+					c = s[i];
+					if(c >= 'a' && c <= 'f') c &= '\xFFDF';
+					if(c < '0' || c > 'F' || (c > '9' && c < 'A'))
+						_throwString(string.Concat("\'", c, "\' is not a digit from [0-9A-Fa-f]."));
+					if(c >= 'A') c -= '\x0007';
+				} while((c & 0xFL) != digit && ++i < s.Length);
+				if(i == s.Length)
+					if(startIndex >= digit || s.Length > digit)
+						_throwString(string.Concat("Digit \'", (char)(digit | '0'), "\' is not found."));
+					else return new PermutationInt64(((1L << (digit << 2)) - 1L) & _mix ^ value);
+				else {
+					value |= (long)digit << (i << 2);
+					if(startIndex < i) startIndex = i;
+				}
+			}
+			return new PermutationInt64(_mix ^ value);
 		}
-		private static void _throwString() {
-			throw new ArgumentException("Bad string. Use unique digits from [0-9A-Fa-f], like \"0123456789ABCDEF\".");
+		private static void _throwString(string message) {
+			throw new ArgumentException(message
+				+ " Use unique digits from [0-9A-Fa-f], like \"0123456789ABCDEF\".");
 		}
 		public static PermutationInt64 FromInt64(long value) {
 			sbyte startIndex = -1;
@@ -116,14 +147,16 @@ namespace DotNetTransformer.Math.Group.Permutation {
 				sbyte i = -1;
 				while(++i < _count && (value >> (i << 2) & 0xFL) != digit) ;
 				if(i == _count)
-					if(startIndex >= digit || (value & (-1L << (digit << 2))) != 0L) _throwInt64();
+					if(startIndex >= digit || (value & (-1L << (digit << 2))) != 0L)
+						_throwInt64(string.Concat("Digit \'", (char)(digit | '0'), "\' is not found."));
 					else return new PermutationInt64(((1L << (digit << 2)) - 1L) & _mix ^ value);
 				else if(startIndex < i) startIndex = i;
 			}
 			return new PermutationInt64(_mix ^ value);
 		}
-		private static void _throwInt64() {
-			throw new ArgumentException("Bad value. Use hexadecimal format and unique digits from [0-9A-Fa-f], like -0x123456789ABCDF0L.");
+		private static void _throwInt64(string message) {
+			throw new ArgumentException(message
+				+ " Use hexadecimal format and unique digits from [0-9A-Fa-f], like -0x123456789ABCDF0L.");
 		}
 
 		public static bool operator ==(PermutationInt64 l, PermutationInt64 r) { return l.Equals(r); }
