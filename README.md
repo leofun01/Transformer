@@ -10,7 +10,7 @@
 			<summary><code>DotNetTransformer</code></summary>
 			<ul>
 				<li>
-					<details open="open">
+					<details>
 						<summary><code>Collections</code></summary>
 						<ul>
 							<li><a href="DotNetTransformer/Collections/EnumerableConverter.cs"><code>EnumerableConverter.cs</code></a></li>
@@ -39,7 +39,10 @@
 											<details open="open">
 												<summary><code>Permutation</code></summary>
 												<ul>
+													<li><a href="DotNetTransformer/Math/Group/Permutation/IPermutation.cs"><code>IPermutation.cs</code></a></li>
+													<li><a href="DotNetTransformer/Math/Group/Permutation/PermutationByte.cs"><code>PermutationByte.cs</code></a></li>
 													<li><a href="DotNetTransformer/Math/Group/Permutation/PermutationInt32.cs"><code>PermutationInt32.cs</code></a></li>
+													<li><a href="DotNetTransformer/Math/Group/Permutation/PermutationInt64.cs"><code>PermutationInt64.cs</code></a></li>
 												</ul>
 											</details>
 										</li>
@@ -53,6 +56,7 @@
 										</li>
 										<li><a href="DotNetTransformer/Math/Group/FiniteGroup.cs"><code>FiniteGroup.cs</code></a></li>
 										<li><a href="DotNetTransformer/Math/Group/FiniteGroupExtension.cs"><code>FiniteGroupExtension.cs</code></a></li>
+										<li><a href="DotNetTransformer/Math/Group/GroupExtension.cs"><code>GroupExtension.cs</code></a></li>
 										<li><a href="DotNetTransformer/Math/Group/IFiniteGroupElement.cs"><code>IFiniteGroupElement.cs</code></a></li>
 										<li><a href="DotNetTransformer/Math/Group/IGroup.cs"><code>IGroup.cs</code></a></li>
 										<li><a href="DotNetTransformer/Math/Group/IGroupElement.cs"><code>IGroupElement.cs</code></a></li>
