@@ -195,6 +195,7 @@ namespace DotNetTransformer.Math.Group.Permutation {
 
 		public static implicit operator PermutationInt64(string o) { return FromString(o); }
 		public static implicit operator PermutationInt64(long o) { return FromInt64(o); }
+		[CLSCompliant(false)]
 		public static implicit operator PermutationInt64(ulong o) { return FromInt64((long)o); }
 	}
 }
