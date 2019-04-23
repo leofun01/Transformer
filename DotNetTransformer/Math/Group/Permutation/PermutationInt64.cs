@@ -161,10 +161,6 @@ namespace DotNetTransformer.Math.Group.Permutation {
 			}
 			return new PermutationInt64(_mix ^ value);
 		}
-		private static void _throwString(string message) {
-			throw new ArgumentException(message
-				+ " Use unique digits from [0-9A-Fa-f], like \"0123456789ABCDEF\".");
-		}
 		public static PermutationInt64 FromInt64(long value) {
 			byte startIndex = 0;
 			for(byte digit = 0; digit < _count; ++digit) {
@@ -177,6 +173,10 @@ namespace DotNetTransformer.Math.Group.Permutation {
 				else if(startIndex < i) startIndex = i;
 			}
 			return new PermutationInt64(_mix ^ value);
+		}
+		private static void _throwString(string message) {
+			throw new ArgumentException(message
+				+ " Use unique digits from [0-9A-Fa-f], like \"0123456789ABCDEF\".");
 		}
 		private static void _throwInt64(string message) {
 			throw new ArgumentException(message

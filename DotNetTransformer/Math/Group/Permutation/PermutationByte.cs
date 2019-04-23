@@ -157,10 +157,6 @@ namespace DotNetTransformer.Math.Group.Permutation {
 			}
 			return new PermutationByte((byte)(_mix ^ value));
 		}
-		private static void _throwString(string message) {
-			throw new ArgumentException(message
-				+ " Use unique digits from [0-3], like \"0123\".");
-		}
 		public static PermutationByte FromByte(byte value) {
 			byte startIndex = 0;
 			for(byte digit = 0; digit < _count; ++digit) {
@@ -173,10 +169,6 @@ namespace DotNetTransformer.Math.Group.Permutation {
 				else if(startIndex < i) startIndex = i;
 			}
 			return new PermutationByte((byte)(_mix ^ value));
-		}
-		private static void _throwByte(string message) {
-			throw new ArgumentException(message
-				+ " Use compressed data format and unique digits from [0-3], like 0xE4 or 0b_11_10_01_00.");
 		}
 		public static PermutationByte FromInt16(short value) {
 			if((value & -0x3334) != 0)
@@ -192,6 +184,14 @@ namespace DotNetTransformer.Math.Group.Permutation {
 				else if(startIndex < i) startIndex = i;
 			}
 			return new PermutationByte((short)(0x3210 ^ value));
+		}
+		private static void _throwString(string message) {
+			throw new ArgumentException(message
+				+ " Use unique digits from [0-3], like \"0123\".");
+		}
+		private static void _throwByte(string message) {
+			throw new ArgumentException(message
+				+ " Use compressed data format and unique digits from [0-3], like 0xE4 or 0b_11_10_01_00.");
 		}
 		private static void _throwInt16(string message) {
 			throw new ArgumentException(message

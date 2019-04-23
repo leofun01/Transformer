@@ -153,10 +153,6 @@ namespace DotNetTransformer.Math.Group.Permutation {
 			}
 			return new PermutationInt32(_mix ^ value);
 		}
-		private static void _throwString(string message) {
-			throw new ArgumentException(message
-				+ " Use unique digits from [0-7], like \"01234567\".");
-		}
 		public static PermutationInt32 FromInt32(int value) {
 			if((value & -0x77777778) != 0)
 				_throwInt32("Some digits is out of range [0-7].");
@@ -171,6 +167,10 @@ namespace DotNetTransformer.Math.Group.Permutation {
 				else if(startIndex < i) startIndex = i;
 			}
 			return new PermutationInt32(_mix ^ value);
+		}
+		private static void _throwString(string message) {
+			throw new ArgumentException(message
+				+ " Use unique digits from [0-7], like \"01234567\".");
 		}
 		private static void _throwInt32(string message) {
 			throw new ArgumentException(message
