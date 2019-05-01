@@ -5,7 +5,7 @@ namespace DotNetTransformer.Extensions {
 	public static class ArrayExtension
 	{
 		public static T[] Transform<T>(this T[] array, bool flip) {
-			if(array == null) return null;
+			if(ReferenceEquals(array, null)) return null;
 			int len = array.GetLength(0);
 			int ai = flip ? len - 1 : 0, di = flip ? -1 : 1;
 			T[] result = new T[len];
@@ -14,7 +14,7 @@ namespace DotNetTransformer.Extensions {
 			return result;
 		}
 		public static T[,] Transform<T>(this T[,] array, FlipRotate2D transformation) {
-			if(array == null) return null;
+			if(ReferenceEquals(array, null)) return null;
 			byte t = transformation.Value;
 			int dim = t >> 2;
 			int w = array.GetLength(dim);
