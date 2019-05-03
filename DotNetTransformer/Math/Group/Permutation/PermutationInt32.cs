@@ -14,7 +14,7 @@ namespace DotNetTransformer.Math.Group.Permutation {
 		private const byte _count = 8, _len = 32, _s = 2;
 
 		public int Value { get { return _value ^ _mix; } }
-		public byte this[int index] {
+		public int this[int index] {
 			get {
 				return (byte)(Value >> (index << _s) & _mask);
 			}
@@ -112,7 +112,7 @@ namespace DotNetTransformer.Math.Group.Permutation {
 			} while(i < length);
 			return sb.ToString();
 		}
-		public IEnumerator<byte> GetEnumerator() {
+		public IEnumerator<int> GetEnumerator() {
 			int t = Value;
 			byte i = 0;
 			do {
