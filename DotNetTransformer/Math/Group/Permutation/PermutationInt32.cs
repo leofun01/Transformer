@@ -16,7 +16,7 @@ namespace DotNetTransformer.Math.Group.Permutation {
 		public int Value { get { return _value ^ _mix; } }
 		public int this[int index] {
 			get {
-				return (byte)(Value >> (index << _s) & _mask);
+				return Value >> (index << _s) & _mask;
 			}
 		}
 		public PermutationInt32 InverseElement {

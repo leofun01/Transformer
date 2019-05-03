@@ -20,7 +20,7 @@ namespace DotNetTransformer.Math.Group.Permutation {
 		public byte Value { get { return (byte)(_value ^ _mix); } }
 		public int this[int index] {
 			get {
-				return (byte)(Value >> (index << _s) & _mask);
+				return Value >> (index << _s) & _mask;
 			}
 		}
 		public PermutationByte InverseElement {
