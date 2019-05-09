@@ -113,7 +113,7 @@ namespace DotNetTransformer.Math.Group.Permutation {
 			length <<= _s;
 			do {
 				digit = (byte)(t >> i & _mask);
-				sb.Append((char)(digit + (digit < 10 ? '0' : '7')));
+				sb.Append((char)((digit < 10 ? '0' : '7') + digit));
 				i += 1 << _s;
 			} while(i < length);
 			return sb.ToString();
@@ -152,7 +152,8 @@ namespace DotNetTransformer.Math.Group.Permutation {
 				} while((c & _mask) != digit && ++i < s.Length);
 				if(i == s.Length)
 					if(startIndex >= digit || s.Length > digit)
-						_throwString(string.Concat("Digit \'", (char)(digit | '0'), "\' is not found."));
+						_throwString(string.Concat("Digit \'",
+							(char)((digit < 10 ? '0' : '7') + digit), "\' is not found."));
 					else return new PermutationInt64(((1L << (digit << _s)) - 1L) & _mix ^ value);
 				else {
 					value |= (long)digit << (i << _s);
@@ -168,7 +169,8 @@ namespace DotNetTransformer.Math.Group.Permutation {
 				while(i < _count && (value >> (i << _s) & _mask) != digit) ++i;
 				if(i == _count)
 					if(startIndex >= digit || (value & (-1L << (digit << _s))) != 0L)
-						_throwInt64(string.Concat("Digit \'", (char)(digit | '0'), "\' is not found."));
+						_throwInt64(string.Concat("Digit \'",
+							(char)((digit < 10 ? '0' : '7') + digit), "\' is not found."));
 					else return new PermutationInt64(((1L << (digit << _s)) - 1L) & _mix ^ value);
 				else if(startIndex < i) startIndex = i;
 			}
