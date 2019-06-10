@@ -35,13 +35,13 @@ namespace DotNetTransformer.Math.Group.Permutation {
 				short digitFlag = 0, multFlag = 0;
 				for(byte i = 0; i < _count; ++i) {
 					if((1 << i & digitFlag) != 0) continue;
-					byte digit = i, mult = 0;
+					byte digit = i, cLen = 0;
 					do {
-						++mult;
+						++cLen;
 						digitFlag |= (short)(1 << digit);
 						digit = (byte)(t >> (digit << _s) & _mask);
 					} while((1 << digit & digitFlag) == 0);
-					multFlag |= (short)(1 << --mult);
+					multFlag |= (short)(1 << --cLen);
 				}
 				if(multFlag == 1) return 1;
 				if((multFlag & -0x2000) != 0) return ((multFlag >> 14) & 3) + 14;
@@ -87,6 +87,47 @@ namespace DotNetTransformer.Math.Group.Permutation {
 					r = r.Add(t);
 			}
 			return r;
+		}
+
+		public List<PermutationInt64> GetCycles() {
+			return GetCycles(p => p.CycleLength > 1);
+		}
+		public List<PermutationInt64> GetCycles(Predicate<PermutationInt64> match) {
+			List<PermutationInt64> list = new List<PermutationInt64>(_count);
+			long t = Value;
+			byte digitFlag = 0;
+			for(byte i = 0; i < _count; ++i) {
+				if((1 << i & digitFlag) != 0) continue;
+				byte digit = i;
+				long value = 0;
+				do {
+					value |= _mask << (digit << _s) & _value;
+					digitFlag |= (byte)(1 << digit);
+					digit = (byte)(t >> (digit << _s) & _mask);
+				} while((1 << digit & digitFlag) == 0);
+				PermutationInt64 p = new PermutationInt64(value);
+				if(match(p)) list.Add(p);
+			}
+			return list;
+		}
+		public int GetCyclesCount() {
+			return GetCyclesCount(i => i > 1);
+		}
+		public int GetCyclesCount(Predicate<int> match) {
+			long t = Value;
+			byte digitFlag = 0;
+			int count = 0;
+			for(byte i = 0; i < _count; ++i) {
+				if((1 << i & digitFlag) != 0) continue;
+				byte digit = i, cLen = 0;
+				do {
+					++cLen;
+					digitFlag |= (byte)(1 << digit);
+					digit = (byte)(t >> (digit << _s) & _mask);
+				} while((1 << digit & digitFlag) == 0);
+				if(match(cLen)) ++count;
+			}
+			return count;
 		}
 
 		public override int GetHashCode() { return (int)(_value >> 32 ^ _value); }
@@ -151,7 +192,7 @@ namespace DotNetTransformer.Math.Group.Permutation {
 					if(c >= 'A') c -= '\x0007';
 				} while((c & _mask) != digit && ++i < s.Length);
 				if(i == s.Length)
-					if(startIndex >= digit || s.Length > digit)
+					if(startIndex >= digit || i > digit)
 						_throwString(string.Concat("Digit \'",
 							(char)((digit < 10 ? '0' : '7') + digit), "\' is not found."));
 					else return new PermutationInt64(((1L << (digit << _s)) - 1L) & _mix ^ value);
