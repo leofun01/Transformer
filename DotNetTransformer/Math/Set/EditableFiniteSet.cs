@@ -1,3 +1,10 @@
+//	EditableFiniteSet.cs
+//	
+//	Based on :
+//		Math
+//			Set theory
+//				Finite set
+
 using System;
 
 namespace DotNetTransformer.Math.Set {
