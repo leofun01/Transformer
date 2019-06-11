@@ -1,3 +1,19 @@
+//	FlipRotate2D.cs
+//	
+//	Based on :
+//		Math
+//			Abstract algebra
+//				Group theory
+//					Discrete group
+//					Finite group
+//					Dihedral group { D_4 D_8 ?, C_2, C_4, SO(2) }
+//					Symmetry group
+//					Isometry group
+//					Orthogonal group
+//					Non-commutative group (non-abelian group)
+//	
+//	Author   : leofun01
+
 using System;
 using System.Collections.Generic;
 using StringBuilder = System.Text.StringBuilder;
@@ -82,6 +98,7 @@ namespace DotNetTransformer.Math.Group.Transform2D {
 			public DihedralGroupD4() { }
 
 			public override FlipRotate2D IdentityElement { get { return None; } }
+			// public override bool IsCyclic { get { return false; } }
 			public override int Count { get { return _count; } }
 			public override bool Contains(FlipRotate2D item) { return true; }
 			public override IEnumerator<FlipRotate2D> GetEnumerator() {
@@ -131,6 +148,13 @@ namespace DotNetTransformer.Math.Group.Transform2D {
 			get {
 				return new FlipRotate2D(0x67543210 >> (Value << 2) & 7);
 				// return new FlipRotate2D((Value >> 1) & (Value >> 2) ^ Value);
+				// return Value > 5 ? new FlipRotate2D(Value ^ 1) : this;
+				// return IsRightAngleRotation ? new FlipRotate2D(Value ^ 1) : this;
+				// return this.Add(this.Add(this));
+				// return this.Add(this).Add(this);
+				// return this.Compose(this.Compose(this));
+				// return this.Compose(this).Compose(this);
+				// return None.Subtract(this);
 			}
 		}
 		/// <summary>
@@ -139,19 +163,30 @@ namespace DotNetTransformer.Math.Group.Transform2D {
 		public int CycleLength {
 			get {
 				return 0x44222221 >> (Value << 2) & 7;
+				// return 1 << (0xA554 >> (Value << 1) & 3);
 				// return 1 << ((Value + 3 - (Value >> 2)) >> 2);
+				// return 1 << (((Value * 15) >> 3) & 1) << ((Value >> 2) & (Value >> 1));
 			}
 		}
 		public FlipRotate2D Add(FlipRotate2D other) {
 			return new FlipRotate2D((Value >> 1) & (other.Value >> 2) ^ Value ^ other.Value);
+			// return other.Compose(this);
+			// return InverseElement.Compose(other.InverseElement).InverseElement;
+			// return Subtract(other.InverseElement);
+			// return other.InverseElement.Subtract(this).InverseElement;
 		}
 		public FlipRotate2D Subtract(FlipRotate2D other) {
 			return new FlipRotate2D((Value ^ other.Value) >> 1 & (other.Value >> 2) ^ Value ^ other.Value);
 			// return new FlipRotate2D(((Value ^ other.Value) & (other.Value >> 1)) >> 1 ^ Value ^ other.Value);
+			// return Add(other.InverseElement);
+			// return other.Add(InverseElement).InverseElement;
+			// return other.InverseElement.Compose(this);
+			// return InverseElement.Compose(other).InverseElement;
 		}
 		public FlipRotate2D Times(int count) {
 			return new FlipRotate2D((count & 1) * Value ^ ((Value >> 1 & Value & count) >> 1));
 			// return new FlipRotate2D((count & 1) * Value ^ ((0xC0 >> Value) & (count >> 1) & 1));
+			// return ((count & 1) == 1 ? this : None).Add((count & 2) == 2 && IsRightAngleRotation ? HalfTurn : None);
 		}
 
 		public override int GetHashCode() { return Value; }
