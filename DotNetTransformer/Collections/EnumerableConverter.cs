@@ -17,9 +17,9 @@ namespace DotNetTransformer.Collections {
 
 		public EnumerableConverter(IEnumerable<TIn> collection, Converter<TIn, TOut> converter) : this(collection, converter, e => true) { }
 		public EnumerableConverter(IEnumerable<TIn> collection, Converter<TIn, TOut> converter, Predicate<TIn> match) {
-			if(collection == null) throw new ArgumentNullException("collection");
-			if(converter == null) throw new ArgumentNullException("converter");
-			if(match == null) throw new ArgumentNullException("match");
+			if(ReferenceEquals(collection, null)) throw new ArgumentNullException("collection");
+			if(ReferenceEquals(converter, null)) throw new ArgumentNullException("converter");
+			if(ReferenceEquals(match, null)) throw new ArgumentNullException("match");
 			_collection = collection;
 			_converter = converter;
 			_match = match;

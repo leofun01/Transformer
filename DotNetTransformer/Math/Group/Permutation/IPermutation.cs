@@ -9,13 +9,17 @@
 //	
 //	Author   : leofun01
 
+using System;
 using System.Collections.Generic;
 
 namespace DotNetTransformer.Math.Group.Permutation {
 	public interface IPermutation<T> : IFiniteGroupElement<T>
-		, IEnumerable<byte>
+		, IEnumerable<int>
 		where T : IPermutation<T>
 	{
-		byte this[int index] { get; }
+		int this[int index] { get; }
+
+		List<T> GetCycles(Predicate<T> match);
+		int GetCyclesCount(Predicate<int> match);
 	}
 }

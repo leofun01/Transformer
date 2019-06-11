@@ -214,16 +214,20 @@ namespace DotNetTransformer.Extensions {
 			return (RotateFlipType)(((o >> 2 ^ o) & t & 1) << 1 ^ t ^ o);
 			// return Add(other, _this);
 		}
+		public static RotateFlipType Subtract(this RotateFlipType _this, RotateFlipType other) {
+			byte t = (byte)_this, o = (byte)other;
+			return (RotateFlipType)((((t ^ o) >> 2 ^ t ^ 1) & o & 1) << 1 ^ t ^ o);
+		}
 		public static RotateFlipType Times(this RotateFlipType _this, int count) {
 			byte t = (byte)_this;
 			return (RotateFlipType)((count & 1) * t ^ ((t >> 1 ^ 2) & (t << 1) & count));
 		}
 
 		public static RotateFlipType AddAll(this IEnumerable<RotateFlipType> collection) {
-			return collection.CollectAll<RotateFlipType>((l, r) => l.Add(r));
+			return collection.CollectAll<RotateFlipType>((l, r) => Add(l, r));
 		}
 		public static RotateFlipType ComposeAll(this IEnumerable<RotateFlipType> collection) {
-			return collection.CollectAll<RotateFlipType>((l, r) => l.Compose(r));
+			return collection.CollectAll<RotateFlipType>((l, r) => Compose(l, r));
 		}
 	}
 }

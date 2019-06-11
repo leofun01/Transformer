@@ -20,14 +20,41 @@ namespace DotNetTransformer.Math.Group.Permutation {
 	{
 		private readonly long _value;
 		private PermutationInt64(long value) { _value = value; }
+		public PermutationInt64(params byte[] array) {
+			if(ReferenceEquals(array, null))
+				throw new ArgumentNullException();
+			int count = array.GetLength(0);
+			if(count > _count)
+				_throwArray("Array length is out of range (0, 16).");
+			_value = 0L;
+			if(count < 1) return;
+			byte startIndex = 0;
+			for(byte digit = 0; digit < _count; ++digit) {
+				byte i = 0;
+				while(i < count && array[i] != digit) ++i;
+				if(i == count) {
+					if(startIndex >= digit || i > digit)
+						_throwArray(string.Concat("Value \'", digit, "\' is not found."));
+					else {
+						_value ^= ((1L << (digit << _s)) - 1L) & _mix;
+						return;
+					}
+				}
+				else {
+					_value |= (long)digit << (i << _s);
+					if(startIndex < i) startIndex = i;
+				}
+			}
+			_value ^= _mix;
+		}
 
 		private const long _mix = -0x123456789ABCDF0L, _mask = 0xFL;
 		private const byte _count = 16, _len = 64, _s = 2;
 
 		public long Value { get { return _value ^ _mix; } }
-		public byte this[int index] {
+		public int this[int index] {
 			get {
-				return (byte)(Value >> (index << _s) & _mask);
+				return (int)(Value >> (index << _s) & _mask);
 			}
 		}
 		public PermutationInt64 InverseElement {
@@ -46,13 +73,13 @@ namespace DotNetTransformer.Math.Group.Permutation {
 				short digitFlag = 0, multFlag = 0;
 				for(byte i = 0; i < _count; ++i) {
 					if((1 << i & digitFlag) != 0) continue;
-					byte digit = i, mult = 0;
+					byte digit = i, cLen = 0;
 					do {
-						++mult;
+						++cLen;
 						digitFlag |= (short)(1 << digit);
 						digit = (byte)(t >> (digit << _s) & _mask);
 					} while((1 << digit & digitFlag) == 0);
-					multFlag |= (short)(1 << --mult);
+					multFlag |= (short)(1 << --cLen);
 				}
 				if(multFlag == 1) return 1;
 				if((multFlag & -0x2000) != 0) return ((multFlag >> 14) & 3) + 14;
@@ -100,6 +127,41 @@ namespace DotNetTransformer.Math.Group.Permutation {
 			return r;
 		}
 
+		public List<PermutationInt64> GetCycles(Predicate<PermutationInt64> match) {
+			List<PermutationInt64> list = new List<PermutationInt64>(_count);
+			long t = Value;
+			byte digitFlag = 0;
+			for(byte i = 0; i < _count; ++i) {
+				if((1 << i & digitFlag) != 0) continue;
+				byte digit = i;
+				long value = 0;
+				do {
+					value |= _mask << (digit << _s) & _value;
+					digitFlag |= (byte)(1 << digit);
+					digit = (byte)(t >> (digit << _s) & _mask);
+				} while((1 << digit & digitFlag) == 0);
+				PermutationInt64 p = new PermutationInt64(value);
+				if(match(p)) list.Add(p);
+			}
+			return list;
+		}
+		public int GetCyclesCount(Predicate<int> match) {
+			long t = Value;
+			byte digitFlag = 0;
+			int count = 0;
+			for(byte i = 0; i < _count; ++i) {
+				if((1 << i & digitFlag) != 0) continue;
+				byte digit = i, cLen = 0;
+				do {
+					++cLen;
+					digitFlag |= (byte)(1 << digit);
+					digit = (byte)(t >> (digit << _s) & _mask);
+				} while((1 << digit & digitFlag) == 0);
+				if(match(cLen)) ++count;
+			}
+			return count;
+		}
+
 		public override int GetHashCode() { return (int)(_value >> 32 ^ _value); }
 		public override bool Equals(object o) {
 			return o is PermutationInt64 && Equals((PermutationInt64)o);
@@ -124,12 +186,12 @@ namespace DotNetTransformer.Math.Group.Permutation {
 			length <<= _s;
 			do {
 				digit = (byte)(t >> i & _mask);
-				sb.Append((char)(digit + (digit < 10 ? '0' : '7')));
+				sb.Append((char)((digit < 10 ? '0' : '7') + digit));
 				i += 1 << _s;
 			} while(i < length);
 			return sb.ToString();
 		}
-		public IEnumerator<byte> GetEnumerator() {
+		public IEnumerator<int> GetEnumerator() {
 			long t = Value;
 			byte i = 0;
 			do {
@@ -162,8 +224,9 @@ namespace DotNetTransformer.Math.Group.Permutation {
 					if(c >= 'A') c -= '\x0007';
 				} while((c & _mask) != digit && ++i < s.Length);
 				if(i == s.Length)
-					if(startIndex >= digit || s.Length > digit)
-						_throwString(string.Concat("Digit \'", (char)(digit | '0'), "\' is not found."));
+					if(startIndex >= digit || i > digit)
+						_throwString(string.Concat("Digit \'",
+							(char)((digit < 10 ? '0' : '7') + digit), "\' is not found."));
 					else return new PermutationInt64(((1L << (digit << _s)) - 1L) & _mix ^ value);
 				else {
 					value |= (long)digit << (i << _s);
@@ -172,10 +235,6 @@ namespace DotNetTransformer.Math.Group.Permutation {
 			}
 			return new PermutationInt64(_mix ^ value);
 		}
-		private static void _throwString(string message) {
-			throw new ArgumentException(message
-				+ " Use unique digits from [0-9A-Fa-f], like \"0123456789ABCDEF\".");
-		}
 		public static PermutationInt64 FromInt64(long value) {
 			byte startIndex = 0;
 			for(byte digit = 0; digit < _count; ++digit) {
@@ -183,15 +242,24 @@ namespace DotNetTransformer.Math.Group.Permutation {
 				while(i < _count && (value >> (i << _s) & _mask) != digit) ++i;
 				if(i == _count)
 					if(startIndex >= digit || (value & (-1L << (digit << _s))) != 0L)
-						_throwInt64(string.Concat("Digit \'", (char)(digit | '0'), "\' is not found."));
+						_throwInt64(string.Concat("Digit \'",
+							(char)((digit < 10 ? '0' : '7') + digit), "\' is not found."));
 					else return new PermutationInt64(((1L << (digit << _s)) - 1L) & _mix ^ value);
 				else if(startIndex < i) startIndex = i;
 			}
 			return new PermutationInt64(_mix ^ value);
 		}
+		private static void _throwString(string message) {
+			throw new ArgumentException(message
+				+ " Use unique digits from [0-9A-Fa-f], like \"0123456789ABCDEF\".");
+		}
 		private static void _throwInt64(string message) {
 			throw new ArgumentException(message
 				+ " Use hexadecimal format and unique digits from [0-9A-Fa-f], like -0x123456789ABCDF0L.");
+		}
+		private static void _throwArray(string message) {
+			throw new ArgumentException(message
+				+ " Use unique values from range (0, 16)");
 		}
 
 		public static bool operator ==(PermutationInt64 l, PermutationInt64 r) { return l.Equals(r); }

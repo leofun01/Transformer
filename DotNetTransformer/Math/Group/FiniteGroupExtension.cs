@@ -25,9 +25,9 @@ namespace DotNetTransformer.Math.Group {
 				if(_list.Count < 1)
 					throw new ArgumentException("Parameter \"collection\" is empty.\r\nGroup cannot be empty.", "collection");
 				T outer = _list[0], inner, new_e;
-				_ident = outer.Add(outer.InverseElement);
+				_ident = outer.Subtract(outer);
 				if(checkIdentity && _ident.CycleLength != 1)
-					throw new ArgumentOutOfRangeException("collection",
+					throw new ArgumentException("collection",
 						"CycleLength of identity element must be equal to 1.");
 				int count, outer_i = 0, inner_i;
 				do {
@@ -67,7 +67,7 @@ namespace DotNetTransformer.Math.Group {
 		public static FiniteGroup<T> CreateGroup<T>(this IEnumerable<T> collection)
 			where T : IFiniteGroupElement<T>
 		{
-			return new InternalGroup<T>(collection, true);
+			return new InternalGroup<T>(collection, false);
 		}
 		public static FiniteGroup<T> CreateGroup<T>(this IEnumerable<T> collection, bool checkIdentity)
 			where T : IFiniteGroupElement<T>
