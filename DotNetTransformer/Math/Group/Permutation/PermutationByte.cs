@@ -109,9 +109,6 @@ namespace DotNetTransformer.Math.Group.Permutation {
 			return r;
 		}
 
-		public List<PermutationByte> GetCycles() {
-			return GetCycles(p => p.CycleLength > 1);
-		}
 		public List<PermutationByte> GetCycles(Predicate<PermutationByte> match) {
 			List<PermutationByte> list = new List<PermutationByte>(_count);
 			byte t = Value;
@@ -129,9 +126,6 @@ namespace DotNetTransformer.Math.Group.Permutation {
 				if(match(p)) list.Add(p);
 			}
 			return list;
-		}
-		public int GetCyclesCount() {
-			return GetCyclesCount(i => i > 1);
 		}
 		public int GetCyclesCount(Predicate<int> match) {
 			byte t = Value;

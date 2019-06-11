@@ -111,9 +111,6 @@ namespace DotNetTransformer.Math.Group.Permutation {
 			return r;
 		}
 
-		public List<PermutationInt32> GetCycles() {
-			return GetCycles(p => p.CycleLength > 1);
-		}
 		public List<PermutationInt32> GetCycles(Predicate<PermutationInt32> match) {
 			List<PermutationInt32> list = new List<PermutationInt32>(_count);
 			int t = Value;
@@ -131,9 +128,6 @@ namespace DotNetTransformer.Math.Group.Permutation {
 				if(match(p)) list.Add(p);
 			}
 			return list;
-		}
-		public int GetCyclesCount() {
-			return GetCyclesCount(i => i > 1);
 		}
 		public int GetCyclesCount(Predicate<int> match) {
 			int t = Value;

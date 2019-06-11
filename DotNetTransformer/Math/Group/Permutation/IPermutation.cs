@@ -8,9 +8,7 @@ namespace DotNetTransformer.Math.Group.Permutation {
 	{
 		int this[int index] { get; }
 
-		List<T> GetCycles();
 		List<T> GetCycles(Predicate<T> match);
-		int GetCyclesCount();
 		int GetCyclesCount(Predicate<int> match);
 	}
 }
