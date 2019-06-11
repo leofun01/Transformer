@@ -1,12 +1,3 @@
-//	IGroup.cs
-//	
-//	Based on :
-//		Math
-//			Abstract algebra
-//				Group theory
-//	
-//	Author   : leofun01
-
 using DotNetTransformer.Math.Set;
 
 namespace DotNetTransformer.Math.Group {
@@ -14,6 +5,5 @@ namespace DotNetTransformer.Math.Group {
 		where T : IGroupElement<T>
 	{
 		T IdentityElement { get; }
-		// bool IsCyclic { get; }
 	}
 }

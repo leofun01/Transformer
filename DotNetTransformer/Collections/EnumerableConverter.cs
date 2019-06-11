@@ -1,9 +1,3 @@
-//	EnumerableConverter.cs
-//	
-//	Based on :
-//		.Net
-//			System.Collections.Generic.IEnumerable<T>
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
