@@ -1,3 +1,11 @@
+//	Array2DTransformer.cs
+//	
+//	Based on :
+//		.Net
+//			System.Array
+//	
+//	Author   : leofun01
+
 using System;
 using System.Runtime.ConstrainedExecution;
 using System.Runtime.InteropServices;
@@ -52,10 +60,12 @@ namespace DotNetTransformer {
 			get {
 				int[] i = _getIndexes(x, y);
 				return _array[i[0], i[1]];
+				//return (T)_array.GetValue(i);
 			}
 			set {
 				int[] i = _getIndexes(x, y);
 				_array[i[0], i[1]] = value;
+				//_array.SetValue(value, i);
 			}
 		}
 		private int[] _getIndexes(int x, int y) {
@@ -87,6 +97,24 @@ namespace DotNetTransformer {
 		}
 		public virtual T[,] ToArray() {
 			return _array.Transform<T>(_transformation);
+			/*//
+			byte t = _transformation.Value;
+			int dim = t >> 2;
+			int w = _array.GetLength(dim);
+			int h = _array.GetLength(dim ^ 1);
+			int dx = (t >> 1 ^ t) & 1, dy = t & 1;
+			int x_init = dx * (w - 1); dx = 1 - (dx << 1);
+			int y_init = dy * (h - 1); dy = 1 - (dy << 1);
+			T[,] result = new T[w, h];
+			int[] i = new int[2];
+			i[dim ^ 1] = x_init;
+			for(int rx = 0; rx < w; ++rx, i[dim ^ 1] += dx) {
+				i[dim] = y_init;
+				for(int ry = 0; ry < h; ++ry, i[dim] += dy)
+					result[rx, ry] = _array[i[1], i[0]];
+			}
+			return result;
+			//*/
 		}
 
 		public static bool operator ==(Array2DTransformer<T> l, Array2DTransformer<T> r) { return l.Equals(r); }
