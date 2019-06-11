@@ -1,3 +1,11 @@
+//	RotateFlipTypeExtension.cs
+//	
+//	Based on :
+//		.Net
+//			System.Drawing.RotateFlipType
+//	
+//	Author   : leofun01
+
 using System.Collections.Generic;
 using RotateFlipType = System.Drawing.RotateFlipType;
 
@@ -184,6 +192,11 @@ namespace DotNetTransformer.Extensions {
 			byte t = (byte)_this;
 			return (RotateFlipType)(0x76541230 >> (t << 2) & 7);
 			// return (RotateFlipType)(((t >> 2 ^ 1) & t) << 1 ^ t);
+			// return IsRightAngleRotation(_this) ? _this ^ RotateFlipType.RotateNoneFlipXY : _this;
+			// return Add(_this, Add(_this, _this));
+			// return Add(Add(_this, _this), _this);
+			// return Compose(_this, Compose(_this, _this));
+			// return Compose(Compose(_this, _this), _this);
 		}
 		public static int GetCycleLength(this RotateFlipType _this) {
 			return 0x22224241 >> ((byte)_this << 2) & 7;
@@ -194,10 +207,12 @@ namespace DotNetTransformer.Extensions {
 		public static RotateFlipType Add(this RotateFlipType _this, RotateFlipType other) {
 			byte t = (byte)_this, o = (byte)other;
 			return (RotateFlipType)(((t >> 2 ^ t) & o & 1) << 1 ^ t ^ o);
+			// return Compose(other, _this);
 		}
 		public static RotateFlipType Compose(this RotateFlipType _this, RotateFlipType other) {
 			byte t = (byte)_this, o = (byte)other;
 			return (RotateFlipType)(((o >> 2 ^ o) & t & 1) << 1 ^ t ^ o);
+			// return Add(other, _this);
 		}
 		public static RotateFlipType Subtract(this RotateFlipType _this, RotateFlipType other) {
 			byte t = (byte)_this, o = (byte)other;
