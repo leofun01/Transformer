@@ -13,6 +13,33 @@ namespace DotNetTransformer.Math.Group.Permutation {
 			value = (short)(((short)(value >> 2) | value) & 0x0F0F);
 			_value = (byte)((short)(value >> 4) | value);
 		}
+		public PermutationByte(params byte[] array) {
+			if(ReferenceEquals(array, null))
+				throw new ArgumentNullException();
+			int count = array.GetLength(0);
+			if(count > _count)
+				_throwArray("Array length is out of range (0, 16).");
+			_value = 0;
+			if(count < 1) return;
+			byte startIndex = 0;
+			for(byte digit = 0; digit < _count; ++digit) {
+				byte i = 0;
+				while(i < count && array[i] != digit) ++i;
+				if(i == count) {
+					if(startIndex >= digit || i > digit)
+						_throwArray(string.Concat("Value \'", digit, "\' is not found."));
+					else {
+						_value ^= (byte)(((1 << (digit << _s)) - 1) & _mix);
+						return;
+					}
+				}
+				else {
+					_value |= (byte)(digit << (i << _s));
+					if(startIndex < i) startIndex = i;
+				}
+			}
+			_value ^= _mix;
+		}
 
 		private const byte _mix = 0xE4, _mask = 3;
 		private const byte _count = 4, _len = 8, _s = 1;
@@ -237,6 +264,10 @@ namespace DotNetTransformer.Math.Group.Permutation {
 		private static void _throwInt16(string message) {
 			throw new ArgumentException(message
 				+ " Use hexadecimal format and unique digits from [0-3], like 0x3210.");
+		}
+		private static void _throwArray(string message) {
+			throw new ArgumentException(message
+				+ " Use unique values from range (0, 4)");
 		}
 
 		public static bool operator ==(PermutationByte l, PermutationByte r) { return l.Equals(r); }

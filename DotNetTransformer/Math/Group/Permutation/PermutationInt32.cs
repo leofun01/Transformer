@@ -9,6 +9,33 @@ namespace DotNetTransformer.Math.Group.Permutation {
 	{
 		private readonly int _value;
 		private PermutationInt32(int value) { _value = value; }
+		public PermutationInt32(params byte[] array) {
+			if(ReferenceEquals(array, null))
+				throw new ArgumentNullException();
+			int count = array.GetLength(0);
+			if(count > _count)
+				_throwArray("Array length is out of range (0, 16).");
+			_value = 0;
+			if(count < 1) return;
+			byte startIndex = 0;
+			for(byte digit = 0; digit < _count; ++digit) {
+				byte i = 0;
+				while(i < count && array[i] != digit) ++i;
+				if(i == count) {
+					if(startIndex >= digit || i > digit)
+						_throwArray(string.Concat("Value \'", digit, "\' is not found."));
+					else {
+						_value ^= ((1 << (digit << _s)) - 1) & _mix;
+						return;
+					}
+				}
+				else {
+					_value |= (int)digit << (i << _s);
+					if(startIndex < i) startIndex = i;
+				}
+			}
+			_value ^= _mix;
+		}
 
 		private const int _mix = 0x76543210, _mask = 7;
 		private const byte _count = 8, _len = 32, _s = 2;
@@ -216,6 +243,10 @@ namespace DotNetTransformer.Math.Group.Permutation {
 		private static void _throwInt32(string message) {
 			throw new ArgumentException(message
 				+ " Use hexadecimal format and unique digits from [0-7], like 0x76543210.");
+		}
+		private static void _throwArray(string message) {
+			throw new ArgumentException(message
+				+ " Use unique values from range (0, 8)");
 		}
 
 		public static bool operator ==(PermutationInt32 l, PermutationInt32 r) { return l.Equals(r); }

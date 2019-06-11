@@ -9,6 +9,33 @@ namespace DotNetTransformer.Math.Group.Permutation {
 	{
 		private readonly long _value;
 		private PermutationInt64(long value) { _value = value; }
+		public PermutationInt64(params byte[] array) {
+			if(ReferenceEquals(array, null))
+				throw new ArgumentNullException();
+			int count = array.GetLength(0);
+			if(count > _count)
+				_throwArray("Array length is out of range (0, 16).");
+			_value = 0L;
+			if(count < 1) return;
+			byte startIndex = 0;
+			for(byte digit = 0; digit < _count; ++digit) {
+				byte i = 0;
+				while(i < count && array[i] != digit) ++i;
+				if(i == count) {
+					if(startIndex >= digit || i > digit)
+						_throwArray(string.Concat("Value \'", digit, "\' is not found."));
+					else {
+						_value ^= ((1L << (digit << _s)) - 1L) & _mix;
+						return;
+					}
+				}
+				else {
+					_value |= (long)digit << (i << _s);
+					if(startIndex < i) startIndex = i;
+				}
+			}
+			_value ^= _mix;
+		}
 
 		private const long _mix = -0x123456789ABCDF0L, _mask = 0xFL;
 		private const byte _count = 16, _len = 64, _s = 2;
@@ -224,6 +251,10 @@ namespace DotNetTransformer.Math.Group.Permutation {
 		private static void _throwInt64(string message) {
 			throw new ArgumentException(message
 				+ " Use hexadecimal format and unique digits from [0-9A-Fa-f], like -0x123456789ABCDF0L.");
+		}
+		private static void _throwArray(string message) {
+			throw new ArgumentException(message
+				+ " Use unique values from range (0, 16)");
 		}
 
 		public static bool operator ==(PermutationInt64 l, PermutationInt64 r) { return l.Equals(r); }
