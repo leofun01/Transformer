@@ -1,15 +1,18 @@
 # Transformer
 
 <h2 id="table-of-contetns">Зміст</h2>
+
 - [Опис](#description)
 - [Структура дирекорій](#directory-structure)
 
 <h2 id="description">Опис</h2>
+
 Проект "Transformer" - це ідея
 використання теорії груп в програмуванні
 для досягнення найефективніших рішень.
 
 <h2 id="directory-structure">Структура дирекорій</h2>
+
 <ul>
 	<li>
 		<details open="open">

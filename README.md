@@ -1,15 +1,18 @@
 # Transformer
 
 ## Table of contetns
+
 - [Description](#description)
 - [Directory structure](#directory-structure)
 
 ## Description
+
 Project "Transformer" is the idea
 of using group theory in programming
 to achieve the most efficient solutions.
 
 ## Directory structure
+
 <ul>
 	<li>
 		<details open="open">
