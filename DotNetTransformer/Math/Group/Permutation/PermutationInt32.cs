@@ -14,7 +14,7 @@ namespace DotNetTransformer.Math.Group.Permutation {
 				throw new ArgumentNullException();
 			int count = array.GetLength(0);
 			if(count > _count)
-				_throwArray("Array length is out of range (0, 16).");
+				_throwArray("Array length is out of range (0, 8).");
 			_value = 0;
 			if(count < 1) return;
 			byte startIndex = 0;

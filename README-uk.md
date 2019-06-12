@@ -1,17 +1,17 @@
 # Transformer
 
-## Contetns
+<h2 id="contetns">Зміст</h2>
 
-- [Description](#description)
-- [Directory structure](#directory-structure)
+- [Опис](#description)
+- [Структура дирекорій](#directory-structure)
 
-## Description
+<h2 id="description">Опис</h2>
 
-The main idea of project "Transformer" is
-using group theory in programming
-to achieve the most efficient solutions.
+Основна ідея проекту "Transformer" -
+використання теорії груп в програмуванні
+для досягнення найефективніших рішень.
 
-## Directory structure
+<h2 id="directory-structure">Структура дирекорій</h2>
 
 <ul>
 	<li>
