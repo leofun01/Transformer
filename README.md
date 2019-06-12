@@ -1,7 +1,13 @@
 # Transformer
 
 ## Table of contetns
+- [Description](#description)
 - [Directory structure](#directory-structure)
+
+## Description
+Project "Transformer" is the idea
+of using group theory in programming
+to achieve the most efficient solutions.
 
 ## Directory structure
 <ul>
@@ -41,6 +47,7 @@
 												<ul>
 													<li><a href="DotNetTransformer/Math/Group/Permutation/IPermutation.cs"><code>IPermutation.cs</code></a></li>
 													<li><a href="DotNetTransformer/Math/Group/Permutation/PermutationByte.cs"><code>PermutationByte.cs</code></a></li>
+													<li><a href="DotNetTransformer/Math/Group/Permutation/PermutationExtension.cs"><code>PermutationExtension.cs</code></a></li>
 													<li><a href="DotNetTransformer/Math/Group/Permutation/PermutationInt32.cs"><code>PermutationInt32.cs</code></a></li>
 													<li><a href="DotNetTransformer/Math/Group/Permutation/PermutationInt64.cs"><code>PermutationInt64.cs</code></a></li>
 												</ul>
