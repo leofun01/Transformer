@@ -1,14 +1,14 @@
 # Transformer
 
-## Table of contetns
+## Contetns
 
 - [Description](#description)
 - [Directory structure](#directory-structure)
 
 ## Description
 
-Project "Transformer" is the idea
-of using group theory in programming
+The main idea of project "Transformer" is
+using group theory in programming
 to achieve the most efficient solutions.
 
 ## Directory structure

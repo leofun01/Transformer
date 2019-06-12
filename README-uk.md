@@ -1,13 +1,13 @@
 # Transformer
 
-<h2 id="table-of-contetns">Зміст</h2>
+<h2 id="contetns">Зміст</h2>
 
 - [Опис](#description)
 - [Структура дирекорій](#directory-structure)
 
 <h2 id="description">Опис</h2>
 
-Проект "Transformer" - це ідея
+Основна ідея проекту "Transformer" -
 використання теорії груп в програмуванні
 для досягнення найефективніших рішень.
 
