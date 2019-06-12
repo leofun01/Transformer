@@ -1,8 +1,8 @@
 # Transformer
 
 ## Зміст
-- [Опис](#description)
-- [Структура дирекорій](#directory-structure)
+- [Опис](#user-content-Опис)
+- [Структура дирекорій](#user-content-Структура-дирекорій)
 
 ## Опис
 Проект "Transformer" - це ідея
