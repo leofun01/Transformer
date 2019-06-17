@@ -14,7 +14,7 @@ namespace DotNetTransformer.Math.Group.Permutation {
 				throw new ArgumentNullException();
 			int count = array.GetLength(0);
 			if(count > _count)
-				_throwArray("Array length is out of range (0, 16).");
+				_throwArray("Array length is out of range (0, 17).");
 			_value = 0L;
 			if(count < 1) return;
 			byte startIndex = 0;
@@ -119,14 +119,14 @@ namespace DotNetTransformer.Math.Group.Permutation {
 		public List<PermutationInt64> GetCycles(Predicate<PermutationInt64> match) {
 			List<PermutationInt64> list = new List<PermutationInt64>(_count);
 			long t = Value;
-			byte digitFlag = 0;
+			short digitFlag = 0;
 			for(byte i = 0; i < _count; ++i) {
 				if((1 << i & digitFlag) != 0) continue;
 				byte digit = i;
 				long value = 0;
 				do {
 					value |= _mask << (digit << _s) & _value;
-					digitFlag |= (byte)(1 << digit);
+					digitFlag |= (short)(1 << digit);
 					digit = (byte)(t >> (digit << _s) & _mask);
 				} while((1 << digit & digitFlag) == 0);
 				PermutationInt64 p = new PermutationInt64(value);
@@ -136,14 +136,14 @@ namespace DotNetTransformer.Math.Group.Permutation {
 		}
 		public int GetCyclesCount(Predicate<int> match) {
 			long t = Value;
-			byte digitFlag = 0;
+			short digitFlag = 0;
 			int count = 0;
 			for(byte i = 0; i < _count; ++i) {
 				if((1 << i & digitFlag) != 0) continue;
 				byte digit = i, cLen = 0;
 				do {
 					++cLen;
-					digitFlag |= (byte)(1 << digit);
+					digitFlag |= (short)(1 << digit);
 					digit = (byte)(t >> (digit << _s) & _mask);
 				} while((1 << digit & digitFlag) == 0);
 				if(match(cLen)) ++count;
@@ -184,7 +184,7 @@ namespace DotNetTransformer.Math.Group.Permutation {
 			long t = Value;
 			byte i = 0;
 			do {
-				yield return (byte)(t >> i & _mask);
+				yield return (int)(t >> i & _mask);
 				i += 1 << _s;
 			} while(i < _len);
 		}
@@ -198,7 +198,7 @@ namespace DotNetTransformer.Math.Group.Permutation {
 		public static PermutationInt64 FromString(string s) {
 			if(ReferenceEquals(s, null)) throw new ArgumentNullException();
 			if(s.Length > _count)
-				_throwString("String length is out of range (0, 16).");
+				_throwString("String length is out of range (0, 17).");
 			if(s.Length < 1) return new PermutationInt64();
 			long value = 0L;
 			byte startIndex = 0;
@@ -239,16 +239,22 @@ namespace DotNetTransformer.Math.Group.Permutation {
 			return new PermutationInt64(_mix ^ value);
 		}
 		private static void _throwString(string message) {
-			throw new ArgumentException(message
-				+ " Use unique digits from [0-9A-Fa-f], like \"0123456789ABCDEF\".");
+			throw new ArgumentException(string.Concat(message,
+				" Use unique digits from [0-9A-Fa-f].",
+				" Example: \"0123456789ABCDEF\"."
+			));
 		}
 		private static void _throwInt64(string message) {
-			throw new ArgumentException(message
-				+ " Use hexadecimal format and unique digits from [0-9A-Fa-f], like -0x123456789ABCDF0L.");
+			throw new ArgumentException(string.Concat(message,
+				" Use hexadecimal format and unique digits from [0-9A-Fa-f].",
+				" Example: -0x123456789ABCDF0L."
+			));
 		}
 		private static void _throwArray(string message) {
-			throw new ArgumentException(message
-				+ " Use unique values from range (0, 16)");
+			throw new ArgumentException(string.Concat(message,
+				" Use unique values from range (0, 16).",
+				" Example: { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 }."
+			));
 		}
 
 		public static bool operator ==(PermutationInt64 l, PermutationInt64 r) { return l.Equals(r); }

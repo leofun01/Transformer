@@ -18,7 +18,7 @@ namespace DotNetTransformer.Math.Group.Permutation {
 				throw new ArgumentNullException();
 			int count = array.GetLength(0);
 			if(count > _count)
-				_throwArray("Array length is out of range (0, 4).");
+				_throwArray("Array length is out of range (0, 5).");
 			_value = 0;
 			if(count < 1) return;
 			byte startIndex = 0;
@@ -182,7 +182,7 @@ namespace DotNetTransformer.Math.Group.Permutation {
 			byte t = Value;
 			byte i = 0;
 			do {
-				yield return (byte)(t >> i & _mask);
+				yield return t >> i & _mask;
 				i += 1 << _s;
 			} while(i < _len);
 		}
@@ -196,7 +196,7 @@ namespace DotNetTransformer.Math.Group.Permutation {
 		public static PermutationByte FromString(string s) {
 			if(ReferenceEquals(s, null)) throw new ArgumentNullException();
 			if(s.Length > _count)
-				_throwString("String length is out of range (0, 4).");
+				_throwString("String length is out of range (0, 5).");
 			if(s.Length < 1) return new PermutationByte();
 			byte value = 0;
 			byte startIndex = 0;
@@ -234,7 +234,7 @@ namespace DotNetTransformer.Math.Group.Permutation {
 		}
 		public static PermutationByte FromInt16(short value) {
 			if((value & -0x3334) != 0)
-				_throwInt16("Some digits is out of range [0-3].");
+				_throwInt16("Some digits is out of [0-3].");
 			byte startIndex = 0;
 			for(byte digit = 0; digit < _count; ++digit) {
 				byte i = 0;
@@ -248,20 +248,28 @@ namespace DotNetTransformer.Math.Group.Permutation {
 			return new PermutationByte((short)(0x3210 ^ value));
 		}
 		private static void _throwString(string message) {
-			throw new ArgumentException(message
-				+ " Use unique digits from [0-3], like \"0123\".");
+			throw new ArgumentException(string.Concat(message,
+				" Use unique digits from [0-3].",
+				" Example: \"0123\"."
+			));
 		}
 		private static void _throwByte(string message) {
-			throw new ArgumentException(message
-				+ " Use compressed data format and unique digits from [0-3], like 0xE4 or 0b_11_10_01_00.");
+			throw new ArgumentException(string.Concat(message,
+				" Use compressed data format and unique digits from [0-3].",
+				" Example: 0xE4 or 0b_11_10_01_00."
+			));
 		}
 		private static void _throwInt16(string message) {
-			throw new ArgumentException(message
-				+ " Use hexadecimal format and unique digits from [0-3], like 0x3210.");
+			throw new ArgumentException(string.Concat(message,
+				" Use hexadecimal format and unique digits from [0-3].",
+				" Example: 0x3210."
+			));
 		}
 		private static void _throwArray(string message) {
-			throw new ArgumentException(message
-				+ " Use unique values from range (0, 4)");
+			throw new ArgumentException(string.Concat(message,
+				" Use unique values from range (0, 4).",
+				" Example: { 0, 1, 2, 3 }."
+			));
 		}
 
 		public static bool operator ==(PermutationByte l, PermutationByte r) { return l.Equals(r); }

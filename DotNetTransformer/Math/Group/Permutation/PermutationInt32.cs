@@ -14,7 +14,7 @@ namespace DotNetTransformer.Math.Group.Permutation {
 				throw new ArgumentNullException();
 			int count = array.GetLength(0);
 			if(count > _count)
-				_throwArray("Array length is out of range (0, 8).");
+				_throwArray("Array length is out of range (0, 9).");
 			_value = 0;
 			if(count < 1) return;
 			byte startIndex = 0;
@@ -178,7 +178,7 @@ namespace DotNetTransformer.Math.Group.Permutation {
 			int t = Value;
 			byte i = 0;
 			do {
-				yield return (byte)(t >> i & _mask);
+				yield return t >> i & _mask;
 				i += 1 << _s;
 			} while(i < _len);
 		}
@@ -192,7 +192,7 @@ namespace DotNetTransformer.Math.Group.Permutation {
 		public static PermutationInt32 FromString(string s) {
 			if(ReferenceEquals(s, null)) throw new ArgumentNullException();
 			if(s.Length > _count)
-				_throwString("String length is out of range (0, 8).");
+				_throwString("String length is out of range (0, 9).");
 			if(s.Length < 1) return new PermutationInt32();
 			int value = 0;
 			byte startIndex = 0;
@@ -217,7 +217,7 @@ namespace DotNetTransformer.Math.Group.Permutation {
 		}
 		public static PermutationInt32 FromInt32(int value) {
 			if((value & -0x77777778) != 0)
-				_throwInt32("Some digits is out of range [0-7].");
+				_throwInt32("Some digits is out of [0-7].");
 			byte startIndex = 0;
 			for(byte digit = 0; digit < _count; ++digit) {
 				byte i = 0;
@@ -231,16 +231,22 @@ namespace DotNetTransformer.Math.Group.Permutation {
 			return new PermutationInt32(_mix ^ value);
 		}
 		private static void _throwString(string message) {
-			throw new ArgumentException(message
-				+ " Use unique digits from [0-7], like \"01234567\".");
+			throw new ArgumentException(string.Concat(message,
+				" Use unique digits from [0-7].",
+				" Example: \"01234567\"."
+			));
 		}
 		private static void _throwInt32(string message) {
-			throw new ArgumentException(message
-				+ " Use hexadecimal format and unique digits from [0-7], like 0x76543210.");
+			throw new ArgumentException(string.Concat(message,
+				" Use hexadecimal format and unique digits from [0-7].",
+				" Example: 0x76543210."
+			));
 		}
 		private static void _throwArray(string message) {
-			throw new ArgumentException(message
-				+ " Use unique values from range (0, 8)");
+			throw new ArgumentException(string.Concat(message,
+				" Use unique values from range (0, 8).",
+				" Example: { 0, 1, 2, 3, 4, 5, 6, 7 }."
+			));
 		}
 
 		public static bool operator ==(PermutationInt32 l, PermutationInt32 r) { return l.Equals(r); }
