@@ -58,11 +58,13 @@ namespace DotNetTransformer.Math.Group.Permutation {
 		}
 		public int CycleLength {
 			get {
+				short multFlag = 0;
 				long t = Value;
-				short digitFlag = 0, multFlag = 0;
+				short digitFlag = 0;
 				for(byte i = 0; i < _count; ++i) {
 					if((1 << i & digitFlag) != 0) continue;
-					byte digit = i, cLen = 0;
+					byte digit = i;
+					byte cLen = 0;
 					do {
 						++cLen;
 						digitFlag |= (short)(1 << digit);
@@ -135,12 +137,13 @@ namespace DotNetTransformer.Math.Group.Permutation {
 			return list;
 		}
 		public int GetCyclesCount(Predicate<int> match) {
+			int count = 0;
 			long t = Value;
 			short digitFlag = 0;
-			int count = 0;
 			for(byte i = 0; i < _count; ++i) {
 				if((1 << i & digitFlag) != 0) continue;
-				byte digit = i, cLen = 0;
+				byte digit = i;
+				byte cLen = 0;
 				do {
 					++cLen;
 					digitFlag |= (short)(1 << digit);
