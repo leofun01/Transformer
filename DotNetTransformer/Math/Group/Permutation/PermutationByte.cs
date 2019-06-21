@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using StringBuilder = System.Text.StringBuilder;
+using CultureInfo = System.Globalization.CultureInfo;
 
 namespace DotNetTransformer.Math.Group.Permutation {
 	[Serializable]
@@ -27,8 +28,8 @@ namespace DotNetTransformer.Math.Group.Permutation {
 			while(e.MoveNext()) {
 				if(count >= _count)
 					_throwArray(string.Format(
-						"Collection size is out of range ({0}, {1}).",
-						0, _count + 1
+						"Collection size ({2}) is out of range ({0}, {1}).",
+						0, _count + 1, count
 					));
 				digit = e.Current;
 				if(digit >= _count)
@@ -57,6 +58,7 @@ namespace DotNetTransformer.Math.Group.Permutation {
 
 		private const byte _mix = 0xE4, _mask = 3;
 		private const byte _count = 4, _len = 8, _s = 1;
+		private const string _charPattern = "[0-3]";
 
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		public byte Value { get { return (byte)(_value ^ _mix); } }
@@ -214,7 +216,10 @@ namespace DotNetTransformer.Math.Group.Permutation {
 		public static PermutationByte FromString(string s) {
 			if(ReferenceEquals(s, null)) throw new ArgumentNullException();
 			if(s.Length > _count)
-				_throwString("String length is out of range (0, 5).");
+				_throwString(string.Format(
+					"String length ({2}) is out of range ({0}, {1}).",
+					0, _count + 1, s.Length
+				));
 			if(s.Length < 1) return new PermutationByte();
 			byte value = 0;
 			byte startIndex = 0;
@@ -224,11 +229,17 @@ namespace DotNetTransformer.Math.Group.Permutation {
 				do {
 					c = s[i];
 					if((-_count & c) != '0')
-						_throwString(string.Concat("\'", c, "\' is not a digit from [0-3]."));
+						_throwString(string.Format(
+							"\'{0}\' is not a digit from {1}.",
+							c, _charPattern
+						));
 				} while((c & _mask) != digit && ++i < s.Length);
 				if(i == s.Length)
 					if(startIndex >= digit || i > digit)
-						_throwString(string.Concat("Digit \'", (char)(digit | '0'), "\' is not found."));
+						_throwString(string.Format(
+							"Digit \'{0}\' is not found.",
+							(char)(digit | '0')
+						));
 					else return new PermutationByte((byte)(((1 << (digit << _s)) - 1) & _mix ^ value));
 				else {
 					value |= (byte)(digit << (i << _s));
@@ -244,7 +255,10 @@ namespace DotNetTransformer.Math.Group.Permutation {
 				while(i < _count && (value >> (i << _s) & _mask) != digit) ++i;
 				if(i == _count)
 					if(startIndex >= digit || (value & (-1 << (digit << _s))) != 0)
-						_throwByte(string.Concat("Digit \'", (char)(digit | '0'), "\' is not found."));
+						_throwByte(string.Format(
+							"Digit \'{0}\' is not found.",
+							(char)(digit | '0')
+						));
 					else return new PermutationByte((byte)(((1 << (digit << _s)) - 1) & _mix ^ value));
 				else if(startIndex < i) startIndex = i;
 			}
@@ -252,14 +266,20 @@ namespace DotNetTransformer.Math.Group.Permutation {
 		}
 		public static PermutationByte FromInt16(short value) {
 			if((value & -0x3334) != 0)
-				_throwInt16("Some digits is out of [0-3].");
+				_throwInt16(string.Format(
+					"Some digits is out of {0}.",
+					_charPattern
+				));
 			byte startIndex = 0;
 			for(byte digit = 0; digit < _count; ++digit) {
 				byte i = 0;
 				while(i < _count && (value >> (i << 2) & _mask) != digit) ++i;
 				if(i == _count)
 					if(startIndex >= digit || (value & (-1 << (digit << 2))) != 0)
-						_throwInt16(string.Concat("Digit \'", (char)(digit | '0'), "\' is not found."));
+						_throwInt16(string.Format(
+							"Digit \'{0}\' is not found.",
+							(char)(digit | '0')
+						));
 					else return new PermutationByte((short)(((1 << (digit << 2)) - 1) & 0x3210 ^ value));
 				else if(startIndex < i) startIndex = i;
 			}
@@ -268,30 +288,47 @@ namespace DotNetTransformer.Math.Group.Permutation {
 		[DebuggerStepThrough]
 		private static void _throwString(string message) {
 			throw new ArgumentException(string.Concat(message,
-				" Use unique digits from [0-3].",
-				" Example: \"0123\"."
+				" Use unique digits from ",
+				_charPattern,
+				". Example: \"0123\"."
 			));
 		}
 		[DebuggerStepThrough]
 		private static void _throwByte(string message) {
 			throw new ArgumentException(string.Concat(message,
-				" Use compressed data format and unique digits from [0-3].",
-				" Example: 0xE4 or 0b_11_10_01_00."
+				" Use compressed data format and unique digits from ",
+				_charPattern,
+				", Example: 0xE4 or 0b_11_10_01_00."
 			));
 		}
 		[DebuggerStepThrough]
 		private static void _throwInt16(string message) {
 			throw new ArgumentException(string.Concat(message,
-				" Use hexadecimal format and unique digits from [0-3].",
-				" Example: 0x3210."
+				" Use hexadecimal format and unique digits from ",
+				_charPattern,
+				". Example: 0x3210."
 			));
 		}
 		[DebuggerStepThrough]
 		private static void _throwArray(string message) {
-			throw new ArgumentException(string.Concat(message,
-				" Use unique values from range (0, 4).",
-				" Example: { 0, 1, 2, 3 }."
-			));
+			StringBuilder sb = new StringBuilder(message);
+			sb.AppendFormat(
+				" Use unique values from range ({0}, {1}).",
+				0, _count
+			);
+			sb.Append(" Example: {");
+			byte i = 0;
+			sb.AppendFormat(
+				CultureInfo.InvariantCulture,
+				" {0}", i
+			);
+			while(++i < _count)
+				sb.AppendFormat(
+					CultureInfo.InvariantCulture,
+					", {0}", i
+				);
+			sb.Append(" }.");
+			throw new ArgumentException(sb.ToString());
 		}
 
 		public static bool operator ==(PermutationByte l, PermutationByte r) { return l.Equals(r); }

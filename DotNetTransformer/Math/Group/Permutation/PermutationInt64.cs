@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using StringBuilder = System.Text.StringBuilder;
+using CultureInfo = System.Globalization.CultureInfo;
 
 namespace DotNetTransformer.Math.Group.Permutation {
 	[Serializable]
@@ -23,8 +24,8 @@ namespace DotNetTransformer.Math.Group.Permutation {
 			while(e.MoveNext()) {
 				if(count >= _count)
 					_throwArray(string.Format(
-						"Collection size is out of range ({0}, {1}).",
-						0, _count + 1
+						"Collection size ({2}) is out of range ({0}, {1}).",
+						0, _count + 1, count
 					));
 				digit = e.Current;
 				if(digit >= _count)
@@ -53,6 +54,7 @@ namespace DotNetTransformer.Math.Group.Permutation {
 
 		private const long _mix = -0x123456789ABCDF0L, _mask = 0xFL;
 		private const byte _count = 16, _len = 64, _s = 2;
+		private const string _charPattern = "[0-9A-Fa-f]";
 
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		public long Value { get { return _value ^ _mix; } }
@@ -216,7 +218,10 @@ namespace DotNetTransformer.Math.Group.Permutation {
 		public static PermutationInt64 FromString(string s) {
 			if(ReferenceEquals(s, null)) throw new ArgumentNullException();
 			if(s.Length > _count)
-				_throwString("String length is out of range (0, 17).");
+				_throwString(string.Format(
+					"String length ({2}) is out of range ({0}, {1}).",
+					0, _count + 1, s.Length
+				));
 			if(s.Length < 1) return new PermutationInt64();
 			long value = 0L;
 			byte startIndex = 0;
@@ -227,13 +232,18 @@ namespace DotNetTransformer.Math.Group.Permutation {
 					c = s[i];
 					if(c >= 'a' && c <= 'f') c &= '\xFFDF';
 					if(c < '0' || c > 'F' || (c > '9' && c < 'A'))
-						_throwString(string.Concat("\'", c, "\' is not a digit from [0-9A-Fa-f]."));
+						_throwString(string.Format(
+							"\'{0}\' is not a digit from {1}.",
+							c, _charPattern
+						));
 					if(c >= 'A') c -= '\x0007';
 				} while((c & _mask) != digit && ++i < s.Length);
 				if(i == s.Length)
 					if(startIndex >= digit || i > digit)
-						_throwString(string.Concat("Digit \'",
-							(char)((digit < 10 ? '0' : '7') + digit), "\' is not found."));
+						_throwString(string.Format(
+							"Digit \'{0}\' is not found.",
+							(char)((digit < 10 ? '0' : '7') + digit)
+						));
 					else return new PermutationInt64(((1L << (digit << _s)) - 1L) & _mix ^ value);
 				else {
 					value |= (long)digit << (i << _s);
@@ -249,8 +259,10 @@ namespace DotNetTransformer.Math.Group.Permutation {
 				while(i < _count && (value >> (i << _s) & _mask) != digit) ++i;
 				if(i == _count)
 					if(startIndex >= digit || (value & (-1L << (digit << _s))) != 0L)
-						_throwInt64(string.Concat("Digit \'",
-							(char)((digit < 10 ? '0' : '7') + digit), "\' is not found."));
+						_throwInt64(string.Format(
+							"Digit \'{0}\' is not found.",
+							(char)((digit < 10 ? '0' : '7') + digit)
+						));
 					else return new PermutationInt64(((1L << (digit << _s)) - 1L) & _mix ^ value);
 				else if(startIndex < i) startIndex = i;
 			}
@@ -259,23 +271,39 @@ namespace DotNetTransformer.Math.Group.Permutation {
 		[DebuggerStepThrough]
 		private static void _throwString(string message) {
 			throw new ArgumentException(string.Concat(message,
-				" Use unique digits from [0-9A-Fa-f].",
-				" Example: \"0123456789ABCDEF\"."
+				" Use unique digits from ",
+				_charPattern,
+				". Example: \"0123456789ABCDEF\"."
 			));
 		}
 		[DebuggerStepThrough]
 		private static void _throwInt64(string message) {
 			throw new ArgumentException(string.Concat(message,
-				" Use hexadecimal format and unique digits from [0-9A-Fa-f].",
-				" Example: -0x123456789ABCDF0L."
+				" Use hexadecimal format and unique digits from ",
+				_charPattern,
+				". Example: -0x123456789ABCDF0L."
 			));
 		}
 		[DebuggerStepThrough]
 		private static void _throwArray(string message) {
-			throw new ArgumentException(string.Concat(message,
-				" Use unique values from range (0, 16).",
-				" Example: { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 }."
-			));
+			StringBuilder sb = new StringBuilder(message);
+			sb.AppendFormat(
+				" Use unique values from range ({0}, {1}).",
+				0, _count
+			);
+			sb.Append(" Example: {");
+			byte i = 0;
+			sb.AppendFormat(
+				CultureInfo.InvariantCulture,
+				" {0}", i
+			);
+			while(++i < _count)
+				sb.AppendFormat(
+					CultureInfo.InvariantCulture,
+					", {0}", i
+				);
+			sb.Append(" }.");
+			throw new ArgumentException(sb.ToString());
 		}
 
 		public static bool operator ==(PermutationInt64 l, PermutationInt64 r) { return l.Equals(r); }
