@@ -1,45 +1,60 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using StringBuilder = System.Text.StringBuilder;
 
 namespace DotNetTransformer.Math.Group.Permutation {
 	[Serializable]
+	[DebuggerDisplay("{ToString()}, CycleLength = {CycleLength}")]
 	public struct PermutationInt64 : IPermutation<PermutationInt64>
 	{
+		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		private readonly long _value;
 		private PermutationInt64(long value) { _value = value; }
-		public PermutationInt64(params byte[] array) {
-			if(ReferenceEquals(array, null))
+		public PermutationInt64(params byte[] array) : this((IEnumerable<byte>)array) { }
+		public PermutationInt64(IEnumerable<byte> collection) {
+			if(ReferenceEquals(collection, null))
 				throw new ArgumentNullException();
-			int count = array.GetLength(0);
-			if(count > _count)
-				_throwArray("Array length is out of range (0, 17).");
+			IEnumerator<byte> e = collection.GetEnumerator();
+			byte count = 0, digit;
 			_value = 0L;
-			if(count < 1) return;
-			byte startIndex = 0;
-			for(byte digit = 0; digit < _count; ++digit) {
-				byte i = 0;
-				while(i < count && array[i] != digit) ++i;
-				if(i == count) {
-					if(startIndex >= digit || i > digit)
-						_throwArray(string.Concat("Value \'", digit, "\' is not found."));
-					else {
-						_value ^= ((1L << (digit << _s)) - 1L) & _mix;
-						return;
-					}
-				}
-				else {
-					_value |= (long)digit << (i << _s);
-					if(startIndex < i) startIndex = i;
-				}
+			short digitFlag = 0;
+			while(e.MoveNext()) {
+				if(count >= _count)
+					_throwArray(string.Format(
+						"Collection size is out of range ({0}, {1}).",
+						0, _count + 1
+					));
+				digit = e.Current;
+				if(digit >= _count)
+					_throwArray(string.Format(
+						"Value \"{2}\" is out of range ({0}, {1}).",
+						0, _count, digit
+					));
+				if((1 << digit & digitFlag) != 0)
+					_throwArray(string.Format(
+						"Value \"{0}\" is duplicated.",
+						digit
+					));
+				digitFlag |= (short)(1 << digit);
+				_value |= (long)(digit ^ count) << (count << _s);
+				++count;
 			}
-			_value ^= _mix;
+			digit = 0;
+			while(((short)(1 << digit) & digitFlag) != 0)
+				++digit;
+			if(((short)((1 << digit) - 1 ^ -1) & digitFlag) != 0)
+				_throwArray(string.Format(
+					"Value \"{0}\" is not found.",
+					digit
+				));
 		}
 
 		private const long _mix = -0x123456789ABCDF0L, _mask = 0xFL;
 		private const byte _count = 16, _len = 64, _s = 2;
 
+		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		public long Value { get { return _value ^ _mix; } }
 		public int this[int index] {
 			get {
@@ -172,10 +187,10 @@ namespace DotNetTransformer.Math.Group.Permutation {
 			return _toString(++minLength);
 		}
 		private string _toString(byte length) {
-			long t = Value;
-			byte i = 0, digit;
 			StringBuilder sb = new StringBuilder(length, length);
 			length <<= _s;
+			long t = Value;
+			byte i = 0, digit;
 			do {
 				digit = (byte)(t >> i & _mask);
 				sb.Append((char)((digit < 10 ? '0' : '7') + digit));
@@ -241,18 +256,21 @@ namespace DotNetTransformer.Math.Group.Permutation {
 			}
 			return new PermutationInt64(_mix ^ value);
 		}
+		[DebuggerStepThrough]
 		private static void _throwString(string message) {
 			throw new ArgumentException(string.Concat(message,
 				" Use unique digits from [0-9A-Fa-f].",
 				" Example: \"0123456789ABCDEF\"."
 			));
 		}
+		[DebuggerStepThrough]
 		private static void _throwInt64(string message) {
 			throw new ArgumentException(string.Concat(message,
 				" Use hexadecimal format and unique digits from [0-9A-Fa-f].",
 				" Example: -0x123456789ABCDF0L."
 			));
 		}
+		[DebuggerStepThrough]
 		private static void _throwArray(string message) {
 			throw new ArgumentException(string.Concat(message,
 				" Use unique values from range (0, 16).",

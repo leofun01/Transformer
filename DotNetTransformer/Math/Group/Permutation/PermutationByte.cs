@@ -1,49 +1,64 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using StringBuilder = System.Text.StringBuilder;
 
 namespace DotNetTransformer.Math.Group.Permutation {
 	[Serializable]
+	[DebuggerDisplay("{ToString()}, CycleLength = {CycleLength}")]
 	public struct PermutationByte : IPermutation<PermutationByte>
 	{
+		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		private readonly byte _value;
 		private PermutationByte(byte value) { _value = value; }
 		private PermutationByte(short value) {
 			value = (short)(((short)(value >> 2) | value) & 0x0F0F);
 			_value = (byte)((short)(value >> 4) | value);
 		}
-		public PermutationByte(params byte[] array) {
-			if(ReferenceEquals(array, null))
+		public PermutationByte(params byte[] array) : this((IEnumerable<byte>)array) { }
+		public PermutationByte(IEnumerable<byte> collection) {
+			if(ReferenceEquals(collection, null))
 				throw new ArgumentNullException();
-			int count = array.GetLength(0);
-			if(count > _count)
-				_throwArray("Array length is out of range (0, 5).");
+			IEnumerator<byte> e = collection.GetEnumerator();
+			byte count = 0, digit;
 			_value = 0;
-			if(count < 1) return;
-			byte startIndex = 0;
-			for(byte digit = 0; digit < _count; ++digit) {
-				byte i = 0;
-				while(i < count && array[i] != digit) ++i;
-				if(i == count) {
-					if(startIndex >= digit || i > digit)
-						_throwArray(string.Concat("Value \'", digit, "\' is not found."));
-					else {
-						_value ^= (byte)(((1 << (digit << _s)) - 1) & _mix);
-						return;
-					}
-				}
-				else {
-					_value |= (byte)(digit << (i << _s));
-					if(startIndex < i) startIndex = i;
-				}
+			byte digitFlag = 0;
+			while(e.MoveNext()) {
+				if(count >= _count)
+					_throwArray(string.Format(
+						"Collection size is out of range ({0}, {1}).",
+						0, _count + 1
+					));
+				digit = e.Current;
+				if(digit >= _count)
+					_throwArray(string.Format(
+						"Value \"{2}\" is out of range ({0}, {1}).",
+						0, _count, digit
+					));
+				if((1 << digit & digitFlag) != 0)
+					_throwArray(string.Format(
+						"Value \"{0}\" is duplicated.",
+						digit
+					));
+				digitFlag |= (byte)(1 << digit);
+				_value |= (byte)((digit ^ count) << (count << _s));
+				++count;
 			}
-			_value ^= _mix;
+			digit = 0;
+			while(((byte)(1 << digit) & digitFlag) != 0)
+				++digit;
+			if(((byte)((1 << digit) - 1 ^ -1) & digitFlag) != 0)
+				_throwArray(string.Format(
+					"Value \"{0}\" is not found.",
+					digit
+				));
 		}
 
 		private const byte _mix = 0xE4, _mask = 3;
 		private const byte _count = 4, _len = 8, _s = 1;
 
+		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		public byte Value { get { return (byte)(_value ^ _mix); } }
 		public int this[int index] {
 			get {
@@ -165,10 +180,10 @@ namespace DotNetTransformer.Math.Group.Permutation {
 			return _toString(++minLength);
 		}
 		private string _toString(byte length) {
-			byte t = Value;
-			byte i = 0;
 			StringBuilder sb = new StringBuilder(length, length);
 			length <<= _s;
+			byte t = Value;
+			byte i = 0;
 			do {
 				sb.Append((char)(t >> i & _mask | '0'));
 				i += 1 << _s;
@@ -250,24 +265,28 @@ namespace DotNetTransformer.Math.Group.Permutation {
 			}
 			return new PermutationByte((short)(0x3210 ^ value));
 		}
+		[DebuggerStepThrough]
 		private static void _throwString(string message) {
 			throw new ArgumentException(string.Concat(message,
 				" Use unique digits from [0-3].",
 				" Example: \"0123\"."
 			));
 		}
+		[DebuggerStepThrough]
 		private static void _throwByte(string message) {
 			throw new ArgumentException(string.Concat(message,
 				" Use compressed data format and unique digits from [0-3].",
 				" Example: 0xE4 or 0b_11_10_01_00."
 			));
 		}
+		[DebuggerStepThrough]
 		private static void _throwInt16(string message) {
 			throw new ArgumentException(string.Concat(message,
 				" Use hexadecimal format and unique digits from [0-3].",
 				" Example: 0x3210."
 			));
 		}
+		[DebuggerStepThrough]
 		private static void _throwArray(string message) {
 			throw new ArgumentException(string.Concat(message,
 				" Use unique values from range (0, 4).",
