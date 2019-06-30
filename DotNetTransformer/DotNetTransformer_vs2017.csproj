@@ -32,8 +32,8 @@
 		</Compile>
 	</ItemGroup>
 	<ItemGroup>
-		<Content Include="**\*.txt" Exclude="Test\**;Draft\**" />
-		<Content Include="Draft\**\*.txt" />
+		<None Include="**\*.txt" Exclude="Test\**" />
+		<None Include="**\*.cd" Exclude="Test\**" />
 	</ItemGroup>
 	<Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

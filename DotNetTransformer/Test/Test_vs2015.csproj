@@ -35,11 +35,11 @@
 		<Compile Include="Draft\**\*.cs" />
 	</ItemGroup>
 	<ItemGroup>
-		<Content Include="**\*.txt" Exclude="Draft\**" />
-		<Content Include="Draft\**\*.txt" />
-		<Content Include="$(ExternalContentRoot)\**\*.txt">
+		<None Include="**\*.txt" />
+		<None Include="**\*.cd" />
+		<None Include="$(ExternalContentRoot)\**\*.txt">
 			<Link>$([MSBuild]::MakeRelative('$(ExternalContentRoot)', '%(FullPath)'))</Link>
-		</Content>
+		</None>
 	</ItemGroup>
 	<Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
