@@ -30,5 +30,9 @@
 			<Link>$([MSBuild]::MakeRelative('$(ExternalCompileRoot)', '%(FullPath)'))</Link>
 		</Compile>
 	</ItemGroup>
+	<ItemGroup>
+		<None Include="**\*.txt" Exclude="Test\**" />
+		<None Include="**\*.cd" Exclude="Test\**" />
+	</ItemGroup>
 	<Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

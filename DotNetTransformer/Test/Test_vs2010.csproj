@@ -10,6 +10,7 @@
 		<AssemblyName>DotNetTransformerTest</AssemblyName>
 		<TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
 		<FileAlignment>512</FileAlignment>
+		<ExternalContentRoot>$(MSBuildProjectDirectory)\..\..\External</ExternalContentRoot>
 	</PropertyGroup>
 	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
 		<PlatformTarget>AnyCPU</PlatformTarget>
@@ -30,7 +31,15 @@
 		</ProjectReference>
 	</ItemGroup>
 	<ItemGroup>
-		<Compile Include="**\*.cs" />
+		<Compile Include="**\*.cs" Exclude="Draft\**" />
+		<Compile Include="Draft\**\*.cs" />
+	</ItemGroup>
+	<ItemGroup>
+		<None Include="**\*.txt" />
+		<None Include="**\*.cd" />
+		<None Include="$(ExternalContentRoot)\**\*.txt">
+			<Link>$([MSBuild]::MakeRelative('$(ExternalContentRoot)', '%(FullPath)'))</Link>
+		</None>
 	</ItemGroup>
 	<Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
