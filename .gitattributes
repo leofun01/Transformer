@@ -7,6 +7,7 @@
 *.cs		text	eol=crlf	diff=csharp
 *.sln		text	eol=crlf
 *.csproj	text	eol=crlf
+*.resx		text	eol=crlf
 
 # Binary
 #*.exe		binary	diff=exif
