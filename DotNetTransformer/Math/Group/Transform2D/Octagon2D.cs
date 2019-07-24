@@ -15,13 +15,37 @@ namespace DotNetTransformer.Math.Group.Transform2D {
 		private static readonly string[] _names;
 		public static readonly FiniteGroup<Octagon2D> AllValues;
 
+		/// <summary>
+		/// "NO": No changes.
+		/// </summary>
 		public static readonly Octagon2D None;
+		/// <summary>
+		/// "HT": 180 degree rotation.
+		/// </summary>
 		public static readonly Octagon2D HalfTurn;
+		/// <summary>
+		/// "FX": Horizontal flip. Reflection across y-axis.
+		/// </summary>
 		public static readonly Octagon2D FlipX;
+		/// <summary>
+		/// "FY": Vertical flip. Reflection across x-axis.
+		/// </summary>
 		public static readonly Octagon2D FlipY;
+		/// <summary>
+		/// "PD": Reflection across primary diagonal line.
+		/// </summary>
 		public static readonly Octagon2D ReflectOverPrimaryDiagonal;
+		/// <summary>
+		/// "SD": Reflection across secondary diagonal line.
+		/// </summary>
 		public static readonly Octagon2D ReflectOverSecondaryDiagonal;
+		/// <summary>
+		/// "RC": 45 degree clockwise rotation.
+		/// </summary>
 		public static readonly Octagon2D RotateClockwise;
+		/// <summary>
+		/// "RN": 45 degree counter clockwise rotation.
+		/// </summary>
 		public static readonly Octagon2D RotateCounterClockwise;
 
 		static Octagon2D() {
@@ -84,6 +108,18 @@ namespace DotNetTransformer.Math.Group.Transform2D {
 				^ (0x7800 >> c & 7) ^ Value ^ other.Value);
 		}
 		public Octagon2D Times(int count) {
+			return new Octagon2D((count & 1) * Value
+				^ (0x400C >> ((Value - 6 << 1 & 0x1C) | (count & 3)) & 1)
+				^ ((8 >> (Value + 2 >> 2)) & (count >> 2) & 1)
+				^ (0x18 >> ((Value - 0xA & 0xC) | (count & 2)) & 6)
+			);
+			/*//
+			return new Octagon2D((count & 1) * Value
+				^ (0x400C >> ((Value - 6 << 1 & 0x1C) | (count & 3)) & 1)
+				^ ((Value + 2 >> 3) & (Value + 2 >> 2) & (count >> 2))
+				^ (0x180 >> ((Value - 6 & 0xC) | (count & 2)) & 6)
+			);
+			//*/
 		}
 
 		public override int GetHashCode() { return Value; }
