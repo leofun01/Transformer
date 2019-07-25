@@ -78,6 +78,37 @@ namespace DotNetTransformer.Math.Group.Transform2D {
 			public override int GetHashCode() { return _count; }
 		}
 
+		/// <summary><return>
+		/// <para>true for "FX", "FY", "PD", "SD", "FX+RC", "FY+RC", "FX+RN", "FY+RN";</para>
+		/// <para>false for "NO", "HT", "RC", "RN", "RC+RC", "RN+RN", "HT+RN", "HT+RC".</para>
+		/// </return></summary>
+		public bool IsReflection { get { return (0x3CC3 >> Value & 1) == 0; } }
+		/// <summary><return>
+		/// <para>true for "FX", "FY";</para>
+		/// <para>false for other.</para>
+		/// </return></summary>
+		public bool IsAxisReflection { get { return (Value & 0xE) == 2; } }
+		/// <summary><return>
+		/// <para>true for "PD", "SD";</para>
+		/// <para>false for other.</para>
+		/// </return></summary>
+		public bool IsDiagonalReflection { get { return (Value & 0xE) == 4; } }
+		/// <summary><return>
+		/// <para>true for "NO", "HT", "RC", "RN", "RC+RC", "RN+RN", "HT+RN", "HT+RC";</para>
+		/// <para>false for "FX", "FY", "PD", "SD", "FX+RC", "FY+RC", "FX+RN", "FY+RN".</para>
+		/// </return></summary>
+		public bool IsRotation { get { return (0x3CC3 >> Value & 1) == 1; } }
+		/// <summary><return>
+		/// <para>true for "NO", "HT";</para>
+		/// <para>false for other.</para>
+		/// </return></summary>
+		public bool IsStraightAngleRotation { get { return Value < 2; } }
+		/// <summary><return>
+		/// <para>true for "RC+RC", "RN+RN";</para>
+		/// <para>false for other.</para>
+		/// </return></summary>
+		public bool IsRightAngleRotation { get { return (Value & 0xE) == 6; } }
+
 		public Octagon2D InverseElement {
 			get {
 				return new Octagon2D(0x07701000 >> (Value << 1 & 0x1C) & 7 ^ Value);
