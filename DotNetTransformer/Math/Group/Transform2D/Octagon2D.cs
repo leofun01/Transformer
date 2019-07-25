@@ -179,6 +179,7 @@ namespace DotNetTransformer.Math.Group.Transform2D {
 			throw new ArgumentException(sb.ToString(), "name");
 		}
 		public static Octagon2D FromInt32(int value) { return new Octagon2D(value & 0xF); }
+		public static Octagon2D FromFlipRotate2D(FlipRotate2D value) { return new Octagon2D(value.Value); }
 		public static Octagon2D FromRotateFlipType(RotateFlipType value) {
 			return new Octagon2D(0x53427160 >> ((byte)value << 2) & 7);
 			// byte v = (byte)value;
@@ -196,6 +197,7 @@ namespace DotNetTransformer.Math.Group.Transform2D {
 		public static Octagon2D operator *(int l, Octagon2D r) { return r.Times(l); }
 
 		public static explicit operator Octagon2D(int o) { return FromInt32(o); }
+		public static implicit operator Octagon2D(FlipRotate2D o) { return FromFlipRotate2D(o); }
 		public static implicit operator Octagon2D(RotateFlipType o) { return FromRotateFlipType(o); }
 	}
 }
