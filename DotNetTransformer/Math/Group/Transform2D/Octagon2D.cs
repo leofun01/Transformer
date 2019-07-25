@@ -167,6 +167,16 @@ namespace DotNetTransformer.Math.Group.Transform2D {
 		/// Invalid <paramref name="name"/>.
 		/// </exception>
 		public static Octagon2D FromString(string name) {
+			int index = Array.IndexOf<string>(_names, name);
+			if(index >= 0) return new Octagon2D(index);
+			StringBuilder sb = new StringBuilder("Acceptable values : ");
+			sb.Append(_names[0]);
+			for(int i = 1; i < _count; ++i) {
+				sb.Append(", ");
+				sb.Append(_names[i]);
+			}
+			sb.Append(".");
+			throw new ArgumentException(sb.ToString(), "name");
 		}
 		public static Octagon2D FromInt32(int value) { return new Octagon2D(value & 0xF); }
 		public static Octagon2D FromRotateFlipType(RotateFlipType value) {
