@@ -114,6 +114,7 @@ namespace DotNetTransformer.Math.Group.Transform2D {
 				return new Octagon2D(0x07701000 >> (Value << 1 & 0x1C) & 7 ^ Value);
 				// return new Octagon2D((0x4195 >> (Value & 0xE) & 3) - 1 & 7 ^ Value);
 				// return new Octagon2D((0x96EA >> (Value & 0xE) & 3) - 2 & 7 ^ Value);
+				// return new Octagon2D((0xC3C0 >> Value & 1) - (Value >> 3) & 7 ^ Value);
 			}
 		}
 		/// <summary>
