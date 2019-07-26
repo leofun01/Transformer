@@ -147,11 +147,12 @@ namespace DotNetTransformer.Math.Group.Transform2D {
 			}
 		}
 		public FlipRotate2D Add(FlipRotate2D other) {
-			return new FlipRotate2D((Value >> 1) & (other.Value >> 2) ^ Value ^ other.Value);
+			return new FlipRotate2D(Value >> 1 & (other.Value >> 2) ^ other.Value ^ Value);
+			// return new FlipRotate2D((other.Value >> 1 & Value) >> 1 ^ other.Value ^ Value);
 		}
 		public FlipRotate2D Subtract(FlipRotate2D other) {
-			return new FlipRotate2D((Value ^ other.Value) >> 1 & (other.Value >> 2) ^ Value ^ other.Value);
-			// return new FlipRotate2D(((Value ^ other.Value) & (other.Value >> 1)) >> 1 ^ Value ^ other.Value);
+			return new FlipRotate2D((other.Value ^ Value) >> 1 & (other.Value >> 2) ^ other.Value ^ Value);
+			// return new FlipRotate2D((other.Value >> 1 & (other.Value ^ Value)) >> 1 ^ other.Value ^ Value);
 		}
 		public FlipRotate2D Times(int count) {
 			return new FlipRotate2D((count & 1) * Value ^ ((Value >> 1 & Value & count) >> 1));
