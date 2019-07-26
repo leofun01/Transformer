@@ -139,12 +139,16 @@ namespace DotNetTransformer.Math.Group.Transform2D {
 				^ (0x7800 >> c & 7) ^ Value ^ other.Value);
 		}
 		public Octagon2D Times(int count) {
+			return new Octagon2D((count & 1) * Value
+				^ (0x07701000 >> ((count & 2) * 0xE & (Value << 1)) & 7)
+				^ (0xF >> ((Value >> 1) - (count & 7)) & (0x3C00 >> Value) & 1)
+			);
+			/*//
 			int v = (0x3C00 >> Value) & 1, c = count >> 1;
 			return new Octagon2D((count & 1) * Value
 				^ ((0xC0 >> Value) & c & 1) ^ ((c & v) * 7)
 				^ (0xF >> ((Value >> 1) - (count & 7)) & v)
 			);
-			/*//
 			return new Octagon2D((count & 1) * Value
 				^ (0x400C >> ((Value - 6 << 1 & 0x1C) | (count & 3)) & 1)
 				^ ((8 >> (Value + 2 >> 2)) & (count >> 2) & 1)
