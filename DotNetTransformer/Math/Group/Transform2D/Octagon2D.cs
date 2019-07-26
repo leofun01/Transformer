@@ -186,9 +186,7 @@ namespace DotNetTransformer.Math.Group.Transform2D {
 		public static Octagon2D FromInt32(int value) { return new Octagon2D(value & 0xF); }
 		public static Octagon2D FromFlipRotate2D(FlipRotate2D value) { return new Octagon2D(value.Value); }
 		public static Octagon2D FromRotateFlipType(RotateFlipType value) {
-			return new Octagon2D(0x53427160 >> ((byte)value << 2) & 7);
-			// byte v = (byte)value;
-			// return new Octagon2D((v << 2 & 4) ^ (v << 1 & 2) ^ (v >> 1));
+			return FromFlipRotate2D(FlipRotate2D.FromRotateFlipType(value));
 		}
 
 		public static bool operator ==(Octagon2D l, Octagon2D r) { return l.Equals(r); }
