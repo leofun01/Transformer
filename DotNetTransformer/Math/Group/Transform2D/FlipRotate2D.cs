@@ -129,8 +129,11 @@ namespace DotNetTransformer.Math.Group.Transform2D {
 
 		public FlipRotate2D InverseElement {
 			get {
-				return new FlipRotate2D(0x67543210 >> (Value << 2) & 7);
+				return new FlipRotate2D(0xC0 >> Value & 1 ^ Value);
+				// return new FlipRotate2D(0x67543210 >> (Value << 2) & 7);
 				// return new FlipRotate2D((Value >> 1) & (Value >> 2) ^ Value);
+				// return new FlipRotate2D(8 >> (Value >> 1) & 1 ^ Value);
+				// return new FlipRotate2D(0x40 >> (Value & 6) & 3 ^ Value);
 			}
 		}
 		/// <summary>
@@ -139,15 +142,17 @@ namespace DotNetTransformer.Math.Group.Transform2D {
 		public int CycleLength {
 			get {
 				return 0x44222221 >> (Value << 2) & 7;
+				// return 1 << (0xA554 >> (Value << 1) & 3);
 				// return 1 << ((Value + 3 - (Value >> 2)) >> 2);
 			}
 		}
 		public FlipRotate2D Add(FlipRotate2D other) {
-			return new FlipRotate2D((Value >> 1) & (other.Value >> 2) ^ Value ^ other.Value);
+			return new FlipRotate2D(Value >> 1 & (other.Value >> 2) ^ other.Value ^ Value);
+			// return new FlipRotate2D((other.Value >> 1 & Value) >> 1 ^ other.Value ^ Value);
 		}
 		public FlipRotate2D Subtract(FlipRotate2D other) {
-			return new FlipRotate2D((Value ^ other.Value) >> 1 & (other.Value >> 2) ^ Value ^ other.Value);
-			// return new FlipRotate2D(((Value ^ other.Value) & (other.Value >> 1)) >> 1 ^ Value ^ other.Value);
+			return new FlipRotate2D((other.Value ^ Value) >> 1 & (other.Value >> 2) ^ other.Value ^ Value);
+			// return new FlipRotate2D((other.Value >> 1 & (other.Value ^ Value)) >> 1 ^ other.Value ^ Value);
 		}
 		public FlipRotate2D Times(int count) {
 			return new FlipRotate2D((count & 1) * Value ^ ((Value >> 1 & Value & count) >> 1));
