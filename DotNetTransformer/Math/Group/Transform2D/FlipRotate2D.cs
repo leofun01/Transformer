@@ -146,8 +146,11 @@ namespace DotNetTransformer.Math.Group.Transform2D {
 
 		public FlipRotate2D InverseElement {
 			get {
-				return new FlipRotate2D(0x67543210 >> (Value << 2) & 7);
+				return new FlipRotate2D(0xC0 >> Value & 1 ^ Value);
+				// return new FlipRotate2D(0x67543210 >> (Value << 2) & 7);
 				// return new FlipRotate2D((Value >> 1) & (Value >> 2) ^ Value);
+				// return new FlipRotate2D(8 >> (Value >> 1) & 1 ^ Value);
+				// return new FlipRotate2D(0x40 >> (Value & 6) & 3 ^ Value);
 				// return Value > 5 ? new FlipRotate2D(Value ^ 1) : this;
 				// return IsRightAngleRotation ? new FlipRotate2D(Value ^ 1) : this;
 				// return this.Add(this.Add(this));
@@ -169,15 +172,16 @@ namespace DotNetTransformer.Math.Group.Transform2D {
 			}
 		}
 		public FlipRotate2D Add(FlipRotate2D other) {
-			return new FlipRotate2D((Value >> 1) & (other.Value >> 2) ^ Value ^ other.Value);
+			return new FlipRotate2D(Value >> 1 & (other.Value >> 2) ^ other.Value ^ Value);
+			// return new FlipRotate2D((other.Value >> 1 & Value) >> 1 ^ other.Value ^ Value);
 			// return other.Compose(this);
 			// return InverseElement.Compose(other.InverseElement).InverseElement;
 			// return Subtract(other.InverseElement);
 			// return other.InverseElement.Subtract(this).InverseElement;
 		}
 		public FlipRotate2D Subtract(FlipRotate2D other) {
-			return new FlipRotate2D((Value ^ other.Value) >> 1 & (other.Value >> 2) ^ Value ^ other.Value);
-			// return new FlipRotate2D(((Value ^ other.Value) & (other.Value >> 1)) >> 1 ^ Value ^ other.Value);
+			return new FlipRotate2D((other.Value ^ Value) >> 1 & (other.Value >> 2) ^ other.Value ^ Value);
+			// return new FlipRotate2D((other.Value >> 1 & (other.Value ^ Value)) >> 1 ^ other.Value ^ Value);
 			// return Add(other.InverseElement);
 			// return other.Add(InverseElement).InverseElement;
 			// return other.InverseElement.Compose(this);
