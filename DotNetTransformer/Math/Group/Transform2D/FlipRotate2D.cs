@@ -129,11 +129,14 @@ namespace DotNetTransformer.Math.Group.Transform2D {
 
 		public FlipRotate2D InverseElement {
 			get {
+				return new FlipRotate2D(Value + 2 >> 3 ^ Value);
+				/*//
 				return new FlipRotate2D(0xC0 >> Value & 1 ^ Value);
-				// return new FlipRotate2D(0x67543210 >> (Value << 2) & 7);
-				// return new FlipRotate2D((Value >> 1) & (Value >> 2) ^ Value);
-				// return new FlipRotate2D(8 >> (Value >> 1) & 1 ^ Value);
-				// return new FlipRotate2D(0x40 >> (Value & 6) & 3 ^ Value);
+				return new FlipRotate2D(0x67543210 >> (Value << 2) & 7);
+				return new FlipRotate2D((Value >> 1) & (Value >> 2) ^ Value);
+				return new FlipRotate2D(8 >> (Value >> 1) & 1 ^ Value);
+				return new FlipRotate2D(0x40 >> (Value & 6) & 3 ^ Value);
+				//*/
 			}
 		}
 		/// <summary>
@@ -142,8 +145,10 @@ namespace DotNetTransformer.Math.Group.Transform2D {
 		public int CycleLength {
 			get {
 				return 0x44222221 >> (Value << 2) & 7;
-				// return 1 << (0xA554 >> (Value << 1) & 3);
-				// return 1 << ((Value + 3 - (Value >> 2)) >> 2);
+				/*//
+				return 1 << (0xA554 >> (Value << 1) & 3);
+				return 1 << ((Value + 3 - (Value >> 2)) >> 2);
+				//*/
 			}
 		}
 		public FlipRotate2D Add(FlipRotate2D other) {
@@ -186,8 +191,10 @@ namespace DotNetTransformer.Math.Group.Transform2D {
 		public static FlipRotate2D FromInt32(int value) { return new FlipRotate2D(value & 7); }
 		public static FlipRotate2D FromRotateFlipType(RotateFlipType value) {
 			return new FlipRotate2D(0x53427160 >> ((byte)value << 2) & 7);
-			// byte v = (byte)value;
-			// return new FlipRotate2D((v << 2 & 4) ^ (v << 1 & 2) ^ (v >> 1));
+			/*//
+			byte v = (byte)value;
+			return new FlipRotate2D((v << 2 & 4) ^ (v << 1 & 2) ^ (v >> 1));
+			//*/
 		}
 
 		public static bool operator ==(FlipRotate2D l, FlipRotate2D r) { return l.Equals(r); }
