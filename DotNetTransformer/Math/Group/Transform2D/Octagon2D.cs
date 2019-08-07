@@ -112,9 +112,11 @@ namespace DotNetTransformer.Math.Group.Transform2D {
 		public Octagon2D InverseElement {
 			get {
 				return new Octagon2D(0x07701000 >> (Value << 1 & 0x1C) & 7 ^ Value);
-				// return new Octagon2D((0x4195 >> (Value & 0xE) & 3) - 1 & 7 ^ Value);
-				// return new Octagon2D((0x96EA >> (Value & 0xE) & 3) - 2 & 7 ^ Value);
-				// return new Octagon2D((0xC3C0 >> Value & 1) - (Value >> 3) & 7 ^ Value);
+				/*//
+				return new Octagon2D((0x4195 >> (Value & 0xE) & 3) - 1 & 7 ^ Value);
+				return new Octagon2D((0x96EA >> (Value & 0xE) & 3) - 2 & 7 ^ Value);
+				return new Octagon2D((0xC3C0 >> Value & 1) - (Value >> 3) & 7 ^ Value);
+				//*/
 			}
 		}
 		/// <summary>
@@ -129,10 +131,12 @@ namespace DotNetTransformer.Math.Group.Transform2D {
 			int c = (Value & 0x8) ^ (other.Value & 0x6);
 			return new Octagon2D(0x84A0 >> (Value >> 1 & 1 | c) & 1
 				^ (0x7800 >> c & 7) ^ Value ^ other.Value);
-			// return new Octagon2D(0x801C >> ((Value & 0xA) * (other.Value & 0x6) >> 2) & 1
-			// 	^ (0x7800 >> ((Value & 0x8) ^ (other.Value & 0x6)) & 7) ^ Value ^ other.Value);
-			// return new Octagon2D(0xEADC >> ((Value & 0xA) * (other.Value & 0x6) >> 2) & 1
-			// 	^ (0x7800 >> ((Value & 0x8) ^ (other.Value & 0x6)) & 7) ^ Value ^ other.Value);
+			/*//
+			return new Octagon2D(0x801C >> ((Value & 0xA) * (other.Value & 0x6) >> 2) & 1
+				^ (0x7800 >> ((Value & 0x8) ^ (other.Value & 0x6)) & 7) ^ Value ^ other.Value);
+			return new Octagon2D(0xEADC >> ((Value & 0xA) * (other.Value & 0x6) >> 2) & 1
+				^ (0x7800 >> ((Value & 0x8) ^ (other.Value & 0x6)) & 7) ^ Value ^ other.Value);
+			//*/
 		}
 		public Octagon2D Subtract(Octagon2D other) {
 			int c = (Value & 0x8) ^ (other.Value & 0xE);
