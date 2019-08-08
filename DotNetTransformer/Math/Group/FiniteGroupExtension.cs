@@ -5,7 +5,7 @@ namespace DotNetTransformer.Math.Group {
 	public static class FiniteGroupExtension
 	{
 		private class InternalGroup<T> : FiniteGroup<T>
-			where T : IFiniteGroupElement<T>
+			where T : IFiniteGroupElement<T>, new()
 		{
 			private readonly T _ident;
 			private readonly List<T> _list;
@@ -55,17 +55,17 @@ namespace DotNetTransformer.Math.Group {
 		}
 
 		public static FiniteGroup<T> CreateGroup<T>(this IEnumerable<T> collection)
-			where T : IFiniteGroupElement<T>
+			where T : IFiniteGroupElement<T>, new()
 		{
 			return new InternalGroup<T>(collection, false);
 		}
 		public static FiniteGroup<T> CreateGroup<T>(this IEnumerable<T> collection, bool checkIdentity)
-			where T : IFiniteGroupElement<T>
+			where T : IFiniteGroupElement<T>, new()
 		{
 			return new InternalGroup<T>(collection, checkIdentity);
 		}
 		public static bool IsGeneratingSetOf<T>(this IEnumerable<T> collection, FiniteGroup<T> group)
-			where T : IFiniteGroupElement<T>
+			where T : IFiniteGroupElement<T>, new()
 		{
 			return !ReferenceEquals(collection, null)
 				&& !ReferenceEquals(group, null)
