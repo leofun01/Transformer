@@ -10,24 +10,16 @@ namespace DotNetTransformer.Math.Group {
 			private readonly T _ident;
 			private readonly List<T> _list;
 
-			public InternalGroup(IEnumerable<T> collection, bool checkIdentity) {
+			public InternalGroup(IEnumerable<T> collection) {
 				_list = new List<T>(collection);
-				if(_list.Count < 1)
-					throw new ArgumentException("Parameter \"collection\" is empty.\r\nGroup cannot be empty.", "collection");
-				T outer = _list[0], inner, new_e;
-				_ident = outer.Subtract(outer);
-				if(checkIdentity && _ident.CycleLength != 1)
-					throw new ArgumentException("collection",
-						"CycleLength of identity element must be equal to 1.");
+				_ident = new T();
+				if(!_list.Contains(_ident))
+					_list.Add(_ident);
+				T outer, inner, new_e;
 				int count, outer_i = 0, inner_i;
 				do {
 					for(count = _list.Count; outer_i < count; ++outer_i) {
 						outer = _list[outer_i];
-						if(checkIdentity) {
-							new_e = outer.InverseElement;
-							CheckIdentity(outer, new_e);
-							CheckIdentity(new_e, outer);
-						}
 						for(inner_i = 0; inner_i < count; ++inner_i) {
 							inner = _list[inner_i];
 							if(!_list.Contains(new_e = outer.Add(inner))) _list.Add(new_e);
@@ -35,13 +27,6 @@ namespace DotNetTransformer.Math.Group {
 						}
 					}
 				} while(count < _list.Count);
-			}
-			private void CheckIdentity(T value, T inverse) {
-				T ident = value.Add(inverse);
-				if(!ident.Equals(_ident))
-					throw new ArgumentException(
-						string.Concat("{", value, "} + {", inverse, "} = {", ident,
-							"}\r\nGroup cannot contain more than one identity element."), "collection");
 			}
 
 			public override T IdentityElement { get { return _ident; } }
@@ -57,12 +42,7 @@ namespace DotNetTransformer.Math.Group {
 		public static FiniteGroup<T> CreateGroup<T>(this IEnumerable<T> collection)
 			where T : IFiniteGroupElement<T>, new()
 		{
-			return new InternalGroup<T>(collection, false);
-		}
-		public static FiniteGroup<T> CreateGroup<T>(this IEnumerable<T> collection, bool checkIdentity)
-			where T : IFiniteGroupElement<T>, new()
-		{
-			return new InternalGroup<T>(collection, checkIdentity);
+			return new InternalGroup<T>(collection);
 		}
 		public static bool IsGeneratingSetOf<T>(this IEnumerable<T> collection, FiniteGroup<T> group)
 			where T : IFiniteGroupElement<T>, new()
