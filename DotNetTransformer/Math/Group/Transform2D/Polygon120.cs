@@ -130,6 +130,11 @@ namespace DotNetTransformer.Math.Group.Transform2D {
 		public override int GetHashCode() { return Value; }
 		public override bool Equals(object o) { return o is Polygon120 && Equals((Polygon120)o); }
 		public bool Equals(Polygon120 o) { return Value == o.Value; }
+		public override string ToString() {
+			if((Value & -2) == 0) return Value == 0 ? "NO" : "FX";
+			int v = (Value >> 1) * 3;
+			return string.Format(IsReflection ? "FX+R{0:000}" : "R{1:000}", 360 - v, v);
+		}
 
 		public static Polygon120 FromInt32(int value) {
 			return new Polygon120((value % _count + _count) % _count);
