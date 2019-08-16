@@ -132,7 +132,7 @@ namespace DotNetTransformer.Math.Group.Transform2D {
 		public bool Equals(Polygon120 o) { return Value == o.Value; }
 
 		public static Polygon120 FromInt32(int value) {
-			return new Polygon120(value % _count);
+			return new Polygon120((value % _count + _count) % _count);
 		}
 		public static Polygon120 FromFlipRotate2D(FlipRotate2D value) {
 			return FromRotateFlipType(value.ToRotateFlipType());
