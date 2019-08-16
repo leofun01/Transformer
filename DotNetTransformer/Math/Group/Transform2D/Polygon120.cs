@@ -65,6 +65,7 @@ namespace DotNetTransformer.Math.Group.Transform2D {
 		public int CycleLength {
 			get {
 				if(IsReflection) return 2;
+				/*//
 				int r = 1;
 				if(Value % 0x04 == 0) r *= 2;
 				if(Value % 0x06 == 0) r *= 3;
@@ -72,6 +73,15 @@ namespace DotNetTransformer.Math.Group.Transform2D {
 				if(Value % 0x0A == 0) r *= 5;
 				if(Value % 0x10 == 0) r *= 2;
 				return _mod / r;
+				/*/
+				int r = _mod;
+				if(Value % 0x06 == 0) r &= 0x28;
+				if(Value % 0x0A == 0) r &= 0x18;
+				if((Value & 0x02) == 0) r >>= 1;
+				if((Value & 0x06) == 0) r >>= 1;
+				if((Value & 0x0E) == 0) r >>= 1;
+				return r;
+				//*/
 			}
 		}
 		public Polygon120 Add(Polygon120 other) {
