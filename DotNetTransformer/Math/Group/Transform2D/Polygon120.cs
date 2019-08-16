@@ -96,8 +96,7 @@ namespace DotNetTransformer.Math.Group.Transform2D {
 		}
 		public Polygon120 Times(int count) {
 			if(IsReflection) return new Polygon120((count & 1) * Value);
-			count = count % _mod + _mod;
-			return new Polygon120(count * Value % _count);
+			return new Polygon120((count % _mod + _mod) * Value % _count);
 		}
 
 		public override int GetHashCode() { return Value; }
