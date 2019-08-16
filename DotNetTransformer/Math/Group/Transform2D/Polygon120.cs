@@ -131,8 +131,8 @@ namespace DotNetTransformer.Math.Group.Transform2D {
 		public override bool Equals(object o) { return o is Polygon120 && Equals((Polygon120)o); }
 		public bool Equals(Polygon120 o) { return Value == o.Value; }
 		public override string ToString() {
-			if((Value & -2) == 0) return Value == 0 ? "NO" : "FX";
 			int v = (Value >> 1) * 3;
+			if(v == 0) return Value == 0 ? "NO" : "FX";
 			return string.Format(IsReflection ? "FX+R{0:000}" : "R{1:000}", 360 - v, v);
 		}
 
