@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using StringBuilder = System.Text.StringBuilder;
 using RotateFlipType = System.Drawing.RotateFlipType;
 
 namespace DotNetTransformer.Math.Group.Transform2D {
@@ -109,6 +108,36 @@ namespace DotNetTransformer.Math.Group.Transform2D {
 			return string.Format(IsReflection ? "FX+R{0:000}" : "R{1:000}", 360 - v, v);
 		}
 
+		///	<exception cref="ArgumentException">
+		///		<exception cref="ArgumentNullException">
+		///			Invalid <paramref name="name"/>.
+		///		</exception>
+		///	</exception>
+		public static Polygon120 FromString(string name) {
+			if(ReferenceEquals(name, null)) throw new ArgumentNullException();
+			if(name == "NO") return None;
+			if(name == "FX") return FlipX;
+			if(name.StartsWith("FX+R") || name.StartsWith("R")) {
+				int start = name.IndexOf('R') + 1;
+				if(start + 3 == name.Length) {
+					int degree = 0;
+					bool ok = true;
+					for(int i = 0; i < 3; ++i) {
+						char ch = name[start + i];
+						ok &= ch >= '0' && ch <= '9';
+						degree = degree * 10 + ch - '0';
+					}
+					if(ok) {
+						Polygon120 r = CreateRotation(degree);
+						return start == 4 ? FlipX.Add(r) : r;
+					}
+				}
+			}
+			throw new ArgumentException(
+				string.Format("\"{0}\" is not found.", name.Replace("\"", "\\\""))
+				, "name"
+			);
+		}
 		public static Polygon120 FromInt32(int value) {
 			return new Polygon120((value % _count + _count) % _count);
 		}
