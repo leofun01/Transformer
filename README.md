@@ -61,7 +61,6 @@ to achieve the most efficient solutions.
 												<summary><code>Transform2D</code></summary>
 												<ul>
 													<li><a href="DotNetTransformer/Math/Group/Transform2D/FlipRotate2D.cs"><code>FlipRotate2D.cs</code></a></li>
-													<li><a href="DotNetTransformer/Math/Group/Transform2D/Octagon2D.cs"><code>Octagon2D.cs</code></a></li>
 													<li><a href="DotNetTransformer/Math/Group/Transform2D/Polygon120.cs"><code>Polygon120.cs</code></a></li>
 												</ul>
 											</details>
