@@ -1,11 +1,14 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using RotateFlipType = System.Drawing.RotateFlipType;
 
 namespace DotNetTransformer.Math.Group.Transform2D {
 	[Serializable]
+	[DebuggerDisplay("{ToString()}, CycleLength = {CycleLength}")]
 	public struct Polygon120 : IFiniteGroupElement<Polygon120>
 	{
+		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		public readonly byte Value;
 		private Polygon120(byte value) { Value = value; }
 		private Polygon120(int value) { Value = (byte)value; }
