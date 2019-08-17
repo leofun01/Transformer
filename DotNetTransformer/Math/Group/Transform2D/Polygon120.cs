@@ -21,38 +21,11 @@ namespace DotNetTransformer.Math.Group.Transform2D {
 		public static readonly Polygon120 FlipX;
 		/// <summary> Vertical flip. Reflection across x-axis. </summary>
 		public static readonly Polygon120 FlipY;
-		/// <summary> 2Pi/120 rad | 3 degree rotation. </summary>
-		public static readonly Polygon120 Rotate003;
-		/// <summary> 2Pi/12 rad | 30 degree rotation. </summary>
-		public static readonly Polygon120 Rotate030;
-		/// <summary> 2Pi/10 rad | 36 degree rotation. </summary>
-		public static readonly Polygon120 Rotate036;
-		/// <summary> 2Pi/8 rad | 45 degree rotation. </summary>
-		public static readonly Polygon120 Rotate045;
-		/// <summary> 2Pi/6 rad | 60 degree rotation. </summary>
-		public static readonly Polygon120 Rotate060;
-		/// <summary> 2Pi/5 rad | 72 degree rotation. </summary>
-		public static readonly Polygon120 Rotate072;
-		/// <summary> 2Pi/4 rad | 90 degree rotation. </summary>
-		public static readonly Polygon120 Rotate090;
-		/// <summary> 2Pi/3 rad | 120 degree rotation. </summary>
-		public static readonly Polygon120 Rotate120;
-		/// <summary> 2Pi/2 rad | 180 degree rotation. </summary>
-		public static readonly Polygon120 Rotate180;
 
 		static Polygon120() {
 			None      = new Polygon120(  0);
 			FlipX     = new Polygon120(  1);
 			FlipY     = new Polygon120(121);
-			Rotate003 = new Polygon120(  2);
-			Rotate030 = new Polygon120( 20);
-			Rotate036 = new Polygon120( 24);
-			Rotate045 = new Polygon120( 30);
-			Rotate060 = new Polygon120( 40);
-			Rotate072 = new Polygon120( 48);
-			Rotate090 = new Polygon120( 60);
-			Rotate120 = new Polygon120( 80);
-			Rotate180 = new Polygon120(120);
 			AllValues = new DihedralGroupD120();
 		}
 
@@ -145,6 +118,13 @@ namespace DotNetTransformer.Math.Group.Transform2D {
 		public static Polygon120 FromRotateFlipType(RotateFlipType value) {
 			int v = (int)value;
 			return new Polygon120((v & 3) * 60 ^ (v >> 2));
+		}
+		public static Polygon120 CreateRotation(int degree) {
+			return new Polygon120((degree % 360 + 361) % 360 / 3 << 1);
+		}
+		public static Polygon120 CreateRotation(float radian) {
+			const float p = 6.2831853f, e = p / _count;
+			return new Polygon120((int)((radian % p + p + e) / p * _mod) % _mod << 1);
 		}
 
 		public static bool operator ==(Polygon120 l, Polygon120 r) { return l.Equals(r); }
