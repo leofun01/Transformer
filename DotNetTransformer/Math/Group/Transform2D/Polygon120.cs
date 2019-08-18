@@ -137,8 +137,10 @@ namespace DotNetTransformer.Math.Group.Transform2D {
 				}
 			}
 			throw new ArgumentException(
-				string.Format("\"{0}\" is not found.", name.Replace("\"", "\\\""))
-				, "name"
+				string.Format("\"{0}\" is not found.", name
+					.Replace("\\", "\\\\")
+					.Replace("\"", "\\\"")
+				), "name"
 			);
 		}
 		public static Polygon120 FromInt32(int value) {
