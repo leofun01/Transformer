@@ -147,7 +147,15 @@ namespace DotNetTransformer.Math.Group.Transform2D {
 			return new Polygon120((value % _count + _count) % _count);
 		}
 		public static Polygon120 FromFlipRotate2D(FlipRotate2D value) {
+			/*//
 			return FromRotateFlipType(value.ToRotateFlipType());
+			int v = value.Value;
+			v = (v << 1) | (v >> 2);
+			return new Polygon120((v & 3) * 60 ^ (((v + 4) >> 3) & 1));
+			/*/
+			int v = 0x62735140 >> (value.Value << 2);
+			return new Polygon120((v & 6) * 30 ^ (v & 1));
+			//*/
 		}
 		public static Polygon120 FromRotateFlipType(RotateFlipType value) {
 			int v = (int)value;
