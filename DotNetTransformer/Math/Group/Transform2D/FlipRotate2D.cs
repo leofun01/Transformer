@@ -161,8 +161,10 @@ namespace DotNetTransformer.Math.Group.Transform2D {
 		}
 		public FlipRotate2D Times(int count) {
 			return new FlipRotate2D((count & 1) * Value ^ ((Value >> 1 & Value & count) >> 1));
-			// return new FlipRotate2D((count & 1) * Value ^ ((Value + 2 >> 3) & (count >> 1)));
-			// return new FlipRotate2D((count & 1) * Value ^ ((0xC0 >> Value) & (count >> 1) & 1));
+			/*//
+			return new FlipRotate2D((count & 1) * Value ^ ((Value + 2 >> 3) & (count >> 1)));
+			return new FlipRotate2D((count & 1) * Value ^ ((0xC0 >> Value) & (count >> 1) & 1));
+			//*/
 		}
 
 		public override int GetHashCode() { return Value; }
