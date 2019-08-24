@@ -70,8 +70,18 @@ namespace DotNetTransformer {
 			return _array.Transform<T>(_flip);
 		}
 
-		public static bool operator ==(Array1DTransformer<T> l, Array1DTransformer<T> r) { return l.Equals(r); }
-		public static bool operator !=(Array1DTransformer<T> l, Array1DTransformer<T> r) { return !l.Equals(r); }
+		public static bool operator ==(Array1DTransformer<T> l, Array1DTransformer<T> r) {
+			return ReferenceEquals(l, r) || (
+				!ReferenceEquals(l, null) &&
+				l.Equals(r)
+			);
+		}
+		public static bool operator !=(Array1DTransformer<T> l, Array1DTransformer<T> r) {
+			return !ReferenceEquals(l, r) && (
+				ReferenceEquals(l, null) ||
+				!l.Equals(r)
+			);
+		}
 
 		public static explicit operator T[](Array1DTransformer<T> o) { return o.ToArray(); }
 	}

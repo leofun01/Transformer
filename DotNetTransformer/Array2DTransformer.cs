@@ -89,8 +89,18 @@ namespace DotNetTransformer {
 			return _array.Transform<T>(_transformation);
 		}
 
-		public static bool operator ==(Array2DTransformer<T> l, Array2DTransformer<T> r) { return l.Equals(r); }
-		public static bool operator !=(Array2DTransformer<T> l, Array2DTransformer<T> r) { return !l.Equals(r); }
+		public static bool operator ==(Array2DTransformer<T> l, Array2DTransformer<T> r) {
+			return ReferenceEquals(l, r) || (
+				!ReferenceEquals(l, null) &&
+				l.Equals(r)
+			);
+		}
+		public static bool operator !=(Array2DTransformer<T> l, Array2DTransformer<T> r) {
+			return !ReferenceEquals(l, r) && (
+				ReferenceEquals(l, null) ||
+				!l.Equals(r)
+			);
+		}
 
 		public static explicit operator T[,](Array2DTransformer<T> o) { return o.ToArray(); }
 	}
