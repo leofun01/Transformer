@@ -174,4 +174,28 @@
 			</ul>
 		</details>
 	</li>
+	<li>
+		<details>
+			<summary><code>svg</code></summary>
+			<ul>
+				<li>
+					<details>
+						<summary><code>OctahedralGroup</code></summary>
+						<ul>
+							<li><a href="svg/OctahedralGroup/CayleyGraph_2e_6af_4b_440x440.svg"><code>CayleyGraph_2e_6af_4b_440x440.svg</code></a></li>
+							<li><a href="svg/OctahedralGroup/CayleyGraph_3e_2f_3a_4b_440x440.svg"><code>CayleyGraph_3e_2f_3a_4b_440x440.svg</code></a></li>
+						</ul>
+					</details>
+				</li>
+				<li>
+					<details>
+						<summary><code>TetrahedralGroup</code></summary>
+						<ul>
+							<li><a href="svg/TetrahedralGroup/CayleyGraph_2e_3a_4b_440x440.svg"><code>CayleyGraph_2e_3a_4b_440x440.svg</code></a></li>
+						</ul>
+					</details>
+				</li>
+			</ul>
+		</details>
+	</li>
 </ul>
