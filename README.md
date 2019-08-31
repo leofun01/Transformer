@@ -15,6 +15,37 @@ to achieve the most efficient solutions.
 
 <ul>
 	<li>
+		<details>
+			<summary><code>docs</code></summary>
+			<ul>
+				<li>
+					<details open="open">
+						<summary><code>svg</code></summary>
+						<ul>
+							<li>
+								<details open="open">
+									<summary><code>OctahedralGroup</code></summary>
+									<ul>
+										<li><a href="docs/svg/OctahedralGroup/CayleyGraph_2e_6af_4b_440x440.svg"><code>CayleyGraph_2e_6af_4b_440x440.svg</code></a></li>
+										<li><a href="docs/svg/OctahedralGroup/CayleyGraph_3e_2f_3a_4b_440x440.svg"><code>CayleyGraph_3e_2f_3a_4b_440x440.svg</code></a></li>
+									</ul>
+								</details>
+							</li>
+							<li>
+								<details open="open">
+									<summary><code>TetrahedralGroup</code></summary>
+									<ul>
+										<li><a href="docs/svg/TetrahedralGroup/CayleyGraph_2e_3a_4b_440x440.svg"><code>CayleyGraph_2e_3a_4b_440x440.svg</code></a></li>
+									</ul>
+								</details>
+							</li>
+						</ul>
+					</details>
+				</li>
+			</ul>
+		</details>
+	</li>
+	<li>
 		<details open="open">
 			<summary><code>DotNetTransformer</code></summary>
 			<ul>
@@ -171,30 +202,6 @@ to achieve the most efficient solutions.
 				<li><a href="VS/Transformer_vs2013.sln"><code>Transformer_vs2013.sln</code></a></li>
 				<li><a href="VS/Transformer_vs2015.sln"><code>Transformer_vs2015.sln</code></a></li>
 				<li><a href="VS/Transformer_vs2017.sln"><code>Transformer_vs2017.sln</code></a></li>
-			</ul>
-		</details>
-	</li>
-	<li>
-		<details>
-			<summary><code>svg</code></summary>
-			<ul>
-				<li>
-					<details>
-						<summary><code>OctahedralGroup</code></summary>
-						<ul>
-							<li><a href="svg/OctahedralGroup/CayleyGraph_2e_6af_4b_440x440.svg"><code>CayleyGraph_2e_6af_4b_440x440.svg</code></a></li>
-							<li><a href="svg/OctahedralGroup/CayleyGraph_3e_2f_3a_4b_440x440.svg"><code>CayleyGraph_3e_2f_3a_4b_440x440.svg</code></a></li>
-						</ul>
-					</details>
-				</li>
-				<li>
-					<details>
-						<summary><code>TetrahedralGroup</code></summary>
-						<ul>
-							<li><a href="svg/TetrahedralGroup/CayleyGraph_2e_3a_4b_440x440.svg"><code>CayleyGraph_2e_3a_4b_440x440.svg</code></a></li>
-						</ul>
-					</details>
-				</li>
 			</ul>
 		</details>
 	</li>
