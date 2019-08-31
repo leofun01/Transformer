@@ -8,6 +8,8 @@
 *.sln		text	eol=crlf
 *.csproj	text	eol=crlf
 *.resx		text	eol=crlf
+*.svg		text	eol=crlf
+*.xml		text	eol=crlf
 
 # Binary
 #*.exe		binary	diff=exif
