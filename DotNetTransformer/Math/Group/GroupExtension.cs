@@ -5,20 +5,24 @@ namespace DotNetTransformer.Math.Group {
 	public static class GroupExtension
 	{
 		public static T Compose<T>(this T _this, T other)
-			where T : IGroupElement<T> {
+			where T : IGroupElement<T>, new()
+		{
 			return other.Add(_this);
 		}
 		public static T Subtract<T>(this T _this, T other)
-			where T : IGroupElement<T> {
+			where T : IGroupElement<T>, new()
+		{
 			return _this.Add(other.InverseElement);
 		}
 
 		public static T AddAll<T>(this IEnumerable<T> collection)
-			where T : IGroupElement<T> {
+			where T : IGroupElement<T>, new()
+		{
 			return collection.CollectAll<T>((l, r) => l.Add(r));
 		}
 		public static T ComposeAll<T>(this IEnumerable<T> collection)
-			where T : IGroupElement<T> {
+			where T : IGroupElement<T>, new()
+		{
 			return collection.CollectAll<T>((l, r) => Compose<T>(l, r));
 		}
 	}

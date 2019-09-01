@@ -1,6 +1,6 @@
 # Transformer
 
-<h2 id="contetns">Зміст</h2>
+<h2 id="contents">Зміст</h2>
 
 - [Опис](#description)
 - [Структура дирекорій](#directory-structure)
@@ -14,6 +14,37 @@
 <h2 id="directory-structure">Структура дирекорій</h2>
 
 <ul>
+	<li>
+		<details>
+			<summary><code>docs</code></summary>
+			<ul>
+				<li>
+					<details open="open">
+						<summary><code>svg</code></summary>
+						<ul>
+							<li>
+								<details open="open">
+									<summary><code>OctahedralGroup</code></summary>
+									<ul>
+										<li><a href="docs/svg/OctahedralGroup/CayleyGraph_2e_6af_4b_440x440.svg"><code>CayleyGraph_2e_6af_4b_440x440.svg</code></a></li>
+										<li><a href="docs/svg/OctahedralGroup/CayleyGraph_3e_2f_3a_4b_440x440.svg"><code>CayleyGraph_3e_2f_3a_4b_440x440.svg</code></a></li>
+									</ul>
+								</details>
+							</li>
+							<li>
+								<details open="open">
+									<summary><code>TetrahedralGroup</code></summary>
+									<ul>
+										<li><a href="docs/svg/TetrahedralGroup/CayleyGraph_2e_3a_4b_440x440.svg"><code>CayleyGraph_2e_3a_4b_440x440.svg</code></a></li>
+									</ul>
+								</details>
+							</li>
+						</ul>
+					</details>
+				</li>
+			</ul>
+		</details>
+	</li>
 	<li>
 		<details open="open">
 			<summary><code>DotNetTransformer</code></summary>
@@ -61,7 +92,7 @@
 												<summary><code>Transform2D</code></summary>
 												<ul>
 													<li><a href="DotNetTransformer/Math/Group/Transform2D/FlipRotate2D.cs"><code>FlipRotate2D.cs</code></a></li>
-													<li><a href="DotNetTransformer/Math/Group/Transform2D/Octagon2D.cs"><code>Octagon2D.cs</code></a></li>
+													<li><a href="DotNetTransformer/Math/Group/Transform2D/Polygon120.cs"><code>Polygon120.cs</code></a></li>
 												</ul>
 											</details>
 										</li>

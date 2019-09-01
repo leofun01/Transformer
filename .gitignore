@@ -9,6 +9,7 @@
 *.dll
 *.manifest
 *.pdb
+*.lnk
 
 # Build results
 [Bb]in/
