@@ -6,26 +6,19 @@ root = true
 charset = utf-8 ; no BOM
 end_of_line = crlf
 indent_size = 4
+indent_style = tab
 insert_final_newline = true
 
 [.*]
-indent_style = tab
 trim_trailing_whitespace = true
 
 [*.md]
 indent_size = 2
-indent_style = tab
 trim_trailing_whitespace = false
-
-[*.cs]
-indent_style = tab
-
-[*.sln]
-indent_style = tab
-
-[*.csproj]
-indent_style = tab
 
 [*.resx]
 indent_size = 2
-indent_style = tab
+
+[*.{yaml,yml}]
+indent_size = 2
+indent_style = space
