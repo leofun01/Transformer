@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using StringBuilder = System.Text.StringBuilder;
 using RotateFlipType = System.Drawing.RotateFlipType;
 
 namespace DotNetTransformer.Math.Group.Transform2D {
 	[Serializable]
+	[DebuggerDisplay("{ToString()}, CycleLength = {CycleLength}")]
 	public struct FlipRotate2D : IFiniteGroupElement<FlipRotate2D>
 	{
 		public readonly byte Value;
