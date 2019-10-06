@@ -68,7 +68,7 @@ namespace DotNetTransformer.Math.Group.Permutation {
 				long t = Value, r = 0L;
 				byte i = 0;
 				do
-					r |= (long)i << (int)((t >> (i << _s) & _mask) << _s);
+					r |= (long)i << ((int)(t >> (i << _s) & _mask) << _s);
 				while(++i < _count);
 				return new PermutationInt64(r ^ _mix);
 			}
