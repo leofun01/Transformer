@@ -75,15 +75,6 @@ to achieve the most efficient solutions.
 								<details open="open">
 									<summary><code>Group</code></summary>
 									<ul>
-										<li>
-											<details open="open">
-												<summary><code>Transform2D</code></summary>
-												<ul>
-													<li><a href="DotNetTransformer/Math/Group/Transform2D/FlipRotate2D.cs"><code>FlipRotate2D.cs</code></a></li>
-													<li><a href="DotNetTransformer/Math/Group/Transform2D/Polygon120.cs"><code>Polygon120.cs</code></a></li>
-												</ul>
-											</details>
-										</li>
 										<li><a href="DotNetTransformer/Math/Group/FiniteGroup.cs"><code>FiniteGroup.cs</code></a></li>
 										<li><a href="DotNetTransformer/Math/Group/FiniteGroupExtension.cs"><code>FiniteGroupExtension.cs</code></a></li>
 										<li><a href="DotNetTransformer/Math/Group/GroupExtension.cs"><code>GroupExtension.cs</code></a></li>
@@ -117,6 +108,15 @@ to achieve the most efficient solutions.
 										<li><a href="DotNetTransformer/Math/Set/ISubSet.cs"><code>ISubSet.cs</code></a></li>
 										<li><a href="DotNetTransformer/Math/Set/ISuperSet.cs"><code>ISuperSet.cs</code></a></li>
 										<li><a href="DotNetTransformer/Math/Set/SetExtension.cs"><code>SetExtension.cs</code></a></li>
+									</ul>
+								</details>
+							</li>
+							<li>
+								<details open="open">
+									<summary><code>Transform</code></summary>
+									<ul>
+										<li><a href="DotNetTransformer/Math/Transform/FlipRotate2D.cs"><code>FlipRotate2D.cs</code></a></li>
+										<li><a href="DotNetTransformer/Math/Transform/Polygon120.cs"><code>Polygon120.cs</code></a></li>
 									</ul>
 								</details>
 							</li>

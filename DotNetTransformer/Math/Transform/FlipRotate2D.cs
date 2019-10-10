@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using StringBuilder = System.Text.StringBuilder;
 using RotateFlipType = System.Drawing.RotateFlipType;
+using DotNetTransformer.Math.Group;
 
-namespace DotNetTransformer.Math.Group.Transform2D {
+namespace DotNetTransformer.Math.Transform {
 	[Serializable]
 	[DebuggerDisplay("{ToString()}, CycleLength = {CycleLength}")]
 	public struct FlipRotate2D : IFiniteGroupElement<FlipRotate2D>
