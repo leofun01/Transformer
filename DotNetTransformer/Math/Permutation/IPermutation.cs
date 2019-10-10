@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
+using DotNetTransformer.Math.Group;
 
-namespace DotNetTransformer.Math.Group.Permutation {
+namespace DotNetTransformer.Math.Permutation {
 	public interface IPermutation<T> : IFiniteGroupElement<T>
 		, IEnumerable<int>
 		where T : IPermutation<T>, new()

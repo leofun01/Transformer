@@ -4,8 +4,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using StringBuilder = System.Text.StringBuilder;
 using CultureInfo = System.Globalization.CultureInfo;
+using DotNetTransformer.Math.Group;
 
-namespace DotNetTransformer.Math.Group.Permutation {
+namespace DotNetTransformer.Math.Permutation {
 	[Serializable]
 	[DebuggerDisplay("{ToString()}, CycleLength = {CycleLength}")]
 	public struct PermutationByte : IPermutation<PermutationByte>

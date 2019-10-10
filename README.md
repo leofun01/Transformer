@@ -1,17 +1,17 @@
 # Transformer
 
-## Contents
+<h2 id="contents">Contents</h2>
 
 - [Description](#description)
 - [Directory structure](#directory-structure)
 
-## Description
+<h2 id="description">Description</h2>
 
 The main idea of project "Transformer" is
 using group theory in programming
 to achieve the most efficient solutions.
 
-## Directory structure
+<h2 id="directory-structure">Directory structure</h2>
 
 <ul>
 	<li>
@@ -77,18 +77,6 @@ to achieve the most efficient solutions.
 									<ul>
 										<li>
 											<details open="open">
-												<summary><code>Permutation</code></summary>
-												<ul>
-													<li><a href="DotNetTransformer/Math/Group/Permutation/IPermutation.cs"><code>IPermutation.cs</code></a></li>
-													<li><a href="DotNetTransformer/Math/Group/Permutation/PermutationByte.cs"><code>PermutationByte.cs</code></a></li>
-													<li><a href="DotNetTransformer/Math/Group/Permutation/PermutationExtension.cs"><code>PermutationExtension.cs</code></a></li>
-													<li><a href="DotNetTransformer/Math/Group/Permutation/PermutationInt32.cs"><code>PermutationInt32.cs</code></a></li>
-													<li><a href="DotNetTransformer/Math/Group/Permutation/PermutationInt64.cs"><code>PermutationInt64.cs</code></a></li>
-												</ul>
-											</details>
-										</li>
-										<li>
-											<details open="open">
 												<summary><code>Transform2D</code></summary>
 												<ul>
 													<li><a href="DotNetTransformer/Math/Group/Transform2D/FlipRotate2D.cs"><code>FlipRotate2D.cs</code></a></li>
@@ -102,6 +90,18 @@ to achieve the most efficient solutions.
 										<li><a href="DotNetTransformer/Math/Group/IFiniteGroupElement.cs"><code>IFiniteGroupElement.cs</code></a></li>
 										<li><a href="DotNetTransformer/Math/Group/IGroup.cs"><code>IGroup.cs</code></a></li>
 										<li><a href="DotNetTransformer/Math/Group/IGroupElement.cs"><code>IGroupElement.cs</code></a></li>
+									</ul>
+								</details>
+							</li>
+							<li>
+								<details open="open">
+									<summary><code>Permutation</code></summary>
+									<ul>
+										<li><a href="DotNetTransformer/Math/Permutation/IPermutation.cs"><code>IPermutation.cs</code></a></li>
+										<li><a href="DotNetTransformer/Math/Permutation/PermutationByte.cs"><code>PermutationByte.cs</code></a></li>
+										<li><a href="DotNetTransformer/Math/Permutation/PermutationExtension.cs"><code>PermutationExtension.cs</code></a></li>
+										<li><a href="DotNetTransformer/Math/Permutation/PermutationInt32.cs"><code>PermutationInt32.cs</code></a></li>
+										<li><a href="DotNetTransformer/Math/Permutation/PermutationInt64.cs"><code>PermutationInt64.cs</code></a></li>
 									</ul>
 								</details>
 							</li>
