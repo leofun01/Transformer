@@ -53,5 +53,19 @@ namespace DotNetTransformer.Math.Group {
 				&& !ReferenceEquals(group, null)
 				&& group.IsSubsetOf(CreateGroup<T>(collection));
 		}
+
+		public static T Times<T>(this T t, int count)
+			where T : IFiniteGroupElement<T>, new()
+		{
+			int c = t.CycleLength;
+			count = (count % c + c) % c;
+			T r = (count & 1) != 0 ? t : new T();
+			while((count >>= 1) != 0) {
+				t = t.Add(t);
+				if((count & 1) != 0)
+					r = r.Add(t);
+			}
+			return r;
+		}
 	}
 }

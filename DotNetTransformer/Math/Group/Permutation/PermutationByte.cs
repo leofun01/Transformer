@@ -115,16 +115,7 @@ namespace DotNetTransformer.Math.Group.Permutation {
 			return new PermutationByte((byte)(r ^ _mix));
 		}
 		public PermutationByte Times(int count) {
-			int c = CycleLength;
-			count = (count % c + c) % c;
-			PermutationByte t = this;
-			PermutationByte r = (count & 1) != 0 ? t : new PermutationByte();
-			while((count >>= 1) != 0) {
-				t = t.Add(t);
-				if((count & 1) != 0)
-					r = r.Add(t);
-			}
-			return r;
+			return this.Times<PermutationByte>(count);
 		}
 
 		public List<PermutationByte> GetCycles(Predicate<PermutationByte> match) {

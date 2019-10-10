@@ -123,16 +123,7 @@ namespace DotNetTransformer.Math.Group.Permutation {
 			return new PermutationInt64(r ^ _mix);
 		}
 		public PermutationInt64 Times(int count) {
-			int c = CycleLength;
-			count = (count % c + c) % c;
-			PermutationInt64 t = this;
-			PermutationInt64 r = (count & 1) != 0 ? t : new PermutationInt64();
-			while((count >>= 1) != 0) {
-				t = t.Add(t);
-				if((count & 1) != 0)
-					r = r.Add(t);
-			}
-			return r;
+			return this.Times<PermutationInt64>(count);
 		}
 
 		public List<PermutationInt64> GetCycles(Predicate<PermutationInt64> match) {
