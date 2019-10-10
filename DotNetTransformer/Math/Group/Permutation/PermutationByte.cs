@@ -93,8 +93,7 @@ namespace DotNetTransformer.Math.Group.Permutation {
 					} while((1 << digit & digitFlag) == 0);
 					multFlag |= (byte)(1 << --cLen);
 				}
-				if(multFlag == 1) return 1;
-				return ((multFlag >> 2) & 3) + 2;
+				return (multFlag >> 1) + 1 - (multFlag >> 3);
 			}
 		}
 		public PermutationByte Add(PermutationByte other) {
