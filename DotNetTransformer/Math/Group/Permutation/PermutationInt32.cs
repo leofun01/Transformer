@@ -90,7 +90,7 @@ namespace DotNetTransformer.Math.Group.Permutation {
 					multFlag |= (byte)(1 << --cLen);
 				}
 				if(multFlag == 1) return 1;
-				if((multFlag & -0x20) != 0) return ((multFlag >> 6) & 3) + 6;
+				if((multFlag & -0x20) != 0) return (multFlag >> 6 & 3) + 6;
 				int r = 1;
 				if((multFlag & 0x0A) != 0) r *= 2;
 				if((multFlag & 0x04) != 0) r *= 3;
