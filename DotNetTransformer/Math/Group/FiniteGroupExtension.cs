@@ -11,10 +11,12 @@ namespace DotNetTransformer.Math.Group {
 			private readonly List<T> _list;
 
 			public InternalGroup(IEnumerable<T> collection) {
-				_list = new List<T>(collection);
 				_ident = new T();
-				if(!_list.Contains(_ident))
-					_list.Add(_ident);
+				_list = new List<T>();
+				_list.Add(_ident);
+				foreach(T item in collection)
+					if(!_list.Contains(item))
+						_list.Add(item);
 				T outer, inner, new_e;
 				int count, outer_i = 0, inner_i;
 				do {
@@ -50,6 +52,20 @@ namespace DotNetTransformer.Math.Group {
 			return !ReferenceEquals(collection, null)
 				&& !ReferenceEquals(group, null)
 				&& group.IsSubsetOf(CreateGroup<T>(collection));
+		}
+
+		public static T Times<T>(this T t, int count)
+			where T : IFiniteGroupElement<T>, new()
+		{
+			int c = t.CycleLength;
+			count = (count % c + c) % c;
+			T r = (count & 1) != 0 ? t : new T();
+			while((count >>= 1) != 0) {
+				t = t.Add(t);
+				if((count & 1) != 0)
+					r = r.Add(t);
+			}
+			return r;
 		}
 	}
 }

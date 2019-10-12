@@ -4,8 +4,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using StringBuilder = System.Text.StringBuilder;
 using CultureInfo = System.Globalization.CultureInfo;
+using DotNetTransformer.Math.Group;
 
-namespace DotNetTransformer.Math.Group.Permutation {
+namespace DotNetTransformer.Math.Permutation {
 	[Serializable]
 	[DebuggerDisplay("{ToString()}, CycleLength = {CycleLength}")]
 	public struct PermutationInt64 : IPermutation<PermutationInt64>
@@ -68,7 +69,7 @@ namespace DotNetTransformer.Math.Group.Permutation {
 				long t = Value, r = 0L;
 				byte i = 0;
 				do
-					r |= (long)i << (int)((t >> (i << _s) & _mask) << _s);
+					r |= (long)i << ((int)(t >> (i << _s) & _mask) << _s);
 				while(++i < _count);
 				return new PermutationInt64(r ^ _mix);
 			}
@@ -90,7 +91,7 @@ namespace DotNetTransformer.Math.Group.Permutation {
 					multFlag |= (short)(1 << --cLen);
 				}
 				if(multFlag == 1) return 1;
-				if((multFlag & -0x2000) != 0) return ((multFlag >> 14) & 3) + 14;
+				if((multFlag & -0x2000) != 0) return (multFlag >> 14 & 3) + 14;
 				int r = 1;
 				if((multFlag & 0x0AAA) != 0) r *= 2;
 				if((multFlag & 0x0924) != 0) r *= 3;
@@ -123,16 +124,7 @@ namespace DotNetTransformer.Math.Group.Permutation {
 			return new PermutationInt64(r ^ _mix);
 		}
 		public PermutationInt64 Times(int count) {
-			int c = CycleLength;
-			count = (count % c + c) % c;
-			PermutationInt64 t = this;
-			PermutationInt64 r = (count & 1) != 0 ? t : new PermutationInt64();
-			while((count >>= 1) != 0) {
-				t = t.Add(t);
-				if((count & 1) != 0)
-					r = r.Add(t);
-			}
-			return r;
+			return this.Times<PermutationInt64>(count);
 		}
 
 		public List<PermutationInt64> GetCycles(Predicate<PermutationInt64> match) {

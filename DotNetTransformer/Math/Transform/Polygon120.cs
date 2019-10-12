@@ -2,8 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using RotateFlipType = System.Drawing.RotateFlipType;
+using DotNetTransformer.Math.Group;
 
-namespace DotNetTransformer.Math.Group.Transform2D {
+namespace DotNetTransformer.Math.Transform {
 	[Serializable]
 	[DebuggerDisplay("{ToString()}, CycleLength = {CycleLength}")]
 	public struct Polygon120 : IFiniteGroupElement<Polygon120>

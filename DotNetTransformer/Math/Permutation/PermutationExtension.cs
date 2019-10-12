@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace DotNetTransformer.Math.Group.Permutation {
+namespace DotNetTransformer.Math.Permutation {
 	public static class PermutationExtension {
 		public static List<T> GetCyclesAll<T>(this IPermutation<T> _this)
 			where T : IPermutation<T>, new()
