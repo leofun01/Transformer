@@ -10,7 +10,7 @@ using System;
 using System.Runtime.ConstrainedExecution;
 using System.Runtime.InteropServices;
 using DotNetTransformer.Extensions;
-using FlipRotate2D = DotNetTransformer.Math.Group.Transform2D.FlipRotate2D;
+using FlipRotate2D = DotNetTransformer.Math.Transform.FlipRotate2D;
 
 namespace DotNetTransformer {
 	[Serializable]
@@ -117,8 +117,18 @@ namespace DotNetTransformer {
 			//*/
 		}
 
-		public static bool operator ==(Array2DTransformer<T> l, Array2DTransformer<T> r) { return l.Equals(r); }
-		public static bool operator !=(Array2DTransformer<T> l, Array2DTransformer<T> r) { return !l.Equals(r); }
+		public static bool operator ==(Array2DTransformer<T> l, Array2DTransformer<T> r) {
+			return ReferenceEquals(l, r) || (
+				!ReferenceEquals(l, null) &&
+				l.Equals(r)
+			);
+		}
+		public static bool operator !=(Array2DTransformer<T> l, Array2DTransformer<T> r) {
+			return !ReferenceEquals(l, r) && (
+				ReferenceEquals(l, null) ||
+				!l.Equals(r)
+			);
+		}
 
 		public static explicit operator T[,](Array2DTransformer<T> o) { return o.ToArray(); }
 	}

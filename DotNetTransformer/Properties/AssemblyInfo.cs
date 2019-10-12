@@ -2,7 +2,6 @@
 
 using System;
 using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("DotNetTransformer")]
@@ -10,12 +9,12 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("DotNetTransformer")]
-[assembly: AssemblyCopyright("Copyright © leofun01 2018")]
+[assembly: AssemblyCopyright("Copyright © leofun01 2018-2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
 [assembly: CLSCompliant(true)]
-[assembly: ComVisible(false)]
+[assembly: ComVisible(true)]
 
 [assembly: Guid("02d87708-8e86-40e8-8be5-35ddef6292ed")]
 
@@ -24,5 +23,5 @@ using System.Runtime.InteropServices;
 //		Minor Version 
 //		Build Number
 //		Revision
-[assembly: AssemblyVersion("0.8.1.0")]
-[assembly: AssemblyFileVersion("0.8.1.0")]
+[assembly: AssemblyVersion("0.8.1.1")]
+[assembly: AssemblyFileVersion("0.8.1.1")]

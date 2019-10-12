@@ -1,6 +1,6 @@
 # Transformer
 
-<h2 id="contetns">Зміст</h2>
+<h2 id="contents">Зміст</h2>
 
 - [Опис](#description)
 - [Структура дирекорій](#directory-structure)
@@ -14,6 +14,37 @@
 <h2 id="directory-structure">Структура дирекорій</h2>
 
 <ul>
+	<li>
+		<details>
+			<summary><code>docs</code></summary>
+			<ul>
+				<li>
+					<details open="open">
+						<summary><code>svg</code></summary>
+						<ul>
+							<li>
+								<details open="open">
+									<summary><code>OctahedralGroup</code></summary>
+									<ul>
+										<li><a href="docs/svg/OctahedralGroup/CayleyGraph_2e_6af_4b_440x440.svg"><code>CayleyGraph_2e_6af_4b_440x440.svg</code></a></li>
+										<li><a href="docs/svg/OctahedralGroup/CayleyGraph_3e_2f_3a_4b_440x440.svg"><code>CayleyGraph_3e_2f_3a_4b_440x440.svg</code></a></li>
+									</ul>
+								</details>
+							</li>
+							<li>
+								<details open="open">
+									<summary><code>TetrahedralGroup</code></summary>
+									<ul>
+										<li><a href="docs/svg/TetrahedralGroup/CayleyGraph_2e_3a_4b_440x440.svg"><code>CayleyGraph_2e_3a_4b_440x440.svg</code></a></li>
+									</ul>
+								</details>
+							</li>
+						</ul>
+					</details>
+				</li>
+			</ul>
+		</details>
+	</li>
 	<li>
 		<details open="open">
 			<summary><code>DotNetTransformer</code></summary>
@@ -44,33 +75,24 @@
 								<details open="open">
 									<summary><code>Group</code></summary>
 									<ul>
-										<li>
-											<details open="open">
-												<summary><code>Permutation</code></summary>
-												<ul>
-													<li><a href="DotNetTransformer/Math/Group/Permutation/IPermutation.cs"><code>IPermutation.cs</code></a></li>
-													<li><a href="DotNetTransformer/Math/Group/Permutation/PermutationByte.cs"><code>PermutationByte.cs</code></a></li>
-													<li><a href="DotNetTransformer/Math/Group/Permutation/PermutationExtension.cs"><code>PermutationExtension.cs</code></a></li>
-													<li><a href="DotNetTransformer/Math/Group/Permutation/PermutationInt32.cs"><code>PermutationInt32.cs</code></a></li>
-													<li><a href="DotNetTransformer/Math/Group/Permutation/PermutationInt64.cs"><code>PermutationInt64.cs</code></a></li>
-												</ul>
-											</details>
-										</li>
-										<li>
-											<details open="open">
-												<summary><code>Transform2D</code></summary>
-												<ul>
-													<li><a href="DotNetTransformer/Math/Group/Transform2D/FlipRotate2D.cs"><code>FlipRotate2D.cs</code></a></li>
-													<li><a href="DotNetTransformer/Math/Group/Transform2D/Octagon2D.cs"><code>Octagon2D.cs</code></a></li>
-												</ul>
-											</details>
-										</li>
 										<li><a href="DotNetTransformer/Math/Group/FiniteGroup.cs"><code>FiniteGroup.cs</code></a></li>
 										<li><a href="DotNetTransformer/Math/Group/FiniteGroupExtension.cs"><code>FiniteGroupExtension.cs</code></a></li>
 										<li><a href="DotNetTransformer/Math/Group/GroupExtension.cs"><code>GroupExtension.cs</code></a></li>
 										<li><a href="DotNetTransformer/Math/Group/IFiniteGroupElement.cs"><code>IFiniteGroupElement.cs</code></a></li>
 										<li><a href="DotNetTransformer/Math/Group/IGroup.cs"><code>IGroup.cs</code></a></li>
 										<li><a href="DotNetTransformer/Math/Group/IGroupElement.cs"><code>IGroupElement.cs</code></a></li>
+									</ul>
+								</details>
+							</li>
+							<li>
+								<details open="open">
+									<summary><code>Permutation</code></summary>
+									<ul>
+										<li><a href="DotNetTransformer/Math/Permutation/IPermutation.cs"><code>IPermutation.cs</code></a></li>
+										<li><a href="DotNetTransformer/Math/Permutation/PermutationByte.cs"><code>PermutationByte.cs</code></a></li>
+										<li><a href="DotNetTransformer/Math/Permutation/PermutationExtension.cs"><code>PermutationExtension.cs</code></a></li>
+										<li><a href="DotNetTransformer/Math/Permutation/PermutationInt32.cs"><code>PermutationInt32.cs</code></a></li>
+										<li><a href="DotNetTransformer/Math/Permutation/PermutationInt64.cs"><code>PermutationInt64.cs</code></a></li>
 									</ul>
 								</details>
 							</li>
@@ -86,6 +108,15 @@
 										<li><a href="DotNetTransformer/Math/Set/ISubSet.cs"><code>ISubSet.cs</code></a></li>
 										<li><a href="DotNetTransformer/Math/Set/ISuperSet.cs"><code>ISuperSet.cs</code></a></li>
 										<li><a href="DotNetTransformer/Math/Set/SetExtension.cs"><code>SetExtension.cs</code></a></li>
+									</ul>
+								</details>
+							</li>
+							<li>
+								<details open="open">
+									<summary><code>Transform</code></summary>
+									<ul>
+										<li><a href="DotNetTransformer/Math/Transform/FlipRotate2D.cs"><code>FlipRotate2D.cs</code></a></li>
+										<li><a href="DotNetTransformer/Math/Transform/Polygon120.cs"><code>Polygon120.cs</code></a></li>
 									</ul>
 								</details>
 							</li>

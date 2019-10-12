@@ -16,11 +16,14 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using StringBuilder = System.Text.StringBuilder;
 using RotateFlipType = System.Drawing.RotateFlipType;
+using DotNetTransformer.Math.Group;
 
-namespace DotNetTransformer.Math.Group.Transform2D {
+namespace DotNetTransformer.Math.Transform {
 	[Serializable]
+	[DebuggerDisplay("{ToString()}, CycleLength = {CycleLength}")]
 	public struct FlipRotate2D : IFiniteGroupElement<FlipRotate2D>
 	{
 		public readonly byte Value;
@@ -146,18 +149,21 @@ namespace DotNetTransformer.Math.Group.Transform2D {
 
 		public FlipRotate2D InverseElement {
 			get {
+				return new FlipRotate2D(Value + 2 >> 3 ^ Value);
+				/*//
 				return new FlipRotate2D(0xC0 >> Value & 1 ^ Value);
-				// return new FlipRotate2D(0x67543210 >> (Value << 2) & 7);
-				// return new FlipRotate2D((Value >> 1) & (Value >> 2) ^ Value);
-				// return new FlipRotate2D(8 >> (Value >> 1) & 1 ^ Value);
-				// return new FlipRotate2D(0x40 >> (Value & 6) & 3 ^ Value);
-				// return Value > 5 ? new FlipRotate2D(Value ^ 1) : this;
-				// return IsRightAngleRotation ? new FlipRotate2D(Value ^ 1) : this;
-				// return this.Add(this.Add(this));
-				// return this.Add(this).Add(this);
-				// return this.Compose(this.Compose(this));
-				// return this.Compose(this).Compose(this);
-				// return None.Subtract(this);
+				return new FlipRotate2D(0x67543210 >> (Value << 2) & 7);
+				return new FlipRotate2D((Value >> 1) & (Value >> 2) ^ Value);
+				return new FlipRotate2D(8 >> (Value >> 1) & 1 ^ Value);
+				return new FlipRotate2D(0x40 >> (Value & 6) & 3 ^ Value);
+				return Value > 5 ? new FlipRotate2D(Value ^ 1) : this;
+				return IsRightAngleRotation ? new FlipRotate2D(Value ^ 1) : this;
+				return this.Add(this.Add(this));
+				return this.Add(this).Add(this);
+				return this.Compose(this.Compose(this));
+				return this.Compose(this).Compose(this);
+				return None.Subtract(this);
+				//*/
 			}
 		}
 		/// <summary>
@@ -166,9 +172,11 @@ namespace DotNetTransformer.Math.Group.Transform2D {
 		public int CycleLength {
 			get {
 				return 0x44222221 >> (Value << 2) & 7;
-				// return 1 << (0xA554 >> (Value << 1) & 3);
-				// return 1 << ((Value + 3 - (Value >> 2)) >> 2);
-				// return 1 << (((Value * 15) >> 3) & 1) << ((Value >> 2) & (Value >> 1));
+				/*//
+				return 1 << (0xA554 >> (Value << 1) & 3);
+				return 1 << ((Value + 3 - (Value >> 2)) >> 2);
+				return 1 << (((Value * 15) >> 3) & 1) << ((Value >> 2) & (Value >> 1));
+				//*/
 			}
 		}
 		public FlipRotate2D Add(FlipRotate2D other) {
@@ -189,8 +197,11 @@ namespace DotNetTransformer.Math.Group.Transform2D {
 		}
 		public FlipRotate2D Times(int count) {
 			return new FlipRotate2D((count & 1) * Value ^ ((Value >> 1 & Value & count) >> 1));
-			// return new FlipRotate2D((count & 1) * Value ^ ((0xC0 >> Value) & (count >> 1) & 1));
-			// return ((count & 1) == 1 ? this : None).Add((count & 2) == 2 && IsRightAngleRotation ? HalfTurn : None);
+			/*//
+			return new FlipRotate2D((count & 1) * Value ^ ((Value + 2 >> 3) & (count >> 1)));
+			return new FlipRotate2D((count & 1) * Value ^ ((0xC0 >> Value) & (count >> 1) & 1));
+			return ((count & 1) == 1 ? this : None).Add((count & 2) == 2 && IsRightAngleRotation ? HalfTurn : None);
+			//*/
 		}
 
 		public override int GetHashCode() { return Value; }
@@ -220,8 +231,10 @@ namespace DotNetTransformer.Math.Group.Transform2D {
 		public static FlipRotate2D FromInt32(int value) { return new FlipRotate2D(value & 7); }
 		public static FlipRotate2D FromRotateFlipType(RotateFlipType value) {
 			return new FlipRotate2D(0x53427160 >> ((byte)value << 2) & 7);
-			// byte v = (byte)value;
-			// return new FlipRotate2D((v << 2 & 4) ^ (v << 1 & 2) ^ (v >> 1));
+			/*//
+			byte v = (byte)value;
+			return new FlipRotate2D((v << 2 & 4) ^ (v << 1 & 2) ^ (v >> 1));
+			//*/
 		}
 
 		public static bool operator ==(FlipRotate2D l, FlipRotate2D r) { return l.Equals(r); }

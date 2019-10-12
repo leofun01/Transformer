@@ -15,29 +15,23 @@ namespace DotNetTransformer.Math.Group {
 	public static class FiniteGroupExtension
 	{
 		private class InternalGroup<T> : FiniteGroup<T>
-			where T : IFiniteGroupElement<T>
+			where T : IFiniteGroupElement<T>, new()
 		{
 			private readonly T _ident;
 			private readonly List<T> _list;
 
-			public InternalGroup(IEnumerable<T> collection, bool checkIdentity) {
-				_list = new List<T>(collection);
-				if(_list.Count < 1)
-					throw new ArgumentException("Parameter \"collection\" is empty.\r\nGroup cannot be empty.", "collection");
-				T outer = _list[0], inner, new_e;
-				_ident = outer.Subtract(outer);
-				if(checkIdentity && _ident.CycleLength != 1)
-					throw new ArgumentException("collection",
-						"CycleLength of identity element must be equal to 1.");
+			public InternalGroup(IEnumerable<T> collection) {
+				_ident = new T();
+				_list = new List<T>();
+				_list.Add(_ident);
+				foreach(T item in collection)
+					if(!_list.Contains(item))
+						_list.Add(item);
+				T outer, inner, new_e;
 				int count, outer_i = 0, inner_i;
 				do {
 					for(count = _list.Count; outer_i < count; ++outer_i) {
 						outer = _list[outer_i];
-						if(checkIdentity) {
-							new_e = outer.InverseElement;
-							CheckIdentity(outer, new_e);
-							CheckIdentity(new_e, outer);
-						}
 						for(inner_i = 0; inner_i < count; ++inner_i) {
 							inner = _list[inner_i];
 							if(!_list.Contains(new_e = outer.Add(inner))) _list.Add(new_e);
@@ -45,13 +39,6 @@ namespace DotNetTransformer.Math.Group {
 						}
 					}
 				} while(count < _list.Count);
-			}
-			private void CheckIdentity(T value, T inverse) {
-				T ident = value.Add(inverse);
-				if(!ident.Equals(_ident))
-					throw new ArgumentException(
-						string.Concat("{", value, "} + {", inverse, "} = {", ident,
-							"}\r\nGroup cannot contain more than one identity element."), "collection");
 			}
 
 			public override T IdentityElement { get { return _ident; } }
@@ -65,21 +52,30 @@ namespace DotNetTransformer.Math.Group {
 		}
 
 		public static FiniteGroup<T> CreateGroup<T>(this IEnumerable<T> collection)
-			where T : IFiniteGroupElement<T>
+			where T : IFiniteGroupElement<T>, new()
 		{
-			return new InternalGroup<T>(collection, false);
-		}
-		public static FiniteGroup<T> CreateGroup<T>(this IEnumerable<T> collection, bool checkIdentity)
-			where T : IFiniteGroupElement<T>
-		{
-			return new InternalGroup<T>(collection, checkIdentity);
+			return new InternalGroup<T>(collection);
 		}
 		public static bool IsGeneratingSetOf<T>(this IEnumerable<T> collection, FiniteGroup<T> group)
-			where T : IFiniteGroupElement<T>
+			where T : IFiniteGroupElement<T>, new()
 		{
 			return !ReferenceEquals(collection, null)
 				&& !ReferenceEquals(group, null)
 				&& group.IsSubsetOf(CreateGroup<T>(collection));
+		}
+
+		public static T Times<T>(this T t, int count)
+			where T : IFiniteGroupElement<T>, new()
+		{
+			int c = t.CycleLength;
+			count = (count % c + c) % c;
+			T r = (count & 1) != 0 ? t : new T();
+			while((count >>= 1) != 0) {
+				t = t.Add(t);
+				if((count & 1) != 0)
+					r = r.Add(t);
+			}
+			return r;
 		}
 	}
 }
