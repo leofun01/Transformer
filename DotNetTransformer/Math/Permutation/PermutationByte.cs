@@ -68,16 +68,6 @@ namespace DotNetTransformer.Math.Permutation {
 				return Value >> (index << _s) & _mask;
 			}
 		}
-		public PermutationByte InverseElement {
-			get {
-				byte t = Value, r = 0;
-				byte i = 0;
-				do
-					r |= (byte)(i << ((t >> (i << _s) & _mask) << _s));
-				while(++i < _count);
-				return new PermutationByte((byte)(r ^ _mix));
-			}
-		}
 		public int CycleLength {
 			get {
 				byte multFlag = 0;
@@ -95,6 +85,16 @@ namespace DotNetTransformer.Math.Permutation {
 					multFlag |= (byte)(1 << --cLen);
 				}
 				return (multFlag >> 1) + 1 - (multFlag >> 3);
+			}
+		}
+		public PermutationByte InverseElement {
+			get {
+				byte t = Value, r = 0;
+				byte i = 0;
+				do
+					r |= (byte)(i << ((t >> (i << _s) & _mask) << _s));
+				while(++i < _count);
+				return new PermutationByte((byte)(r ^ _mix));
 			}
 		}
 		public PermutationByte Add(PermutationByte other) {
