@@ -12,9 +12,9 @@ namespace DotNetTransformer.Math.Permutation {
 	public struct PermutationByte : IPermutation<PermutationByte>
 	{
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
-		private readonly byte _value;
-		private PermutationByte(byte value) { _value = value; }
-		private PermutationByte(short value) {
+		internal readonly byte _value;
+		internal PermutationByte(byte value) { _value = value; }
+		internal PermutationByte(short value) {
 			value = (short)(((short)(value >> 2) | value) & 0x0F0F);
 			_value = (byte)((short)(value >> 4) | value);
 		}

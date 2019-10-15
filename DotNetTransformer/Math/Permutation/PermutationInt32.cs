@@ -12,8 +12,8 @@ namespace DotNetTransformer.Math.Permutation {
 	public struct PermutationInt32 : IPermutation<PermutationInt32>
 	{
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
-		private readonly int _value;
-		private PermutationInt32(int value) { _value = value; }
+		internal readonly int _value;
+		internal PermutationInt32(int value) { _value = value; }
 		public PermutationInt32(params byte[] array) : this((IEnumerable<byte>)array) { }
 		public PermutationInt32(IEnumerable<byte> collection) {
 			if(ReferenceEquals(collection, null))
