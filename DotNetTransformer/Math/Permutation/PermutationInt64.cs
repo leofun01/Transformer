@@ -7,9 +7,11 @@ using CultureInfo = System.Globalization.CultureInfo;
 using DotNetTransformer.Math.Group;
 
 namespace DotNetTransformer.Math.Permutation {
+	using P = PermutationInt64;
+
 	[Serializable]
 	[DebuggerDisplay("{ToString()}, CycleLength = {CycleLength}")]
-	public struct PermutationInt64 : IPermutation<PermutationInt64>
+	public struct PermutationInt64 : IPermutation<P>
 	{
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		internal readonly long _value;
@@ -95,40 +97,40 @@ namespace DotNetTransformer.Math.Permutation {
 				return r;
 			}
 		}
-		public PermutationInt64 InverseElement {
+		public P InverseElement {
 			get {
 				long t = Value, r = 0L;
 				byte i = 0;
 				do
 					r |= (long)i << ((int)(t >> (i << _s) & _mask) << _s);
 				while(++i < _count);
-				return new PermutationInt64(r ^ _mix);
+				return new P(r ^ _mix);
 			}
 		}
-		public PermutationInt64 Add(PermutationInt64 other) {
+		public P Add(P other) {
 			long t = Value, o = other.Value, r = 0L;
 			byte i = 0;
 			do {
 				r |= (t >> (int)((o >> i & _mask) << _s) & _mask) << i;
 				i += 1 << _s;
 			} while(i < _len);
-			return new PermutationInt64(r ^ _mix);
+			return new P(r ^ _mix);
 		}
-		public PermutationInt64 Subtract(PermutationInt64 other) {
+		public P Subtract(P other) {
 			long t = Value, o = other.Value, r = 0L;
 			byte i = 0;
 			do {
 				r |= (t >> i & _mask) << (int)((o >> i & _mask) << _s);
 				i += 1 << _s;
 			} while(i < _len);
-			return new PermutationInt64(r ^ _mix);
+			return new P(r ^ _mix);
 		}
-		public PermutationInt64 Times(int count) {
-			return this.Times<PermutationInt64>(count);
+		public P Times(int count) {
+			return this.Times<P>(count);
 		}
 
-		public List<PermutationInt64> GetCycles(Predicate<PermutationInt64> match) {
-			List<PermutationInt64> list = new List<PermutationInt64>(_count);
+		public List<P> GetCycles(Predicate<P> match) {
+			List<P> list = new List<P>(_count);
 			long t = Value;
 			short digitFlag = 0;
 			for(byte i = 0; i < _count; ++i) {
@@ -140,7 +142,7 @@ namespace DotNetTransformer.Math.Permutation {
 					digitFlag |= (short)(1 << digit);
 					digit = (byte)(t >> (digit << _s) & _mask);
 				} while((1 << digit & digitFlag) == 0);
-				PermutationInt64 p = new PermutationInt64(value);
+				P p = new P(value);
 				if(match(p)) list.Add(p);
 			}
 			return list;
@@ -165,9 +167,9 @@ namespace DotNetTransformer.Math.Permutation {
 
 		public override int GetHashCode() { return (int)(_value >> 32 ^ _value); }
 		public override bool Equals(object o) {
-			return o is PermutationInt64 && Equals((PermutationInt64)o);
+			return o is P && Equals((P)o);
 		}
-		public bool Equals(PermutationInt64 o) { return _value == o._value; }
+		public bool Equals(P o) { return _value == o._value; }
 		public override string ToString() {
 			return _toString(_count);
 		}
@@ -207,14 +209,14 @@ namespace DotNetTransformer.Math.Permutation {
 		///			Invalid <paramref name="s"/>.
 		///		</exception>
 		///	</exception>
-		public static PermutationInt64 FromString(string s) {
+		public static P FromString(string s) {
 			if(ReferenceEquals(s, null)) throw new ArgumentNullException();
 			if(s.Length > _count)
 				_throwString(string.Format(
 					"String length ({2}) is out of range ({0}, {1}).",
 					0, _count + 1, s.Length
 				));
-			if(s.Length < 1) return new PermutationInt64();
+			if(s.Length < 1) return new P();
 			long value = 0L;
 			byte startIndex = 0;
 			for(byte digit = 0; digit < _count; ++digit) {
@@ -236,15 +238,15 @@ namespace DotNetTransformer.Math.Permutation {
 							"Digit \'{0}\' is not found.",
 							(char)((digit < 10 ? '0' : '7') + digit)
 						));
-					else return new PermutationInt64(((1L << (digit << _s)) - 1L) & _mix ^ value);
+					else return new P(((1L << (digit << _s)) - 1L) & _mix ^ value);
 				else {
 					value |= (long)digit << (i << _s);
 					if(startIndex < i) startIndex = i;
 				}
 			}
-			return new PermutationInt64(_mix ^ value);
+			return new P(_mix ^ value);
 		}
-		public static PermutationInt64 FromInt64(long value) {
+		public static P FromInt64(long value) {
 			byte startIndex = 0;
 			for(byte digit = 0; digit < _count; ++digit) {
 				byte i = 0;
@@ -255,10 +257,10 @@ namespace DotNetTransformer.Math.Permutation {
 							"Digit \'{0}\' is not found.",
 							(char)((digit < 10 ? '0' : '7') + digit)
 						));
-					else return new PermutationInt64(((1L << (digit << _s)) - 1L) & _mix ^ value);
+					else return new P(((1L << (digit << _s)) - 1L) & _mix ^ value);
 				else if(startIndex < i) startIndex = i;
 			}
-			return new PermutationInt64(_mix ^ value);
+			return new P(_mix ^ value);
 		}
 		[DebuggerStepThrough]
 		private static void _throwString(string message) {
@@ -298,19 +300,19 @@ namespace DotNetTransformer.Math.Permutation {
 			throw new ArgumentException(sb.ToString());
 		}
 
-		public static bool operator ==(PermutationInt64 l, PermutationInt64 r) { return l.Equals(r); }
-		public static bool operator !=(PermutationInt64 l, PermutationInt64 r) { return !l.Equals(r); }
+		public static bool operator ==(P l, P r) { return l.Equals(r); }
+		public static bool operator !=(P l, P r) { return !l.Equals(r); }
 
-		public static PermutationInt64 operator +(PermutationInt64 o) { return o; }
-		public static PermutationInt64 operator -(PermutationInt64 o) { return o.InverseElement; }
-		public static PermutationInt64 operator +(PermutationInt64 l, PermutationInt64 r) { return l.Add(r); }
-		public static PermutationInt64 operator -(PermutationInt64 l, PermutationInt64 r) { return l.Subtract(r); }
-		public static PermutationInt64 operator *(PermutationInt64 l, int r) { return l.Times(r); }
-		public static PermutationInt64 operator *(int l, PermutationInt64 r) { return r.Times(l); }
+		public static P operator +(P o) { return o; }
+		public static P operator -(P o) { return o.InverseElement; }
+		public static P operator +(P l, P r) { return l.Add(r); }
+		public static P operator -(P l, P r) { return l.Subtract(r); }
+		public static P operator *(P l, int r) { return l.Times(r); }
+		public static P operator *(int l, P r) { return r.Times(l); }
 
-		public static implicit operator PermutationInt64(string o) { return FromString(o); }
-		public static implicit operator PermutationInt64(long o) { return FromInt64(o); }
+		public static implicit operator P(string o) { return FromString(o); }
+		public static implicit operator P(long o) { return FromInt64(o); }
 		[CLSCompliant(false)]
-		public static implicit operator PermutationInt64(ulong o) { return FromInt64((long)o); }
+		public static implicit operator P(ulong o) { return FromInt64((long)o); }
 	}
 }
