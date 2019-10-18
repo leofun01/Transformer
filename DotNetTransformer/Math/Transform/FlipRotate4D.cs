@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using CultureInfo = System.Globalization.CultureInfo;
 using DotNetTransformer.Math.Group;
 using DotNetTransformer.Math.Permutation;
 
@@ -86,6 +87,12 @@ namespace DotNetTransformer.Math.Transform {
 			return o is T && Equals((T)o);
 		}
 		public bool Equals(T o) { return _value == o._value; }
+		public override string ToString() {
+			return string.Format(
+				CultureInfo.InvariantCulture,
+				"P:{0} V:{1}", Permutation, Vertex
+			);
+		}
 
 		private static int GetNextVertex(int v, P p) {
 			int r = 0;
@@ -94,6 +101,32 @@ namespace DotNetTransformer.Math.Transform {
 				v >>= 1;
 			}
 			return r;
+		}
+		///	<exception cref="ArgumentException">
+		///		<exception cref="ArgumentNullException">
+		///			Invalid <paramref name="s"/>.
+		///		</exception>
+		///	</exception>
+		public static T FromString(string s) {
+			if(ReferenceEquals(s, null)) throw new ArgumentNullException();
+			string[] ss = s.Trim().Split(
+				(" ").ToCharArray(),
+				StringSplitOptions.RemoveEmptyEntries
+			);
+			int len = ss.GetLength(0);
+			if(len != 2) throw new ArgumentException();
+			Dictionary<string, string> dict = new Dictionary<string, string>();
+			for(int j = 0; j < len; ++j) {
+				int i = ss[j].IndexOf(':');
+				dict.Add(ss[j].Substring(0, i), ss[j].Substring(i + 1));
+			}
+			return new T(
+				P.FromString(dict["P"]),
+				int.Parse(dict["V"], CultureInfo.InvariantCulture)
+			);
+		}
+		public static T FromInt16(short value) {
+			return new T(P.FromByte((byte)((value ^ P._mix) & _perm)), value >> _s);
 		}
 
 		public static bool operator ==(T l, T r) { return l.Equals(r); }
@@ -105,5 +138,7 @@ namespace DotNetTransformer.Math.Transform {
 		public static T operator -(T l, T r) { return l.Subtract(r); }
 		public static T operator *(T l, int r) { return l.Times(r); }
 		public static T operator *(int l, T r) { return r.Times(l); }
+
+		public static explicit operator T(short o) { return FromInt16(o); }
 	}
 }
