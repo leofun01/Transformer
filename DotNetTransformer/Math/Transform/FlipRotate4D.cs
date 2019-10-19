@@ -20,34 +20,11 @@ namespace DotNetTransformer.Math.Transform {
 		}
 
 		public static T None { get { return new T(); } }
-		public static readonly FiniteGroup<T> AllValues;
-		static FlipRotate4D() {
-			AllValues = new InternalGroupB4();
-		}
 
 		private const short _s = 8, _perm = (1 << _s) - 1;
 
 		public P Permutation { get { return new P((byte)(_value & _perm)); } }
 		public int Vertex { get { return _value >> _s; } }
-
-		private sealed class InternalGroupB4 : FiniteGroup<T>
-		{
-			public InternalGroupB4() { }
-
-			public override T IdentityElement { get { return None; } }
-			public override int Count { get { return 384; } }
-			public override bool Contains(T item) { return true; }
-			public override IEnumerator<T> GetEnumerator() {
-				FiniteGroup<P> g = (
-					new P[] { "1203", "1230" }
-				).CreateGroup<P>();
-				int count = 1 << 4;
-				for(byte v = 0; v < count; ++v)
-					foreach(P p in g)
-						yield return new T(p, v);
-			}
-			public override int GetHashCode() { return Count; }
-		}
 
 		public int CycleLength {
 			get {
