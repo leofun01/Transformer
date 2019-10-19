@@ -63,19 +63,19 @@ namespace DotNetTransformer.Math.Transform {
 		public T InverseElement {
 			get {
 				P p = -Permutation;
-				return new T(p, GetNextVertex(Vertex, p));
+				return new T(p, p.GetNextVertex<P>(Vertex));
 			}
 		}
 		public T Add(T other) {
 			P p = Permutation;
 			return new T(p + other.Permutation,
-				GetNextVertex(other.Vertex, p) ^ Vertex
+				p.GetNextVertex<P>(other.Vertex) ^ Vertex
 			);
 		}
 		public T Subtract(T other) {
 			P p = Permutation - other.Permutation;
 			return new T(p,
-				GetNextVertex(other.Vertex, p) ^ Vertex
+				p.GetNextVertex<P>(other.Vertex) ^ Vertex
 			);
 		}
 		public T Times(int count) {
@@ -94,14 +94,6 @@ namespace DotNetTransformer.Math.Transform {
 			);
 		}
 
-		private static int GetNextVertex(int v, P p) {
-			int r = 0;
-			for(byte i = 0; v != 0; ++i) {
-				r ^= (v & 1) << p[i];
-				v >>= 1;
-			}
-			return r;
-		}
 		///	<exception cref="ArgumentException">
 		///		<exception cref="ArgumentNullException">
 		///			Invalid <paramref name="s"/>.

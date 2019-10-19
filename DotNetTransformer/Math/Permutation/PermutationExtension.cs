@@ -22,5 +22,15 @@ namespace DotNetTransformer.Math.Permutation {
 		{
 			return _this.GetCyclesCount(i => i > 1);
 		}
+		public static int GetNextVertex<T>(this IPermutation<T> p, int v)
+			where T : IPermutation<T>, new()
+		{
+			int r = 0;
+			for(byte i = 0; v != 0; ++i) {
+				r ^= (v & 1) << p[i];
+				v >>= 1;
+			}
+			return r;
+		}
 	}
 }
