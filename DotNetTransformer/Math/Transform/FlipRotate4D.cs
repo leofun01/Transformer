@@ -84,7 +84,7 @@ namespace DotNetTransformer.Math.Transform {
 		public override string ToString() {
 			return string.Format(
 				CultureInfo.InvariantCulture,
-				"P:{0} V:{1:X}", Permutation, Vertex
+				"P:{0} V:{1:X1}", Permutation, Vertex
 			);
 		}
 
@@ -114,9 +114,6 @@ namespace DotNetTransformer.Math.Transform {
 				)
 			);
 		}
-		public static T FromInt16(short value) {
-			return new T(P.FromByte((byte)((value ^ P._mix) & _perm)), value >> _s);
-		}
 
 		public static bool operator ==(T l, T r) { return l.Equals(r); }
 		public static bool operator !=(T l, T r) { return !l.Equals(r); }
@@ -127,7 +124,5 @@ namespace DotNetTransformer.Math.Transform {
 		public static T operator -(T l, T r) { return l.Subtract(r); }
 		public static T operator *(T l, int r) { return l.Times(r); }
 		public static T operator *(int l, T r) { return r.Times(l); }
-
-		public static explicit operator T(short o) { return FromInt16(o); }
 	}
 }
