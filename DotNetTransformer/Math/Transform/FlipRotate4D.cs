@@ -90,7 +90,7 @@ namespace DotNetTransformer.Math.Transform {
 		public override string ToString() {
 			return string.Format(
 				CultureInfo.InvariantCulture,
-				"P:{0} V:{1}", Permutation, Vertex
+				"P:{0} V:{1:X}", Permutation, Vertex
 			);
 		}
 
@@ -114,7 +114,10 @@ namespace DotNetTransformer.Math.Transform {
 			}
 			return new T(
 				P.FromString(dict["P"]),
-				int.Parse(dict["V"], CultureInfo.InvariantCulture)
+				int.Parse(dict["V"]
+					, System.Globalization.NumberStyles.HexNumber
+					, CultureInfo.InvariantCulture
+				)
 			);
 		}
 		public static T FromInt16(short value) {
