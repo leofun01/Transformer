@@ -11,7 +11,7 @@ namespace DotNetTransformer.Math.Transform {
 
 	[Serializable]
 	[DebuggerDisplay("{ToString()}, CycleLength = {CycleLength}")]
-	public struct FlipRotate4D : IFiniteGroupElement<T>
+	public struct FlipRotate4D : IFlipRotate<T, P>
 	{
 		private readonly short _value;
 		public FlipRotate4D(P permutation, int vertex) {
@@ -42,9 +42,9 @@ namespace DotNetTransformer.Math.Transform {
 					new P[] { "1203", "1230" }
 				).CreateGroup<P>();
 				int count = 1 << 4;
-				for(byte i = 0; i < count; ++i)
+				for(byte v = 0; v < count; ++v)
 					foreach(P p in g)
-						yield return new T(p, i);
+						yield return new T(p, v);
 			}
 			public override int GetHashCode() { return Count; }
 		}
