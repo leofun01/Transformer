@@ -51,13 +51,7 @@ namespace DotNetTransformer.Math.Transform {
 
 		public int CycleLength {
 			get {
-				int cLen = 1;
-				T sum = this;
-				while(sum != None) {
-					sum += this;
-					++cLen;
-				}
-				return cLen;
+				return this.GetLengthTo<T>(None);
 			}
 		}
 		public T InverseElement {
