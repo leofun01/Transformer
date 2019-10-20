@@ -14,8 +14,26 @@ namespace DotNetTransformer.Math.Transform {
 	public struct FlipRotate8D : IFlipRotate<T, P>
 	{
 		private readonly int _value;
+		public FlipRotate8D(P permutation, int vertex) {
+			vertex &= 0xFF;
+			vertex |= vertex << 0x09;
+			vertex |= vertex << 0x12;
+			_value = vertex & _vert | permutation._value;
+		}
 
 		public static T None { get { return new T(); } }
+
+		private const int _perm = 0x77777777, _vert = _perm ^ -1;
+
+		public P Permutation { get { return new P(_value & _perm); } }
+		public int Vertex {
+			get {
+				int v = _value & _vert;
+				v |= v >> 0x12;
+				v |= v >> 0x09;
+				return v & 0xFF;
+			}
+		}
 
 		public int CycleLength {
 			get {
