@@ -14,16 +14,16 @@ namespace DotNetTransformer.Math.Transform {
 	public struct FlipRotate16D : IFlipRotate<T, P>
 	{
 		public readonly P Permutation;
-		public readonly short Vertex;
+		private readonly short _vertex;
 		public FlipRotate16D(P permutation, int vertex) {
 			Permutation = permutation;
-			Vertex = (short)vertex;
+			_vertex = (short)vertex;
 		}
 
 		public static T None { get { return new T(); } }
 
 		P IFlipRotate<T, P>.Permutation { get { return Permutation; } }
-		int IFlipRotate<T, P>.Vertex { get { return Vertex; } }
+		public int Vertex { get { return _vertex & 0xFFFF; } }
 
 		public int CycleLength {
 			get {
