@@ -18,11 +18,11 @@ namespace DotNetTransformer.Math.Group {
 					if(!_list.Contains(item))
 						_list.Add(item);
 				T outer, inner, new_e;
-				int count, outer_i = 0, inner_i;
+				int count, outer_i = 1, inner_i;
 				do {
 					for(count = _list.Count; outer_i < count; ++outer_i) {
 						outer = _list[outer_i];
-						for(inner_i = 0; inner_i < count; ++inner_i) {
+						for(inner_i = 1; inner_i < count; ++inner_i) {
 							inner = _list[inner_i];
 							if(!_list.Contains(new_e = outer.Add(inner))) _list.Add(new_e);
 							if(!_list.Contains(new_e = inner.Add(outer))) _list.Add(new_e);
