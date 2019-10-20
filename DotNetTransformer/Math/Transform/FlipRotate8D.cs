@@ -28,10 +28,9 @@ namespace DotNetTransformer.Math.Transform {
 		public P Permutation { get { return new P(_value & _perm); } }
 		public int Vertex {
 			get {
-				int v = _value & _vert;
-				v |= v >> 0x12;
-				v |= v >> 0x09;
-				return v & 0xFF;
+				int v = _value;
+				v = (v >> 0x12 & 0x2222) | (v & 0x8888);
+				return (v >> 0x09 | v) & 0xFF;
 			}
 		}
 
