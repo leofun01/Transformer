@@ -27,60 +27,52 @@ namespace DotNetTransformer.Math.Transform {
 		/// <para> 0 1  -->  0 1 </para>
 		/// <para> 3 2  -->  3 2 </para>
 		/// </summary>
-		public static readonly T None;
+		public static T None { get { return new T(); } }
 		/// <summary>
 		/// "HT": 180 degree rotation.
 		/// <para> 0 1  -->  2 3 </para>
 		/// <para> 3 2  -->  1 0 </para>
 		/// </summary>
-		public static readonly T HalfTurn;
+		public static T HalfTurn { get { return new T(1); } }
 		/// <summary>
 		/// "FX": Horizontal flip. Reflection across y-axis.
 		/// <para> 0 1  -->  1 0 </para>
 		/// <para> 3 2  -->  2 3 </para>
 		/// </summary>
-		public static readonly T FlipX;
+		public static T FlipX { get { return new T(2); } }
 		/// <summary>
 		/// "FY": Vertical flip. Reflection across x-axis.
 		/// <para> 0 1  -->  3 2 </para>
 		/// <para> 3 2  -->  0 1 </para>
 		/// </summary>
-		public static readonly T FlipY;
+		public static T FlipY { get { return new T(3); } }
 		/// <summary>
 		/// "PD": Reflection across primary diagonal line.
 		/// <para> 0 1  -->  0 3 </para>
 		/// <para> 3 2  -->  1 2 </para>
 		/// </summary>
-		public static readonly T ReflectOverPrimaryDiagonal;
+		public static T ReflectOverPrimaryDiagonal { get { return new T(4); } }
 		/// <summary>
 		/// "SD": Reflection across secondary diagonal line.
 		/// <para> 0 1  -->  2 1 </para>
 		/// <para> 3 2  -->  3 0 </para>
 		/// </summary>
-		public static readonly T ReflectOverSecondaryDiagonal;
+		public static T ReflectOverSecondaryDiagonal { get { return new T(5); } }
 		/// <summary>
 		/// "RC": 90 degree clockwise rotation.
 		/// <para> 0 1  -->  3 0 </para>
 		/// <para> 3 2  -->  2 1 </para>
 		/// </summary>
-		public static readonly T RotateClockwise;
+		public static T RotateClockwise { get { return new T(6); } }
 		/// <summary>
 		/// "RN": 90 degree counter clockwise rotation.
 		/// <para> 0 1  -->  1 2 </para>
 		/// <para> 3 2  -->  0 3 </para>
 		/// </summary>
-		public static readonly T RotateCounterClockwise;
+		public static T RotateCounterClockwise { get { return new T(7); } }
 
 		static FlipRotate2D() {
 			_names = new string[_count] { "NO", "HT", "FX", "FY", "PD", "SD", "RC", "RN" };
-			None                         = new T(0);	// = FromString("NO");	// 000
-			HalfTurn                     = new T(1);	// = FromString("HT");	// 001
-			FlipX                        = new T(2);	// = FromString("FX");	// 010
-			FlipY                        = new T(3);	// = FromString("FY");	// 011
-			ReflectOverPrimaryDiagonal   = new T(4);	// = FromString("PD");	// 100
-			ReflectOverSecondaryDiagonal = new T(5);	// = FromString("SD");	// 101
-			RotateClockwise              = new T(6);	// = FromString("RC");	// 110
-			RotateCounterClockwise       = new T(7);	// = FromString("RN");	// 111
 			AllValues = new DihedralGroupD4();
 		}
 
