@@ -15,8 +15,7 @@ namespace DotNetTransformer.Math.Transform {
 	{
 		private readonly short _value;
 		public FlipRotate4D(P permutation, int vertex) {
-			vertex <<= _s;
-			_value = (short)((vertex | permutation._value) & 0x0FFF);
+			_value = (short)((vertex << _s | permutation._value) & 0x0FFF);
 		}
 
 		public static T None { get { return new T(); } }
