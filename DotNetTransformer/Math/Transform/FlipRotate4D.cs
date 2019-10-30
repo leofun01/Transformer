@@ -63,6 +63,14 @@ namespace DotNetTransformer.Math.Transform {
 				"P:{0} V:{1:X1}", Permutation, Vertex
 			);
 		}
+		public PermutationInt64 ToPermutationInt64() {
+			P p = Permutation;
+			long v = Vertex;
+			const long b = 0x1111111111111111L;
+			for(int i = 0, l = 4; i < 4; ++i, l <<= 1)
+				v ^= ((1L << l) - 1L & (b << p[i]) ^ v) << l;
+			return new PermutationInt64(v ^ -0x123456789ABCDF0L);
+		}
 
 		///	<exception cref="ArgumentException">
 		///		<exception cref="ArgumentNullException">
