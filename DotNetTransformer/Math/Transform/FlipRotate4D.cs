@@ -67,7 +67,7 @@ namespace DotNetTransformer.Math.Transform {
 			P p = Permutation;
 			long v = Vertex;
 			const long b = 0x1111111111111111L;
-			for(int i = 0, l = 4; i < 4; ++i, l <<= 1)
+			for(byte i = 0, l = 4; i < 4; ++i, l <<= 1)
 				v ^= ((1L << l) - 1L & (b << p[i]) ^ v) << l;
 			return new PermutationInt64(v ^ -0x123456789ABCDF0L);
 		}
