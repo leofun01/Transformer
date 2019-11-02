@@ -184,8 +184,12 @@ namespace DotNetTransformer.Math.Transform {
 			P p = Permutation;
 			int v = Vertex;
 			const int b = 0x55;
+			v ^= ((b << p[0]) & 0x3 ^ v) << 2;
+			v ^= ((b << p[1]) & 0xF ^ v) << 4;
+			/*//
 			for(byte i = 0, l = 2; i < 2; ++i, l <<= 1)
 				v ^= ((1 << l) - 1 & (b << p[i]) ^ v) << l;
+			//*/
 			return new P((byte)(v ^ 0xE4));
 		}
 		public RotateFlipType ToRotateFlipType() {
