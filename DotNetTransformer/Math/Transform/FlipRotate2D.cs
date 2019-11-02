@@ -17,6 +17,9 @@ namespace DotNetTransformer.Math.Transform {
 		public readonly byte Value;
 		private FlipRotate2D(byte value) { Value = value; }
 		private FlipRotate2D(int value) { Value = (byte)value; }
+		public FlipRotate2D(P permutation, int vertex) {
+			Value = (byte)(0x65471320 >> ((vertex ^ permutation._value) << 2) & 7);
+		}
 
 		private const byte _count = 8;
 		private static readonly string[] _names;
