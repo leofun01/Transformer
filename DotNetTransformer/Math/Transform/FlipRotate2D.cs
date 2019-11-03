@@ -18,6 +18,10 @@ namespace DotNetTransformer.Math.Transform {
 		private FlipRotate2D(byte value) { Value = value; }
 		private FlipRotate2D(int value) { Value = (byte)value; }
 		public FlipRotate2D(P permutation, int vertex) {
+			if((permutation._value & -6) != 0)
+				throw new ArgumentException(
+					"Parameter \"permutation\" has invalid value."
+				);
 			Value = (byte)(0x65471320 >> ((vertex ^ permutation._value) << 2) & 7);
 		}
 
