@@ -15,13 +15,26 @@ namespace DotNetTransformer.Math.Transform {
 	{
 		private readonly byte _value;
 		public FlipRotate3D(P permutation, int vertex) {
-			_value = (byte)((vertex << _s | (permutation._value & _perm)) & 0x7F);
+			if(permutation[3] != 3)
+				throw new ArgumentException(
+					"Parameter \"permutation\" has invalid value."
+				);
+			int v = permutation._value & 0x33;
+			v = (v >> 2 | v) & _perm;
+			_value = (byte)((vertex << _s | v) & 0x7F);
 		}
 
 		public static T None { get { return new T(); } }
 
 		private const short _s = 4, _perm = (1 << _s) - 1;
 
+		public P Permutation {
+			get {
+				int v = _value & _perm;
+				v ^= v << 2;
+				return new P((byte)v);
+			}
+		}
 		public int Vertex { get { return _value >> _s; } }
 
 		public int CycleLength {
