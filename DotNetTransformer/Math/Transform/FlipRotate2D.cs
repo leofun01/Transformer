@@ -17,12 +17,15 @@ namespace DotNetTransformer.Math.Transform {
 		public readonly byte Value;
 		private FlipRotate2D(byte value) { Value = value; }
 		private FlipRotate2D(int value) { Value = (byte)value; }
+		private FlipRotate2D(byte permutation, int vertex) {
+			Value = (byte)(0x65471320 >> ((vertex ^ permutation) << 2) & 7);
+		}
 		public FlipRotate2D(P permutation, int vertex) {
 			if((permutation._value & -6) != 0)
 				throw new ArgumentException(
 					"Parameter \"permutation\" has invalid value."
 				);
-			Value = (byte)(0x65471320 >> ((vertex ^ permutation._value) << 2) & 7);
+			this = new T(permutation._value, vertex);
 		}
 
 		private const byte _count = 8;
