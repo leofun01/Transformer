@@ -180,7 +180,7 @@ namespace DotNetTransformer.Math.Transform {
 		public override bool Equals(object o) { return o is T && Equals((T)o); }
 		public bool Equals(T o) { return Value == o.Value; }
 		public override string ToString() { return _names[Value]; }
-		public P ToPermutationByte() {
+		public PermutationByte ToPermutationByte() {
 			P p = Permutation;
 			int v = Vertex;
 			const int b = 0x55;
@@ -190,7 +190,7 @@ namespace DotNetTransformer.Math.Transform {
 			for(byte i = 0, l = 2; i < 2; ++i, l <<= 1)
 				v ^= ((1 << l) - 1 & (b << p[i]) ^ v) << l;
 			//*/
-			return new P((byte)(v ^ 0xE4));
+			return new PermutationByte((byte)(v ^ 0xE4));
 		}
 		public RotateFlipType ToRotateFlipType() {
 			return (RotateFlipType)(0x31756420 >> (Value << 2) & 7);
