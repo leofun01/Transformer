@@ -14,14 +14,17 @@ namespace DotNetTransformer.Math.Transform {
 	public struct FlipRotate3D : IFlipRotate<T, P>
 	{
 		private readonly byte _value;
+		private FlipRotate3D(byte permutation, int vertex) {
+			int v = permutation & 0x33;
+			v = (v >> 2 | v) & _perm;
+			_value = (byte)((vertex << _s | v) & 0x7F);
+		}
 		public FlipRotate3D(P permutation, int vertex) {
 			if(permutation[3] != 3)
 				throw new ArgumentException(
 					"Parameter \"permutation\" has invalid value."
 				);
-			int v = permutation._value & 0x33;
-			v = (v >> 2 | v) & _perm;
-			_value = (byte)((vertex << _s | v) & 0x7F);
+			this = new T(permutation._value, vertex);
 		}
 
 		public static T None { get { return new T(); } }
@@ -45,18 +48,18 @@ namespace DotNetTransformer.Math.Transform {
 		public T InverseElement {
 			get {
 				P p = -Permutation;
-				return new T(p, p.GetNextVertex<P>(Vertex));
+				return new T(p._value, p.GetNextVertex<P>(Vertex));
 			}
 		}
 		public T Add(T other) {
 			P p = Permutation;
-			return new T(p + other.Permutation,
+			return new T((p + other.Permutation)._value,
 				p.GetNextVertex<P>(other.Vertex) ^ Vertex
 			);
 		}
 		public T Subtract(T other) {
 			P p = Permutation - other.Permutation;
-			return new T(p,
+			return new T(p._value,
 				p.GetNextVertex<P>(other.Vertex) ^ Vertex
 			);
 		}
