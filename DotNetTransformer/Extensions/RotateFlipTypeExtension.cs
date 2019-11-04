@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using RotateFlipType = System.Drawing.RotateFlipType;
+using T = System.Drawing.RotateFlipType;
 
 namespace DotNetTransformer.Extensions {
 	public static class RotateFlipTypeExtension
@@ -26,8 +26,8 @@ namespace DotNetTransformer.Extensions {
 		///		<para>Rotate90FlipXY.</para>
 		/// </para>
 		/// </return></summary>
-		public static bool IsReflection(this RotateFlipType _this) {
-			return (_this & RotateFlipType.RotateNoneFlipX) == RotateFlipType.RotateNoneFlipX;
+		public static bool IsReflection(this T _this) {
+			return (_this & T.RotateNoneFlipX) == T.RotateNoneFlipX;
 		}
 		/// <summary><return>
 		/// <para>true for
@@ -51,8 +51,8 @@ namespace DotNetTransformer.Extensions {
 		///		<para>Rotate90FlipXY.</para>
 		/// </para>
 		/// </return></summary>
-		public static bool IsAxisReflection(this RotateFlipType _this) {
-			return (_this & RotateFlipType.Rotate90FlipX) == RotateFlipType.RotateNoneFlipX;
+		public static bool IsAxisReflection(this T _this) {
+			return (_this & T.Rotate90FlipX) == T.RotateNoneFlipX;
 		}
 		/// <summary><return>
 		/// <para>true for
@@ -76,8 +76,8 @@ namespace DotNetTransformer.Extensions {
 		///		<para>Rotate90FlipXY.</para>
 		/// </para>
 		/// </return></summary>
-		public static bool IsDiagonalReflection(this RotateFlipType _this) {
-			return (_this & RotateFlipType.Rotate90FlipX) == RotateFlipType.Rotate90FlipX;
+		public static bool IsDiagonalReflection(this T _this) {
+			return (_this & T.Rotate90FlipX) == T.Rotate90FlipX;
 		}
 		/// <summary><return>
 		/// <para>true for
@@ -101,8 +101,8 @@ namespace DotNetTransformer.Extensions {
 		///		<para>Rotate270FlipX.</para>
 		/// </para>
 		/// </return></summary>
-		public static bool IsRotation(this RotateFlipType _this) {
-			return (_this & RotateFlipType.RotateNoneFlipX) == RotateFlipType.RotateNoneFlipNone;
+		public static bool IsRotation(this T _this) {
+			return (_this & T.RotateNoneFlipX) == T.RotateNoneFlipNone;
 		}
 		/// <summary><return>
 		/// <para>true for
@@ -126,8 +126,8 @@ namespace DotNetTransformer.Extensions {
 		///		<para>Rotate90FlipXY.</para>
 		/// </para>
 		/// </return></summary>
-		public static bool IsStraightAngleRotation(this RotateFlipType _this) {
-			return (_this & RotateFlipType.Rotate90FlipX) == RotateFlipType.RotateNoneFlipNone;
+		public static bool IsStraightAngleRotation(this T _this) {
+			return (_this & T.Rotate90FlipX) == T.RotateNoneFlipNone;
 		}
 		/// <summary><return>
 		/// <para>true for
@@ -151,8 +151,8 @@ namespace DotNetTransformer.Extensions {
 		///		<para>Rotate270FlipX.</para>
 		/// </para>
 		/// </return></summary>
-		public static bool IsRightAngleRotation(this RotateFlipType _this) {
-			return (_this & RotateFlipType.Rotate90FlipX) == RotateFlipType.Rotate90FlipNone;
+		public static bool IsRightAngleRotation(this T _this) {
+			return (_this & T.Rotate90FlipX) == T.Rotate90FlipNone;
 		}
 		/// <summary><return>
 		/// <para>true for
@@ -176,43 +176,47 @@ namespace DotNetTransformer.Extensions {
 		///		<para>Rotate180FlipX.</para>
 		/// </para>
 		/// </return></summary>
-		public static bool IsSwapDimensions(this RotateFlipType _this) {
-			return (_this & RotateFlipType.Rotate90FlipNone) == RotateFlipType.Rotate90FlipNone;
+		public static bool IsSwapDimensions(this T _this) {
+			return (_this & T.Rotate90FlipNone) == T.Rotate90FlipNone;
 		}
 
-		public static RotateFlipType GetInverseElement(this RotateFlipType _this) {
+		public static T GetInverseElement(this T _this) {
 			byte t = (byte)_this;
-			return (RotateFlipType)(0x76541230 >> (t << 2) & 7);
-			// return (RotateFlipType)(((t >> 2 ^ 1) & t) << 1 ^ t);
+			return (T)(0x76541230 >> (t << 2) & 7);
+			/*//
+			return (T)(((t >> 2 ^ 1) & t) << 1 ^ t);
+			//*/
 		}
-		public static int GetCycleLength(this RotateFlipType _this) {
+		public static int GetCycleLength(this T _this) {
 			return 0x22224241 >> ((byte)_this << 2) & 7;
-			// return 1 << (0x5598 >> ((byte)_this << 1) & 3);
-			// byte t = (byte)_this;
-			// return 1 << (20 >> t & 3 | (t >> 2));
-		}
-		public static RotateFlipType Add(this RotateFlipType _this, RotateFlipType other) {
-			byte t = (byte)_this, o = (byte)other;
-			return (RotateFlipType)(((t >> 2 ^ t) & o & 1) << 1 ^ t ^ o);
-		}
-		public static RotateFlipType Compose(this RotateFlipType _this, RotateFlipType other) {
-			byte t = (byte)_this, o = (byte)other;
-			return (RotateFlipType)(((o >> 2 ^ o) & t & 1) << 1 ^ t ^ o);
-		}
-		public static RotateFlipType Subtract(this RotateFlipType _this, RotateFlipType other) {
-			byte t = (byte)_this, o = (byte)other;
-			return (RotateFlipType)((((t ^ o) >> 2 ^ t ^ 1) & o & 1) << 1 ^ t ^ o);
-		}
-		public static RotateFlipType Times(this RotateFlipType _this, int count) {
+			/*//
+			return 1 << (0x5598 >> ((byte)_this << 1) & 3);
 			byte t = (byte)_this;
-			return (RotateFlipType)((count & 1) * t ^ ((t >> 1 ^ 2) & (t << 1) & count));
+			return 1 << (20 >> t & 3 | (t >> 2));
+			//*/
+		}
+		public static T Add(this T _this, T other) {
+			byte t = (byte)_this, o = (byte)other;
+			return (T)(((t >> 2 ^ t) & o & 1) << 1 ^ t ^ o);
+		}
+		public static T Compose(this T _this, T other) {
+			byte t = (byte)_this, o = (byte)other;
+			return (T)(((o >> 2 ^ o) & t & 1) << 1 ^ t ^ o);
+		}
+		public static T Subtract(this T _this, T other) {
+			byte t = (byte)_this, o = (byte)other;
+			return (T)((((t ^ o) >> 2 ^ t ^ 1) & o & 1) << 1 ^ t ^ o);
+		}
+		public static T Times(this T _this, int count) {
+			byte t = (byte)_this;
+			return (T)((count & 1) * t ^ ((t >> 1 ^ 2) & (t << 1) & count));
 		}
 
-		public static RotateFlipType AddAll(this IEnumerable<RotateFlipType> collection) {
-			return collection.CollectAll<RotateFlipType>((l, r) => Add(l, r));
+		public static T AddAll(this IEnumerable<T> collection) {
+			return collection.CollectAll<T>((l, r) => Add(l, r));
 		}
-		public static RotateFlipType ComposeAll(this IEnumerable<RotateFlipType> collection) {
-			return collection.CollectAll<RotateFlipType>((l, r) => Compose(l, r));
+		public static T ComposeAll(this IEnumerable<T> collection) {
+			return collection.CollectAll<T>((l, r) => Compose(l, r));
 		}
 	}
 }
