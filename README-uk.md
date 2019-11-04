@@ -42,6 +42,15 @@
 						</ul>
 					</details>
 				</li>
+				<li>
+					<details open="open">
+						<summary><code>txt</code></summary>
+						<ul>
+							<li><a href="docs/txt/Tesseract_16_v1.txt"><code>Tesseract_16_v1.txt</code></a></li>
+							<li><a href="docs/txt/TesseractResearchResult.txt"><code>TesseractResearchResult.txt</code></a></li>
+						</ul>
+					</details>
+				</li>
 			</ul>
 		</details>
 	</li>
@@ -115,7 +124,12 @@
 								<details open="open">
 									<summary><code>Transform</code></summary>
 									<ul>
+										<li><a href="DotNetTransformer/Math/Transform/FlipRotate16D.cs"><code>FlipRotate16D.cs</code></a></li>
 										<li><a href="DotNetTransformer/Math/Transform/FlipRotate2D.cs"><code>FlipRotate2D.cs</code></a></li>
+										<li><a href="DotNetTransformer/Math/Transform/FlipRotate3D.cs"><code>FlipRotate3D.cs</code></a></li>
+										<li><a href="DotNetTransformer/Math/Transform/FlipRotate4D.cs"><code>FlipRotate4D.cs</code></a></li>
+										<li><a href="DotNetTransformer/Math/Transform/FlipRotate8D.cs"><code>FlipRotate8D.cs</code></a></li>
+										<li><a href="DotNetTransformer/Math/Transform/IFlipRotate.cs"><code>IFlipRotate.cs</code></a></li>
 										<li><a href="DotNetTransformer/Math/Transform/Polygon120.cs"><code>Polygon120.cs</code></a></li>
 									</ul>
 								</details>

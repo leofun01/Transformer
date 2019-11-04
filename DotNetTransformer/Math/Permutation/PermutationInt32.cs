@@ -7,13 +7,15 @@ using CultureInfo = System.Globalization.CultureInfo;
 using DotNetTransformer.Math.Group;
 
 namespace DotNetTransformer.Math.Permutation {
+	using P = PermutationInt32;
+
 	[Serializable]
 	[DebuggerDisplay("{ToString()}, CycleLength = {CycleLength}")]
-	public struct PermutationInt32 : IPermutation<PermutationInt32>
+	public struct PermutationInt32 : IPermutation<P>
 	{
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
-		private readonly int _value;
-		private PermutationInt32(int value) { _value = value; }
+		internal readonly int _value;
+		internal PermutationInt32(int value) { _value = value; }
 		public PermutationInt32(params byte[] array) : this((IEnumerable<byte>)array) { }
 		public PermutationInt32(IEnumerable<byte> collection) {
 			if(ReferenceEquals(collection, null))
@@ -64,16 +66,6 @@ namespace DotNetTransformer.Math.Permutation {
 				return Value >> (index << _s) & _mask;
 			}
 		}
-		public PermutationInt32 InverseElement {
-			get {
-				int t = Value, r = 0;
-				byte i = 0;
-				do
-					r |= i << ((t >> (i << _s) & _mask) << _s);
-				while(++i < _count);
-				return new PermutationInt32(r ^ _mix);
-			}
-		}
 		public int CycleLength {
 			get {
 				byte multFlag = 0;
@@ -100,30 +92,40 @@ namespace DotNetTransformer.Math.Permutation {
 				return r;
 			}
 		}
-		public PermutationInt32 Add(PermutationInt32 other) {
+		public P InverseElement {
+			get {
+				int t = Value, r = 0;
+				byte i = 0;
+				do
+					r |= i << ((t >> (i << _s) & _mask) << _s);
+				while(++i < _count);
+				return new P(r ^ _mix);
+			}
+		}
+		public P Add(P other) {
 			int t = Value, o = other.Value, r = 0;
 			byte i = 0;
 			do {
 				r |= (t >> ((o >> i & _mask) << _s) & _mask) << i;
 				i += 1 << _s;
 			} while(i < _len);
-			return new PermutationInt32(r ^ _mix);
+			return new P(r ^ _mix);
 		}
-		public PermutationInt32 Subtract(PermutationInt32 other) {
+		public P Subtract(P other) {
 			int t = Value, o = other.Value, r = 0;
 			byte i = 0;
 			do {
 				r |= (t >> i & _mask) << ((o >> i & _mask) << _s);
 				i += 1 << _s;
 			} while(i < _len);
-			return new PermutationInt32(r ^ _mix);
+			return new P(r ^ _mix);
 		}
-		public PermutationInt32 Times(int count) {
-			return this.Times<PermutationInt32>(count);
+		public P Times(int count) {
+			return this.Times<P>(count);
 		}
 
-		public List<PermutationInt32> GetCycles(Predicate<PermutationInt32> match) {
-			List<PermutationInt32> list = new List<PermutationInt32>(_count);
+		public List<P> GetCycles(Predicate<P> match) {
+			List<P> list = new List<P>(_count);
 			int t = Value;
 			byte digitFlag = 0;
 			for(byte i = 0; i < _count; ++i) {
@@ -135,7 +137,7 @@ namespace DotNetTransformer.Math.Permutation {
 					digitFlag |= (byte)(1 << digit);
 					digit = (byte)(t >> (digit << _s) & _mask);
 				} while((1 << digit & digitFlag) == 0);
-				PermutationInt32 p = new PermutationInt32(value);
+				P p = new P(value);
 				if(match(p)) list.Add(p);
 			}
 			return list;
@@ -160,9 +162,9 @@ namespace DotNetTransformer.Math.Permutation {
 
 		public override int GetHashCode() { return _value; }
 		public override bool Equals(object o) {
-			return o is PermutationInt32 && Equals((PermutationInt32)o);
+			return o is P && Equals((P)o);
 		}
-		public bool Equals(PermutationInt32 o) { return _value == o._value; }
+		public bool Equals(P o) { return _value == o._value; }
 		public override string ToString() {
 			return _toString(_count);
 		}
@@ -201,14 +203,14 @@ namespace DotNetTransformer.Math.Permutation {
 		///			Invalid <paramref name="s"/>.
 		///		</exception>
 		///	</exception>
-		public static PermutationInt32 FromString(string s) {
+		public static P FromString(string s) {
 			if(ReferenceEquals(s, null)) throw new ArgumentNullException();
 			if(s.Length > _count)
 				_throwString(string.Format(
 					"String length ({2}) is out of range ({0}, {1}).",
 					0, _count + 1, s.Length
 				));
-			if(s.Length < 1) return new PermutationInt32();
+			if(s.Length < 1) return new P();
 			int value = 0;
 			byte startIndex = 0;
 			for(byte digit = 0; digit < _count; ++digit) {
@@ -228,15 +230,15 @@ namespace DotNetTransformer.Math.Permutation {
 							"Digit \'{0}\' is not found.",
 							(char)(digit | '0')
 						));
-					else return new PermutationInt32(((1 << (digit << _s)) - 1) & _mix ^ value);
+					else return new P(((1 << (digit << _s)) - 1) & _mix ^ value);
 				else {
 					value |= (int)digit << (i << _s);
 					if(startIndex < i) startIndex = i;
 				}
 			}
-			return new PermutationInt32(_mix ^ value);
+			return new P(_mix ^ value);
 		}
-		public static PermutationInt32 FromInt32(int value) {
+		public static P FromInt32(int value) {
 			if((value & -0x77777778) != 0)
 				_throwInt32(string.Format(
 					"Some digits is out of {0}.",
@@ -252,10 +254,10 @@ namespace DotNetTransformer.Math.Permutation {
 							"Digit \'{0}\' is not found.",
 							(char)(digit | '0')
 						));
-					else return new PermutationInt32(((1 << (digit << _s)) - 1) & _mix ^ value);
+					else return new P(((1 << (digit << _s)) - 1) & _mix ^ value);
 				else if(startIndex < i) startIndex = i;
 			}
-			return new PermutationInt32(_mix ^ value);
+			return new P(_mix ^ value);
 		}
 		[DebuggerStepThrough]
 		private static void _throwString(string message) {
@@ -295,19 +297,19 @@ namespace DotNetTransformer.Math.Permutation {
 			throw new ArgumentException(sb.ToString());
 		}
 
-		public static bool operator ==(PermutationInt32 l, PermutationInt32 r) { return l.Equals(r); }
-		public static bool operator !=(PermutationInt32 l, PermutationInt32 r) { return !l.Equals(r); }
+		public static bool operator ==(P l, P r) { return l.Equals(r); }
+		public static bool operator !=(P l, P r) { return !l.Equals(r); }
 
-		public static PermutationInt32 operator +(PermutationInt32 o) { return o; }
-		public static PermutationInt32 operator -(PermutationInt32 o) { return o.InverseElement; }
-		public static PermutationInt32 operator +(PermutationInt32 l, PermutationInt32 r) { return l.Add(r); }
-		public static PermutationInt32 operator -(PermutationInt32 l, PermutationInt32 r) { return l.Subtract(r); }
-		public static PermutationInt32 operator *(PermutationInt32 l, int r) { return l.Times(r); }
-		public static PermutationInt32 operator *(int l, PermutationInt32 r) { return r.Times(l); }
+		public static P operator +(P o) { return o; }
+		public static P operator -(P o) { return o.InverseElement; }
+		public static P operator +(P l, P r) { return l.Add(r); }
+		public static P operator -(P l, P r) { return l.Subtract(r); }
+		public static P operator *(P l, int r) { return l.Times(r); }
+		public static P operator *(int l, P r) { return r.Times(l); }
 
-		public static implicit operator PermutationInt32(string o) { return FromString(o); }
-		public static implicit operator PermutationInt32(int o) { return FromInt32(o); }
+		public static implicit operator P(string o) { return FromString(o); }
+		public static implicit operator P(int o) { return FromInt32(o); }
 		[CLSCompliant(false)]
-		public static implicit operator PermutationInt32(uint o) { return FromInt32((int)o); }
+		public static implicit operator P(uint o) { return FromInt32((int)o); }
 	}
 }
