@@ -18,14 +18,16 @@ using CultureInfo = System.Globalization.CultureInfo;
 using DotNetTransformer.Math.Group;
 
 namespace DotNetTransformer.Math.Permutation {
+	using P = PermutationByte;
+
 	[Serializable]
 	[DebuggerDisplay("{ToString()}, CycleLength = {CycleLength}")]
-	public struct PermutationByte : IPermutation<PermutationByte>
+	public struct PermutationByte : IPermutation<P>
 	{
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
-		private readonly byte _value;
-		private PermutationByte(byte value) { _value = value; }
-		private PermutationByte(short value) {
+		internal readonly byte _value;
+		internal PermutationByte(byte value) { _value = value; }
+		internal PermutationByte(short value) {
 			value = (short)(((short)(value >> 2) | value) & 0x0F0F);
 			_value = (byte)((short)(value >> 4) | value);
 		}
@@ -79,16 +81,6 @@ namespace DotNetTransformer.Math.Permutation {
 				return Value >> (index << _s) & _mask;
 			}
 		}
-		public PermutationByte InverseElement {
-			get {
-				byte t = Value, r = 0;
-				byte i = 0;
-				do
-					r |= (byte)(i << ((t >> (i << _s) & _mask) << _s));
-				while(++i < _count);
-				return new PermutationByte((byte)(r ^ _mix));
-			}
-		}
 		public int CycleLength {
 			get {
 				byte multFlag = 0;
@@ -108,30 +100,40 @@ namespace DotNetTransformer.Math.Permutation {
 				return (multFlag >> 1) + 1 - (multFlag >> 3);
 			}
 		}
-		public PermutationByte Add(PermutationByte other) {
+		public P InverseElement {
+			get {
+				byte t = Value, r = 0;
+				byte i = 0;
+				do
+					r |= (byte)(i << ((t >> (i << _s) & _mask) << _s));
+				while(++i < _count);
+				return new P((byte)(r ^ _mix));
+			}
+		}
+		public P Add(P other) {
 			byte t = Value, o = other.Value, r = 0;
 			byte i = 0;
 			do {
 				r |= (byte)((t >> ((o >> i & _mask) << _s) & _mask) << i);
 				i += 1 << _s;
 			} while(i < _len);
-			return new PermutationByte((byte)(r ^ _mix));
+			return new P((byte)(r ^ _mix));
 		}
-		public PermutationByte Subtract(PermutationByte other) {
+		public P Subtract(P other) {
 			byte t = Value, o = other.Value, r = 0;
 			byte i = 0;
 			do {
 				r |= (byte)((t >> i & _mask) << ((o >> i & _mask) << _s));
 				i += 1 << _s;
 			} while(i < _len);
-			return new PermutationByte((byte)(r ^ _mix));
+			return new P((byte)(r ^ _mix));
 		}
-		public PermutationByte Times(int count) {
-			return this.Times<PermutationByte>(count);
+		public P Times(int count) {
+			return this.Times<P>(count);
 		}
 
-		public List<PermutationByte> GetCycles(Predicate<PermutationByte> match) {
-			List<PermutationByte> list = new List<PermutationByte>(_count);
+		public List<P> GetCycles(Predicate<P> match) {
+			List<P> list = new List<P>(_count);
 			byte t = Value;
 			byte digitFlag = 0;
 			for(byte i = 0; i < _count; ++i) {
@@ -143,7 +145,7 @@ namespace DotNetTransformer.Math.Permutation {
 					digitFlag |= (byte)(1 << digit);
 					digit = (byte)(t >> (digit << _s) & _mask);
 				} while((1 << digit & digitFlag) == 0);
-				PermutationByte p = new PermutationByte(value);
+				P p = new P(value);
 				if(match(p)) list.Add(p);
 			}
 			return list;
@@ -168,9 +170,9 @@ namespace DotNetTransformer.Math.Permutation {
 
 		public override int GetHashCode() { return _value; }
 		public override bool Equals(object o) {
-			return o is PermutationByte && Equals((PermutationByte)o);
+			return o is P && Equals((P)o);
 		}
-		public bool Equals(PermutationByte o) { return _value == o._value; }
+		public bool Equals(P o) { return _value == o._value; }
 		public override string ToString() {
 			return _toString(_count);
 		}
@@ -215,14 +217,14 @@ namespace DotNetTransformer.Math.Permutation {
 		///			Invalid <paramref name="s"/>.
 		///		</exception>
 		///	</exception>
-		public static PermutationByte FromString(string s) {
+		public static P FromString(string s) {
 			if(ReferenceEquals(s, null)) throw new ArgumentNullException();
 			if(s.Length > _count)
 				_throwString(string.Format(
 					"String length ({2}) is out of range ({0}, {1}).",
 					0, _count + 1, s.Length
 				));
-			if(s.Length < 1) return new PermutationByte();
+			if(s.Length < 1) return new P();
 			byte value = 0;
 			byte startIndex = 0;
 			for(byte digit = 0; digit < _count; ++digit) {
@@ -242,15 +244,15 @@ namespace DotNetTransformer.Math.Permutation {
 							"Digit \'{0}\' is not found.",
 							(char)(digit | '0')
 						));
-					else return new PermutationByte((byte)(((1 << (digit << _s)) - 1) & _mix ^ value));
+					else return new P((byte)(((1 << (digit << _s)) - 1) & _mix ^ value));
 				else {
 					value |= (byte)(digit << (i << _s));
 					if(startIndex < i) startIndex = i;
 				}
 			}
-			return new PermutationByte((byte)(_mix ^ value));
+			return new P((byte)(_mix ^ value));
 		}
-		public static PermutationByte FromByte(byte value) {
+		public static P FromByte(byte value) {
 			byte startIndex = 0;
 			for(byte digit = 0; digit < _count; ++digit) {
 				byte i = 0;
@@ -261,12 +263,12 @@ namespace DotNetTransformer.Math.Permutation {
 							"Digit \'{0}\' is not found.",
 							(char)(digit | '0')
 						));
-					else return new PermutationByte((byte)(((1 << (digit << _s)) - 1) & _mix ^ value));
+					else return new P((byte)(((1 << (digit << _s)) - 1) & _mix ^ value));
 				else if(startIndex < i) startIndex = i;
 			}
-			return new PermutationByte((byte)(_mix ^ value));
+			return new P((byte)(_mix ^ value));
 		}
-		public static PermutationByte FromInt16(short value) {
+		public static P FromInt16(short value) {
 			if((value & -0x3334) != 0)
 				_throwInt16(string.Format(
 					"Some digits is out of {0}.",
@@ -282,10 +284,10 @@ namespace DotNetTransformer.Math.Permutation {
 							"Digit \'{0}\' is not found.",
 							(char)(digit | '0')
 						));
-					else return new PermutationByte((short)(((1 << (digit << 2)) - 1) & 0x3210 ^ value));
+					else return new P((short)(((1 << (digit << 2)) - 1) & 0x3210 ^ value));
 				else if(startIndex < i) startIndex = i;
 			}
-			return new PermutationByte((short)(0x3210 ^ value));
+			return new P((short)(0x3210 ^ value));
 		}
 		[DebuggerStepThrough]
 		private static void _throwString(string message) {
@@ -333,22 +335,22 @@ namespace DotNetTransformer.Math.Permutation {
 			throw new ArgumentException(sb.ToString());
 		}
 
-		public static bool operator ==(PermutationByte l, PermutationByte r) { return l.Equals(r); }
-		public static bool operator !=(PermutationByte l, PermutationByte r) { return !l.Equals(r); }
+		public static bool operator ==(P l, P r) { return l.Equals(r); }
+		public static bool operator !=(P l, P r) { return !l.Equals(r); }
 
-		public static PermutationByte operator +(PermutationByte o) { return o; }
-		public static PermutationByte operator -(PermutationByte o) { return o.InverseElement; }
-		public static PermutationByte operator +(PermutationByte l, PermutationByte r) { return l.Add(r); }
-		public static PermutationByte operator -(PermutationByte l, PermutationByte r) { return l.Subtract(r); }
-		public static PermutationByte operator *(PermutationByte l, int r) { return l.Times(r); }
-		public static PermutationByte operator *(int l, PermutationByte r) { return r.Times(l); }
+		public static P operator +(P o) { return o; }
+		public static P operator -(P o) { return o.InverseElement; }
+		public static P operator +(P l, P r) { return l.Add(r); }
+		public static P operator -(P l, P r) { return l.Subtract(r); }
+		public static P operator *(P l, int r) { return l.Times(r); }
+		public static P operator *(int l, P r) { return r.Times(l); }
 
-		public static implicit operator PermutationByte(string o) { return FromString(o); }
-		public static implicit operator PermutationByte(byte o) { return FromByte(o); }
-		public static implicit operator PermutationByte(short o) { return FromInt16(o); }
+		public static implicit operator P(string o) { return FromString(o); }
+		public static implicit operator P(byte o) { return FromByte(o); }
+		public static implicit operator P(short o) { return FromInt16(o); }
 		[CLSCompliant(false)]
-		public static implicit operator PermutationByte(sbyte o) { return FromByte((byte)o); }
+		public static implicit operator P(sbyte o) { return FromByte((byte)o); }
 		[CLSCompliant(false)]
-		public static implicit operator PermutationByte(ushort o) { return FromInt16((short)o); }
+		public static implicit operator P(ushort o) { return FromInt16((short)o); }
 	}
 }

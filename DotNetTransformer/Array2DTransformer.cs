@@ -124,10 +124,7 @@ namespace DotNetTransformer {
 			);
 		}
 		public static bool operator !=(Array2DTransformer<T> l, Array2DTransformer<T> r) {
-			return !ReferenceEquals(l, r) && (
-				ReferenceEquals(l, null) ||
-				!l.Equals(r)
-			);
+			return !(l == r);
 		}
 
 		public static explicit operator T[,](Array2DTransformer<T> o) { return o.ToArray(); }

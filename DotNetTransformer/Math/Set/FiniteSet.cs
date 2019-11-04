@@ -78,10 +78,7 @@ namespace DotNetTransformer.Math.Set {
 			);
 		}
 		public static bool operator !=(FiniteSet<T> l, FiniteSet<T> r) {
-			return !ReferenceEquals(l, r) && (
-				ReferenceEquals(l, null) ||
-				!l.Equals(r)
-			);
+			return !(l == r);
 		}
 	}
 }
