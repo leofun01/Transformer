@@ -65,21 +65,6 @@ namespace DotNetTransformer.Math.Group {
 			}
 			return cLen;
 		}
-		public static T GetCommutatorWith<T>(this T t, T o)
-			where T : IFiniteGroupElement<T>, new()
-		{
-			return o.Add(t).InverseElement.Add(t.Add(o));
-		}
-		public static T InverseAdd<T>(this T t, T o)
-			where T : IFiniteGroupElement<T>, new()
-		{
-			return o.InverseElement.Add(t);
-		}
-		public static T Conjugate<T>(this T t, T o)
-			where T : IFiniteGroupElement<T>, new()
-		{
-			return o.InverseElement.Add(t).Add(o);
-		}
 		public static T Times<T>(this T t, int count)
 			where T : IFiniteGroupElement<T>, new()
 		{
