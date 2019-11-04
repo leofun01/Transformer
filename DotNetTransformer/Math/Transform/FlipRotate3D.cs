@@ -14,6 +14,7 @@ namespace DotNetTransformer.Math.Transform {
 	public struct FlipRotate3D : IFlipRotate<T, P>
 	{
 		private readonly byte _value;
+		private FlipRotate3D(byte value) { _value = value; }
 		private FlipRotate3D(byte permutation, int vertex) {
 			int v = permutation & 0x33;
 			v = (v >> 2 | v) & _perm;
@@ -28,6 +29,14 @@ namespace DotNetTransformer.Math.Transform {
 		}
 
 		public static T None { get { return new T(); } }
+
+		public static T FlipX     { get { return new T(0x10); } }
+		public static T FlipY     { get { return new T(0x20); } }
+		public static T FlipZ     { get { return new T(0x40); } }
+		public static T RotateXY  { get { return new T(0x21); } }
+		public static T RotateYZ  { get { return new T(0x4C); } }
+		public static T RotateZX  { get { return new T(0x1A); } }
+		public static T RotateXYZ { get { return new T(0x0E); } }
 
 		private const short _s = 4, _perm = (1 << _s) - 1;
 
