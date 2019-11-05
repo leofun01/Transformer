@@ -14,5 +14,7 @@ namespace DotNetTransformer.Math.Permutation {
 
 		List<T> GetCycles(Predicate<T> match);
 		int GetCyclesCount(Predicate<int> match);
+
+		int[] ToArray();
 	}
 }

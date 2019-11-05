@@ -202,6 +202,16 @@ namespace DotNetTransformer.Math.Permutation {
 			} while(i < _len);
 		}
 		IEnumerator IEnumerable.GetEnumerator() { return GetEnumerator(); }
+		public int[] ToArray() {
+			long v = Value;
+			int[] a = new int[_count];
+			int i = 0;
+			do {
+				a[i] = (int)(v & _mask);
+				v >>= 1 << _s;
+			} while(++i < _count);
+			return a;
+		}
 
 		///	<exception cref="ArgumentException">
 		///		<exception cref="ArgumentNullException">
