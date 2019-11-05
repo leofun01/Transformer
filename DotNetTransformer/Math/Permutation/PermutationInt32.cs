@@ -124,6 +124,11 @@ namespace DotNetTransformer.Math.Permutation {
 			return this.Times<P>(count);
 		}
 
+		public P GetNextPermutation() {
+		}
+		public P GetPreviousPermutation() {
+		}
+
 		public List<P> GetCycles(Predicate<P> match) {
 			List<P> list = new List<P>(_count);
 			int t = Value;
