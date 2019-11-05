@@ -38,7 +38,7 @@ namespace DotNetTransformer.Math.Group {
 		public static T ComposeAll<T>(this IEnumerable<T> collection)
 			where T : IGroupElement<T>, new()
 		{
-			return collection.CollectAll<T>((l, r) => Compose<T>(l, r));
+			return collection.CollectAll<T>(Compose<T>);
 		}
 	}
 }

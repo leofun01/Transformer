@@ -213,10 +213,10 @@ namespace DotNetTransformer.Extensions {
 		}
 
 		public static T AddAll(this IEnumerable<T> collection) {
-			return collection.CollectAll<T>((l, r) => Add(l, r));
+			return collection.CollectAll<T>(Add);
 		}
 		public static T ComposeAll(this IEnumerable<T> collection) {
-			return collection.CollectAll<T>((l, r) => Compose(l, r));
+			return collection.CollectAll<T>(Compose);
 		}
 	}
 }
