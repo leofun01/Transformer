@@ -9,8 +9,8 @@ namespace DotNetTransformer.Math.Permutation {
 	{
 		int this[int index] { get; }
 
-		T GetNextPermutation();
-		T GetPreviousPermutation();
+		T GetNextPermutation(int maxLength);
+		T GetPreviousPermutation(int maxLength);
 
 		List<T> GetCycles(Predicate<T> match);
 		int GetCyclesCount(Predicate<int> match);

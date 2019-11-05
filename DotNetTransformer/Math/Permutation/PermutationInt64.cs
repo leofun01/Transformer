@@ -129,9 +129,28 @@ namespace DotNetTransformer.Math.Permutation {
 			return this.Times<P>(count);
 		}
 
-		public P GetNextPermutation() {
+		public P GetNextPermutation(int maxLength) {
+			if(maxLength > _count) maxLength = _count;
+			int[] a = ToArray();
+			byte n = 0, i;
+			while(++n < maxLength && a[n - 1] >= a[n]) ;
+			if(n < maxLength) {
+				for(i = 0; a[i] >= a[n]; ++i) ;
+				int t = a[n];
+				a[n] = a[i];
+				a[i] = t;
+			}
+			for(i = 0; i < --n; ++i) {
+				int t = a[n];
+				a[n] = a[i];
+				a[i] = t;
+			}
+			long r = 0;
+			for(i = 0; i < _count; ++i)
+				r |= (long)a[i] << (i << _s);
+			return new P(r ^ _mix);
 		}
-		public P GetPreviousPermutation() {
+		public P GetPreviousPermutation(int maxLength) {
 		}
 
 		public List<P> GetCycles(Predicate<P> match) {
