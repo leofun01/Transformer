@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 
 namespace DotNetTransformer.Math.Permutation {
-	public static class PermutationExtension {
+	public static class PermutationExtension
+	{
 		public static List<T> GetCyclesAll<T>(this T _this)
 			where T : IPermutation<T>, new()
 		{
@@ -22,6 +23,7 @@ namespace DotNetTransformer.Math.Permutation {
 		{
 			return _this.GetCyclesCount(i => i > 1);
 		}
+
 		public static int GetNextVertex<T>(this T p, int v)
 			where T : IPermutation<T>, new()
 		{

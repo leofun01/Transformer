@@ -56,7 +56,7 @@ namespace DotNetTransformer.Math.Permutation {
 		}
 
 		private const int _mix = 0x76543210, _mask = 7;
-		private const byte _count = 8, _len = 32, _s = 2;
+		private const byte _s = 2, _count = 8, _len = _count << _s;
 		private const string _charPattern = "[0-7]";
 
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]

@@ -60,7 +60,7 @@ namespace DotNetTransformer.Math.Permutation {
 		}
 
 		private const byte _mix = 0xE4, _mask = 3;
-		private const byte _count = 4, _len = 8, _s = 1;
+		private const byte _s = 1, _count = 4, _len = _count << _s;
 		private const string _charPattern = "[0-3]";
 
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
