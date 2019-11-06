@@ -20,6 +20,32 @@ namespace DotNetTransformer.Math.Transform {
 
 		public static T None { get { return new T(); } }
 
+		public static readonly FiniteGroup<T> AllValues;
+
+		static FlipRotate4D() {
+			AllValues = new InternalGroup();
+		}
+
+		private sealed class InternalGroup : FiniteGroup<T>
+		{
+			public InternalGroup() { }
+
+			public override T IdentityElement { get { return None; } }
+			public override int Count { get { return 384; } }
+			public override bool Contains(T item) { return true; }
+			public override IEnumerator<T> GetEnumerator() {
+				P none = new P(), p = none;
+				const byte count = 1 << _dimCount;
+				do {
+					for(byte i = 0; i < count; ++i)
+						yield return new T(p, i);
+					p = p.GetNextPermutation(_dimCount);
+				} while(p != none);
+			}
+			public override int GetHashCode() { return Count; }
+		}
+
+		private const byte _dimCount = 4;
 		private const short _s = 8, _perm = (1 << _s) - 1;
 
 		public P Permutation { get { return new P((byte)(_value & _perm)); } }
@@ -67,7 +93,7 @@ namespace DotNetTransformer.Math.Transform {
 			P p = Permutation;
 			long v = Vertex;
 			const long b = 0x1111111111111111L;
-			for(byte i = 0, l = 4; i < 4; ++i, l <<= 1)
+			for(byte i = 0, l = 4; i < _dimCount; ++i, l <<= 1)
 				v ^= ((1L << l) - 1L & (b << p[i]) ^ v) << l;
 			return new PermutationInt64(v ^ -0x123456789ABCDF0L);
 		}

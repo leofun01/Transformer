@@ -28,10 +28,6 @@ namespace DotNetTransformer.Math.Transform {
 			this = new T(permutation._value, vertex);
 		}
 
-		private const byte _count = 8;
-		private static readonly string[] _names;
-		public static readonly FiniteGroup<T> AllValues;
-
 		/// <summary>
 		/// "NO": No changes.
 		/// <para> 0 1  -->  0 1 </para>
@@ -80,6 +76,10 @@ namespace DotNetTransformer.Math.Transform {
 		/// <para> 3 2  -->  0 3 </para>
 		/// </summary>
 		public static T RotateCounterClockwise { get { return new T(7); } }
+
+		private const byte _count = 8;
+		private static readonly string[] _names;
+		public static readonly FiniteGroup<T> AllValues;
 
 		static FlipRotate2D() {
 			_names = new string[_count] { "NO", "HT", "FX", "FY", "PD", "SD", "RC", "RN" };
