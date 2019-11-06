@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using DotNetTransformer.Extensions;
 
 namespace DotNetTransformer.Math.Permutation {
 	public static class PermutationExtension
@@ -33,6 +34,29 @@ namespace DotNetTransformer.Math.Permutation {
 				v >>= 1;
 			}
 			return r;
+		}
+		public static void ApplyNextPermutation<T>(this T[] a, int maxLength, Order<T> match) {
+			int length = a.GetLength(0);
+			if(maxLength > length) maxLength = length;
+			int n = 0, i;
+			while(++n < maxLength && match(a[n - 1], a[n])) ;
+			if(n < maxLength) {
+				for(i = 0; match(a[i], a[n]); ++i) ;
+				T t = a[n];
+				a[n] = a[i];
+				a[i] = t;
+			}
+			for(i = 0; i < --n; ++i) {
+				T t = a[n];
+				a[n] = a[i];
+				a[i] = t;
+			}
+		}
+		public static void ApplyNextPermutation(this int[] a, int maxLength) {
+			ApplyNextPermutation<int>(a, maxLength, (int l, int r) => l >= r);
+		}
+		public static void ApplyPreviousPermutation(this int[] a, int maxLength) {
+			ApplyNextPermutation<int>(a, maxLength, (int l, int r) => l <= r);
 		}
 	}
 }

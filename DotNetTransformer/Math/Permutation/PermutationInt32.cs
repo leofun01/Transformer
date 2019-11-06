@@ -4,8 +4,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using StringBuilder = System.Text.StringBuilder;
 using CultureInfo = System.Globalization.CultureInfo;
+using DotNetTransformer.Extensions;
 using DotNetTransformer.Math.Group;
-using Comparison = DotNetTransformer.Extensions.Comparison<int>;
 
 namespace DotNetTransformer.Math.Permutation {
 	using P = PermutationInt32;
@@ -125,32 +125,19 @@ namespace DotNetTransformer.Math.Permutation {
 			return this.Times<P>(count);
 		}
 
-		private P _GetNextPermutation(int maxLength, Comparison compare) {
-			if(maxLength > _count) maxLength = _count;
+		public P GetNextPermutation(int maxLength, Order<int> match) {
 			int[] a = ToArray();
-			byte n = 0, i;
-			while(++n < maxLength && compare(a[n - 1], a[n])) ;
-			if(n < maxLength) {
-				for(i = 0; compare(a[i], a[n]); ++i) ;
-				int t = a[n];
-				a[n] = a[i];
-				a[i] = t;
-			}
-			for(i = 0; i < --n; ++i) {
-				int t = a[n];
-				a[n] = a[i];
-				a[i] = t;
-			}
+			a.ApplyNextPermutation<int>(maxLength, match);
 			int r = 0;
-			for(i = 0; i < _count; ++i)
+			for(int i = 0; i < _count; ++i)
 				r |= a[i] << (i << _s);
 			return new P(r ^ _mix);
 		}
 		public P GetNextPermutation(int maxLength) {
-			return _GetNextPermutation(maxLength, (int l, int r) => l >= r);
+			return GetNextPermutation(maxLength, (int l, int r) => l >= r);
 		}
 		public P GetPreviousPermutation(int maxLength) {
-			return _GetNextPermutation(maxLength, (int l, int r) => l <= r);
+			return GetNextPermutation(maxLength, (int l, int r) => l <= r);
 		}
 
 		public List<P> GetCycles(Predicate<P> match) {
