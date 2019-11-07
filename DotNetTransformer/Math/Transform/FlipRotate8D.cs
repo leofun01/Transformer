@@ -25,9 +25,21 @@ namespace DotNetTransformer.Math.Transform {
 		public static T None { get { return new T(); } }
 
 		public static T GetFlip(int dimension) {
-			return new T(new P(), 1 << (dimension & 0x07));
+			if((dimension & -_dimCount) != 0)
+				throw new ArgumentOutOfRangeException("dimension");
+			return new T(new P(), 1 << dimension);
+		}
+		public static T GetRotate(int dimFrom, int dimTo) {
+			if((dimFrom & -_dimCount) != 0)
+				throw new ArgumentOutOfRangeException("dimFrom");
+			if((dimTo & -_dimCount) != 0)
+				throw new ArgumentOutOfRangeException("dimTo");
+			int x = dimFrom ^ dimTo;
+			P p = new P((x << (dimFrom << 2)) ^ (x << (dimTo << 2)));
+			return new T(p, 1 << dimTo);
 		}
 
+		private const byte _dimCount = 8;
 		private const int _perm = 0x77777777, _vert = _perm ^ -1;
 
 		public P Permutation { get { return new P(_value & _perm); } }

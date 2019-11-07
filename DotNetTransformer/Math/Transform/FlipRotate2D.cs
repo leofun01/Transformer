@@ -77,6 +77,21 @@ namespace DotNetTransformer.Math.Transform {
 		/// </summary>
 		public static T RotateCounterClockwise { get { return new T(7); } }
 
+		public static T GetFlip(int dimension) {
+			if((dimension & -_dimCount) != 0)
+				throw new ArgumentOutOfRangeException("dimension");
+			return new T(0, 1 << dimension);
+		}
+		public static T GetRotate(int dimFrom, int dimTo) {
+			if((dimFrom & -_dimCount) != 0)
+				throw new ArgumentOutOfRangeException("dimFrom");
+			if((dimTo & -_dimCount) != 0)
+				throw new ArgumentOutOfRangeException("dimTo");
+			int x = dimFrom ^ dimTo;
+			P p = new P((byte)((x << (dimFrom << 1)) ^ (x << (dimTo << 1))));
+			return new T(p._value, 1 << dimTo);
+		}
+
 		private const byte _count = 8;
 		private static readonly string[] _names;
 		public static readonly FiniteGroup<T> AllValues;
@@ -99,6 +114,8 @@ namespace DotNetTransformer.Math.Transform {
 			}
 			public override int GetHashCode() { return _count; }
 		}
+
+		private const byte _dimCount = 2;
 
 		/// <summary><return>
 		/// <para>true for "FX", "FY", "PD", "SD";</para>
@@ -194,7 +211,7 @@ namespace DotNetTransformer.Math.Transform {
 			v ^= ((b << p[0]) & 0x3 ^ v) << 2;
 			v ^= ((b << p[1]) & 0xF ^ v) << 4;
 			/*//
-			for(byte i = 0, l = 2; i < 2; ++i, l <<= 1)
+			for(byte i = 0, l = 2; i < _dimCount; ++i, l <<= 1)
 				v ^= ((1 << l) - 1 & (b << p[i]) ^ v) << l;
 			//*/
 			return new PermutationByte((byte)(v ^ 0xE4));

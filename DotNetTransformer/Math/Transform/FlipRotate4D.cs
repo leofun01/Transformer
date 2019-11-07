@@ -22,7 +22,18 @@ namespace DotNetTransformer.Math.Transform {
 		public static T None { get { return new T(); } }
 
 		public static T GetFlip(int dimension) {
-			return new T(new P(), 1 << (dimension & 0x03));
+			if((dimension & -_dimCount) != 0)
+				throw new ArgumentOutOfRangeException("dimension");
+			return new T((short)(1 << dimension << _s));
+		}
+		public static T GetRotate(int dimFrom, int dimTo) {
+			if((dimFrom & -_dimCount) != 0)
+				throw new ArgumentOutOfRangeException("dimFrom");
+			if((dimTo & -_dimCount) != 0)
+				throw new ArgumentOutOfRangeException("dimTo");
+			int x = dimFrom ^ dimTo;
+			P p = new P((byte)((x << (dimFrom << 1)) ^ (x << (dimTo << 1))));
+			return new T(p, 1 << dimTo);
 		}
 
 		public static readonly FiniteGroup<T> AllValues;

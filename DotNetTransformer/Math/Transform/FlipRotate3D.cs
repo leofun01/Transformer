@@ -38,6 +38,21 @@ namespace DotNetTransformer.Math.Transform {
 		public static T RotateZX  { get { return new T(0x1A); } }
 		public static T RotateXYZ { get { return new T(0x0E); } }
 
+		public static T GetFlip(int dimension) {
+			if(dimension < 0 || dimension >= _dimCount)
+				throw new ArgumentOutOfRangeException("dimension");
+			return new T((byte)(1 << dimension << _s));
+		}
+		public static T GetRotate(int dimFrom, int dimTo) {
+			if(dimFrom < 0 || dimFrom >= _dimCount)
+				throw new ArgumentOutOfRangeException("dimFrom");
+			if(dimTo < 0 || dimTo >= _dimCount)
+				throw new ArgumentOutOfRangeException("dimTo");
+			int x = dimFrom ^ dimTo;
+			P p = new P((byte)((x << (dimFrom << 1)) ^ (x << (dimTo << 1))));
+			return new T(p, 1 << dimTo);
+		}
+
 		public static readonly FiniteGroup<T> AllValues;
 
 		static FlipRotate3D() {
