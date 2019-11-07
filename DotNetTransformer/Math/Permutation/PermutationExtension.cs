@@ -37,10 +37,10 @@ namespace DotNetTransformer.Math.Permutation {
 		}
 		public static void ApplyNextPermutation<T>(this T[] a, int maxLength, Order<T> match) {
 			int length = a.GetLength(0);
-			if(maxLength > length) maxLength = length;
+			if(length > maxLength) length = maxLength;
 			int n = 0, i;
-			while(++n < maxLength && match(a[n - 1], a[n])) ;
-			if(n < maxLength) {
+			while(++n < length && match(a[n - 1], a[n])) ;
+			if(n < length) {
 				for(i = 0; match(a[i], a[n]); ++i) ;
 				T t = a[n];
 				a[n] = a[i];
