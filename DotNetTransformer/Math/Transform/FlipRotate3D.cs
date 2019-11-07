@@ -110,7 +110,7 @@ namespace DotNetTransformer.Math.Transform {
 		public override string ToString() {
 			return string.Format(
 				CultureInfo.InvariantCulture,
-				"P:{0} V:{1:X1}", Permutation, Vertex
+				"P:{0} V:{1:X1}", Permutation.ToString(_dimCount), Vertex
 			);
 		}
 		public PermutationInt32 ToPermutationInt32() {
