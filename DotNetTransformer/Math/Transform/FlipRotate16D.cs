@@ -108,5 +108,7 @@ namespace DotNetTransformer.Math.Transform {
 		public static T operator -(T l, T r) { return l.Subtract(r); }
 		public static T operator *(T l, int r) { return l.Times(r); }
 		public static T operator *(int l, T r) { return r.Times(l); }
+
+		public static implicit operator T(P o) { return new T(o, 0); }
 	}
 }

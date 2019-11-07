@@ -14,6 +14,7 @@ namespace DotNetTransformer.Math.Transform {
 	public struct FlipRotate4D : IFlipRotate<T, P>
 	{
 		private readonly short _value;
+		private FlipRotate4D(short value) { _value = value; }
 		public FlipRotate4D(P permutation, int vertex) {
 			_value = (short)((vertex << _s | permutation._value) & 0x0FFF);
 		}
@@ -138,5 +139,7 @@ namespace DotNetTransformer.Math.Transform {
 		public static T operator -(T l, T r) { return l.Subtract(r); }
 		public static T operator *(T l, int r) { return l.Times(r); }
 		public static T operator *(int l, T r) { return r.Times(l); }
+
+		public static implicit operator T(P o) { return new T(o._value); }
 	}
 }

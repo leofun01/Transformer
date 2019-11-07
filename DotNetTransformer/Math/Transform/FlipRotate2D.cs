@@ -240,6 +240,7 @@ namespace DotNetTransformer.Math.Transform {
 		public static T operator *(T l, int r) { return l.Times(r); }
 		public static T operator *(int l, T r) { return r.Times(l); }
 
+		public static implicit operator T(P o) { return new T(o, 0); }
 		public static explicit operator T(int o) { return FromInt32(o); }
 		public static implicit operator T(RotateFlipType o) { return FromRotateFlipType(o); }
 		public static implicit operator RotateFlipType(T o) { return o.ToRotateFlipType(); }
