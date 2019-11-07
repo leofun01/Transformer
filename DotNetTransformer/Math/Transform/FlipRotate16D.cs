@@ -22,6 +22,10 @@ namespace DotNetTransformer.Math.Transform {
 
 		public static T None { get { return new T(); } }
 
+		public static T GetFlip(int dimension) {
+			return new T(new P(), 1 << (dimension & 0x0F));
+		}
+
 		P IFlipRotate<T, P>.Permutation { get { return Permutation; } }
 		public int Vertex { get { return _vertex & 0xFFFF; } }
 

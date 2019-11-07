@@ -20,6 +20,10 @@ namespace DotNetTransformer.Math.Transform {
 
 		public static T None { get { return new T(); } }
 
+		public static T GetFlip(int dimension) {
+			return new T(new P(), 1 << (dimension & 0x03));
+		}
+
 		public static readonly FiniteGroup<T> AllValues;
 
 		static FlipRotate4D() {
