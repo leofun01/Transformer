@@ -34,6 +34,9 @@ namespace DotNetTransformer.Math.Transform {
 				throw new ArgumentOutOfRangeException("dimFrom");
 			if((dimTo & -_dimCount) != 0)
 				throw new ArgumentOutOfRangeException("dimTo");
+			if(dimFrom == dimTo)
+				throw new ArgumentException(
+				);
 			int x = dimFrom ^ dimTo;
 			P p = new P((x << (dimFrom << 2)) ^ (x << (dimTo << 2)));
 			return new T(p, 1 << dimTo);
