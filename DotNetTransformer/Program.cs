@@ -7,6 +7,7 @@ using DotNetTransformer.Math.Transform;
 namespace DotNetTransformer {
 	using T = FlipRotate16D;
 	using P = PermutationInt64;
+	using D = SortedDictionary<int, long>;
 
 	public static class Program {
 		public static void Main(string[] args) {
@@ -21,11 +22,11 @@ namespace DotNetTransformer {
 				}
 			}
 		}
-		public static SortedDictionary<int, long> GetHyperCubeCycleCounts(byte dim) {
+		public static D GetHyperCubeCycleCounts(byte dim) {
 			if(dim > 16) throw new ArgumentOutOfRangeException();
 			int pow2 = 1 << dim;
 			P p = new P(), pNone = p;
-			SortedDictionary<int, long> dict = new SortedDictionary<int, long>();
+			D dict = new D();
 			do {
 				for(int v = 0; v < pow2; ++v) {
 					T t = new T(p, v);
