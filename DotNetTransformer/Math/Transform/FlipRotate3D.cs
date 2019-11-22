@@ -38,6 +38,50 @@ namespace DotNetTransformer.Math.Transform {
 		public static T RotateZX  { get { return new T(0x1A); } }
 		public static T RotateXYZ { get { return new T(0x0E); } }
 
+		public static T GetFlip(int dimension) {
+			if(dimension < 0 || dimension >= _dimCount)
+				throw new ArgumentOutOfRangeException("dimension");
+			return new T((byte)(1 << dimension << _s));
+		}
+		public static T GetRotate(int dimFrom, int dimTo) {
+			if(dimFrom < 0 || dimFrom >= _dimCount)
+				throw new ArgumentOutOfRangeException("dimFrom");
+			if(dimTo < 0 || dimTo >= _dimCount)
+				throw new ArgumentOutOfRangeException("dimTo");
+			if(dimFrom == dimTo)
+				throw new ArgumentException(
+				);
+			int x = dimFrom ^ dimTo;
+			P p = new P((byte)((x << (dimFrom << 1)) ^ (x << (dimTo << 1))));
+			return new T(p, 1 << dimTo);
+		}
+
+		public static readonly FiniteGroup<T> AllValues;
+
+		static FlipRotate3D() {
+			AllValues = new InternalGroup();
+		}
+
+		private sealed class InternalGroup : FiniteGroup<T>
+		{
+			public InternalGroup() { }
+
+			public override T IdentityElement { get { return None; } }
+			public override int Count { get { return 48; } }
+			public override bool Contains(T item) { return true; }
+			public override IEnumerator<T> GetEnumerator() {
+				P none = new P(), p = none;
+				const byte count = 1 << _dimCount;
+				do {
+					for(byte i = 0; i < count; ++i)
+						yield return new T(p._value, i);
+					p = p.GetNextPermutation(_dimCount);
+				} while(p != none);
+			}
+			public override int GetHashCode() { return Count; }
+		}
+
+		private const byte _dimCount = 3;
 		private const short _s = 4, _perm = (1 << _s) - 1;
 
 		public P Permutation {
@@ -84,14 +128,14 @@ namespace DotNetTransformer.Math.Transform {
 		public override string ToString() {
 			return string.Format(
 				CultureInfo.InvariantCulture,
-				"P:{0} V:{1:X1}", Permutation, Vertex
+				"P:{0} V:{1:X1}", Permutation.ToString(_dimCount), Vertex
 			);
 		}
 		public PermutationInt32 ToPermutationInt32() {
 			P p = Permutation;
 			int v = Vertex;
 			const int b = 0x11111111;
-			for(byte i = 0, l = 4; i < 3; ++i, l <<= 1)
+			for(byte i = 0, l = 4; i < _dimCount; ++i, l <<= 1)
 				v ^= ((1 << l) - 1 & (b << p[i]) ^ v) << l;
 			return new PermutationInt32(v ^ 0x76543210);
 		}
@@ -132,5 +176,7 @@ namespace DotNetTransformer.Math.Transform {
 		public static T operator -(T l, T r) { return l.Subtract(r); }
 		public static T operator *(T l, int r) { return l.Times(r); }
 		public static T operator *(int l, T r) { return r.Times(l); }
+
+		public static implicit operator T(P o) { return new T(o, 0); }
 	}
 }

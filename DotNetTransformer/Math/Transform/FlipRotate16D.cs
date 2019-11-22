@@ -22,6 +22,26 @@ namespace DotNetTransformer.Math.Transform {
 
 		public static T None { get { return new T(); } }
 
+		public static T GetFlip(int dimension) {
+			if((dimension & -_dimCount) != 0)
+				throw new ArgumentOutOfRangeException("dimension");
+			return new T(new P(), 1 << dimension);
+		}
+		public static T GetRotate(int dimFrom, int dimTo) {
+			if((dimFrom & -_dimCount) != 0)
+				throw new ArgumentOutOfRangeException("dimFrom");
+			if((dimTo & -_dimCount) != 0)
+				throw new ArgumentOutOfRangeException("dimTo");
+			if(dimFrom == dimTo)
+				throw new ArgumentException(
+				);
+			long x = dimFrom ^ dimTo;
+			P p = new P((x << (dimFrom << 2)) ^ (x << (dimTo << 2)));
+			return new T(p, 1 << dimTo);
+		}
+
+		private const byte _dimCount = 16;
+
 		P IFlipRotate<T, P>.Permutation { get { return Permutation; } }
 		public int Vertex { get { return _vertex & 0xFFFF; } }
 
@@ -104,5 +124,7 @@ namespace DotNetTransformer.Math.Transform {
 		public static T operator -(T l, T r) { return l.Subtract(r); }
 		public static T operator *(T l, int r) { return l.Times(r); }
 		public static T operator *(int l, T r) { return r.Times(l); }
+
+		public static implicit operator T(P o) { return new T(o, 0); }
 	}
 }

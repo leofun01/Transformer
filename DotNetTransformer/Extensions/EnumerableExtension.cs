@@ -14,7 +14,6 @@ namespace DotNetTransformer.Extensions {
 			return !collection.Exist<T>(e => !match(e));
 		}
 
-		public delegate T Func<T>(T l, T r);
 		public static T CollectAll<T>(this IEnumerable<T> collection, Func<T> func) {
 			T result = default(T);
 			foreach(T item in collection)

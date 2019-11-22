@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using StringBuilder = System.Text.StringBuilder;
 using CultureInfo = System.Globalization.CultureInfo;
+using DotNetTransformer.Extensions;
 using DotNetTransformer.Math.Group;
 
 namespace DotNetTransformer.Math.Permutation {
@@ -56,7 +57,7 @@ namespace DotNetTransformer.Math.Permutation {
 		}
 
 		private const int _mix = 0x76543210, _mask = 7;
-		private const byte _count = 8, _len = 32, _s = 2;
+		private const byte _s = 2, _count = 8, _len = _count << _s;
 		private const string _charPattern = "[0-7]";
 
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
@@ -122,6 +123,21 @@ namespace DotNetTransformer.Math.Permutation {
 		}
 		public P Times(int count) {
 			return this.Times<P>(count);
+		}
+
+		public P GetNextPermutation(int maxLength, Order<int> match) {
+			int[] a = ToArray();
+			a.ApplyNextPermutation<int>(maxLength, match);
+			int r = 0;
+			for(int i = 0; i < _count; ++i)
+				r |= a[i] << (i << _s);
+			return new P(r ^ _mix);
+		}
+		public P GetNextPermutation(int maxLength) {
+			return GetNextPermutation(maxLength, (int l, int r) => l >= r);
+		}
+		public P GetPreviousPermutation(int maxLength) {
+			return GetNextPermutation(maxLength, (int l, int r) => l <= r);
 		}
 
 		public List<P> GetCycles(Predicate<P> match) {
@@ -197,6 +213,16 @@ namespace DotNetTransformer.Math.Permutation {
 			} while(i < _len);
 		}
 		IEnumerator IEnumerable.GetEnumerator() { return GetEnumerator(); }
+		public int[] ToArray() {
+			long v = Value;
+			int[] a = new int[_count];
+			int i = 0;
+			do {
+				a[i] = (int)(v & _mask);
+				v >>= 1 << _s;
+			} while(++i < _count);
+			return a;
+		}
 
 		///	<exception cref="ArgumentException">
 		///		<exception cref="ArgumentNullException">

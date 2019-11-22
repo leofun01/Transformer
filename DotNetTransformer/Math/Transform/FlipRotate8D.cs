@@ -14,6 +14,7 @@ namespace DotNetTransformer.Math.Transform {
 	public struct FlipRotate8D : IFlipRotate<T, P>
 	{
 		private readonly int _value;
+		private FlipRotate8D(int value) { _value = value; }
 		public FlipRotate8D(P permutation, int vertex) {
 			vertex &= 0xFF;
 			vertex |= vertex << 0x09;
@@ -23,6 +24,25 @@ namespace DotNetTransformer.Math.Transform {
 
 		public static T None { get { return new T(); } }
 
+		public static T GetFlip(int dimension) {
+			if((dimension & -_dimCount) != 0)
+				throw new ArgumentOutOfRangeException("dimension");
+			return new T(new P(), 1 << dimension);
+		}
+		public static T GetRotate(int dimFrom, int dimTo) {
+			if((dimFrom & -_dimCount) != 0)
+				throw new ArgumentOutOfRangeException("dimFrom");
+			if((dimTo & -_dimCount) != 0)
+				throw new ArgumentOutOfRangeException("dimTo");
+			if(dimFrom == dimTo)
+				throw new ArgumentException(
+				);
+			int x = dimFrom ^ dimTo;
+			P p = new P((x << (dimFrom << 2)) ^ (x << (dimTo << 2)));
+			return new T(p, 1 << dimTo);
+		}
+
+		private const byte _dimCount = 8;
 		private const int _perm = 0x77777777, _vert = _perm ^ -1;
 
 		public P Permutation { get { return new P(_value & _perm); } }
@@ -109,5 +129,7 @@ namespace DotNetTransformer.Math.Transform {
 		public static T operator -(T l, T r) { return l.Subtract(r); }
 		public static T operator *(T l, int r) { return l.Times(r); }
 		public static T operator *(int l, T r) { return r.Times(l); }
+
+		public static implicit operator T(P o) { return new T(o._value); }
 	}
 }
