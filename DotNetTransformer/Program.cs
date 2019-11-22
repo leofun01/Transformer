@@ -16,6 +16,7 @@ namespace DotNetTransformer {
 				try {
 					dim = byte.Parse(args[0], CultureInfo.InvariantCulture);
 					var dict = GetHyperCubeCycleCounts(dim);
+					Console.WriteLine("\r\n{0}D group size : {1}\r\n", dim, GetValuesSum(dict));
 				}
 				catch(Exception ex) {
 					Console.WriteLine("Exception message: {0}", ex.Message);
@@ -37,6 +38,12 @@ namespace DotNetTransformer {
 				p = p.GetNextPermutation(dim);
 			} while(p != pNone);
 			return dict;
+		}
+		public static long GetValuesSum(D dict) {
+			long sum = 0L;
+			foreach(var pair in dict)
+				sum += pair.Value;
+			return sum;
 		}
 	}
 }
