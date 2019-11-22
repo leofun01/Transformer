@@ -14,19 +14,26 @@ namespace DotNetTransformer {
 	public static class Program {
 		public static void Main(string[] args) {
 			byte dim = 0;
+			string dimStr;
 			if(args.GetLength(0) > 0) {
-				try {
-					dim = byte.Parse(args[0], CultureInfo.InvariantCulture);
-					var dict = GetHyperCubeCycleCounts(dim);
-					Console.WriteLine("\r\n{0}D group size : {1}\r\n", dim, GetValuesSum(dict));
-				}
-				catch(Exception ex) {
-					Console.WriteLine("Exception message: {0}", ex.Message);
-					return;
-				}
+				dimStr = args[0];
 			}
 			else {
+				Console.Write("Enter dimensions count [0..16] : ");
+				dimStr = Console.ReadLine();
 			}
+			try {
+				dim = byte.Parse(dimStr, CultureInfo.InvariantCulture);
+				var dict = GetHyperCubeCycleCounts(dim);
+				Console.WriteLine("\r\n{0}D group size : {1}\r\n", dim, GetValuesSum(dict));
+				WriteDictionary(Console.Out, dict, "cLen", "count");
+				Console.Write("\r\nRun is complete. ");
+			}
+			catch(Exception ex) {
+				Console.WriteLine("Exception message : {0}", ex.Message);
+			}
+			Console.Write("\r\nPress enter to exit ... ");
+			Console.ReadLine();
 		}
 		public static D GetHyperCubeCycleCounts(byte dim) {
 			if(dim > 16) throw new ArgumentOutOfRangeException();
