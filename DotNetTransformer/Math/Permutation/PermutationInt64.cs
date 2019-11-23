@@ -49,7 +49,7 @@ namespace DotNetTransformer.Math.Permutation {
 			digit = 0;
 			while(((short)(1 << digit) & digitFlag) != 0)
 				++digit;
-			if(((short)((1 << digit) - 1 ^ -1) & digitFlag) != 0)
+			if(((short)(-1 << digit) & digitFlag) != 0)
 				_throwArray(string.Format(
 					"Value \"{0}\" is not found.",
 					digit
