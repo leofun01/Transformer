@@ -117,7 +117,7 @@ namespace DotNetTransformer.Math.Transform {
 			);
 		}
 		public T Times(int count) {
-			return this.Times<T>(count);
+			return FiniteGroupExtension.Times<T>(this, count);
 		}
 
 		public override int GetHashCode() { return _value; }

@@ -70,13 +70,7 @@ namespace DotNetTransformer.Math.Group {
 		{
 			int c = t.CycleLength;
 			count = (count % c + c) % c;
-			T r = (count & 1) != 0 ? t : new T();
-			while((count >>= 1) != 0) {
-				t = t.Add(t);
-				if((count & 1) != 0)
-					r = r.Add(t);
-			}
-			return r;
+			return GroupExtension.Times<T>(t, count);
 		}
 	}
 }

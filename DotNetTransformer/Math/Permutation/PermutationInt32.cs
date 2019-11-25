@@ -122,7 +122,7 @@ namespace DotNetTransformer.Math.Permutation {
 			return new P(r ^ _mix);
 		}
 		public P Times(int count) {
-			return this.Times<P>(count);
+			return FiniteGroupExtension.Times<P>(this, count);
 		}
 
 		public P GetNextPermutation(int maxLength, Order<int> match) {
