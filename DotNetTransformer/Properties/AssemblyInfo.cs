@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("DotNetTransformer")]
-[assembly: AssemblyCopyright("Copyright © leofun01 2018-2019")]
+[assembly: AssemblyCopyright("Copyright © leofun01 2018-2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

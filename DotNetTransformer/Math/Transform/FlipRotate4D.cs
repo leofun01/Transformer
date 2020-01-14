@@ -72,7 +72,7 @@ namespace DotNetTransformer.Math.Transform {
 
 		public int CycleLength {
 			get {
-				return this.GetLengthTo<T>(None);
+				return FlipRotateExtension.GetCycleLength<T, P>(this);
 			}
 		}
 		public T InverseElement {
@@ -94,7 +94,7 @@ namespace DotNetTransformer.Math.Transform {
 			);
 		}
 		public T Times(int count) {
-			return this.Times<T>(count);
+			return FiniteGroupExtension.Times<T>(this, count);
 		}
 
 		public override int GetHashCode() { return _value; }

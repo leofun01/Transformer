@@ -21,16 +21,13 @@ namespace DotNetTransformer.Math.Transform {
 		public static readonly FiniteGroup<T> AllValues;
 
 		/// <summary> No changes | 360 degree rotation. </summary>
-		public static readonly T None;
+		public static T None { get { return new T(); } }
 		/// <summary> Horizontal flip. Reflection across y-axis. </summary>
-		public static readonly T FlipX;
+		public static T FlipX { get { return new T(1); } }
 		/// <summary> Vertical flip. Reflection across x-axis. </summary>
-		public static readonly T FlipY;
+		public static T FlipY { get { return new T(1 + _mod); } }
 
 		static Polygon120() {
-			None      = new T(0);
-			FlipX     = new T(1);
-			FlipY     = new T(1 + _mod);
 			AllValues = new DihedralGroupD120();
 		}
 

@@ -40,5 +40,17 @@ namespace DotNetTransformer.Math.Group {
 		{
 			return collection.CollectAll<T>(Compose<T>);
 		}
+
+		public static T Times<T>(this T t, int count)
+			where T : IGroupElement<T>, new()
+		{
+			T r = (count & 1) != 0 ? t : new T();
+			while((count >>= 1) != 0) {
+				t = t.Add(t);
+				if((count & 1) != 0)
+					r = r.Add(t);
+			}
+			return r;
+		}
 	}
 }

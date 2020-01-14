@@ -49,7 +49,7 @@ namespace DotNetTransformer.Math.Permutation {
 			digit = 0;
 			while(((byte)(1 << digit) & digitFlag) != 0)
 				++digit;
-			if(((byte)((1 << digit) - 1 ^ -1) & digitFlag) != 0)
+			if(((byte)(-1 << digit) & digitFlag) != 0)
 				_throwArray(string.Format(
 					"Value \"{0}\" is not found.",
 					digit
@@ -122,7 +122,7 @@ namespace DotNetTransformer.Math.Permutation {
 			return new P(r ^ _mix);
 		}
 		public P Times(int count) {
-			return this.Times<P>(count);
+			return FiniteGroupExtension.Times<P>(this, count);
 		}
 
 		public P GetNextPermutation(int maxLength, Order<int> match) {
