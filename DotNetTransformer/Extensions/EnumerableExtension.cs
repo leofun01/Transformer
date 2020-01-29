@@ -20,5 +20,16 @@ namespace DotNetTransformer.Extensions {
 				result = func(result, item);
 			return result;
 		}
+
+		public static IEnumerable<T> GetRange<T>(this T start, Predicate<T> match, Generator<T> next) {
+			T t = start;
+			do {
+				yield return t;
+				t = next(t);
+			} while(match(t));
+		}
+		public static IEnumerable<T> GetRange<T>(this T start, T stop, Generator<T> next) {
+			return GetRange<T>(start, t => !t.Equals(stop), next);
+		}
 	}
 }
