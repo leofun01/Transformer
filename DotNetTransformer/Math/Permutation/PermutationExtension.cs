@@ -35,6 +35,7 @@ namespace DotNetTransformer.Math.Permutation {
 			}
 			return r;
 		}
+
 		public static void ApplyNextPermutation<T>(this T[] a, int maxLength, Order<T> match) {
 			int length = a.GetLength(0);
 			if(length > maxLength) length = maxLength;
@@ -57,6 +58,12 @@ namespace DotNetTransformer.Math.Permutation {
 		}
 		public static void ApplyPreviousPermutation(this int[] a, int maxLength) {
 			ApplyNextPermutation<int>(a, maxLength, (int l, int r) => l <= r);
+		}
+
+		public static IEnumerable<T> GetRange<T>(this T start, T stop, int maxLength)
+			where T : IPermutation<T>, new()
+		{
+			return start.GetRange<T>(stop, p => p.GetNextPermutation(maxLength));
 		}
 	}
 }
