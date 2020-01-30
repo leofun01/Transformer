@@ -71,6 +71,7 @@ to achieve the most efficient solutions.
 						<summary><code>Extensions</code></summary>
 						<ul>
 							<li><a href="DotNetTransformer/Extensions/ArrayExtension.cs"><code>ArrayExtension.cs</code></a></li>
+							<li><a href="DotNetTransformer/Extensions/Delegate.cs"><code>Delegate.cs</code></a></li>
 							<li><a href="DotNetTransformer/Extensions/EnumerableExtension.cs"><code>EnumerableExtension.cs</code></a></li>
 							<li><a href="DotNetTransformer/Extensions/RotateFlipTypeExtension.cs"><code>RotateFlipTypeExtension.cs</code></a></li>
 						</ul>
@@ -129,6 +130,7 @@ to achieve the most efficient solutions.
 										<li><a href="DotNetTransformer/Math/Transform/FlipRotate3D.cs"><code>FlipRotate3D.cs</code></a></li>
 										<li><a href="DotNetTransformer/Math/Transform/FlipRotate4D.cs"><code>FlipRotate4D.cs</code></a></li>
 										<li><a href="DotNetTransformer/Math/Transform/FlipRotate8D.cs"><code>FlipRotate8D.cs</code></a></li>
+										<li><a href="DotNetTransformer/Math/Transform/FlipRotateExtension.cs"><code>FlipRotateExtension.cs</code></a></li>
 										<li><a href="DotNetTransformer/Math/Transform/IFlipRotate.cs"><code>IFlipRotate.cs</code></a></li>
 										<li><a href="DotNetTransformer/Math/Transform/Polygon120.cs"><code>Polygon120.cs</code></a></li>
 									</ul>
