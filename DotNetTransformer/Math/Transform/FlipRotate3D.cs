@@ -95,7 +95,7 @@ namespace DotNetTransformer.Math.Transform {
 
 		public int CycleLength {
 			get {
-				return FlipRotateExtension.GetCycleLength<T, P>(this);
+				return this.GetCycleLength<T, P>();
 			}
 		}
 		public T InverseElement {
