@@ -71,22 +71,17 @@ namespace DotNetTransformer.Math.Permutation {
 				return Value >> (index << _s) & _mask;
 			}
 		}
+		public int SwapsCount {
+			get {
+				int count = 0;
+				ForAllCyclesDo(_ => { }, c => count += c);
+				return count;
+			}
+		}
 		public int CycleLength {
 			get {
-				byte multFlag = 0;
-				byte t = Value;
-				byte digitFlag = 0;
-				for(byte i = 0; i < _count; ++i) {
-					if((1 << i & digitFlag) != 0) continue;
-					byte digit = i;
-					byte cLen = 0;
-					do {
-						++cLen;
-						digitFlag |= (byte)(1 << digit);
-						digit = (byte)(t >> (digit << _s) & _mask);
-					} while((1 << digit & digitFlag) == 0);
-					multFlag |= (byte)(1 << --cLen);
-				}
+				int multFlag = 0;
+				ForAllCyclesDo(_ => { }, c => multFlag |= 1 << c);
 				return (multFlag >> 1) + 1 - (multFlag >> 3);
 			}
 		}
@@ -137,26 +132,7 @@ namespace DotNetTransformer.Math.Permutation {
 			return GetNextPermutation(maxLength, (int l, int r) => l <= r);
 		}
 
-		public List<P> GetCycles(Predicate<P> match) {
-			List<P> list = new List<P>(_count);
-			byte t = Value;
-			byte digitFlag = 0;
-			for(byte i = 0; i < _count; ++i) {
-				if((1 << i & digitFlag) != 0) continue;
-				byte digit = i;
-				byte value = 0;
-				do {
-					value |= (byte)(_mask << (digit << _s) & _value);
-					digitFlag |= (byte)(1 << digit);
-					digit = (byte)(t >> (digit << _s) & _mask);
-				} while((1 << digit & digitFlag) == 0);
-				P p = new P(value);
-				if(match(p)) list.Add(p);
-			}
-			return list;
-		}
-		public int GetCyclesCount(Predicate<int> match) {
-			int count = 0;
+		public void ForAllCyclesDo(Action<byte> digitAction, Action<byte> cycleAction) {
 			byte t = Value;
 			byte digitFlag = 0;
 			for(byte i = 0; i < _count; ++i) {
@@ -164,12 +140,30 @@ namespace DotNetTransformer.Math.Permutation {
 				byte digit = i;
 				byte cLen = 0;
 				do {
+					digitAction(digit);
 					++cLen;
 					digitFlag |= (byte)(1 << digit);
 					digit = (byte)(t >> (digit << _s) & _mask);
 				} while((1 << digit & digitFlag) == 0);
-				if(match(cLen)) ++count;
+				cycleAction(--cLen);
 			}
+		}
+		public List<P> GetCycles(Predicate<P> match) {
+			List<P> list = new List<P>(_count);
+			byte value = 0, t = this._value;
+			ForAllCyclesDo(
+				d => { value |= (byte)(_mask << (d << _s) & t); },
+				_ => {
+					P p = new P(value);
+					if(match(p)) list.Add(p);
+					value = 0;
+				}
+			);
+			return list;
+		}
+		public int GetCyclesCount(Predicate<int> match) {
+			int count = 0;
+			ForAllCyclesDo(_ => { }, c => { if(match(c)) ++count; });
 			return count;
 		}
 
