@@ -70,14 +70,14 @@ namespace DotNetTransformer.Math.Permutation {
 		public int SwapsCount {
 			get {
 				int count = 0;
-				ForAllCyclesDo(_ => { }, c => { count += c; });
+				ForAllCyclesDo(_ => { }, c => { count += --c; });
 				return count;
 			}
 		}
 		public int CycleLength {
 			get {
 				int multFlag = 0;
-				ForAllCyclesDo(_ => { }, c => { multFlag |= 1 << c; });
+				ForAllCyclesDo(_ => { }, c => { multFlag |= 1 << --c; });
 				if(multFlag == 1) return 1;
 				if((multFlag & -0x2000) != 0) return (multFlag >> 14 & 3) + 14;
 				int r = 1;
@@ -153,7 +153,7 @@ namespace DotNetTransformer.Math.Permutation {
 					digitFlag |= (short)(1 << digit);
 					digit = (byte)(t >> (digit << _s) & _mask);
 				} while((1 << digit & digitFlag) == 0);
-				cycleAction(--cLen);
+				cycleAction(cLen);
 			}
 		}
 		public List<P> GetCycles(Predicate<P> match) {
