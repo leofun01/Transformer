@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using CultureInfo = System.Globalization.CultureInfo;
+using DotNetTransformer.Extensions;
 using DotNetTransformer.Math.Group;
 using DotNetTransformer.Math.Permutation;
 
@@ -40,6 +41,61 @@ namespace DotNetTransformer.Math.Transform {
 			int x = dimFrom ^ dimTo;
 			P p = new P((x << (dimFrom << 2)) ^ (x << (dimTo << 2)));
 			return new T(p, 1 << dimTo);
+		}
+
+		public static IEnumerable<T> GetReflections(int dimensions) {
+			if(dimensions < 0 || dimensions > _dimCount)
+				throw new ArgumentOutOfRangeException(
+				);
+			return FlipRotateExtension.GetValues<T, P>(
+				dimensions, (p, v) => new T(p, v),
+				p => p.SwapsCount & 1 ^ 1, v => v + 2
+			);
+		}
+		public static FiniteGroup<T> GetRotations(int dimensions) {
+			return GetValues(dimensions,
+				c => dimensions > 0 ? c >> 1 : c,
+				p => p.SwapsCount & 1, v => v + 2
+			);
+		}
+		public static FiniteGroup<T> GetValues(int dimensions) {
+			return GetValues(dimensions, c => c, _ => 0, v => v + 1);
+		}
+		private static FiniteGroup<T> GetValues(int dimensions,
+			Generator<int> count,
+			Converter<P, int> startVertex,
+			Generator<int> nextVertex
+		) {
+			if(dimensions < 0 || dimensions > _dimCount)
+				throw new ArgumentOutOfRangeException(
+				);
+			int f = 1, i = 1;
+			while(i < dimensions) f *= ++i;
+			return new InternalGroup(
+				FlipRotateExtension.GetValues<T, P>(
+					dimensions, (p, v) => new T(p, v),
+					startVertex, nextVertex
+				),
+				count(f << dimensions)
+			);
+		}
+
+		private sealed class InternalGroup : FiniteGroup<T>
+		{
+			private IEnumerable<T> _collection;
+			private int _count;
+
+			public InternalGroup(IEnumerable<T> collection, int count) {
+				_collection = collection;
+				_count = count;
+			}
+
+			public override T IdentityElement { get { return None; } }
+			public override int Count { get { return _count; } }
+			public override IEnumerator<T> GetEnumerator() {
+				return _collection.GetEnumerator();
+			}
+			public override int GetHashCode() { return Count; }
 		}
 
 		private const byte _dimCount = 8;
