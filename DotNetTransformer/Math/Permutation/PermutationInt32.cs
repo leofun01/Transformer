@@ -70,14 +70,14 @@ namespace DotNetTransformer.Math.Permutation {
 		public int SwapsCount {
 			get {
 				int count = 0;
-				ForAllCyclesDo(_ => { }, c => count += c);
+				ForAllCyclesDo(_ => { }, c => { count += c; });
 				return count;
 			}
 		}
 		public int CycleLength {
 			get {
 				int multFlag = 0;
-				ForAllCyclesDo(_ => { }, c => multFlag |= 1 << c);
+				ForAllCyclesDo(_ => { }, c => { multFlag |= 1 << c; });
 				if(multFlag == 1) return 1;
 				if((multFlag & -0x20) != 0) return (multFlag >> 6 & 3) + 6;
 				int r = 1;

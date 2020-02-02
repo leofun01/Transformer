@@ -8,6 +8,7 @@ namespace DotNetTransformer.Math.Permutation {
 		where T : IPermutation<T>, new()
 	{
 		int this[int index] { get; }
+		int SwapsCount { get; }
 
 		T GetNextPermutation(int maxLength);
 		T GetPreviousPermutation(int maxLength);
