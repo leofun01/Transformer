@@ -42,6 +42,16 @@ namespace DotNetTransformer.Math.Transform {
 
 		private const byte _dimCount = 16;
 
+		public bool IsReflection { get { return !IsRotation; } }
+		public bool IsRotation {
+			get {
+				int v = _vertex;
+				for(int i = 1; i < _dimCount; i <<= 1)
+					v ^= v >> i;
+				return ((Permutation.SwapsCount ^ v) & 1) == 0;
+			}
+		}
+
 		P IFlipRotate<T, P>.Permutation { get { return Permutation; } }
 		public int Vertex { get { return _vertex & 0xFFFF; } }
 
@@ -79,7 +89,7 @@ namespace DotNetTransformer.Math.Transform {
 			return o is T && Equals((T)o);
 		}
 		public bool Equals(T o) {
-			return Permutation == o.Permutation && Vertex == o.Vertex;
+			return Permutation == o.Permutation && _vertex == o._vertex;
 		}
 		public override string ToString() {
 			return string.Format(

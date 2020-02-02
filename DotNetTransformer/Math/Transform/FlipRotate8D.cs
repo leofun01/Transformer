@@ -45,6 +45,16 @@ namespace DotNetTransformer.Math.Transform {
 		private const byte _dimCount = 8;
 		private const int _perm = 0x77777777, _vert = _perm ^ -1;
 
+		public bool IsReflection { get { return !IsRotation; } }
+		public bool IsRotation {
+			get {
+				int v = _value >> 3;
+				for(int i = 1; i < _dimCount; i <<= 1)
+					v ^= v >> (i << 2);
+				return ((Permutation.SwapsCount ^ v) & 1) == 0;
+			}
+		}
+
 		public P Permutation { get { return new P(_value & _perm); } }
 		public int Vertex {
 			get {
