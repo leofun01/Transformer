@@ -6,6 +6,9 @@ namespace DotNetTransformer.Math.Transform {
 		where T : IFlipRotate<T, P>, new()
 		where P : IPermutation<P>, new()
 	{
+		bool IsReflection { get; }
+		bool IsRotation { get; }
+
 		P Permutation { get; }
 		int Vertex { get; }
 	}
