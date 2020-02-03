@@ -25,15 +25,15 @@
 		<Reference Include="System.Drawing" />
 	</ItemGroup>
 	<ItemGroup>
-		<Compile Include="**\*.cs" Exclude="Test\**;Draft\**" />
+		<Compile Include="**\*.cs" Exclude="bin\**;obj\**;Test\**;Draft\**" />
 		<Compile Include="Draft\**\*.cs" />
 		<Compile Include="$(ExternalCompileRoot)\**\*.cs">
 			<Link>$([MSBuild]::MakeRelative('$(ExternalCompileRoot)', '%(FullPath)'))</Link>
 		</Compile>
 	</ItemGroup>
 	<ItemGroup>
-		<None Include="**\*.txt" Exclude="Test\**" />
-		<None Include="**\*.cd" Exclude="Test\**" />
+		<None Include="**\*.txt" Exclude="bin\**;obj\**;Test\**" />
+		<None Include="**\*.cd" Exclude="bin\**;obj\**;Test\**" />
 	</ItemGroup>
 	<Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
