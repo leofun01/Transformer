@@ -1,15 +1,16 @@
 using System.Collections.Generic;
 using DotNetTransformer.Extensions;
+using DotNetTransformer.Math.Set;
 
 namespace DotNetTransformer.Math.Permutation {
 	public static class PermutationExtension
 	{
-		public static List<T> GetCyclesAll<T>(this T _this)
+		public static FiniteSet<T> GetCyclesAll<T>(this T _this)
 			where T : IPermutation<T>, new()
 		{
 			return _this.GetCycles(p => true);
 		}
-		public static List<T> GetCyclesNonTrivial<T>(this T _this)
+		public static FiniteSet<T> GetCyclesNonTrivial<T>(this T _this)
 			where T : IPermutation<T>, new()
 		{
 			return _this.GetCycles(p => p.CycleLength > 1);

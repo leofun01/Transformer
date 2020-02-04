@@ -6,6 +6,7 @@ using StringBuilder = System.Text.StringBuilder;
 using CultureInfo = System.Globalization.CultureInfo;
 using DotNetTransformer.Extensions;
 using DotNetTransformer.Math.Group;
+using DotNetTransformer.Math.Set;
 
 namespace DotNetTransformer.Math.Permutation {
 	using P = PermutationByte;
@@ -148,7 +149,7 @@ namespace DotNetTransformer.Math.Permutation {
 				cycleAction(cLen);
 			}
 		}
-		public List<P> GetCycles(Predicate<P> match) {
+		public FiniteSet<P> GetCycles(Predicate<P> match) {
 			List<P> list = new List<P>(_count);
 			byte value = 0, t = this._value;
 			ForAllCyclesDo(
@@ -159,7 +160,7 @@ namespace DotNetTransformer.Math.Permutation {
 					value = 0;
 				}
 			);
-			return list;
+			return list.ToFiniteSet<P>();
 		}
 		public int GetCyclesCount(Predicate<int> match) {
 			int count = 0;
