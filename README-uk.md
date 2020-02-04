@@ -113,6 +113,7 @@
 										<li><a href="DotNetTransformer/Math/Set/EditableFiniteSet.cs"><code>EditableFiniteSet.cs</code></a></li>
 										<li><a href="DotNetTransformer/Math/Set/EmptySet.cs"><code>EmptySet.cs</code></a></li>
 										<li><a href="DotNetTransformer/Math/Set/FiniteSet.cs"><code>FiniteSet.cs</code></a></li>
+										<li><a href="DotNetTransformer/Math/Set/FiniteSetExtension.cs"><code>FiniteSetExtension.cs</code></a></li>
 										<li><a href="DotNetTransformer/Math/Set/IEditableSet.cs"><code>IEditableSet.cs</code></a></li>
 										<li><a href="DotNetTransformer/Math/Set/ISet.cs"><code>ISet.cs</code></a></li>
 										<li><a href="DotNetTransformer/Math/Set/ISubSet.cs"><code>ISubSet.cs</code></a></li>

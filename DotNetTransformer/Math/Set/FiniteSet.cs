@@ -66,5 +66,9 @@ namespace DotNetTransformer.Math.Set {
 		public static bool operator !=(FiniteSet<T> l, FiniteSet<T> r) {
 			return !(l == r);
 		}
+
+		public static implicit operator FiniteSet<T>(ICollection<T> o) {
+			return o.ToFiniteSet<T>();
+		}
 	}
 }
