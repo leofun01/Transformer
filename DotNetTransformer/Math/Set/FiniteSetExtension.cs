@@ -18,7 +18,7 @@ namespace DotNetTransformer.Math.Set {
 			}
 		}
 
-		public static FiniteSet<T> ToFiniteSet<T>(this ICollection<T> collection)
+		internal static FiniteSet<T> ToFiniteSet<T>(this ICollection<T> collection)
 			where T : IEquatable<T>
 		{
 			return ReferenceEquals(collection, null) ?
