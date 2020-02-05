@@ -13,7 +13,7 @@ namespace DotNetTransformer.Math.Set {
 				_collection = collection;
 			}
 
-			public override int Count { get { return _collection.Count; } }
+			public override long Count { get { return _collection.Count; } }
 			public override bool Contains(T item) {
 				return _collection.Contains(item);
 			}

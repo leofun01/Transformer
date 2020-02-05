@@ -36,7 +36,7 @@ namespace DotNetTransformer.Math.Transform {
 			public DihedralGroupD120() { }
 
 			public override T IdentityElement { get { return None; } }
-			public override int Count { get { return _count; } }
+			public override long Count { get { return _count; } }
 			public override bool Contains(T item) { return true; }
 			public override IEnumerator<T> GetEnumerator() {
 				for(byte i = 0; i < _count; ++i)

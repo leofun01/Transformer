@@ -11,7 +11,7 @@ namespace DotNetTransformer.Math.Set {
 		, ISuperSet<T, FiniteSet<T>>
 		where T : IEquatable<T>
 	{
-		public abstract int Count { get; }
+		public abstract long Count { get; }
 		public virtual bool Contains(T item) {
 			return this.Exist<T>(e => e.Equals(item));
 		}
@@ -31,7 +31,7 @@ namespace DotNetTransformer.Math.Set {
 			return Equals(obj as FiniteSet<T>);
 		}
 		public override int GetHashCode() {
-			int hash = Count;
+			int hash = (int)Count;
 			foreach(T item in this)
 				hash ^= item.GetHashCode();
 			return hash;

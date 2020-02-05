@@ -91,11 +91,11 @@ namespace DotNetTransformer.Math.Transform {
 			}
 
 			public override T IdentityElement { get { return None; } }
-			public override int Count { get { return _count; } }
+			public override long Count { get { return _count; } }
 			public override IEnumerator<T> GetEnumerator() {
 				return _collection.GetEnumerator();
 			}
-			public override int GetHashCode() { return Count; }
+			public override int GetHashCode() { return _count; }
 		}
 
 		private const byte _dimCount = 8;

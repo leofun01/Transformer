@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using DotNetTransformer.Math.Set;
 
 namespace DotNetTransformer.Math.Group {
 	public static class FiniteGroupExtension
@@ -8,20 +9,22 @@ namespace DotNetTransformer.Math.Group {
 			where T : IFiniteGroupElement<T>, new()
 		{
 			private readonly T _identity;
-			private readonly ICollection<T> _collection;
+			private readonly FiniteSet<T> _set;
 
-			internal InternalGroup(ICollection<T> collection) {
+			internal InternalGroup(FiniteSet<T> set) {
 				_identity = new T();
-				_collection = collection;
+				_set = set;
 			}
+			internal InternalGroup(ICollection<T> collection)
+				: this(collection.ToFiniteSet<T>()) { }
 
 			public override T IdentityElement { get { return _identity; } }
-			public override int Count { get { return _collection.Count; } }
+			public override long Count { get { return _set.Count; } }
 			public override bool Contains(T item) {
-				return _collection.Contains(item);
+				return _set.Contains(item);
 			}
 			public override IEnumerator<T> GetEnumerator() {
-				return _collection.GetEnumerator();
+				return _set.GetEnumerator();
 			}
 
 			public static FiniteGroup<T> CreateGroup(IEnumerable<T> collection) {
@@ -46,6 +49,12 @@ namespace DotNetTransformer.Math.Group {
 			}
 		}
 
+		internal static FiniteGroup<T> ToFiniteGroup<T>(this FiniteSet<T> collection)
+			where T : IFiniteGroupElement<T>, new()
+		{
+			return ReferenceEquals(collection, null) ?
+				null : new InternalGroup<T>(collection);
+		}
 		internal static FiniteGroup<T> ToFiniteGroup<T>(this ICollection<T> collection)
 			where T : IFiniteGroupElement<T>, new()
 		{

@@ -10,11 +10,11 @@ namespace DotNetTransformer.Math.Set {
 		{
 			public EmptySet() { }
 
-			public override int Count { get { return 0; } }
+			public override long Count { get { return 0L; } }
 			public override bool Contains(T item) { return false; }
 			public override IEnumerator<T> GetEnumerator() { yield break; }
 			public override bool Equals(FiniteSet<T> other) {
-				return !ReferenceEquals(other, null) && other.Count == 0;
+				return !ReferenceEquals(other, null) && other.Count == 0L;
 			}
 			public override int GetHashCode() { return 0; }
 			public override bool IsSubsetOf(ISet<T> other) { return !ReferenceEquals(other, null); }
