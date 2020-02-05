@@ -4,47 +4,58 @@ using System.Collections.Generic;
 namespace DotNetTransformer.Math.Group {
 	public static class FiniteGroupExtension
 	{
-		private class InternalGroup<T> : FiniteGroup<T>
+		private sealed class InternalGroup<T> : FiniteGroup<T>
 			where T : IFiniteGroupElement<T>, new()
 		{
-			private readonly T _ident;
-			private readonly List<T> _list;
+			private readonly T _identity;
+			private readonly ICollection<T> _collection;
 
-			public InternalGroup(IEnumerable<T> collection) {
-				_ident = new T();
-				_list = new List<T>();
-				_list.Add(_ident);
-				foreach(T item in collection)
-					if(!_list.Contains(item))
-						_list.Add(item);
-				T outer, inner, new_e;
-				int count, outer_i = 1, inner_i;
-				do {
-					for(count = _list.Count; outer_i < count; ++outer_i) {
-						outer = _list[outer_i];
-						for(inner_i = 1; inner_i < count; ++inner_i) {
-							inner = _list[inner_i];
-							if(!_list.Contains(new_e = outer.Add(inner))) _list.Add(new_e);
-							if(!_list.Contains(new_e = inner.Add(outer))) _list.Add(new_e);
-						}
-					}
-				} while(count < _list.Count);
+			internal InternalGroup(ICollection<T> collection) {
+				_identity = new T();
+				_collection = collection;
 			}
 
-			public override T IdentityElement { get { return _ident; } }
-			public override int Count { get { return _list.Count; } }
+			public override T IdentityElement { get { return _identity; } }
+			public override int Count { get { return _collection.Count; } }
 			public override bool Contains(T item) {
-				return _list.Contains(item);
+				return _collection.Contains(item);
 			}
 			public override IEnumerator<T> GetEnumerator() {
-				return _list.GetEnumerator();
+				return _collection.GetEnumerator();
+			}
+
+			public static FiniteGroup<T> CreateGroup(IEnumerable<T> collection) {
+				List<T> list = new List<T>();
+				list.Add(new T());
+				foreach(T a in collection)
+					if(!list.Contains(a)) list.Add(a);
+				int i = 1, count;
+				do {
+					for(count = list.Count; i < count; ++i) {
+						T a = list[i];
+						for(int j = 1; j < count; ++j) {
+							T b = list[j], c;
+							if(!list.Contains(c = a.Add(b))) list.Add(c);
+							if(!list.Contains(c = b.Add(a))) list.Add(c);
+						}
+					}
+				} while(count < list.Count);
+				InternalGroup<T> group = new InternalGroup<T>(list);
+				list[0] = group.IdentityElement;
+				return group;
 			}
 		}
 
+		internal static FiniteGroup<T> ToFiniteGroup<T>(this ICollection<T> collection)
+			where T : IFiniteGroupElement<T>, new()
+		{
+			return ReferenceEquals(collection, null) ?
+				null : new InternalGroup<T>(collection);
+		}
 		public static FiniteGroup<T> CreateGroup<T>(this IEnumerable<T> collection)
 			where T : IFiniteGroupElement<T>, new()
 		{
-			return new InternalGroup<T>(collection);
+			return InternalGroup<T>.CreateGroup(collection);
 		}
 		public static bool IsGeneratingSetOf<T>(this IEnumerable<T> collection, FiniteGroup<T> group)
 			where T : IFiniteGroupElement<T>, new()
