@@ -13,20 +13,20 @@ namespace DotNetTransformer.Math.Transform {
 			where T : IFlipRotate<T, P>, new()
 			where P : IPermutation<P>, new()
 		{
-			return GetValues<T, P>(dimensions, ctor, _ => 0, v => v + 1);
+			return GetValues<T, P>(dimensions, ctor,
+				_ => (0).GetRange<int>(1 << dimensions, v => v + 1)
+			);
 		}
 		public static IEnumerable<T> GetValues<T, P>(int dimensions,
 			Constructor<P, int, T> ctor,
-			Converter<P, int> startVertex,
-			Generator<int> nextVertex
+			Converter<P, IEnumerable<int>> vertexes
 		)
 			where T : IFlipRotate<T, P>, new()
 			where P : IPermutation<P>, new()
 		{
-			int c = 1 << dimensions;
 			P i = new P();
 			foreach(P p in i.GetRange<P>(i, dimensions))
-				for(int v = startVertex(p); v < c; v = nextVertex(v))
+				foreach(int v in vertexes(p))
 					yield return ctor(p, v);
 		}
 
