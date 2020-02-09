@@ -9,40 +9,59 @@ namespace DotNetTransformer.Math.Group {
 			where T : IFiniteGroupElement<T>, new()
 		{
 			private readonly T _identity;
-			private readonly FiniteSet<T> _set;
+			private readonly FiniteSet<T> _collection;
 
-			internal InternalGroup(FiniteSet<T> set) {
+			internal InternalGroup(FiniteSet<T> collection) {
 				_identity = new T();
-				_set = set;
+				_collection = collection;
 			}
 			internal InternalGroup(ICollection<T> collection)
 				: this(collection.ToFiniteSet<T>()) { }
 
 			public override T IdentityElement { get { return _identity; } }
-			public override long Count { get { return _set.Count; } }
+			public override long Count { get { return _collection.Count; } }
 			public override bool Contains(T item) {
-				return _set.Contains(item);
+				return _collection.Contains(item);
 			}
 			public override IEnumerator<T> GetEnumerator() {
-				return _set.GetEnumerator();
+				return _collection.GetEnumerator();
+			}
+			public override bool Equals(FiniteSet<T> other) {
+				return CollectionsEquals(other) || base.Equals(other);
+			}
+			public override bool IsSubsetOf(ISet<T> other) {
+				return CollectionsEquals(other) || base.IsSubsetOf(other);
+			}
+			public override bool IsSubsetOf(FiniteSet<T> other) {
+				return CollectionsEquals(other) || base.IsSubsetOf(other);
+			}
+			public override bool IsSupersetOf(FiniteSet<T> other) {
+				return CollectionsEquals(other) || base.IsSupersetOf(other);
+			}
+			private bool CollectionsEquals(object other) {
+				InternalGroup<T> o = other as InternalGroup<T>;
+				return !ReferenceEquals(o, null)
+					&& _collection.Equals(o._collection);
 			}
 
 			public static FiniteGroup<T> CreateGroup(IEnumerable<T> collection) {
 				List<T> list = new List<T>();
 				list.Add(new T());
-				foreach(T a in collection)
-					if(!list.Contains(a)) list.Add(a);
-				int i = 1, count;
-				do {
-					for(count = list.Count; i < count; ++i) {
-						T a = list[i];
-						for(int j = 1; j < count; ++j) {
-							T b = list[j], c;
-							if(!list.Contains(c = a.Add(b))) list.Add(c);
-							if(!list.Contains(c = b.Add(a))) list.Add(c);
+				if(!ReferenceEquals(collection, null)) {
+					foreach(T a in collection)
+						if(!list.Contains(a)) list.Add(a);
+					int i = 1, count;
+					do {
+						for(count = list.Count; i < count; ++i) {
+							T a = list[i];
+							for(int j = 1; j < count; ++j) {
+								T b = list[j], c;
+								if(!list.Contains(c = a.Add(b))) list.Add(c);
+								if(!list.Contains(c = b.Add(a))) list.Add(c);
+							}
 						}
-					}
-				} while(count < list.Count);
+					} while(count < list.Count);
+				}
 				InternalGroup<T> group = new InternalGroup<T>(list);
 				list[0] = group.IdentityElement;
 				return group;
@@ -61,6 +80,7 @@ namespace DotNetTransformer.Math.Group {
 			return ReferenceEquals(collection, null) ?
 				null : new InternalGroup<T>(collection);
 		}
+
 		public static FiniteGroup<T> CreateGroup<T>(this IEnumerable<T> collection)
 			where T : IFiniteGroupElement<T>, new()
 		{
