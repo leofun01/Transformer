@@ -1,5 +1,5 @@
-using System;
 using System.Collections.Generic;
+using DotNetTransformer.Extensions;
 using DotNetTransformer.Math.Set;
 
 namespace DotNetTransformer.Math.Group {
@@ -27,21 +27,23 @@ namespace DotNetTransformer.Math.Group {
 				return _collection.GetEnumerator();
 			}
 			public override bool Equals(FiniteSet<T> other) {
-				return CollectionsEquals(other) || base.Equals(other);
+				return IsMatch(other, (l, r) => l.Equals(r)) || base.Equals(other);
 			}
 			public override bool IsSubsetOf(ISet<T> other) {
-				return CollectionsEquals(other) || base.IsSubsetOf(other);
+				return IsMatch(other, (l, r) => l.IsSubsetOf(r)) || base.IsSubsetOf(other);
 			}
 			public override bool IsSubsetOf(FiniteSet<T> other) {
-				return CollectionsEquals(other) || base.IsSubsetOf(other);
+				return IsMatch(other, (l, r) => l.IsSubsetOf(r)) || base.IsSubsetOf(other);
 			}
 			public override bool IsSupersetOf(FiniteSet<T> other) {
-				return CollectionsEquals(other) || base.IsSupersetOf(other);
+				return IsMatch(other, (l, r) => l.IsSupersetOf(r)) || base.IsSupersetOf(other);
 			}
-			private bool CollectionsEquals(object other) {
+			private bool IsMatch(object other, Order<FiniteSet<T>> match) {
 				InternalGroup<T> o = other as InternalGroup<T>;
-				return !ReferenceEquals(o, null)
-					&& _collection.Equals(o._collection);
+				return !ReferenceEquals(o, null) && (
+					ReferenceEquals(_collection, o._collection)
+					|| match(_collection, o._collection)
+				);
 			}
 
 			public static FiniteGroup<T> CreateGroup(IEnumerable<T> collection) {
