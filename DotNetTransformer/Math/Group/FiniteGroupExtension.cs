@@ -20,31 +20,32 @@ namespace DotNetTransformer.Math.Group {
 				: this(collection.ToFiniteSet<T>()) { }
 
 			public override T IdentityElement { get { return _identity; } }
-			public override long Count { get { return _collection.Count; } }
-			public override bool Contains(T item) {
+			public sealed override long Count { get { return _collection.Count; } }
+			public sealed override bool Contains(T item) {
 				return _collection.Contains(item);
 			}
-			public override IEnumerator<T> GetEnumerator() {
+			public sealed override IEnumerator<T> GetEnumerator() {
 				return _collection.GetEnumerator();
 			}
-			public override bool Equals(FiniteSet<T> other) {
-				return IsMatch(other, (l, r) => l.Equals(r)) || base.Equals(other);
+			public sealed override bool Equals(FiniteSet<T> other) {
+				return IsMatch<FiniteSet<T>>(other, base.Equals);
 			}
-			public override bool IsSubsetOf(ISet<T> other) {
-				return IsMatch(other, (l, r) => l.IsSubsetOf(r)) || base.IsSubsetOf(other);
+			public sealed override bool IsSubsetOf(ISet<T> other) {
+				return IsMatch<ISet<T>>(other, base.IsSubsetOf);
 			}
-			public override bool IsSubsetOf(FiniteSet<T> other) {
-				return IsMatch(other, (l, r) => l.IsSubsetOf(r)) || base.IsSubsetOf(other);
+			public sealed override bool IsSubsetOf(FiniteSet<T> other) {
+				return IsMatch<FiniteSet<T>>(other, base.IsSubsetOf);
 			}
-			public override bool IsSupersetOf(FiniteSet<T> other) {
-				return IsMatch(other, (l, r) => l.IsSupersetOf(r)) || base.IsSupersetOf(other);
+			public sealed override bool IsSupersetOf(FiniteSet<T> other) {
+				return IsMatch<FiniteSet<T>>(other, base.IsSupersetOf);
 			}
-			private bool IsMatch(object other, Order<FiniteSet<T>> match) {
+			private bool IsMatch<TSet>(TSet other, Predicate<TSet> match)
+				where TSet : ISet<T>
+			{
 				InternalGroup<T> o = other as InternalGroup<T>;
-				return !ReferenceEquals(o, null) && (
-					ReferenceEquals(_collection, o._collection)
-					|| match(_collection, o._collection)
-				);
+				return ReferenceEquals(_collection, other)
+					|| !ReferenceEquals(o, null) && ReferenceEquals(_collection, o._collection)
+					|| match(other);
 			}
 
 			public static FiniteGroup<T> CreateGroup(IEnumerable<T> collection) {
