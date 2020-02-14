@@ -47,8 +47,8 @@ namespace DotNetTransformer.Math.Set {
 		{
 			internal InternalCollection(ICollection<T> collection) : base(collection) { }
 
-			public override long Count { get { return _collection.Count; } }
-			public override bool Contains(T item) {
+			public sealed override long Count { get { return _collection.Count; } }
+			public sealed override bool Contains(T item) {
 				return _collection.Contains(item);
 			}
 		}
@@ -65,8 +65,8 @@ namespace DotNetTransformer.Math.Set {
 				_contains = contains;
 			}
 
-			public override long Count { get { return _count; } }
-			public override bool Contains(T item) {
+			public sealed override long Count { get { return _count; } }
+			public sealed override bool Contains(T item) {
 				return _contains(item);
 			}
 		}
