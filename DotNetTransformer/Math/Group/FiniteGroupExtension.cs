@@ -18,26 +18,26 @@ namespace DotNetTransformer.Math.Group {
 			}
 
 			public override T IdentityElement { get { return _identity; } }
-			public sealed override long Count { get { return _collection.Count; } }
-			public sealed override bool Contains(T item) {
+			public override sealed long Count { get { return _collection.Count; } }
+			public override sealed bool Contains(T item) {
 				return _collection.Contains(item);
 			}
-			public sealed override IEnumerator<T> GetEnumerator() {
+			public override sealed IEnumerator<T> GetEnumerator() {
 				return _collection.GetEnumerator();
 			}
-			public sealed override bool Equals(FiniteSet<T> other) {
+			public override sealed bool Equals(FiniteSet<T> other) {
 				return IsMatch<FiniteSet<T>>(other, base.Equals);
 			}
-			public sealed override int GetHashCode() {
+			public override sealed int GetHashCode() {
 				return _collection.GetHashCode();
 			}
-			public sealed override bool IsSubsetOf(ISet<T> other) {
+			public override sealed bool IsSubsetOf(ISet<T> other) {
 				return IsMatch<ISet<T>>(other, base.IsSubsetOf);
 			}
-			public sealed override bool IsSubsetOf(FiniteSet<T> other) {
+			public override sealed bool IsSubsetOf(FiniteSet<T> other) {
 				return IsMatch<FiniteSet<T>>(other, base.IsSubsetOf);
 			}
-			public sealed override bool IsSupersetOf(FiniteSet<T> other) {
+			public override sealed bool IsSupersetOf(FiniteSet<T> other) {
 				return IsMatch<FiniteSet<T>>(other, base.IsSupersetOf);
 			}
 			private bool IsMatch<TSet>(TSet other, Predicate<TSet> match)
