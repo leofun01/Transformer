@@ -21,6 +21,9 @@ namespace DotNetTransformer.Math.Set {
 			public sealed override bool Equals(FiniteSet<T> other) {
 				return IsMatch<FiniteSet<T>>(other, base.Equals);
 			}
+			public sealed override int GetHashCode() {
+				return _collection.GetHashCode();
+			}
 			public sealed override bool IsSubsetOf(ISet<T> other) {
 				return IsMatch<ISet<T>>(other, base.IsSubsetOf);
 			}
