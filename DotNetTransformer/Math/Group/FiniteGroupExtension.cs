@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using DotNetTransformer.Extensions;
 using DotNetTransformer.Math.Set;
@@ -79,8 +80,14 @@ namespace DotNetTransformer.Math.Group {
 		internal static FiniteGroup<T> ToFiniteGroup<T>(this ICollection<T> collection)
 			where T : IFiniteGroupElement<T>, new()
 		{
-			return ReferenceEquals(collection, null) ?
-				null : new InternalGroup<T>(collection);
+			return ToFiniteGroup<T>(collection.ToFiniteSet<T>());
+		}
+		internal static FiniteGroup<T> ToFiniteGroup<T>(this IEnumerable<T> collection,
+			long count, Predicate<T> contains
+		)
+			where T : IFiniteGroupElement<T>, new()
+		{
+			return ToFiniteGroup<T>(collection.ToFiniteSet<T>(count, contains));
 		}
 
 		public static FiniteGroup<T> CreateGroup<T>(this IEnumerable<T> collection)
