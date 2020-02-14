@@ -16,8 +16,6 @@ namespace DotNetTransformer.Math.Group {
 				_identity = new T();
 				_collection = collection;
 			}
-			internal InternalGroup(ICollection<T> collection)
-				: this(collection.ToFiniteSet<T>()) { }
 
 			public override T IdentityElement { get { return _identity; } }
 			public sealed override long Count { get { return _collection.Count; } }
@@ -50,29 +48,6 @@ namespace DotNetTransformer.Math.Group {
 					|| !ReferenceEquals(o, null) && ReferenceEquals(_collection, o._collection)
 					|| match(other);
 			}
-
-			public static FiniteGroup<T> CreateGroup(IEnumerable<T> collection) {
-				List<T> list = new List<T>();
-				list.Add(new T());
-				if(!ReferenceEquals(collection, null)) {
-					foreach(T a in collection)
-						if(!list.Contains(a)) list.Add(a);
-					int i = 1, count;
-					do {
-						for(count = list.Count; i < count; ++i) {
-							T a = list[i];
-							for(int j = 1; j < count; ++j) {
-								T b = list[j], c;
-								if(!list.Contains(c = a.Add(b))) list.Add(c);
-								if(!list.Contains(c = b.Add(a))) list.Add(c);
-							}
-						}
-					} while(count < list.Count);
-				}
-				InternalGroup<T> group = new InternalGroup<T>(list);
-				list[0] = group.IdentityElement;
-				return group;
-			}
 		}
 
 		internal static FiniteGroup<T> ToFiniteGroup<T>(this FiniteSet<T> collection)
@@ -97,7 +72,26 @@ namespace DotNetTransformer.Math.Group {
 		public static FiniteGroup<T> CreateGroup<T>(this IEnumerable<T> collection)
 			where T : IFiniteGroupElement<T>, new()
 		{
-			return InternalGroup<T>.CreateGroup(collection);
+			List<T> list = new List<T>();
+			list.Add(new T());
+			if(!ReferenceEquals(collection, null)) {
+				foreach(T a in collection)
+					if(!list.Contains(a)) list.Add(a);
+				int i = 1, count;
+				do {
+					for(count = list.Count; i < count; ++i) {
+						T a = list[i];
+						for(int j = 1; j < count; ++j) {
+							T b = list[j], c;
+							if(!list.Contains(c = a.Add(b))) list.Add(c);
+							if(!list.Contains(c = b.Add(a))) list.Add(c);
+						}
+					}
+				} while(count < list.Count);
+			}
+			FiniteGroup<T> group = ToFiniteGroup<T>(list);
+			list[0] = group.IdentityElement;
+			return group;
 		}
 		public static bool IsGeneratingSetOf<T>(this IEnumerable<T> collection, FiniteGroup<T> group)
 			where T : IFiniteGroupElement<T>, new()
