@@ -195,7 +195,9 @@ namespace DotNetTransformer.Math.Transform {
 		/// </return></summary>
 		public bool IsSwapDimensions { get { return Value > 3; } }
 
-		public P Permutation { get { return new P((byte)((Value >> 2) * 5)); } }
+		P IFlipRotate<T, P>.Permutation {
+			get { return new P((byte)((Value >> 2) * 5)); }
+		}
 		public int Vertex { get { return 0x6C9C >> (Value << 1) & 3; } }
 
 		/// <summary>
