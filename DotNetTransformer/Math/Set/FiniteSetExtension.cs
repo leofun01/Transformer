@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using DotNetTransformer.Math.Group;
 
 namespace DotNetTransformer.Math.Set {
 	public static class FiniteSetExtension
@@ -42,6 +43,16 @@ namespace DotNetTransformer.Math.Set {
 					|| match(other);
 			}
 		}
+		private sealed class InternalGroup<T> : InternalBase<T, FiniteGroup<T>>
+			where T : IFiniteGroupElement<T>, new()
+		{
+			internal InternalGroup(FiniteGroup<T> collection) : base(collection) { }
+
+			public override sealed long Count { get { return _collection.Count; } }
+			public override sealed bool Contains(T item) {
+				return _collection.Contains(item);
+			}
+		}
 		private sealed class InternalCollection<T> : InternalBase<T, ICollection<T>>
 			where T : IEquatable<T>
 		{
@@ -71,6 +82,12 @@ namespace DotNetTransformer.Math.Set {
 			}
 		}
 
+		internal static FiniteSet<T> ToFiniteSet<T>(this FiniteGroup<T> collection)
+			where T : IFiniteGroupElement<T>, new()
+		{
+			return ReferenceEquals(collection, null) ?
+				null : new InternalGroup<T>(collection);
+		}
 		internal static FiniteSet<T> ToFiniteSet<T>(this ICollection<T> collection)
 			where T : IEquatable<T>
 		{
