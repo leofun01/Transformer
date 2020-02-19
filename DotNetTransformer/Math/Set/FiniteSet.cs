@@ -4,11 +4,8 @@ using System.Collections.Generic;
 using DotNetTransformer.Extensions;
 
 namespace DotNetTransformer.Math.Set {
-	public abstract partial class FiniteSet<T> : ISet<T>, IEnumerable<T>
-		, IEquatable<FiniteSet<T>>
+	public abstract partial class FiniteSet<T> : IFiniteSet<T, FiniteSet<T>>
 		, ISubSet<T, ISet<T>>
-		, ISubSet<T, FiniteSet<T>>
-		, ISuperSet<T, FiniteSet<T>>
 		where T : IEquatable<T>
 	{
 		public abstract long Count { get; }
