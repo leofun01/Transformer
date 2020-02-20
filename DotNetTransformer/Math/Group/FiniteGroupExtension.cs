@@ -40,8 +40,8 @@ namespace DotNetTransformer.Math.Group {
 			public override sealed bool IsSupersetOf(FiniteSet<T> other) {
 				return IsMatch<FiniteSet<T>>(other, base.IsSupersetOf);
 			}
-			private bool IsMatch<TSet>(TSet other, Predicate<TSet> match)
-				where TSet : ISet<T>
+			private bool IsMatch<S>(S other, Predicate<S> match)
+				where S : ISet<T>
 			{
 				InternalGroup<T> o = other as InternalGroup<T>;
 				return ReferenceEquals(_collection, other)

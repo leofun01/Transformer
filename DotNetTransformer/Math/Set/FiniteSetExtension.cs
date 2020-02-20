@@ -5,13 +5,13 @@ using DotNetTransformer.Math.Group;
 namespace DotNetTransformer.Math.Set {
 	public static class FiniteSetExtension
 	{
-		private abstract class InternalBase<T, TEnum> : FiniteSet<T>
-			where T     : IEquatable<T>
-			where TEnum : IEnumerable<T>
+		private abstract class InternalBase<T, E> : FiniteSet<T>
+			where T : IEquatable<T>
+			where E : IEnumerable<T>
 		{
-			protected readonly TEnum _collection;
+			protected readonly E _collection;
 
-			protected internal InternalBase(TEnum collection) {
+			protected internal InternalBase(E collection) {
 				_collection = collection;
 			}
 
@@ -34,10 +34,10 @@ namespace DotNetTransformer.Math.Set {
 			public override sealed bool IsSupersetOf(FiniteSet<T> other) {
 				return IsMatch<FiniteSet<T>>(other, base.IsSupersetOf);
 			}
-			private bool IsMatch<TSet>(TSet other, Predicate<TSet> match)
-				where TSet : ISet<T>
+			private bool IsMatch<S>(S other, Predicate<S> match)
+				where S : ISet<T>
 			{
-				InternalBase<T, TEnum> o = other as InternalBase<T, TEnum>;
+				InternalBase<T, E> o = other as InternalBase<T, E>;
 				return ReferenceEquals(_collection, other)
 					|| !ReferenceEquals(o, null) && ReferenceEquals(_collection, o._collection)
 					|| match(other);
