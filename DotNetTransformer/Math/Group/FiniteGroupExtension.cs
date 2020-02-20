@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using DotNetTransformer.Extensions;
 using DotNetTransformer.Math.Set;
 
 namespace DotNetTransformer.Math.Group {
@@ -10,9 +9,9 @@ namespace DotNetTransformer.Math.Group {
 			where T : IFiniteGroupElement<T>, new()
 		{
 			private readonly T _identity;
-			private readonly FiniteSet<T> _collection;
+			private readonly IFiniteSet<T> _collection;
 
-			internal InternalGroup(FiniteSet<T> collection) {
+			internal InternalGroup(IFiniteSet<T> collection) {
 				_identity = new T();
 				_collection = collection;
 			}
@@ -25,8 +24,8 @@ namespace DotNetTransformer.Math.Group {
 			public override sealed IEnumerator<T> GetEnumerator() {
 				return _collection.GetEnumerator();
 			}
-			public override sealed bool Equals(FiniteSet<T> other) {
-				return IsMatch<FiniteSet<T>>(other, base.Equals);
+			public override sealed bool Equals(IFiniteSet<T> other) {
+				return IsMatch<IFiniteSet<T>>(other, base.Equals);
 			}
 			public override sealed int GetHashCode() {
 				return _collection.GetHashCode();
@@ -34,11 +33,11 @@ namespace DotNetTransformer.Math.Group {
 			public override sealed bool IsSubsetOf(ISet<T> other) {
 				return IsMatch<ISet<T>>(other, base.IsSubsetOf);
 			}
-			public override sealed bool IsSubsetOf(FiniteSet<T> other) {
-				return IsMatch<FiniteSet<T>>(other, base.IsSubsetOf);
+			public override sealed bool IsSubsetOf(IFiniteSet<T> other) {
+				return IsMatch<IFiniteSet<T>>(other, base.IsSubsetOf);
 			}
-			public override sealed bool IsSupersetOf(FiniteSet<T> other) {
-				return IsMatch<FiniteSet<T>>(other, base.IsSupersetOf);
+			public override sealed bool IsSupersetOf(IFiniteSet<T> other) {
+				return IsMatch<IFiniteSet<T>>(other, base.IsSupersetOf);
 			}
 			private bool IsMatch<S>(S other, Predicate<S> match)
 				where S : ISet<T>
@@ -50,18 +49,18 @@ namespace DotNetTransformer.Math.Group {
 			}
 		}
 
-		internal static FiniteGroup<T> ToFiniteGroup<T>(this FiniteSet<T> collection)
+		internal static IFiniteGroup<T> ToFiniteGroup<T>(this IFiniteSet<T> collection)
 			where T : IFiniteGroupElement<T>, new()
 		{
 			return ReferenceEquals(collection, null) ?
 				null : new InternalGroup<T>(collection);
 		}
-		internal static FiniteGroup<T> ToFiniteGroup<T>(this ICollection<T> collection)
+		internal static IFiniteGroup<T> ToFiniteGroup<T>(this ICollection<T> collection)
 			where T : IFiniteGroupElement<T>, new()
 		{
 			return ToFiniteGroup<T>(collection.ToFiniteSet<T>());
 		}
-		internal static FiniteGroup<T> ToFiniteGroup<T>(this IEnumerable<T> collection,
+		internal static IFiniteGroup<T> ToFiniteGroup<T>(this IEnumerable<T> collection,
 			long count, Predicate<T> contains
 		)
 			where T : IFiniteGroupElement<T>, new()
@@ -69,7 +68,7 @@ namespace DotNetTransformer.Math.Group {
 			return ToFiniteGroup<T>(collection.ToFiniteSet<T>(count, contains));
 		}
 
-		public static FiniteGroup<T> CreateGroup<T>(this IEnumerable<T> collection)
+		public static IFiniteGroup<T> CreateGroup<T>(this IEnumerable<T> collection)
 			where T : IFiniteGroupElement<T>, new()
 		{
 			List<T> list = new List<T>();
@@ -89,11 +88,11 @@ namespace DotNetTransformer.Math.Group {
 					}
 				} while(count < list.Count);
 			}
-			FiniteGroup<T> group = ToFiniteGroup<T>(list);
+			IFiniteGroup<T> group = ToFiniteGroup<T>(list);
 			list[0] = group.IdentityElement;
 			return group;
 		}
-		public static bool IsGeneratingSetOf<T>(this IEnumerable<T> collection, FiniteGroup<T> group)
+		public static bool IsGeneratingSetOf<T>(this IEnumerable<T> collection, IFiniteGroup<T> group)
 			where T : IFiniteGroupElement<T>, new()
 		{
 			return !ReferenceEquals(collection, null)
