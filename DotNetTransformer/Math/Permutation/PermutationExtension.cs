@@ -5,12 +5,12 @@ using DotNetTransformer.Math.Set;
 namespace DotNetTransformer.Math.Permutation {
 	public static class PermutationExtension
 	{
-		public static FiniteSet<T> GetCyclesAll<T>(this T _this)
+		public static IFiniteSet<T> GetCyclesAll<T>(this T _this)
 			where T : IPermutation<T>, new()
 		{
 			return _this.GetCycles(p => true);
 		}
-		public static FiniteSet<T> GetCyclesNonTrivial<T>(this T _this)
+		public static IFiniteSet<T> GetCyclesNonTrivial<T>(this T _this)
 			where T : IPermutation<T>, new()
 		{
 			return _this.GetCycles(p => p.CycleLength > 1);

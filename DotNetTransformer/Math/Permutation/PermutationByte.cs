@@ -149,7 +149,7 @@ namespace DotNetTransformer.Math.Permutation {
 				cycleAction(cLen);
 			}
 		}
-		public FiniteSet<P> GetCycles(Predicate<P> match) {
+		public IFiniteSet<P> GetCycles(Predicate<P> match) {
 			List<P> list = new List<P>(_count);
 			byte value = 0, t = this._value;
 			ForAllCyclesDo(

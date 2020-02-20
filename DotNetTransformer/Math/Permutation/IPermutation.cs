@@ -14,7 +14,7 @@ namespace DotNetTransformer.Math.Permutation {
 		T GetNextPermutation(int maxLength);
 		T GetPreviousPermutation(int maxLength);
 
-		FiniteSet<T> GetCycles(Predicate<T> match);
+		IFiniteSet<T> GetCycles(Predicate<T> match);
 		int GetCyclesCount(Predicate<int> match);
 
 		int[] ToArray();

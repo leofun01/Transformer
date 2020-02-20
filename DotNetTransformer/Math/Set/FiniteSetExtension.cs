@@ -19,8 +19,8 @@ namespace DotNetTransformer.Math.Set {
 			public override sealed IEnumerator<T> GetEnumerator() {
 				return _collection.GetEnumerator();
 			}
-			public override sealed bool Equals(FiniteSet<T> other) {
-				return IsMatch<FiniteSet<T>>(other, base.Equals);
+			public override sealed bool Equals(IFiniteSet<T> other) {
+				return IsMatch<IFiniteSet<T>>(other, base.Equals);
 			}
 			public override sealed int GetHashCode() {
 				return _collection.GetHashCode();
@@ -28,11 +28,11 @@ namespace DotNetTransformer.Math.Set {
 			public override sealed bool IsSubsetOf(ISet<T> other) {
 				return IsMatch<ISet<T>>(other, base.IsSubsetOf);
 			}
-			public override sealed bool IsSubsetOf(FiniteSet<T> other) {
-				return IsMatch<FiniteSet<T>>(other, base.IsSubsetOf);
+			public override sealed bool IsSubsetOf(IFiniteSet<T> other) {
+				return IsMatch<IFiniteSet<T>>(other, base.IsSubsetOf);
 			}
-			public override sealed bool IsSupersetOf(FiniteSet<T> other) {
-				return IsMatch<FiniteSet<T>>(other, base.IsSupersetOf);
+			public override sealed bool IsSupersetOf(IFiniteSet<T> other) {
+				return IsMatch<IFiniteSet<T>>(other, base.IsSupersetOf);
 			}
 			private bool IsMatch<S>(S other, Predicate<S> match)
 				where S : ISet<T>
@@ -43,10 +43,10 @@ namespace DotNetTransformer.Math.Set {
 					|| match(other);
 			}
 		}
-		private sealed class InternalGroup<T> : InternalBase<T, FiniteGroup<T>>
+		private sealed class InternalGroup<T> : InternalBase<T, IFiniteGroup<T>>
 			where T : IFiniteGroupElement<T>, new()
 		{
-			internal InternalGroup(FiniteGroup<T> collection) : base(collection) { }
+			internal InternalGroup(IFiniteGroup<T> collection) : base(collection) { }
 
 			public override sealed long Count { get { return _collection.Count; } }
 			public override sealed bool Contains(T item) {
@@ -82,19 +82,19 @@ namespace DotNetTransformer.Math.Set {
 			}
 		}
 
-		internal static FiniteSet<T> ToFiniteSet<T>(this FiniteGroup<T> collection)
+		internal static IFiniteSet<T> ToFiniteSet<T>(this IFiniteGroup<T> collection)
 			where T : IFiniteGroupElement<T>, new()
 		{
 			return ReferenceEquals(collection, null) ?
 				null : new InternalGroup<T>(collection);
 		}
-		internal static FiniteSet<T> ToFiniteSet<T>(this ICollection<T> collection)
+		internal static IFiniteSet<T> ToFiniteSet<T>(this ICollection<T> collection)
 			where T : IEquatable<T>
 		{
 			return ReferenceEquals(collection, null) ?
 				null : new InternalCollection<T>(collection);
 		}
-		internal static FiniteSet<T> ToFiniteSet<T>(this IEnumerable<T> collection,
+		internal static IFiniteSet<T> ToFiniteSet<T>(this IEnumerable<T> collection,
 			long count, Predicate<T> contains
 		)
 			where T : IEquatable<T>

@@ -13,13 +13,13 @@ namespace DotNetTransformer.Math.Set {
 			public override long Count { get { return 0L; } }
 			public override bool Contains(T item) { return false; }
 			public override IEnumerator<T> GetEnumerator() { yield break; }
-			public override bool Equals(FiniteSet<T> other) {
+			public override bool Equals(IFiniteSet<T> other) {
 				return !ReferenceEquals(other, null) && other.Count == 0L;
 			}
 			public override int GetHashCode() { return 0; }
 			public override bool IsSubsetOf(ISet<T> other) { return !ReferenceEquals(other, null); }
-			public override bool IsSubsetOf(FiniteSet<T> other) { return !ReferenceEquals(other, null); }
-			public override bool IsSupersetOf(FiniteSet<T> other) { return Equals(other); }
+			public override bool IsSubsetOf(IFiniteSet<T> other) { return !ReferenceEquals(other, null); }
+			public override bool IsSupersetOf(IFiniteSet<T> other) { return Equals(other); }
 		}
 	}
 }

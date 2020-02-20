@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using DotNetTransformer.Extensions;
 
 namespace DotNetTransformer.Math.Set {
-	public abstract partial class FiniteSet<T> : IFiniteSet<T, FiniteSet<T>>
+	public abstract partial class FiniteSet<T> : IFiniteSet<T>
 		, ISubSet<T, ISet<T>>
 		where T : IEquatable<T>
 	{
@@ -16,7 +16,7 @@ namespace DotNetTransformer.Math.Set {
 		IEnumerator IEnumerable.GetEnumerator() {
 			return GetEnumerator();
 		}
-		public virtual bool Equals(FiniteSet<T> other) {
+		public virtual bool Equals(IFiniteSet<T> other) {
 			return ReferenceEquals(this, other) || (
 				!ReferenceEquals(other, null)
 				&& Count == other.Count
@@ -39,14 +39,14 @@ namespace DotNetTransformer.Math.Set {
 				&& !this.Exist<T>(e => !other.Contains(e))
 			);
 		}
-		public virtual bool IsSubsetOf(FiniteSet<T> other) {
+		public virtual bool IsSubsetOf(IFiniteSet<T> other) {
 			return ReferenceEquals(this, other) || (
 				!ReferenceEquals(other, null)
 				&& Count <= other.Count
 				&& !this.Exist<T>(e => !other.Contains(e))
 			);
 		}
-		public virtual bool IsSupersetOf(FiniteSet<T> other) {
+		public virtual bool IsSupersetOf(IFiniteSet<T> other) {
 			return ReferenceEquals(this, other) || (
 				!ReferenceEquals(other, null)
 				&& Count >= other.Count
@@ -54,13 +54,13 @@ namespace DotNetTransformer.Math.Set {
 			);
 		}
 
-		public static bool operator ==(FiniteSet<T> l, FiniteSet<T> r) {
+		public static bool operator ==(FiniteSet<T> l, IFiniteSet<T> r) {
 			return ReferenceEquals(l, r) || (
 				!ReferenceEquals(l, null) &&
 				l.Equals(r)
 			);
 		}
-		public static bool operator !=(FiniteSet<T> l, FiniteSet<T> r) {
+		public static bool operator !=(FiniteSet<T> l, IFiniteSet<T> r) {
 			return !(l == r);
 		}
 	}
