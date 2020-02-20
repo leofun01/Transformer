@@ -100,16 +100,16 @@ namespace DotNetTransformer.Math.Group {
 				&& group.IsSubsetOf(CreateGroup<T>(collection));
 		}
 
-		public static int GetLengthTo<T>(this T t, T o)
+		public static int? GetLengthTo<T>(this T t, T o)
 			where T : IFiniteGroupElement<T>, new()
 		{
 			int cLen = 1;
-			T sum = t;
-			while(!sum.Equals(o)) {
+			T sum = t, n = new T();
+			while(!n.Equals(sum) && !o.Equals(sum)) {
 				sum = sum.Add(t);
 				++cLen;
 			}
-			return cLen;
+			return o.Equals(sum) ? (int?)cLen : null;
 		}
 		public static T Times<T>(this T t, int count)
 			where T : IFiniteGroupElement<T>, new()
