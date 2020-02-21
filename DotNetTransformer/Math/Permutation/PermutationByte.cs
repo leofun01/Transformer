@@ -18,10 +18,6 @@ namespace DotNetTransformer.Math.Permutation {
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		internal readonly byte _value;
 		internal PermutationByte(byte value) { _value = value; }
-		internal PermutationByte(short value) {
-			value = (short)(((short)(value >> 2) | value) & 0x0F0F);
-			_value = (byte)((short)(value >> 4) | value);
-		}
 		public PermutationByte(params byte[] array) : this((IEnumerable<byte>)array) { }
 		public PermutationByte(IEnumerable<byte> collection) {
 			if(ReferenceEquals(collection, null))
@@ -281,6 +277,11 @@ namespace DotNetTransformer.Math.Permutation {
 			}
 			return new P((byte)(_mix ^ value));
 		}
+		private static P FromInt16Internal(short value) {
+			value = (short)(((short)(value >> 2) | value) & 0x0F0F);
+			value = (short)(((short)(value >> 4) | value) & 0x00FF);
+			return new P((byte)(value ^ _mix));
+		}
 		public static P FromInt16(short value) {
 			if((value & -0x3334) != 0)
 				_throwInt16(string.Format(
@@ -297,10 +298,10 @@ namespace DotNetTransformer.Math.Permutation {
 							"Digit \'{0}\' is not found.",
 							(char)(digit | '0')
 						));
-					else return new P((short)(((1 << (digit << 2)) - 1) & 0x3210 ^ value));
+					else return FromInt16Internal((short)((-1 << (digit << 2)) & 0x3210 ^ value));
 				else if(startIndex < i) startIndex = i;
 			}
-			return new P((short)(0x3210 ^ value));
+			return FromInt16Internal(value);
 		}
 		[DebuggerStepThrough]
 		private static void _throwString(string message) {
