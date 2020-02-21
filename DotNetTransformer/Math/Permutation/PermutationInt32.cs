@@ -259,6 +259,9 @@ namespace DotNetTransformer.Math.Permutation {
 			}
 			return new P(_mix ^ value);
 		}
+		internal static P FromInt32Internal(int value) {
+			return new P(value ^ _mix);
+		}
 		public static P FromInt32(int value) {
 			if((value & -0x77777778) != 0)
 				_throwInt32(string.Format(

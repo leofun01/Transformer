@@ -178,7 +178,7 @@ namespace DotNetTransformer.Math.Transform {
 			const int b = 0x11111111;
 			for(byte i = 0, l = 4; i < _dimCount; ++i, l <<= 1)
 				v ^= ((1 << l) - 1 & (b << p[i]) ^ v) << l;
-			return new PermutationInt32(v ^ 0x76543210);
+			return PermutationInt32.FromInt32Internal(v);
 		}
 
 		///	<exception cref="ArgumentException">
