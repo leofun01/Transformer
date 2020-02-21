@@ -260,7 +260,7 @@ namespace DotNetTransformer.Math.Transform {
 			for(byte i = 0, l = 2; i < _dimCount; ++i, l <<= 1)
 				v ^= ((1 << l) - 1 & (b << p[i]) ^ v) << l;
 			//*/
-			return new PermutationByte((byte)(v ^ 0xE4));
+			return PermutationByte.FromByteInternal((byte)v);
 		}
 		public RotateFlipType ToRotateFlipType() {
 			return (RotateFlipType)(0x31756420 >> (Value << 2) & 7);

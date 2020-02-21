@@ -262,6 +262,9 @@ namespace DotNetTransformer.Math.Permutation {
 			}
 			return new P((byte)(_mix ^ value));
 		}
+		internal static P FromByteInternal(byte value) {
+			return new P((byte)(value ^ _mix));
+		}
 		public static P FromByte(byte value) {
 			byte startIndex = 0;
 			for(byte digit = 0; digit < _count; ++digit) {
