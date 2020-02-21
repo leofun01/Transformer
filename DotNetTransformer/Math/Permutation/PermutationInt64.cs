@@ -16,7 +16,7 @@ namespace DotNetTransformer.Math.Permutation {
 	public struct PermutationInt64 : IPermutation<P>
 	{
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
-		internal readonly long _value;
+		private readonly long _value;
 		internal PermutationInt64(long value) { _value = value; }
 		public PermutationInt64(params byte[] array) : this((IEnumerable<byte>)array) { }
 		public PermutationInt64(IEnumerable<byte> collection) {
@@ -266,6 +266,9 @@ namespace DotNetTransformer.Math.Permutation {
 				}
 			}
 			return new P(_mix ^ value);
+		}
+		internal static P FromInt64Internal(long value) {
+			return new P(value ^ _mix);
 		}
 		public static P FromInt64(long value) {
 			byte startIndex = 0;

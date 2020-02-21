@@ -155,7 +155,7 @@ namespace DotNetTransformer.Math.Transform {
 			const long b = 0x1111111111111111L;
 			for(byte i = 0, l = 4; i < _dimCount; ++i, l <<= 1)
 				v ^= ((1L << l) - 1L & (b << p[i]) ^ v) << l;
-			return new PermutationInt64(v ^ -0x123456789ABCDF0L);
+			return PermutationInt64.FromInt64Internal(v);
 		}
 
 		///	<exception cref="ArgumentException">
