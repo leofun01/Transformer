@@ -29,13 +29,5 @@ namespace DotNetTransformer.Math.Transform {
 				foreach(int v in vertexes(p))
 					yield return ctor(p, v);
 		}
-
-		internal static int GetCycleLength<T, P>(this T _this)
-			where T : IFlipRotate<T, P>, new()
-			where P : IPermutation<P>, new()
-		{
-			int c = _this.Permutation.CycleLength;
-			return GroupExtension.Times<T>(_this, c).Equals(new T()) ? c : (c << 1);
-		}
 	}
 }
