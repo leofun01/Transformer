@@ -5,7 +5,7 @@ namespace DotNetTransformer.Math.Set {
 	public abstract partial class FiniteSet<T>
 		where T : IEquatable<T>
 	{
-		public static readonly FiniteSet<T> Empty = new EmptySet();
+		public static readonly IFiniteSet<T> Empty = new EmptySet();
 		private sealed class EmptySet : FiniteSet<T>
 		{
 			public EmptySet() { }

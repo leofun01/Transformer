@@ -25,7 +25,7 @@ namespace DotNetTransformer.Math.Set {
 			);
 		}
 		public override sealed bool Equals(object obj) {
-			return Equals(obj as FiniteSet<T>);
+			return Equals(obj as IFiniteSet<T>);
 		}
 		public override int GetHashCode() {
 			int hash = (int)Count;
