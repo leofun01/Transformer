@@ -8,7 +8,7 @@ namespace DotNetTransformer.Math.Transform {
 	public static class FlipRotateExtension
 	{
 		public static IEnumerable<T> GetValues<T, P>(int dimensions,
-			Constructor<P, int, T> ctor
+			Constructor<T, P, int> ctor
 		)
 			where T : IFlipRotate<T, P>, new()
 			where P : IPermutation<P>, new()
@@ -18,7 +18,7 @@ namespace DotNetTransformer.Math.Transform {
 			);
 		}
 		public static IEnumerable<T> GetValues<T, P>(int dimensions,
-			Constructor<P, int, T> ctor,
+			Constructor<T, P, int> ctor,
 			Converter<P, IEnumerable<int>> vertexes
 		)
 			where T : IFlipRotate<T, P>, new()
