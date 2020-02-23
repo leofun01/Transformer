@@ -258,7 +258,7 @@ namespace DotNetTransformer.Math.Transform {
 			v ^= ((b << p[1]) & 0xF ^ v) << 4;
 			/*//
 			for(byte i = 0, l = 2; i < _dimCount; ++i, l <<= 1)
-				v ^= ((1 << l) - 1 & (b << p[i]) ^ v) << l;
+				v ^= (((-1 << l) ^ -1) & (b << p[i]) ^ v) << l;
 			//*/
 			return PermutationByte.FromByteInternal((byte)v);
 		}

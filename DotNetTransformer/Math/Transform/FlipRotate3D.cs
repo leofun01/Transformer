@@ -113,7 +113,7 @@ namespace DotNetTransformer.Math.Transform {
 		}
 
 		private const byte _dimCount = 3;
-		private const short _s = 4, _perm = (1 << _s) - 1;
+		private const short _s = 4, _perm = (-1 << _s) ^ -1;
 
 		public bool IsReflection { get { return !IsRotation; } }
 		public bool IsRotation {
@@ -178,7 +178,7 @@ namespace DotNetTransformer.Math.Transform {
 			int v = Vertex;
 			const int b = 0x11111111;
 			for(byte i = 0, l = 4; i < _dimCount; ++i, l <<= 1)
-				v ^= ((1 << l) - 1 & (b << p[i]) ^ v) << l;
+				v ^= (((-1 << l) ^ -1) & (b << p[i]) ^ v) << l;
 			return PermutationInt32.FromInt32Internal(v);
 		}
 

@@ -96,7 +96,7 @@ namespace DotNetTransformer.Math.Transform {
 		}
 
 		private const byte _dimCount = 4;
-		private const short _s = 8, _perm = (1 << _s) - 1;
+		private const short _s = 8, _perm = (-1 << _s) ^ -1;
 
 		public bool IsReflection { get { return !IsRotation; } }
 		public bool IsRotation {
