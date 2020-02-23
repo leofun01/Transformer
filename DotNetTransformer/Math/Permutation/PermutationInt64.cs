@@ -65,6 +65,7 @@ namespace DotNetTransformer.Math.Permutation {
 		public long Value { get { return _value ^ _mix; } }
 		public int this[int index] {
 			get {
+				if(index < 0 || index >= _count) return index;
 				return (int)(Value >> (index << _s) & _mask);
 			}
 		}
