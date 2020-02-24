@@ -146,11 +146,10 @@ namespace DotNetTransformer.Math.Transform {
 			protected FlipRotateSet(byte dimensions) {
 				_dim = dimensions;
 			}
-			protected bool IsRotational(int swaps, int vertex) {
-				for(int i = 1; i < _dim; i <<= 1)
-					vertex ^= vertex >> i;
-				return ((swaps ^ vertex) & 1) == 0;
+			protected bool IsRotational(int value) {
+				return (0x96 >> value & 1) == 0;
 			}
+			protected const int _p = 0x56741320;
 
 			public override long Count {
 				get {
@@ -162,11 +161,12 @@ namespace DotNetTransformer.Math.Transform {
 					item.Permutation.ReducibleTo(_dim);
 			}
 			public override IEnumerator<T> GetEnumerator() {
-				int c = 1 << _dim;
-				P i = new P();
-				foreach(P p in i.GetRange<P>(i, _dim))
-					for(int v = 0; v < c; ++v)
-						yield return new T(p, v);
+				int p = _p;
+				byte c = (byte)Count;
+				for(byte i = 0; i < c; ++i) {
+					yield return new T(p & 7);
+					p >>= 4;
+				}
 			}
 		}
 		private class FlipRotateGroup : FlipRotateSet, IFiniteGroup<T>
@@ -188,13 +188,12 @@ namespace DotNetTransformer.Math.Transform {
 				return base.Contains(item) && item.IsReflection;
 			}
 			public override IEnumerator<T> GetEnumerator() {
-				int c = 1 << _dim;
-				P i = new P();
-				foreach(P p in i.GetRange<P>(i, _dim)) {
-					int s = p.SwapsCount;
-					for(int v = 0; v < c; ++v)
-						if(!IsRotational(s, v))
-							yield return new T(p, v);
+				int p = _p;
+				byte c = (byte)Count;
+				for(byte i = 0; i < c; ++i) {
+					if(!IsRotational(i))
+						yield return new T(p & 7);
+					p >>= 4;
 				}
 			}
 		}
@@ -212,13 +211,12 @@ namespace DotNetTransformer.Math.Transform {
 				return base.Contains(item) && item.IsRotation;
 			}
 			public override IEnumerator<T> GetEnumerator() {
-				int c = 1 << _dim;
-				P i = new P();
-				foreach(P p in i.GetRange<P>(i, _dim)) {
-					int s = p.SwapsCount;
-					for(int v = 0; v < c; ++v)
-						if(IsRotational(s, v))
-							yield return new T(p, v);
+				int p = _p;
+				byte c = (byte)Count;
+				for(byte i = 0; i < c; ++i) {
+					if(IsRotational(i))
+						yield return new T(p & 7);
+					p >>= 4;
 				}
 			}
 		}

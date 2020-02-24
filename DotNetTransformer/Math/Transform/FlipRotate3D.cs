@@ -115,9 +115,12 @@ namespace DotNetTransformer.Math.Transform {
 
 			public override long Count {
 				get {
+					return (0x6211L >> (_dim << 2) & 7L) << _dim;
+					/*//
 					long c = 1L;
 					for(byte i = 1; i < _dim; c *= ++i) ;
 					return c << _dim;
+					//*/
 				}
 			}
 			public override bool Contains(T item) {
