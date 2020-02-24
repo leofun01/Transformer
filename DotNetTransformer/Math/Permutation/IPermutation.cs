@@ -11,6 +11,8 @@ namespace DotNetTransformer.Math.Permutation {
 		int this[int index] { get; }
 		int SwapsCount { get; }
 
+		bool ReducibleTo(int length);
+
 		T GetNextPermutation(int maxLength);
 		T GetPreviousPermutation(int maxLength);
 

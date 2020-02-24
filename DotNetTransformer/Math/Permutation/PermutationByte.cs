@@ -115,6 +115,10 @@ namespace DotNetTransformer.Math.Permutation {
 			return FiniteGroupExtension.Times<P>(this, count);
 		}
 
+		public bool ReducibleTo(int length) {
+			return _value >> (length << _s) == 0;
+		}
+
 		public P GetNextPermutation(int maxLength, Order<int> match) {
 			int[] a = ToArray();
 			a.ApplyNextPermutation<int>(maxLength, match);
