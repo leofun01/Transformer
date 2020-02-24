@@ -189,7 +189,7 @@ namespace DotNetTransformer.Math.Transform {
 			}
 			public override IEnumerator<T> GetEnumerator() {
 				int p = _p;
-				byte c = (byte)Count;
+				byte c = (byte)base.Count;
 				for(byte i = 0; i < c; ++i) {
 					if(!IsRotational(i))
 						yield return new T(p & 7);
@@ -212,7 +212,7 @@ namespace DotNetTransformer.Math.Transform {
 			}
 			public override IEnumerator<T> GetEnumerator() {
 				int p = _p;
-				byte c = (byte)Count;
+				byte c = (byte)base.Count;
 				for(byte i = 0; i < c; ++i) {
 					if(IsRotational(i))
 						yield return new T(p & 7);
