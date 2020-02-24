@@ -44,6 +44,49 @@ namespace DotNetTransformer.Math.Transform {
 			return new T(p, 1 << dimTo);
 		}
 
+		private static IDictionary<byte, IFiniteSet<T>> _reflections;
+		private static IDictionary<byte, IFiniteGroup<T>> _rotations;
+		private static IDictionary<byte, IFiniteGroup<T>> _allValues;
+
+		public static IFiniteSet<T> GetReflections(int dimensions) {
+			return GetValues<IFiniteSet<T>>(
+				dimensions, ref _reflections,
+				dim => new ReflectionsSet(dim)
+			);
+		}
+		public static IFiniteGroup<T> GetRotations(int dimensions) {
+			return GetValues<IFiniteGroup<T>>(
+				dimensions, ref _rotations,
+				dim => new RotationsGroup(dim)
+			);
+		}
+		public static IFiniteGroup<T> GetAllValues(int dimensions) {
+			return GetValues<IFiniteGroup<T>>(
+				dimensions, ref _allValues,
+				dim => new FlipRotateGroup(dim)
+			);
+		}
+		private static S GetValues<S>(int dimensions,
+			ref IDictionary<byte, S> collection,
+			Converter<byte, S> ctor
+		)
+			where S : IFiniteSet<T>
+		{
+			if(dimensions < 0 || dimensions > _dimCount)
+				throw new ArgumentOutOfRangeException(
+				);
+			byte dim = (byte)dimensions;
+			if(ReferenceEquals(collection, null))
+				collection = new SortedList<byte, S>(_dimCount + 1);
+			if(collection.ContainsKey(dim))
+				return collection[dim];
+			else {
+				S r = ctor(dim);
+				collection.Add(dim, r);
+				return r;
+			}
+		}
+
 		private abstract class FlipRotateSet : FiniteSet<T>
 		{
 			protected readonly byte _dim;
