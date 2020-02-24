@@ -139,10 +139,9 @@ namespace DotNetTransformer.Math.Transform {
 				P i = new P();
 				foreach(P p in i.GetRange<P>(i, _dim)) {
 					int s = p.SwapsCount;
-					for(int v = 0; v < c; ++v) {
-						while(IsRotational(s, v)) ++v;
-						yield return new T(p, v);
-					}
+					for(int v = 0; v < c; ++v)
+						if(!IsRotational(s, v))
+							yield return new T(p, v);
 				}
 			}
 		}
@@ -164,10 +163,9 @@ namespace DotNetTransformer.Math.Transform {
 				P i = new P();
 				foreach(P p in i.GetRange<P>(i, _dim)) {
 					int s = p.SwapsCount;
-					for(int v = 0; v < c; ++v) {
-						while(!IsRotational(s, v)) ++v;
-						yield return new T(p, v);
-					}
+					for(int v = 0; v < c; ++v)
+						if(IsRotational(s, v))
+							yield return new T(p, v);
 				}
 			}
 		}
