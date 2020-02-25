@@ -189,7 +189,7 @@ namespace DotNetTransformer.Math.Permutation {
 		public override string ToString() {
 			return _toString(_count);
 		}
-		public string ToString(byte minLength) {
+		public string ToString(int minLength) {
 			if(minLength > _count) minLength = _count;
 			long t = Value;
 			byte i = _count;
@@ -198,7 +198,7 @@ namespace DotNetTransformer.Math.Permutation {
 			if(minLength < i) minLength = i;
 			return _toString(++minLength);
 		}
-		private string _toString(byte length) {
+		private string _toString(int length) {
 			StringBuilder sb = new StringBuilder(length, length);
 			length <<= _s;
 			long t = Value;
