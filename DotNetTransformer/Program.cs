@@ -37,18 +37,12 @@ namespace DotNetTransformer {
 		}
 		public static D GetHyperCubeCycleCounts(byte dim) {
 			if(dim > 16) throw new ArgumentOutOfRangeException();
-			int pow2 = 1 << dim;
-			P p = new P(), pNone = p;
 			D dict = new D();
-			do {
-				for(int v = 0; v < pow2; ++v) {
-					T t = new T(p, v);
-					int cLen = t.CycleLength;
-					if(dict.ContainsKey(cLen)) ++dict[cLen];
-					else dict.Add(cLen, 1);
-				}
-				p = p.GetNextPermutation(dim);
-			} while(p != pNone);
+			foreach(T t in T.GetAllValues(dim)) {
+				int cLen = t.CycleLength;
+				if(dict.ContainsKey(cLen)) ++dict[cLen];
+				else dict.Add(cLen, 1L);
+			}
 			return dict;
 		}
 		public static long GetValuesSum(D dict) {
