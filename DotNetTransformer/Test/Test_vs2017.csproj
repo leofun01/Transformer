@@ -31,11 +31,11 @@
 		</ProjectReference>
 	</ItemGroup>
 	<ItemGroup>
-		<Compile Include="**\*.cs" Exclude="Draft\**" />
+		<Compile Include="**\*.cs" Exclude="bin\**;obj\**;Draft\**" />
 	</ItemGroup>
 	<ItemGroup>
-		<None Include="**\*.txt" />
-		<None Include="**\*.cd" />
+		<None Include="**\*.txt" Exclude="bin\**;obj\**" />
+		<None Include="**\*.cd" Exclude="bin\**;obj\**" />
 		<None Include="$(ExternalContentRoot)\**\*.txt">
 			<Link>$([MSBuild]::MakeRelative('$(ExternalContentRoot)', '%(FullPath)'))</Link>
 		</None>

@@ -14,11 +14,6 @@ namespace DotNetTransformer.Math.Group {
 		{
 			return _this.Add(other.InverseElement);
 		}
-		public static T InverseAdd<T>(this T t, T o)
-			where T : IGroupElement<T>, new()
-		{
-			return o.InverseElement.Add(t);
-		}
 		public static T Conjugate<T>(this T t, T o)
 			where T : IGroupElement<T>, new()
 		{

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using DotNetTransformer.Math.Group;
+using DotNetTransformer.Math.Set;
 
 namespace DotNetTransformer.Math.Permutation {
 	public interface IPermutation<T> : IFiniteGroupElement<T>
@@ -8,11 +9,14 @@ namespace DotNetTransformer.Math.Permutation {
 		where T : IPermutation<T>, new()
 	{
 		int this[int index] { get; }
+		int SwapsCount { get; }
+
+		bool ReducibleTo(int length);
 
 		T GetNextPermutation(int maxLength);
 		T GetPreviousPermutation(int maxLength);
 
-		List<T> GetCycles(Predicate<T> match);
+		IFiniteSet<T> GetCycles(Predicate<T> match);
 		int GetCyclesCount(Predicate<int> match);
 
 		int[] ToArray();
