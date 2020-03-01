@@ -12,6 +12,11 @@ namespace DotNetTransformer.Math.Set {
 			public bool Contains(T item) { return _contains(item); }
 		}
 
+		public static ISet<T> Inverse<T>(this ISet<T> _this)
+			where T : IEquatable<T>
+		{
+			return new InternalSet<T>(e => !_this.Contains(e));
+		}
 		public static ISet<T> Union<T>(this ISet<T> _this, ISet<T> other)
 			where T : IEquatable<T>
 		{
