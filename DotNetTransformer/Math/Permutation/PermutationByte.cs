@@ -15,7 +15,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using StringBuilder = System.Text.StringBuilder;
 using CultureInfo = System.Globalization.CultureInfo;
+using DotNetTransformer.Extensions;
 using DotNetTransformer.Math.Group;
+using DotNetTransformer.Math.Set;
 
 namespace DotNetTransformer.Math.Permutation {
 	using P = PermutationByte;
@@ -27,10 +29,6 @@ namespace DotNetTransformer.Math.Permutation {
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		internal readonly byte _value;
 		internal PermutationByte(byte value) { _value = value; }
-		internal PermutationByte(short value) {
-			value = (short)(((short)(value >> 2) | value) & 0x0F0F);
-			_value = (byte)((short)(value >> 4) | value);
-		}
 		public PermutationByte(params byte[] array) : this((IEnumerable<byte>)array) { }
 		public PermutationByte(IEnumerable<byte> collection) {
 			if(ReferenceEquals(collection, null))
@@ -63,7 +61,7 @@ namespace DotNetTransformer.Math.Permutation {
 			digit = 0;
 			while(((byte)(1 << digit) & digitFlag) != 0)
 				++digit;
-			if(((byte)((1 << digit) - 1 ^ -1) & digitFlag) != 0)
+			if(((byte)(-1 << digit) & digitFlag) != 0)
 				_throwArray(string.Format(
 					"Value \"{0}\" is not found.",
 					digit
@@ -71,32 +69,28 @@ namespace DotNetTransformer.Math.Permutation {
 		}
 
 		private const byte _mix = 0xE4, _mask = 3;
-		private const byte _count = 4, _len = 8, _s = 1;
+		private const byte _s = 1, _count = 4, _len = _count << _s;
 		private const string _charPattern = "[0-3]";
 
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		public byte Value { get { return (byte)(_value ^ _mix); } }
 		public int this[int index] {
 			get {
+				if(index < 0 || index >= _count) return index;
 				return Value >> (index << _s) & _mask;
+			}
+		}
+		public int SwapsCount {
+			get {
+				int count = 0;
+				ForAllCyclesDo(_ => { }, c => { count += --c; });
+				return count;
 			}
 		}
 		public int CycleLength {
 			get {
-				byte multFlag = 0;
-				byte t = Value;
-				byte digitFlag = 0;
-				for(byte i = 0; i < _count; ++i) {
-					if((1 << i & digitFlag) != 0) continue;
-					byte digit = i;
-					byte cLen = 0;
-					do {
-						++cLen;
-						digitFlag |= (byte)(1 << digit);
-						digit = (byte)(t >> (digit << _s) & _mask);
-					} while((1 << digit & digitFlag) == 0);
-					multFlag |= (byte)(1 << --cLen);
-				}
+				int multFlag = 0;
+				ForAllCyclesDo(_ => { }, c => { multFlag |= 1 << --c; });
 				return (multFlag >> 1) + 1 - (multFlag >> 3);
 			}
 		}
@@ -129,29 +123,29 @@ namespace DotNetTransformer.Math.Permutation {
 			return new P((byte)(r ^ _mix));
 		}
 		public P Times(int count) {
-			return this.Times<P>(count);
+			return FiniteGroupExtension.Times<P>(this, count);
 		}
 
-		public List<P> GetCycles(Predicate<P> match) {
-			List<P> list = new List<P>(_count);
-			byte t = Value;
-			byte digitFlag = 0;
-			for(byte i = 0; i < _count; ++i) {
-				if((1 << i & digitFlag) != 0) continue;
-				byte digit = i;
-				byte value = 0;
-				do {
-					value |= (byte)(_mask << (digit << _s) & _value);
-					digitFlag |= (byte)(1 << digit);
-					digit = (byte)(t >> (digit << _s) & _mask);
-				} while((1 << digit & digitFlag) == 0);
-				P p = new P(value);
-				if(match(p)) list.Add(p);
-			}
-			return list;
+		public bool ReducibleTo(int length) {
+			return _value >> (length << _s) == 0;
 		}
-		public int GetCyclesCount(Predicate<int> match) {
-			int count = 0;
+
+		public P GetNextPermutation(int maxLength, Order<int> match) {
+			int[] a = ToArray();
+			a.ApplyNextPermutation<int>(maxLength, match);
+			byte r = 0;
+			for(int i = 0; i < _count; ++i)
+				r |= (byte)(a[i] << (i << _s));
+			return new P((byte)(r ^ _mix));
+		}
+		public P GetNextPermutation(int maxLength) {
+			return GetNextPermutation(maxLength, (int l, int r) => l >= r);
+		}
+		public P GetPreviousPermutation(int maxLength) {
+			return GetNextPermutation(maxLength, (int l, int r) => l <= r);
+		}
+
+		public void ForAllCyclesDo(Action<byte> digitAction, Action<byte> cycleAction) {
 			byte t = Value;
 			byte digitFlag = 0;
 			for(byte i = 0; i < _count; ++i) {
@@ -159,12 +153,30 @@ namespace DotNetTransformer.Math.Permutation {
 				byte digit = i;
 				byte cLen = 0;
 				do {
+					digitAction(digit);
 					++cLen;
 					digitFlag |= (byte)(1 << digit);
 					digit = (byte)(t >> (digit << _s) & _mask);
 				} while((1 << digit & digitFlag) == 0);
-				if(match(cLen)) ++count;
+				cycleAction(cLen);
 			}
+		}
+		public IFiniteSet<P> GetCycles(Predicate<P> match) {
+			List<P> list = new List<P>(_count);
+			byte value = 0, t = this._value;
+			ForAllCyclesDo(
+				d => { value |= (byte)(_mask << (d << _s) & t); },
+				_ => {
+					P p = new P(value);
+					if(match(p)) list.Add(p);
+					value = 0;
+				}
+			);
+			return list.ToFiniteSet<P>();
+		}
+		public int GetCyclesCount(Predicate<int> match) {
+			int count = 0;
+			ForAllCyclesDo(_ => { }, c => { if(match(c)) ++count; });
 			return count;
 		}
 
@@ -176,7 +188,7 @@ namespace DotNetTransformer.Math.Permutation {
 		public override string ToString() {
 			return _toString(_count);
 		}
-		public string ToString(byte minLength) {
+		public string ToString(int minLength) {
 			if(minLength > _count) minLength = _count;
 			byte t = Value;
 			byte i = _count;
@@ -185,7 +197,7 @@ namespace DotNetTransformer.Math.Permutation {
 			if(minLength < i) minLength = i;
 			return _toString(++minLength);
 		}
-		private string _toString(byte length) {
+		private string _toString(int length) {
 			StringBuilder sb = new StringBuilder(length, length);
 			length <<= _s;
 			byte t = Value;
@@ -211,6 +223,16 @@ namespace DotNetTransformer.Math.Permutation {
 			} while(i < _len);
 		}
 		IEnumerator IEnumerable.GetEnumerator() { return GetEnumerator(); }
+		public int[] ToArray() {
+			long v = Value;
+			int[] a = new int[_count];
+			int i = 0;
+			do {
+				a[i] = (int)(v & _mask);
+				v >>= 1 << _s;
+			} while(++i < _count);
+			return a;
+		}
 
 		///	<exception cref="ArgumentException">
 		///		<exception cref="ArgumentNullException">
@@ -252,6 +274,9 @@ namespace DotNetTransformer.Math.Permutation {
 			}
 			return new P((byte)(_mix ^ value));
 		}
+		internal static P FromByteInternal(byte value) {
+			return new P((byte)(value ^ _mix));
+		}
 		public static P FromByte(byte value) {
 			byte startIndex = 0;
 			for(byte digit = 0; digit < _count; ++digit) {
@@ -267,6 +292,11 @@ namespace DotNetTransformer.Math.Permutation {
 				else if(startIndex < i) startIndex = i;
 			}
 			return new P((byte)(_mix ^ value));
+		}
+		private static P FromInt16Internal(short value) {
+			value = (short)(((short)(value >> 2) | value) & 0x0F0F);
+			value = (short)(((short)(value >> 4) | value) & 0x00FF);
+			return new P((byte)(value ^ _mix));
 		}
 		public static P FromInt16(short value) {
 			if((value & -0x3334) != 0)
@@ -284,10 +314,10 @@ namespace DotNetTransformer.Math.Permutation {
 							"Digit \'{0}\' is not found.",
 							(char)(digit | '0')
 						));
-					else return new P((short)(((1 << (digit << 2)) - 1) & 0x3210 ^ value));
+					else return FromInt16Internal((short)((-1 << (digit << 2)) & 0x3210 ^ value));
 				else if(startIndex < i) startIndex = i;
 			}
-			return new P((short)(0x3210 ^ value));
+			return FromInt16Internal(value);
 		}
 		[DebuggerStepThrough]
 		private static void _throwString(string message) {

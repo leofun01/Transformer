@@ -2,8 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using CultureInfo = System.Globalization.CultureInfo;
+using DotNetTransformer.Extensions;
 using DotNetTransformer.Math.Group;
 using DotNetTransformer.Math.Permutation;
+using DotNetTransformer.Math.Set;
 
 namespace DotNetTransformer.Math.Transform {
 	using T = FlipRotate4D;
@@ -14,20 +16,179 @@ namespace DotNetTransformer.Math.Transform {
 	public struct FlipRotate4D : IFlipRotate<T, P>
 	{
 		private readonly short _value;
+		private FlipRotate4D(short value) { _value = value; }
 		public FlipRotate4D(P permutation, int vertex) {
 			_value = (short)((vertex << _s | permutation._value) & 0x0FFF);
 		}
 
 		public static T None { get { return new T(); } }
 
-		private const short _s = 8, _perm = (1 << _s) - 1;
+		public static T GetFlip(int dimension) {
+			if((dimension & -_dimCount) != 0)
+				throw new ArgumentOutOfRangeException("dimension");
+			return new T((short)(1 << dimension << _s));
+		}
+		public static T GetRotate(int dimFrom, int dimTo) {
+			if((dimFrom & -_dimCount) != 0)
+				throw new ArgumentOutOfRangeException("dimFrom");
+			if((dimTo & -_dimCount) != 0)
+				throw new ArgumentOutOfRangeException("dimTo");
+			if(dimFrom == dimTo)
+				throw new ArgumentException(
+				);
+			int x = dimFrom ^ dimTo;
+			P p = new P((byte)((x << (dimFrom << 1)) ^ (x << (dimTo << 1))));
+			return new T(p, 1 << dimTo);
+		}
+
+		private static IDictionary<byte, IFiniteSet<T>> _reflections;
+		private static IDictionary<byte, IFiniteGroup<T>> _rotations;
+		private static IDictionary<byte, IFiniteGroup<T>> _allValues;
+
+		public static IFiniteSet<T> GetReflections(int dimensions) {
+			return GetValues<IFiniteSet<T>>(
+				dimensions, ref _reflections,
+				dim => new ReflectionsSet(dim)
+			);
+		}
+		public static IFiniteGroup<T> GetRotations(int dimensions) {
+			return GetValues<IFiniteGroup<T>>(
+				dimensions, ref _rotations,
+				dim => new RotationsGroup(dim)
+			);
+		}
+		public static IFiniteGroup<T> GetAllValues(int dimensions) {
+			return GetValues<IFiniteGroup<T>>(
+				dimensions, ref _allValues,
+				dim => new FlipRotateGroup(dim)
+			);
+		}
+		private static S GetValues<S>(int dimensions,
+			ref IDictionary<byte, S> collection,
+			Converter<byte, S> ctor
+		)
+			where S : IFiniteSet<T>
+		{
+			if(dimensions < 0 || dimensions > _dimCount)
+				throw new ArgumentOutOfRangeException(
+				);
+			byte dim = (byte)dimensions;
+			if(ReferenceEquals(collection, null))
+				collection = new SortedList<byte, S>(_dimCount + 1);
+			if(collection.ContainsKey(dim))
+				return collection[dim];
+			else {
+				S r = ctor(dim);
+				collection.Add(dim, r);
+				return r;
+			}
+		}
+
+		private abstract class FlipRotateSet : FiniteSet<T>
+		{
+			protected readonly byte _dim;
+			protected FlipRotateSet(byte dimensions) {
+				_dim = dimensions;
+			}
+			protected bool IsRotational(int swaps, int vertex) {
+				for(int i = 1; i < _dim; i <<= 1)
+					vertex ^= vertex >> i;
+				return ((swaps ^ vertex) & 1) == 0;
+			}
+
+			public override long Count {
+				get {
+					long c = 1L;
+					for(byte i = 1; i < _dim; c *= ++i) ;
+					return c << _dim;
+				}
+			}
+			public override bool Contains(T item) {
+				return item.Vertex >> _dim == 0 &&
+					item.Permutation.ReducibleTo(_dim);
+			}
+			public override IEnumerator<T> GetEnumerator() {
+				int c = 1 << _dim;
+				P i = new P();
+				foreach(P p in i.GetRange<P>(i, _dim))
+					for(int v = 0; v < c; ++v)
+						yield return new T(p, v);
+			}
+		}
+		private class FlipRotateGroup : FlipRotateSet, IFiniteGroup<T>
+		{
+			public FlipRotateGroup(byte dimensions) : base(dimensions) { }
+
+			public T IdentityElement { get { return None; } }
+		}
+		private sealed class ReflectionsSet : FlipRotateSet
+		{
+			public ReflectionsSet(byte dimensions) : base(dimensions) { }
+
+			public override long Count {
+				get {
+					return base.Count >> 1;
+				}
+			}
+			public override bool Contains(T item) {
+				return base.Contains(item) && item.IsReflection;
+			}
+			public override IEnumerator<T> GetEnumerator() {
+				int c = 1 << _dim;
+				P i = new P();
+				foreach(P p in i.GetRange<P>(i, _dim)) {
+					int s = p.SwapsCount;
+					for(int v = 0; v < c; ++v)
+						if(!IsRotational(s, v))
+							yield return new T(p, v);
+				}
+			}
+		}
+		private sealed class RotationsGroup : FlipRotateGroup
+		{
+			public RotationsGroup(byte dimensions) : base(dimensions) { }
+
+			public override long Count {
+				get {
+					long c = base.Count;
+					return c - (c >> 1);
+				}
+			}
+			public override bool Contains(T item) {
+				return base.Contains(item) && item.IsRotation;
+			}
+			public override IEnumerator<T> GetEnumerator() {
+				int c = 1 << _dim;
+				P i = new P();
+				foreach(P p in i.GetRange<P>(i, _dim)) {
+					int s = p.SwapsCount;
+					for(int v = 0; v < c; ++v)
+						if(IsRotational(s, v))
+							yield return new T(p, v);
+				}
+			}
+		}
+
+		private const byte _dimCount = 4;
+		private const short _s = 8, _perm = (-1 << _s) ^ -1;
+
+		public bool IsReflection { get { return !IsRotation; } }
+		public bool IsRotation {
+			get {
+				int v = Vertex;
+				for(int i = 1; i < _dimCount; i <<= 1)
+					v ^= v >> i;
+				return ((Permutation.SwapsCount ^ v) & 1) == 0;
+			}
+		}
 
 		public P Permutation { get { return new P((byte)(_value & _perm)); } }
 		public int Vertex { get { return _value >> _s; } }
 
 		public int CycleLength {
 			get {
-				return this.GetLengthTo<T>(None);
+				int c = Permutation.CycleLength;
+				return GroupExtension.Times<T>(this, c).Equals(None) ? c : (c << 1);
 			}
 		}
 		public T InverseElement {
@@ -49,7 +210,7 @@ namespace DotNetTransformer.Math.Transform {
 			);
 		}
 		public T Times(int count) {
-			return this.Times<T>(count);
+			return FiniteGroupExtension.Times<T>(this, count);
 		}
 
 		public override int GetHashCode() { return _value; }
@@ -67,9 +228,9 @@ namespace DotNetTransformer.Math.Transform {
 			P p = Permutation;
 			long v = Vertex;
 			const long b = 0x1111111111111111L;
-			for(byte i = 0, l = 4; i < 4; ++i, l <<= 1)
+			for(byte i = 0, l = 4; i < _dimCount; ++i, l <<= 1)
 				v ^= ((1L << l) - 1L & (b << p[i]) ^ v) << l;
-			return new PermutationInt64(v ^ -0x123456789ABCDF0L);
+			return PermutationInt64.FromInt64Internal(v);
 		}
 
 		///	<exception cref="ArgumentException">
@@ -108,5 +269,7 @@ namespace DotNetTransformer.Math.Transform {
 		public static T operator -(T l, T r) { return l.Subtract(r); }
 		public static T operator *(T l, int r) { return l.Times(r); }
 		public static T operator *(int l, T r) { return r.Times(l); }
+
+		public static implicit operator T(P o) { return new T(o._value); }
 	}
 }

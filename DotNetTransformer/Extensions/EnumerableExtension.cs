@@ -22,12 +22,22 @@ namespace DotNetTransformer.Extensions {
 			return !collection.Exist<T>(e => !match(e));
 		}
 
-		public delegate T Func<T>(T l, T r);
 		public static T CollectAll<T>(this IEnumerable<T> collection, Func<T> func) {
 			T result = default(T);
 			foreach(T item in collection)
 				result = func(result, item);
 			return result;
+		}
+
+		public static IEnumerable<T> GetRange<T>(this T start, Predicate<T> match, Generator<T> next) {
+			T t = start;
+			do {
+				yield return t;
+				t = next(t);
+			} while(match(t));
+		}
+		public static IEnumerable<T> GetRange<T>(this T start, T stop, Generator<T> next) {
+			return GetRange<T>(start, t => !t.Equals(stop), next);
 		}
 	}
 }

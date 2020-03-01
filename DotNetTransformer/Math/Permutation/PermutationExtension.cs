@@ -10,15 +10,18 @@
 //	Author   : leofun01
 
 using System.Collections.Generic;
+using DotNetTransformer.Extensions;
+using DotNetTransformer.Math.Set;
 
 namespace DotNetTransformer.Math.Permutation {
-	public static class PermutationExtension {
-		public static List<T> GetCyclesAll<T>(this T _this)
+	public static class PermutationExtension
+	{
+		public static IFiniteSet<T> GetCyclesAll<T>(this T _this)
 			where T : IPermutation<T>, new()
 		{
 			return _this.GetCycles(p => true);
 		}
-		public static List<T> GetCyclesNonTrivial<T>(this T _this)
+		public static IFiniteSet<T> GetCyclesNonTrivial<T>(this T _this)
 			where T : IPermutation<T>, new()
 		{
 			return _this.GetCycles(p => p.CycleLength > 1);
@@ -33,6 +36,7 @@ namespace DotNetTransformer.Math.Permutation {
 		{
 			return _this.GetCyclesCount(i => i > 1);
 		}
+
 		public static int GetNextVertex<T>(this T p, int v)
 			where T : IPermutation<T>, new()
 		{
@@ -42,6 +46,36 @@ namespace DotNetTransformer.Math.Permutation {
 				v >>= 1;
 			}
 			return r;
+		}
+
+		public static void ApplyNextPermutation<T>(this T[] a, int maxLength, Order<T> match) {
+			int length = a.GetLength(0);
+			if(length > maxLength) length = maxLength;
+			int n = 0, i;
+			while(++n < length && match(a[n - 1], a[n])) ;
+			if(n < length) {
+				for(i = 0; match(a[i], a[n]); ++i) ;
+				T t = a[n];
+				a[n] = a[i];
+				a[i] = t;
+			}
+			for(i = 0; i < --n; ++i) {
+				T t = a[n];
+				a[n] = a[i];
+				a[i] = t;
+			}
+		}
+		public static void ApplyNextPermutation(this int[] a, int maxLength) {
+			ApplyNextPermutation<int>(a, maxLength, (int l, int r) => l >= r);
+		}
+		public static void ApplyPreviousPermutation(this int[] a, int maxLength) {
+			ApplyNextPermutation<int>(a, maxLength, (int l, int r) => l <= r);
+		}
+
+		public static IEnumerable<T> GetRange<T>(this T start, T stop, int maxLength)
+			where T : IPermutation<T>, new()
+		{
+			return start.GetRange<T>(stop, p => p.GetNextPermutation(maxLength));
 		}
 	}
 }

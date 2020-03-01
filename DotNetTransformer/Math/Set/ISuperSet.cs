@@ -9,13 +9,13 @@
 using System;
 
 namespace DotNetTransformer.Math.Set {
-	// T    is contravariant
-	// TSet is contravariant
-	public interface ISuperSet<in T, in TSet> : ISet<T>
-		where T    : IEquatable<T>
-		where TSet : ISet<T>
+	// T is contravariant
+	// S is contravariant
+	public interface ISuperSet<in T, in S> : ISet<T>
+		where T : IEquatable<T>
+		where S : ISet<T>
 	{
-		bool IsSupersetOf(TSet other);
+		bool IsSupersetOf(S other);
 	}
 	/*//
 	public interface ISuperSet<in T, in TSubSet, in TSuperSet> : ISet<T>, ISuperSet<T, TSubSet>
