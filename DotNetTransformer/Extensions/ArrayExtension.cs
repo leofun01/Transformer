@@ -1,5 +1,5 @@
 using RotateFlipType = System.Drawing.RotateFlipType;
-using FlipRotate2D = DotNetTransformer.Math.Transform.FlipRotate2D;
+using DotNetTransformer.Math.Transform;
 
 namespace DotNetTransformer.Extensions {
 	public static class ArrayExtension

@@ -1,52 +1,98 @@
 using System;
 using System.Collections.Generic;
+using DotNetTransformer.Math.Set;
 
 namespace DotNetTransformer.Math.Group {
 	public static class FiniteGroupExtension
 	{
-		private class InternalGroup<T> : FiniteGroup<T>
+		private sealed class InternalGroup<T> : FiniteGroup<T>
 			where T : IFiniteGroupElement<T>, new()
 		{
-			private readonly T _ident;
-			private readonly List<T> _list;
+			private readonly T _identity;
+			private readonly IFiniteSet<T> _collection;
 
-			public InternalGroup(IEnumerable<T> collection) {
-				_ident = new T();
-				_list = new List<T>();
-				_list.Add(_ident);
-				foreach(T item in collection)
-					if(!_list.Contains(item))
-						_list.Add(item);
-				T outer, inner, new_e;
-				int count, outer_i = 1, inner_i;
+			internal InternalGroup(IFiniteSet<T> collection) {
+				_identity = new T();
+				_collection = collection;
+			}
+
+			public override T IdentityElement { get { return _identity; } }
+			public override sealed long Count { get { return _collection.Count; } }
+			public override sealed bool Contains(T item) {
+				return _collection.Contains(item);
+			}
+			public override sealed IEnumerator<T> GetEnumerator() {
+				return _collection.GetEnumerator();
+			}
+			public override sealed bool Equals(IFiniteSet<T> other) {
+				return IsMatch<IFiniteSet<T>>(other, base.Equals);
+			}
+			public override sealed int GetHashCode() {
+				return _collection.GetHashCode();
+			}
+			public override sealed bool IsSubsetOf(ISet<T> other) {
+				return IsMatch<ISet<T>>(other, base.IsSubsetOf);
+			}
+			public override sealed bool IsSubsetOf(IFiniteSet<T> other) {
+				return IsMatch<IFiniteSet<T>>(other, base.IsSubsetOf);
+			}
+			public override sealed bool IsSupersetOf(IFiniteSet<T> other) {
+				return IsMatch<IFiniteSet<T>>(other, base.IsSupersetOf);
+			}
+			private bool IsMatch<S>(S other, Predicate<S> match)
+				where S : ISet<T>
+			{
+				InternalGroup<T> o = other as InternalGroup<T>;
+				return ReferenceEquals(_collection, other)
+					|| !ReferenceEquals(o, null) && ReferenceEquals(_collection, o._collection)
+					|| match(other);
+			}
+		}
+
+		internal static IFiniteGroup<T> ToFiniteGroup<T>(this IFiniteSet<T> collection)
+			where T : IFiniteGroupElement<T>, new()
+		{
+			return ReferenceEquals(collection, null) ?
+				null : new InternalGroup<T>(collection);
+		}
+		internal static IFiniteGroup<T> ToFiniteGroup<T>(this ICollection<T> collection)
+			where T : IFiniteGroupElement<T>, new()
+		{
+			return ToFiniteGroup<T>(collection.ToFiniteSet<T>());
+		}
+		internal static IFiniteGroup<T> ToFiniteGroup<T>(this IEnumerable<T> collection,
+			long count, Predicate<T> contains
+		)
+			where T : IFiniteGroupElement<T>, new()
+		{
+			return ToFiniteGroup<T>(collection.ToFiniteSet<T>(count, contains));
+		}
+
+		public static IFiniteGroup<T> CreateGroup<T>(this IEnumerable<T> collection)
+			where T : IFiniteGroupElement<T>, new()
+		{
+			List<T> list = new List<T>();
+			list.Add(new T());
+			if(!ReferenceEquals(collection, null)) {
+				foreach(T a in collection)
+					if(!list.Contains(a)) list.Add(a);
+				int i = 1, count;
 				do {
-					for(count = _list.Count; outer_i < count; ++outer_i) {
-						outer = _list[outer_i];
-						for(inner_i = 1; inner_i < count; ++inner_i) {
-							inner = _list[inner_i];
-							if(!_list.Contains(new_e = outer.Add(inner))) _list.Add(new_e);
-							if(!_list.Contains(new_e = inner.Add(outer))) _list.Add(new_e);
+					for(count = list.Count; i < count; ++i) {
+						T a = list[i];
+						for(int j = 1; j < count; ++j) {
+							T b = list[j], c;
+							if(!list.Contains(c = a.Add(b))) list.Add(c);
+							if(!list.Contains(c = b.Add(a))) list.Add(c);
 						}
 					}
-				} while(count < _list.Count);
+				} while(count < list.Count);
 			}
-
-			public override T IdentityElement { get { return _ident; } }
-			public override int Count { get { return _list.Count; } }
-			public override bool Contains(T item) {
-				return _list.Contains(item);
-			}
-			public override IEnumerator<T> GetEnumerator() {
-				return _list.GetEnumerator();
-			}
+			IFiniteGroup<T> group = ToFiniteGroup<T>(list);
+			list[0] = group.IdentityElement;
+			return group;
 		}
-
-		public static FiniteGroup<T> CreateGroup<T>(this IEnumerable<T> collection)
-			where T : IFiniteGroupElement<T>, new()
-		{
-			return new InternalGroup<T>(collection);
-		}
-		public static bool IsGeneratingSetOf<T>(this IEnumerable<T> collection, FiniteGroup<T> group)
+		public static bool IsGeneratingSetOf<T>(this IEnumerable<T> collection, IFiniteGroup<T> group)
 			where T : IFiniteGroupElement<T>, new()
 		{
 			return !ReferenceEquals(collection, null)
@@ -54,29 +100,23 @@ namespace DotNetTransformer.Math.Group {
 				&& group.IsSubsetOf(CreateGroup<T>(collection));
 		}
 
-		public static int GetLengthTo<T>(this T t, T o)
+		public static int? GetLengthTo<T>(this T t, T o)
 			where T : IFiniteGroupElement<T>, new()
 		{
 			int cLen = 1;
-			T sum = t;
-			while(!sum.Equals(o)) {
+			T sum = t, n = new T();
+			while(!n.Equals(sum) && !o.Equals(sum)) {
 				sum = sum.Add(t);
 				++cLen;
 			}
-			return cLen;
+			return o.Equals(sum) ? (int?)cLen : null;
 		}
 		public static T Times<T>(this T t, int count)
 			where T : IFiniteGroupElement<T>, new()
 		{
 			int c = t.CycleLength;
 			count = (count % c + c) % c;
-			T r = (count & 1) != 0 ? t : new T();
-			while((count >>= 1) != 0) {
-				t = t.Add(t);
-				if((count & 1) != 0)
-					r = r.Add(t);
-			}
-			return r;
+			return GroupExtension.Times<T>(t, count);
 		}
 	}
 }

@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using StringBuilder = System.Text.StringBuilder;
 using RotateFlipType = System.Drawing.RotateFlipType;
+using DotNetTransformer.Extensions;
 using DotNetTransformer.Math.Group;
 using DotNetTransformer.Math.Permutation;
+using DotNetTransformer.Math.Set;
 
 namespace DotNetTransformer.Math.Transform {
 	using T = FlipRotate2D;
@@ -95,30 +97,137 @@ namespace DotNetTransformer.Math.Transform {
 			return new T(p._value, 1 << dimTo);
 		}
 
-		private const byte _count = 8;
-		private static readonly string[] _names;
-		public static readonly FiniteGroup<T> AllValues;
+		private static IDictionary<byte, IFiniteSet<T>> _reflections;
+		private static IDictionary<byte, IFiniteGroup<T>> _rotations;
+		private static IDictionary<byte, IFiniteGroup<T>> _allValues;
 
-		static FlipRotate2D() {
-			_names = new string[_count] { "NO", "HT", "FX", "FY", "PD", "SD", "RC", "RN" };
-			AllValues = new DihedralGroupD4();
+		public static IFiniteSet<T> GetReflections(int dimensions) {
+			return GetValues<IFiniteSet<T>>(
+				dimensions, ref _reflections,
+				dim => new ReflectionsSet(dim)
+			);
+		}
+		public static IFiniteGroup<T> GetRotations(int dimensions) {
+			return GetValues<IFiniteGroup<T>>(
+				dimensions, ref _rotations,
+				dim => new RotationsGroup(dim)
+			);
+		}
+		public static IFiniteGroup<T> GetAllValues(int dimensions) {
+			return GetValues<IFiniteGroup<T>>(
+				dimensions, ref _allValues,
+				dim => new FlipRotateGroup(dim)
+			);
+		}
+		private static S GetValues<S>(int dimensions,
+			ref IDictionary<byte, S> collection,
+			Converter<byte, S> ctor
+		)
+			where S : IFiniteSet<T>
+		{
+			if(dimensions < 0 || dimensions > _dimCount)
+				throw new ArgumentOutOfRangeException(
+				);
+			byte dim = (byte)dimensions;
+			if(ReferenceEquals(collection, null))
+				collection = new SortedList<byte, S>(_dimCount + 1);
+			if(collection.ContainsKey(dim))
+				return collection[dim];
+			else {
+				S r = ctor(dim);
+				collection.Add(dim, r);
+				return r;
+			}
 		}
 
-		private sealed class DihedralGroupD4 : FiniteGroup<T>
+		private abstract class FlipRotateSet : FiniteSet<T>
 		{
-			public DihedralGroupD4() { }
-
-			public override T IdentityElement { get { return None; } }
-			public override int Count { get { return _count; } }
-			public override bool Contains(T item) { return true; }
-			public override IEnumerator<T> GetEnumerator() {
-				for(byte i = 0; i < _count; ++i)
-					yield return new T(i);
+			protected readonly byte _dim;
+			protected FlipRotateSet(byte dimensions) {
+				_dim = dimensions;
 			}
-			public override int GetHashCode() { return _count; }
+			protected bool IsRotational(int value) {
+				return (0x96 >> value & 1) == 0;
+			}
+			protected const int _p = 0x56741320;
+
+			public override long Count {
+				get {
+					return 1 << ((1 << _dim) - 1);
+				}
+			}
+			public override bool Contains(T item) {
+				return item.Vertex >> _dim == 0 &&
+					item.Permutation.ReducibleTo(_dim);
+			}
+			public override IEnumerator<T> GetEnumerator() {
+				int p = _p;
+				byte c = (byte)Count;
+				for(byte i = 0; i < c; ++i) {
+					yield return new T(p & 7);
+					p >>= 4;
+				}
+			}
+		}
+		private class FlipRotateGroup : FlipRotateSet, IFiniteGroup<T>
+		{
+			public FlipRotateGroup(byte dimensions) : base(dimensions) { }
+
+			public T IdentityElement { get { return None; } }
+		}
+		private sealed class ReflectionsSet : FlipRotateSet
+		{
+			public ReflectionsSet(byte dimensions) : base(dimensions) { }
+
+			public override long Count {
+				get {
+					return base.Count >> 1;
+				}
+			}
+			public override bool Contains(T item) {
+				return base.Contains(item) && item.IsReflection;
+			}
+			public override IEnumerator<T> GetEnumerator() {
+				int p = _p;
+				byte c = (byte)base.Count;
+				for(byte i = 0; i < c; ++i) {
+					if(!IsRotational(i))
+						yield return new T(p & 7);
+					p >>= 4;
+				}
+			}
+		}
+		private sealed class RotationsGroup : FlipRotateGroup
+		{
+			public RotationsGroup(byte dimensions) : base(dimensions) { }
+
+			public override long Count {
+				get {
+					long c = base.Count;
+					return c - (c >> 1);
+				}
+			}
+			public override bool Contains(T item) {
+				return base.Contains(item) && item.IsRotation;
+			}
+			public override IEnumerator<T> GetEnumerator() {
+				int p = _p;
+				byte c = (byte)base.Count;
+				for(byte i = 0; i < c; ++i) {
+					if(IsRotational(i))
+						yield return new T(p & 7);
+					p >>= 4;
+				}
+			}
 		}
 
 		private const byte _dimCount = 2;
+		private const byte _count = 8;
+		private static readonly string[] _names;
+
+		static FlipRotate2D() {
+			_names = new string[_count] { "NO", "HT", "FX", "FY", "PD", "SD", "RC", "RN" };
+		}
 
 		/// <summary><return>
 		/// <para>true for "FX", "FY", "PD", "SD";</para>
@@ -156,8 +265,12 @@ namespace DotNetTransformer.Math.Transform {
 		/// </return></summary>
 		public bool IsSwapDimensions { get { return Value > 3; } }
 
-		public P Permutation { get { return new P((byte)((Value >> 2) * 5)); } }
-		public int Vertex { get { return 0x6C9C >> (Value << 1) & 3; } }
+		public P Permutation {
+			get { return new P((byte)((Value >> 2) * 5)); }
+		}
+		public int Vertex {
+			get { return 0x6C9C >> (Value << 1) & 3; }
+		}
 
 		/// <summary>
 		/// The order of a cyclic group that can be generated by this element.
@@ -215,9 +328,9 @@ namespace DotNetTransformer.Math.Transform {
 			v ^= ((b << p[1]) & 0xF ^ v) << 4;
 			/*//
 			for(byte i = 0, l = 2; i < _dimCount; ++i, l <<= 1)
-				v ^= ((1 << l) - 1 & (b << p[i]) ^ v) << l;
+				v ^= (((-1 << l) ^ -1) & (b << p[i]) ^ v) << l;
 			//*/
-			return new PermutationByte((byte)(v ^ 0xE4));
+			return PermutationByte.FromByteInternal((byte)v);
 		}
 		public RotateFlipType ToRotateFlipType() {
 			return (RotateFlipType)(0x31756420 >> (Value << 2) & 7);
