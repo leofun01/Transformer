@@ -175,7 +175,7 @@ cLen :      count       cnt1       cnt2
 ## 11 dimensions
 ```
 size : 81749606400 32732555625 49017050775
-cLen :       count       count       count
+cLen :       count        cnt1        cnt2
    1 :           1           1            
    2 :     5222207     5220160        2047
    3 :     8181800     8181800            

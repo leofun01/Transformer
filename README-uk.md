@@ -47,7 +47,7 @@
 						<summary><code>txt</code></summary>
 						<ul>
 							<li><a href="docs/txt/Tesseract_16_v1.txt"><code>Tesseract_16_v1.txt</code></a></li>
-							<li><a href="docs/txt/TesseractResearchResult.txt"><code>TesseractResearchResult.txt</code></a></li>
+							<li><a href="docs/txt/hypercube-symmetries.md"><code>hypercube-symmetries.md</code></a></li>
 						</ul>
 					</details>
 				</li>
