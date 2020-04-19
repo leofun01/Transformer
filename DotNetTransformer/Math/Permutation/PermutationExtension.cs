@@ -26,21 +26,51 @@ namespace DotNetTransformer.Math.Permutation {
 			return _this.GetCyclesCount(i => i > 1);
 		}
 
+		public static byte GetNext<T>(this byte v, T p)
+			where T : IPermutation<T>, new()
+		{
+			return (byte)GetNext<T>(v, p, 8);
+		}
+		public static byte GetPrev<T>(this byte v, T p)
+			where T : IPermutation<T>, new()
+		{
+			return (byte)GetPrev<T>(v, p, 8);
+		}
 		public static short GetNext<T>(this short v, T p)
 			where T : IPermutation<T>, new()
 		{
-			int r = 0;
-			for(byte i = 0; i < 16; ++i)
-				r |= (v >> p[i] & 1) << i;
-			return (short)r;
+			return (short)GetNext<T>(v, p, 16);
 		}
 		public static short GetPrev<T>(this short v, T p)
 			where T : IPermutation<T>, new()
 		{
+			return (short)GetPrev<T>(v, p, 16);
+		}
+		public static int GetNext<T>(this int v, T p)
+			where T : IPermutation<T>, new()
+		{
+			return GetNext<T>(v, p, 32);
+		}
+		public static int GetPrev<T>(this int v, T p)
+			where T : IPermutation<T>, new()
+		{
+			return GetPrev<T>(v, p, 32);
+		}
+		public static int GetNext<T>(this int v, T p, byte size)
+			where T : IPermutation<T>, new()
+		{
 			int r = 0;
-			for(byte i = 0; i < 16; ++i)
+			for(byte i = 0; i < size; ++i)
+				r |= (v >> p[i] & 1) << i;
+			return r;
+		}
+		public static int GetPrev<T>(this int v, T p, byte size)
+			where T : IPermutation<T>, new()
+		{
+			int r = 0;
+			for(byte i = 0; i < size; ++i)
 				r |= (v >> i & 1) << p[i];
-			return (short)r;
+			return r;
 		}
 		public static int GetNextVertex<T>(this T p, int v)
 			where T : IPermutation<T>, new()
