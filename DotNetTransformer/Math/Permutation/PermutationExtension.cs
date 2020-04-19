@@ -93,7 +93,7 @@ namespace DotNetTransformer.Math.Permutation {
 		public static void ApplyNextPermutation(this int[] a, int maxLength) {
 			ApplyNextPermutation<int>(a, maxLength, (int l, int r) => l >= r);
 		}
-		public static void ApplyPreviousPermutation(this int[] a, int maxLength) {
+		public static void ApplyPrevPermutation(this int[] a, int maxLength) {
 			ApplyNextPermutation<int>(a, maxLength, (int l, int r) => l <= r);
 		}
 

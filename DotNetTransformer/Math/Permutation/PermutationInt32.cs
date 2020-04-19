@@ -137,7 +137,7 @@ namespace DotNetTransformer.Math.Permutation {
 		public P GetNextPermutation(int maxLength) {
 			return GetNextPermutation(maxLength, (int l, int r) => l >= r);
 		}
-		public P GetPreviousPermutation(int maxLength) {
+		public P GetPrevPermutation(int maxLength) {
 			return GetNextPermutation(maxLength, (int l, int r) => l <= r);
 		}
 
