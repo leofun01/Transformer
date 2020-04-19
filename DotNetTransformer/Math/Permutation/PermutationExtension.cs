@@ -26,13 +26,17 @@ namespace DotNetTransformer.Math.Permutation {
 			return _this.GetCyclesCount(i => i > 1);
 		}
 
-		public static short GetNext(this short v, PermutationInt64 p) {
+		public static short GetNext<T>(this short v, T p)
+			where T : IPermutation<T>, new()
+		{
 			int r = 0;
 			for(byte i = 0; i < 16; ++i)
 				r |= (v >> p[i] & 1) << i;
 			return (short)r;
 		}
-		public static short GetPrev(this short v, PermutationInt64 p) {
+		public static short GetPrev<T>(this short v, T p)
+			where T : IPermutation<T>, new()
+		{
 			int r = 0;
 			for(byte i = 0; i < 16; ++i)
 				r |= (v >> i & 1) << p[i];
