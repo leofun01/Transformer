@@ -72,16 +72,6 @@ namespace DotNetTransformer.Math.Permutation {
 				r |= (v >> i & 1) << p[i];
 			return r;
 		}
-		public static int GetNextVertex<T>(this T p, int v)
-			where T : IPermutation<T>, new()
-		{
-			int r = 0;
-			for(byte i = 0; v > 0; ++i) {
-				r ^= (v & 1) << p[i];
-				v >>= 1;
-			}
-			return r;
-		}
 
 		public static void ApplyNextPermutation<T>(this T[] a, int maxLength, Order<T> match) {
 			int length = a.GetLength(0);
