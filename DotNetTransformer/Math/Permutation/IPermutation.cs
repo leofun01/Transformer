@@ -6,6 +6,7 @@ using DotNetTransformer.Math.Set;
 namespace DotNetTransformer.Math.Permutation {
 	public interface IPermutation<T> : IFiniteGroupElement<T>
 		, IEnumerable<int>
+		, IComparable<T>
 		where T : IPermutation<T>, new()
 	{
 		int this[int index] { get; }

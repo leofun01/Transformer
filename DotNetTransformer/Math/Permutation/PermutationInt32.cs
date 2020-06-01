@@ -181,6 +181,7 @@ namespace DotNetTransformer.Math.Permutation {
 			return o is P && Equals((P)o);
 		}
 		public bool Equals(P o) { return _value == o._value; }
+		public int CompareTo(P o) { return o.Value - Value; }
 		public override string ToString() {
 			return _toString(_count);
 		}
@@ -328,6 +329,10 @@ namespace DotNetTransformer.Math.Permutation {
 
 		public static bool operator ==(P l, P r) { return l.Equals(r); }
 		public static bool operator !=(P l, P r) { return !l.Equals(r); }
+		public static bool operator >(P l, P r) { return l.Value < r.Value; }
+		public static bool operator <(P l, P r) { return l.Value > r.Value; }
+		public static bool operator >=(P l, P r) { return l.Value <= r.Value; }
+		public static bool operator <=(P l, P r) { return l.Value >= r.Value; }
 
 		public static P operator +(P o) { return o; }
 		public static P operator -(P o) { return o.InverseElement; }
