@@ -8,7 +8,7 @@
 <h2 id="description">Description</h2>
 
 The main idea of project "Transformer" is
-using group theory in programming
+usage of group theory in programming
 to achieve the most efficient solutions.
 
 <h2 id="directory-structure">Directory structure</h2>
