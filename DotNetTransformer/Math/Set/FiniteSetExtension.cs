@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using DotNetTransformer.Math.Group;
 
 namespace DotNetTransformer.Math.Set {
 	public static class FiniteSetExtension
