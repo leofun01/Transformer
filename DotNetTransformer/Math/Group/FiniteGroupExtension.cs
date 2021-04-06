@@ -72,7 +72,8 @@ namespace DotNetTransformer.Math.Group {
 			where T : IFiniteGroupElement<T>, new()
 		{
 			List<T> list = new List<T>();
-			list.Add(new T());
+			IFiniteGroup<T> group = ToFiniteGroup<T>(list);
+			list.Add(group.IdentityElement);
 			if(!ReferenceEquals(collection, null)) {
 				foreach(T a in collection)
 					if(!list.Contains(a)) list.Add(a);
@@ -88,8 +89,6 @@ namespace DotNetTransformer.Math.Group {
 					}
 				} while(count < list.Count);
 			}
-			IFiniteGroup<T> group = ToFiniteGroup<T>(list);
-			list[0] = group.IdentityElement;
 			return group;
 		}
 		public static bool IsGeneratingSetOf<T>(this IEnumerable<T> collection, IFiniteGroup<T> group)
