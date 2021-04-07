@@ -334,10 +334,10 @@ namespace DotNetTransformer.Math.Permutation {
 
 		public static bool operator ==(P l, P r) { return l.Equals(r); }
 		public static bool operator !=(P l, P r) { return !l.Equals(r); }
-		public static bool operator >(P l, P r) { return l.Value < r.Value; }
-		public static bool operator <(P l, P r) { return l.Value > r.Value; }
-		public static bool operator >=(P l, P r) { return l.Value <= r.Value; }
-		public static bool operator <=(P l, P r) { return l.Value >= r.Value; }
+		public static bool operator >(P l, P r) { return (ulong)l.Value < (ulong)r.Value; }
+		public static bool operator <(P l, P r) { return (ulong)l.Value > (ulong)r.Value; }
+		public static bool operator >=(P l, P r) { return (ulong)l.Value <= (ulong)r.Value; }
+		public static bool operator <=(P l, P r) { return (ulong)l.Value >= (ulong)r.Value; }
 
 		public static P operator +(P o) { return o; }
 		public static P operator -(P o) { return o.InverseElement; }
