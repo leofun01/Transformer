@@ -11,6 +11,9 @@
 *.pdb
 *.lnk
 
+# System files
+*.ini
+
 # Build results
 [Bb]in/
 [Oo]bj/

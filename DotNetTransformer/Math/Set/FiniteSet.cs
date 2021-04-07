@@ -5,7 +5,6 @@ using DotNetTransformer.Extensions;
 
 namespace DotNetTransformer.Math.Set {
 	public abstract partial class FiniteSet<T> : IFiniteSet<T>
-		, ISubSet<T, ISet<T>>
 		where T : IEquatable<T>
 	{
 		public abstract long Count { get; }

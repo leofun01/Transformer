@@ -142,7 +142,7 @@ namespace DotNetTransformer.Math.Permutation {
 		public P GetNextPermutation(int maxLength) {
 			return GetNextPermutation(maxLength, (int l, int r) => l >= r);
 		}
-		public P GetPreviousPermutation(int maxLength) {
+		public P GetPrevPermutation(int maxLength) {
 			return GetNextPermutation(maxLength, (int l, int r) => l <= r);
 		}
 
@@ -186,6 +186,9 @@ namespace DotNetTransformer.Math.Permutation {
 			return o is P && Equals((P)o);
 		}
 		public bool Equals(P o) { return _value == o._value; }
+		public int CompareTo(P o) {
+			return Equals(o) ? 0 : this > o ? 1 : -1;
+		}
 		public override string ToString() {
 			return _toString(_count);
 		}
@@ -331,6 +334,10 @@ namespace DotNetTransformer.Math.Permutation {
 
 		public static bool operator ==(P l, P r) { return l.Equals(r); }
 		public static bool operator !=(P l, P r) { return !l.Equals(r); }
+		public static bool operator >(P l, P r) { return (ulong)l.Value < (ulong)r.Value; }
+		public static bool operator <(P l, P r) { return (ulong)l.Value > (ulong)r.Value; }
+		public static bool operator >=(P l, P r) { return (ulong)l.Value <= (ulong)r.Value; }
+		public static bool operator <=(P l, P r) { return (ulong)l.Value >= (ulong)r.Value; }
 
 		public static P operator +(P o) { return o; }
 		public static P operator -(P o) { return o.InverseElement; }

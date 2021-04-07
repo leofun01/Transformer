@@ -8,7 +8,7 @@
 <h2 id="description">Description</h2>
 
 The main idea of project "Transformer" is
-using group theory in programming
+usage of group theory in programming
 to achieve the most efficient solutions.
 
 <h2 id="directory-structure">Directory structure</h2>
@@ -47,7 +47,7 @@ to achieve the most efficient solutions.
 						<summary><code>txt</code></summary>
 						<ul>
 							<li><a href="docs/txt/Tesseract_16_v1.txt"><code>Tesseract_16_v1.txt</code></a></li>
-							<li><a href="docs/txt/TesseractResearchResult.txt"><code>TesseractResearchResult.txt</code></a></li>
+							<li><a href="docs/txt/hypercube-symmetries.md"><code>hypercube-symmetries.md</code></a></li>
 						</ul>
 					</details>
 				</li>

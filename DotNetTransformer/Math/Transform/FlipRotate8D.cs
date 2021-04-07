@@ -203,19 +203,19 @@ namespace DotNetTransformer.Math.Transform {
 		public T InverseElement {
 			get {
 				P p = -Permutation;
-				return new T(p, p.GetNextVertex<P>(Vertex));
+				return new T(p, Vertex.GetPrev<P>(p, _dimCount));
 			}
 		}
 		public T Add(T other) {
 			P p = Permutation;
 			return new T(p + other.Permutation,
-				p.GetNextVertex<P>(other.Vertex) ^ Vertex
+				Vertex ^ other.Vertex.GetPrev<P>(p, _dimCount)
 			);
 		}
 		public T Subtract(T other) {
 			P p = Permutation - other.Permutation;
 			return new T(p,
-				p.GetNextVertex<P>(other.Vertex) ^ Vertex
+				Vertex ^ other.Vertex.GetPrev<P>(p, _dimCount)
 			);
 		}
 		public T Times(int count) {
