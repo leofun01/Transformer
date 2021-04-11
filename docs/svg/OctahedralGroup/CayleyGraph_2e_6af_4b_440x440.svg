@@ -36,7 +36,7 @@
 			stroke-miterlimit: 4;
 			stroke-opacity: 1;
 		}
-		.arrows path {
+		.arrow path {
 			fill: none;
 			stroke: gray;
 			stroke-width: 1.5;
@@ -56,10 +56,10 @@
 			stroke-linejoin: round;
 			stroke-width: 0.5;
 		}
-		.arrows .cycle-6 path {
+		.arrow .cycle-6 path {
 			marker-end: url(#arrow-c6);
 		}
-		.arrows .cycle-4 path {
+		.arrow .cycle-4 path {
 			marker-end: url(#arrow-c4);
 		}
 		circle {
@@ -70,26 +70,26 @@
 			stroke-linejoin: miter;
 			stroke-miterlimit: 4;
 		}
-		.vertexes circle {
+		.vertex circle {
 			fill: white;
 			stroke: #000000;
 			stroke-width: 1;
 		}
-		.vertexes circle:nth-child(odd) {
-			fill: #a0ffff;
-		}
-		.vertexes circle:nth-child(even) {
+		.vertex circle:nth-child(even) {
 			fill: #ffff80;
+		}
+		.vertex circle:nth-child(odd) {
+			fill: #a0ffff;
 		}
 		/* ]]> */
 	</style>
 	<defs>
 		<marker
-			orient="auto"
-			refY="0.0"
-			refX="0.0"
 			id="arrow-c6"
 			class="cycle-6"
+			orient="auto"
+			refX="0.0"
+			refY="0.0"
 			inkscape:isstock="true"
 			inkscape:collect="always"
 		>
@@ -99,11 +99,11 @@
 			/>
 		</marker>
 		<marker
-			orient="auto"
-			refY="0.0"
-			refX="0.0"
 			id="arrow-c4"
 			class="cycle-4"
+			orient="auto"
+			refX="0.0"
+			refY="0.0"
 			inkscape:isstock="true"
 			inkscape:collect="always"
 		>
@@ -195,7 +195,7 @@
 		inkscape:groupmode="layer"
 	>
 		<g
-			class="arrows"
+			class="arrow"
 		>
 			<g
 				class="cycle-4"
@@ -959,7 +959,7 @@
 			</g>
 		</g>
 		<g
-			class="vertexes"
+			class="vertex"
 		>
 			<circle
 				id="v00"
