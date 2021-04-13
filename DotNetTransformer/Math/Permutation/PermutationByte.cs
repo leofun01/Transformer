@@ -169,7 +169,12 @@ namespace DotNetTransformer.Math.Permutation {
 			return count;
 		}
 
-		public override int GetHashCode() { return _value; }
+		public override int GetHashCode() {
+			int h = _value;
+			h = ((h << 4) | h) & 0x0F0F;
+			h = ((h << 2) | h) & 0x3333;
+			return h;
+		}
 		public override bool Equals(object o) {
 			return o is P && Equals((P)o);
 		}
@@ -199,10 +204,7 @@ namespace DotNetTransformer.Math.Permutation {
 			return sb.ToString();
 		}
 		public short ToInt16() {
-			short r = Value;
-			r = (short)(((short)(r << 4) | r) & 0x0F0F);
-			r = (short)(((short)(r << 2) | r) & 0x3333);
-			return r;
+			return (short)(GetHashCode() ^ 0x3210);
 		}
 		public IEnumerator<int> GetEnumerator() {
 			byte t = Value;
