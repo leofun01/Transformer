@@ -213,7 +213,9 @@ namespace DotNetTransformer.Math.Transform {
 			return FiniteGroupExtension.Times<T>(this, count);
 		}
 
-		public override int GetHashCode() { return _value; }
+		public override int GetHashCode() {
+			return Permutation.GetHashCode() ^ Vertex;
+		}
 		public override bool Equals(object o) {
 			return o is T && Equals((T)o);
 		}

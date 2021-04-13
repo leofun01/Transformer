@@ -316,7 +316,9 @@ namespace DotNetTransformer.Math.Transform {
 			//*/
 		}
 
-		public override int GetHashCode() { return Value; }
+		public override int GetHashCode() {
+			return Permutation.GetHashCode() ^ Vertex;
+		}
 		public override bool Equals(object o) { return o is T && Equals((T)o); }
 		public bool Equals(T o) { return Value == o.Value; }
 		public override string ToString() { return _names[Value]; }
