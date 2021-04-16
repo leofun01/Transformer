@@ -168,6 +168,10 @@ namespace DotNetTransformer.Math.Transform {
 					p >>= 4;
 				}
 			}
+			public override int GetHashCode() {
+				long c = Count;
+				return (int)(c >> 32 ^ c) ^ (2 >> _dim & 1);
+			}
 		}
 		private class FlipRotateGroup : FlipRotateSet, IFiniteGroup<T>
 		{
@@ -218,6 +222,10 @@ namespace DotNetTransformer.Math.Transform {
 						yield return new T(p & 7);
 					p >>= 4;
 				}
+			}
+			public override int GetHashCode() {
+				long c = Count;
+				return (int)(c >> 32 ^ c);
 			}
 		}
 
