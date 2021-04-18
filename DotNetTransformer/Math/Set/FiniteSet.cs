@@ -34,6 +34,8 @@ namespace DotNetTransformer.Math.Set {
 			return hash ^ (int)(c >> 32 ^ c);
 		}
 		public virtual bool IsSubsetOf(ISet<T> other) {
+			IFiniteSet<T> o = other as IFiniteSet<T>;
+			if(o != null) return IsSubsetOf(o);
 			return ReferenceEquals(this, other) || (
 				!ReferenceEquals(other, null)
 				&& !this.Exist<T>(e => !other.Contains(e))
