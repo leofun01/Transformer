@@ -12,7 +12,7 @@
 	height="440px"
 	viewBox="-220 -220 440 440"
 	version="1.1"
-	sodipodi:docname="OctahedralGroup_CayleyGraph_2e_6af_4b_440x440.svg"
+	sodipodi:docname="OctahedralGroup_CayleyGraph_2e_6af_4b_440x440-v2.svg"
 >
 	<title>
 		Octahedral group Cayley graph (2 =&gt; 48).
@@ -204,28 +204,28 @@
 					class="inner center c-1"
 				>
 					<path
-						d="m   60,  60 v -120"
+						d="m   80,  80 v -160"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v33"
 						inkscape:connection-end="#v21"
 					/>
 					<path
-						d="m  -60,  60 h  120"
+						d="m  -80,  80 h  160"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v45"
 						inkscape:connection-end="#v33"
 					/>
 					<path
-						d="m  -60, -60 v  120"
+						d="m  -80, -80 v  160"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v09"
 						inkscape:connection-end="#v45"
 					/>
 					<path
-						d="m   60, -60 h -120"
+						d="m   80, -80 h -160"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v21"
@@ -236,28 +236,28 @@
 					class="outer center c-1"
 				>
 					<path
-						d="m  160, 160 v -320"
+						d="m  140, 140 v -280"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v30"
 						inkscape:connection-end="#v18"
 					/>
 					<path
-						d="m -160, 160 h  320"
+						d="m -140, 140 h  280"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v42"
 						inkscape:connection-end="#v30"
 					/>
 					<path
-						d="m -160,-160 v  320"
+						d="m -140,-140 v  280"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v06"
 						inkscape:connection-end="#v42"
 					/>
 					<path
-						d="m  160,-160 h -320"
+						d="m  140,-140 h -280"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v18"
@@ -268,28 +268,28 @@
 					class="inner top"
 				>
 					<path
-						d="m -100, -40 v  -40"
+						d="m -100, -20 v  -40"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v04"
 						inkscape:connection-end="#v08"
 					/>
 					<path
-						d="m -100, -80 h  200"
+						d="m -100, -60 h  200"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v08"
 						inkscape:connection-end="#v22"
 					/>
 					<path
-						d="m  100, -80 v   40"
+						d="m  100, -60 v   40"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v22"
 						inkscape:connection-end="#v14"
 					/>
 					<path
-						d="m  100, -40 h -200"
+						d="m  100, -20 h -200"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v14"
@@ -300,28 +300,28 @@
 					class="inner right"
 				>
 					<path
-						d="m   40, 100 v -200"
+						d="m   20, 100 v -200"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v26"
 						inkscape:connection-end="#v16"
 					/>
 					<path
-						d="m   40,-100 h   40"
+						d="m   20,-100 h   40"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v16"
 						inkscape:connection-end="#v20"
 					/>
 					<path
-						d="m   80,-100 v  200"
+						d="m   60,-100 v  200"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v20"
 						inkscape:connection-end="#v34"
 					/>
 					<path
-						d="m   80, 100 h  -40"
+						d="m   60, 100 h  -40"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v34"
@@ -332,28 +332,28 @@
 					class="inner bottom"
 				>
 					<path
-						d="m -100,  80 v  -40"
+						d="m -100,  60 v  -40"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v46"
 						inkscape:connection-end="#v38"
 					/>
 					<path
-						d="m -100,  40 h  200"
+						d="m -100,  20 h  200"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v38"
 						inkscape:connection-end="#v28"
 					/>
 					<path
-						d="m  100,  40 v   40"
+						d="m  100,  20 v   40"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v28"
 						inkscape:connection-end="#v32"
 					/>
 					<path
-						d="m  100,  80 h -200"
+						d="m  100,  60 h -200"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v32"
@@ -364,28 +364,28 @@
 					class="inner left"
 				>
 					<path
-						d="m  -80, 100 v -200"
+						d="m  -60, 100 v -200"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v44"
 						inkscape:connection-end="#v10"
 					/>
 					<path
-						d="m  -80,-100 h   40"
+						d="m  -60,-100 h   40"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v10"
 						inkscape:connection-end="#v02"
 					/>
 					<path
-						d="m  -40,-100 v  200"
+						d="m  -20,-100 v  200"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v02"
 						inkscape:connection-end="#v40"
 					/>
 					<path
-						d="m  -40, 100 h  -40"
+						d="m  -20, 100 h  -40"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v40"
@@ -396,28 +396,28 @@
 					class="outer top"
 				>
 					<path
-						d="m  120,-140 v  -40"
+						d="m  120,-160 v  -40"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v19"
 						inkscape:connection-end="#v17"
 					/>
 					<path
-						d="m -120,-140 h  240"
+						d="m -120,-160 h  240"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v11"
 						inkscape:connection-end="#v19"
 					/>
 					<path
-						d="m -120,-180 v   40"
+						d="m -120,-200 v   40"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v01"
 						inkscape:connection-end="#v11"
 					/>
 					<path
-						d="m  120,-180 h -240"
+						d="m  120,-200 h -240"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v17"
@@ -428,28 +428,28 @@
 					class="outer right"
 				>
 					<path
-						d="m  180, 120 v -240"
+						d="m  200, 120 v -240"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v29"
 						inkscape:connection-end="#v13"
 					/>
 					<path
-						d="m  140, 120 h   40"
+						d="m  160, 120 h   40"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v31"
 						inkscape:connection-end="#v29"
 					/>
 					<path
-						d="m  140,-120 v  240"
+						d="m  160,-120 v  240"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v23"
 						inkscape:connection-end="#v31"
 					/>
 					<path
-						d="m  180,-120 h  -40"
+						d="m  200,-120 h  -40"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v13"
@@ -460,28 +460,28 @@
 					class="outer bottom"
 				>
 					<path
-						d="m  120, 180 v  -40"
+						d="m  120, 200 v  -40"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v25"
 						inkscape:connection-end="#v35"
 					/>
 					<path
-						d="m -120, 180 h  240"
+						d="m -120, 200 h  240"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v41"
 						inkscape:connection-end="#v25"
 					/>
 					<path
-						d="m -120, 140 v   40"
+						d="m -120, 160 v   40"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v43"
 						inkscape:connection-end="#v41"
 					/>
 					<path
-						d="m  120, 140 h -240"
+						d="m  120, 160 h -240"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v35"
@@ -492,28 +492,28 @@
 					class="outer left"
 				>
 					<path
-						d="m -140, 120 v -240"
+						d="m -160, 120 v -240"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v47"
 						inkscape:connection-end="#v07"
 					/>
 					<path
-						d="m -180, 120 h   40"
+						d="m -200, 120 h   40"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v37"
 						inkscape:connection-end="#v47"
 					/>
 					<path
-						d="m -180,-120 v  240"
+						d="m -200,-120 v  240"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v05"
 						inkscape:connection-end="#v37"
 					/>
 					<path
-						d="m -140,-120 h  -40"
+						d="m -160,-120 h  -40"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v07"
@@ -524,28 +524,28 @@
 					class="inner center c-0"
 				>
 					<path
-						d="m  -20,  20 v  -40"
+						d="m  -40,  40 v  -80"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v39"
 						inkscape:connection-end="#v03"
 					/>
 					<path
-						d="m  -20, -20 h   40"
+						d="m  -40, -40 h   80"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v03"
 						inkscape:connection-end="#v15"
 					/>
 					<path
-						d="m   20, -20 v   40"
+						d="m   40, -40 v   80"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v15"
 						inkscape:connection-end="#v27"
 					/>
 					<path
-						d="m   20,  20 h  -40"
+						d="m   40,  40 h  -80"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v27"
@@ -556,28 +556,28 @@
 					class="outer center c-0"
 				>
 					<path
-						d="m -200, 200 v -400"
+						d="m -180, 180 v -360"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v36"
 						inkscape:connection-end="#v00"
 					/>
 					<path
-						d="m -200,-200 h  400"
+						d="m -180,-180 h  360"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v00"
 						inkscape:connection-end="#v12"
 					/>
 					<path
-						d="m  200,-200 v  400"
+						d="m  180,-180 v  360"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v12"
 						inkscape:connection-end="#v24"
 					/>
 					<path
-						d="m  200, 200 h -400"
+						d="m  180, 180 h -360"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v24"
@@ -592,42 +592,42 @@
 					class="top left c-1"
 				>
 					<path
-						d="m -160,-160  20, 40"
+						d="m -140,-140  -20,  20"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v06"
 						inkscape:connection-end="#v07"
 					/>
 					<path
-						d="m -140,-120  40, 40"
+						d="m -160,-120   60,  60"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v07"
 						inkscape:connection-end="#v08"
 					/>
 					<path
-						d="m -100, -80  40, 20"
+						d="m -100, -60   20, -20"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v08"
 						inkscape:connection-end="#v09"
 					/>
 					<path
-						d="m  -60, -60 -20,-40"
+						d="m  -80, -80   20, -20"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v09"
 						inkscape:connection-end="#v10"
 					/>
 					<path
-						d="m  -80,-100 -40,-40"
+						d="m  -60,-100  -60, -60"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v10"
 						inkscape:connection-end="#v11"
 					/>
 					<path
-						d="m -120,-140 -40,-20"
+						d="m -120,-160  -20,  20"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v11"
@@ -638,42 +638,42 @@
 					class="top right c-1"
 				>
 					<path
-						d="m  160,-160 -40, 20"
+						d="m  140,-140  -20, -20"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v18"
 						inkscape:connection-end="#v19"
 					/>
 					<path
-						d="m  120,-140 -40, 40"
+						d="m  120,-160  -60,  60"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v19"
 						inkscape:connection-end="#v20"
 					/>
 					<path
-						d="m   80,-100 -20, 40"
+						d="m   60,-100   20,  20"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v20"
 						inkscape:connection-end="#v21"
 					/>
 					<path
-						d="m   60, -60  40,-20"
+						d="m   80, -80   20,  20"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v21"
 						inkscape:connection-end="#v22"
 					/>
 					<path
-						d="m  100, -80  40,-40"
+						d="m  100, -60   60, -60"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v22"
 						inkscape:connection-end="#v23"
 					/>
 					<path
-						d="m  140,-120  20,-40"
+						d="m  160,-120  -20, -20"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v23"
@@ -684,42 +684,42 @@
 					class="bottom right c-1"
 				>
 					<path
-						d="m  160, 160 -20,-40"
+						d="m  140, 140   20, -20"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v30"
 						inkscape:connection-end="#v31"
 					/>
 					<path
-						d="m  140, 120 -40,-40"
+						d="m  160, 120  -60, -60"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v31"
 						inkscape:connection-end="#v32"
 					/>
 					<path
-						d="m  100,  80 -40,-20"
+						d="m  100,  60  -20,  20"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v32"
 						inkscape:connection-end="#v33"
 					/>
 					<path
-						d="m   60,  60  20, 40"
+						d="m   80,  80  -20,  20"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v33"
 						inkscape:connection-end="#v34"
 					/>
 					<path
-						d="m   80, 100  40, 40"
+						d="m   60, 100   60,  60"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v34"
 						inkscape:connection-end="#v35"
 					/>
 					<path
-						d="m  120, 140  40, 20"
+						d="m  120, 160   20, -20"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v35"
@@ -730,42 +730,42 @@
 					class="bottom left c-1"
 				>
 					<path
-						d="m -160, 160  40,-20"
+						d="m -140, 140   20,  20"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v42"
 						inkscape:connection-end="#v43"
 					/>
 					<path
-						d="m -120, 140  40,-40"
+						d="m -120, 160   60, -60"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v43"
 						inkscape:connection-end="#v44"
 					/>
 					<path
-						d="m  -80, 100  20,-40"
+						d="m  -60, 100  -20, -20"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v44"
 						inkscape:connection-end="#v45"
 					/>
 					<path
-						d="m  -60,  60 -40, 20"
+						d="m  -80,  80  -20, -20"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v45"
 						inkscape:connection-end="#v46"
 					/>
 					<path
-						d="m -100,  80 -40, 40"
+						d="m -100,  60  -60,  60"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v46"
 						inkscape:connection-end="#v47"
 					/>
 					<path
-						d="m -140, 120 -20, 40"
+						d="m -160, 120   20,  20"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v47"
@@ -776,42 +776,42 @@
 					class="top left c-0"
 				>
 					<path
-						d="m -200,-200  80, 20"
+						d="m -180,-180   60, -20"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v00"
 						inkscape:connection-end="#v01"
 					/>
 					<path
-						d="m -120,-180  80, 80"
+						d="m -120,-200  100, 100"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v01"
 						inkscape:connection-end="#v02"
 					/>
 					<path
-						d="m  -40,-100  20, 80"
+						d="m  -20,-100  -20,  60"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v02"
 						inkscape:connection-end="#v03"
 					/>
 					<path
-						d="m  -20, -20 -80,-20"
+						d="m  -40, -40  -60,  20"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v03"
 						inkscape:connection-end="#v04"
 					/>
 					<path
-						d="m -100, -40 -80,-80"
+						d="m -100, -20 -100,-100"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v04"
 						inkscape:connection-end="#v05"
 					/>
 					<path
-						d="m -180,-120 -20,-80"
+						d="m -200,-120   20, -60"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v05"
@@ -822,42 +822,42 @@
 					class="top right c-0"
 				>
 					<path
-						d="m  200,-200 -20, 80"
+						d="m  180,-180   20,  60"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v12"
 						inkscape:connection-end="#v13"
 					/>
 					<path
-						d="m  180,-120 -80, 80"
+						d="m  200,-120 -100, 100"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v13"
 						inkscape:connection-end="#v14"
 					/>
 					<path
-						d="m  100, -40 -80, 20"
+						d="m  100, -20  -60, -20"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v14"
 						inkscape:connection-end="#v15"
 					/>
 					<path
-						d="m   20, -20  20,-80"
+						d="m   40, -40  -20, -60"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v15"
 						inkscape:connection-end="#v16"
 					/>
 					<path
-						d="m   40,-100  80,-80"
+						d="m   20,-100  100,-100"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v16"
 						inkscape:connection-end="#v17"
 					/>
 					<path
-						d="m  120,-180  80,-20"
+						d="m  120,-200   60,  20"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v17"
@@ -868,42 +868,42 @@
 					class="bottom right c-0"
 				>
 					<path
-						d="m  200, 200 -80,-20"
+						d="m  180, 180  -60,  20"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v24"
 						inkscape:connection-end="#v25"
 					/>
 					<path
-						d="m  120, 180 -80,-80"
+						d="m  120, 200 -100,-100"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v25"
 						inkscape:connection-end="#v26"
 					/>
 					<path
-						d="m   40, 100 -20,-80"
+						d="m   20, 100   20, -60"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v26"
 						inkscape:connection-end="#v27"
 					/>
 					<path
-						d="m   20,  20  80, 20"
+						d="m   40,  40   60, -20"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v27"
 						inkscape:connection-end="#v28"
 					/>
 					<path
-						d="m  100,  40  80, 80"
+						d="m  100,  20  100, 100"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v28"
 						inkscape:connection-end="#v29"
 					/>
 					<path
-						d="m  180, 120  20, 80"
+						d="m  200, 120  -20,  60"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v29"
@@ -914,42 +914,42 @@
 					class="bottom left c-0"
 				>
 					<path
-						d="m -200, 200  20,-80"
+						d="m -180, 180  -20, -60"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v36"
 						inkscape:connection-end="#v37"
 					/>
 					<path
-						d="m -180, 120  80,-80"
+						d="m -200, 120  100,-100"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v37"
 						inkscape:connection-end="#v38"
 					/>
 					<path
-						d="m -100,  40  80,-20"
+						d="m -100,  20   60,  20"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v38"
 						inkscape:connection-end="#v39"
 					/>
 					<path
-						d="m  -20,  20 -20, 80"
+						d="m  -40,  40   20,  60"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v39"
 						inkscape:connection-end="#v40"
 					/>
 					<path
-						d="m  -40, 100 -80, 80"
+						d="m  -20, 100 -100, 100"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v40"
 						inkscape:connection-end="#v41"
 					/>
 					<path
-						d="m -120, 180 -80, 20"
+						d="m -120, 200  -60, -20"
 						inkscape:connector-type="polyline"
 						inkscape:connector-curvature="0"
 						inkscape:connection-start="#v41"
@@ -964,56 +964,56 @@
 			<circle
 				id="v00"
 				class="outer top left c-0"
-				cx="-200"
-				cy="-200"
+				cx="-180"
+				cy="-180"
 				r="4"
 			/>
 			<circle
 				id="v01"
 				class="outer top left c-0"
 				cx="-120"
-				cy="-180"
+				cy="-200"
 				r="4"
 			/>
 			<circle
 				id="v02"
 				class="inner top left c-0"
-				cx="-40"
+				cx="-20"
 				cy="-100"
 				r="4"
 			/>
 			<circle
 				id="v03"
 				class="inner top left c-0"
-				cx="-20"
-				cy="-20"
+				cx="-40"
+				cy="-40"
 				r="4"
 			/>
 			<circle
 				id="v04"
 				class="inner top left c-0"
 				cx="-100"
-				cy="-40"
+				cy="-20"
 				r="4"
 			/>
 			<circle
 				id="v05"
 				class="outer top left c-0"
-				cx="-180"
+				cx="-200"
 				cy="-120"
 				r="4"
 			/>
 			<circle
 				id="v06"
 				class="outer top left c-1"
-				cx="-160"
-				cy="-160"
+				cx="-140"
+				cy="-140"
 				r="4"
 			/>
 			<circle
 				id="v07"
 				class="outer top left c-1"
-				cx="-140"
+				cx="-160"
 				cy="-120"
 				r="4"
 			/>
@@ -1021,20 +1021,20 @@
 				id="v08"
 				class="inner top left c-1"
 				cx="-100"
-				cy="-80"
+				cy="-60"
 				r="4"
 			/>
 			<circle
 				id="v09"
 				class="inner top left c-1"
-				cx="-60"
-				cy="-60"
+				cx="-80"
+				cy="-80"
 				r="4"
 			/>
 			<circle
 				id="v10"
 				class="inner top left c-1"
-				cx="-80"
+				cx="-60"
 				cy="-100"
 				r="4"
 			/>
@@ -1042,20 +1042,20 @@
 				id="v11"
 				class="outer top left c-1"
 				cx="-120"
-				cy="-140"
+				cy="-160"
 				r="4"
 			/>
 			<circle
 				id="v12"
 				class="outer top right c-0"
-				cx="200"
-				cy="-200"
+				cx="180"
+				cy="-180"
 				r="4"
 			/>
 			<circle
 				id="v13"
 				class="outer top right c-0"
-				cx="180"
+				cx="200"
 				cy="-120"
 				r="4"
 			/>
@@ -1063,20 +1063,20 @@
 				id="v14"
 				class="inner top right c-0"
 				cx="100"
-				cy="-40"
+				cy="-20"
 				r="4"
 			/>
 			<circle
 				id="v15"
 				class="inner top right c-0"
-				cx="20"
-				cy="-20"
+				cx="40"
+				cy="-40"
 				r="4"
 			/>
 			<circle
 				id="v16"
 				class="inner top right c-0"
-				cx="40"
+				cx="20"
 				cy="-100"
 				r="4"
 			/>
@@ -1084,104 +1084,104 @@
 				id="v17"
 				class="outer top right c-0"
 				cx="120"
-				cy="-180"
+				cy="-200"
 				r="4"
 			/>
 			<circle
 				id="v18"
 				class="outer top right c-1"
-				cx="160"
-				cy="-160"
+				cx="140"
+				cy="-140"
 				r="4"
 			/>
 			<circle
 				id="v19"
 				class="outer top right c-1"
 				cx="120"
-				cy="-140"
+				cy="-160"
 				r="4"
 			/>
 			<circle
 				id="v20"
 				class="inner top right c-1"
-				cx="80"
+				cx="60"
 				cy="-100"
 				r="4"
 			/>
 			<circle
 				id="v21"
 				class="inner top right c-1"
-				cx="60"
-				cy="-60"
+				cx="80"
+				cy="-80"
 				r="4"
 			/>
 			<circle
 				id="v22"
 				class="inner top right c-1"
 				cx="100"
-				cy="-80"
+				cy="-60"
 				r="4"
 			/>
 			<circle
 				id="v23"
 				class="outer top right c-1"
-				cx="140"
+				cx="160"
 				cy="-120"
 				r="4"
 			/>
 			<circle
 				id="v24"
 				class="outer bottom right c-0"
-				cx="200"
-				cy="200"
+				cx="180"
+				cy="180"
 				r="4"
 			/>
 			<circle
 				id="v25"
 				class="outer bottom right c-0"
 				cx="120"
-				cy="180"
+				cy="200"
 				r="4"
 			/>
 			<circle
 				id="v26"
 				class="inner bottom right c-0"
-				cx="40"
+				cx="20"
 				cy="100"
 				r="4"
 			/>
 			<circle
 				id="v27"
 				class="inner bottom right c-0"
-				cx="20"
-				cy="20"
+				cx="40"
+				cy="40"
 				r="4"
 			/>
 			<circle
 				id="v28"
 				class="inner bottom right c-0"
 				cx="100"
-				cy="40"
+				cy="20"
 				r="4"
 			/>
 			<circle
 				id="v29"
 				class="outer bottom right c-0"
-				cx="180"
+				cx="200"
 				cy="120"
 				r="4"
 			/>
 			<circle
 				id="v30"
 				class="outer bottom right c-1"
-				cx="160"
-				cy="160"
+				cx="140"
+				cy="140"
 				r="4"
 			/>
 			<circle
 				id="v31"
 				class="outer bottom right c-1"
-				cx="140"
+				cx="160"
 				cy="120"
 				r="4"
 			/>
@@ -1189,20 +1189,20 @@
 				id="v32"
 				class="inner bottom right c-1"
 				cx="100"
-				cy="80"
+				cy="60"
 				r="4"
 			/>
 			<circle
 				id="v33"
 				class="inner bottom right c-1"
-				cx="60"
-				cy="60"
+				cx="80"
+				cy="80"
 				r="4"
 			/>
 			<circle
 				id="v34"
 				class="inner bottom right c-1"
-				cx="80"
+				cx="60"
 				cy="100"
 				r="4"
 			/>
@@ -1210,20 +1210,20 @@
 				id="v35"
 				class="outer bottom right c-1"
 				cx="120"
-				cy="140"
+				cy="160"
 				r="4"
 			/>
 			<circle
 				id="v36"
 				class="outer bottom left c-0"
-				cx="-200"
-				cy="200"
+				cx="-180"
+				cy="180"
 				r="4"
 			/>
 			<circle
 				id="v37"
 				class="outer bottom left c-0"
-				cx="-180"
+				cx="-200"
 				cy="120"
 				r="4"
 			/>
@@ -1231,20 +1231,20 @@
 				id="v38"
 				class="inner bottom left c-0"
 				cx="-100"
-				cy="40"
+				cy="20"
 				r="4"
 			/>
 			<circle
 				id="v39"
 				class="inner bottom left c-0"
-				cx="-20"
-				cy="20"
+				cx="-40"
+				cy="40"
 				r="4"
 			/>
 			<circle
 				id="v40"
 				class="inner bottom left c-0"
-				cx="-40"
+				cx="-20"
 				cy="100"
 				r="4"
 			/>
@@ -1252,48 +1252,48 @@
 				id="v41"
 				class="outer bottom left c-0"
 				cx="-120"
-				cy="180"
+				cy="200"
 				r="4"
 			/>
 			<circle
 				id="v42"
 				class="outer bottom left c-1"
-				cx="-160"
-				cy="160"
+				cx="-140"
+				cy="140"
 				r="4"
 			/>
 			<circle
 				id="v43"
 				class="outer bottom left c-1"
 				cx="-120"
-				cy="140"
+				cy="160"
 				r="4"
 			/>
 			<circle
 				id="v44"
 				class="inner bottom left c-1"
-				cx="-80"
+				cx="-60"
 				cy="100"
 				r="4"
 			/>
 			<circle
 				id="v45"
 				class="inner bottom left c-1"
-				cx="-60"
-				cy="60"
+				cx="-80"
+				cy="80"
 				r="4"
 			/>
 			<circle
 				id="v46"
 				class="inner bottom left c-1"
 				cx="-100"
-				cy="80"
+				cy="60"
 				r="4"
 			/>
 			<circle
 				id="v47"
 				class="outer bottom left c-1"
-				cx="-140"
+				cx="-160"
 				cy="120"
 				r="4"
 			/>

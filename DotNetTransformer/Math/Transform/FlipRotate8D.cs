@@ -49,21 +49,24 @@ namespace DotNetTransformer.Math.Transform {
 		private static IDictionary<byte, IFiniteGroup<T>> _allValues;
 
 		public static IFiniteSet<T> GetReflections(int dimensions) {
+			if(dimensions == 0) return FiniteSet<T>.Empty;
 			return GetValues<IFiniteSet<T>>(
 				dimensions, ref _reflections,
-				dim => new ReflectionsSet(dim)
+				dim => new ReflectionsSet<T, P>(dim, (P p, int v) => new T(p, v))
 			);
 		}
 		public static IFiniteGroup<T> GetRotations(int dimensions) {
+			if(dimensions == 0) dimensions = 1;
 			return GetValues<IFiniteGroup<T>>(
 				dimensions, ref _rotations,
-				dim => new RotationsGroup(dim)
+				dim => new RotationsGroup<T, P>(dim, (P p, int v) => new T(p, v))
 			);
 		}
 		public static IFiniteGroup<T> GetAllValues(int dimensions) {
+			if(dimensions == 0) return GetRotations(1);
 			return GetValues<IFiniteGroup<T>>(
 				dimensions, ref _allValues,
-				dim => new FlipRotateGroup(dim)
+				dim => new FlipRotateGroup<T, P>(dim, (P p, int v) => new T(p, v))
 			);
 		}
 		private static S GetValues<S>(int dimensions,
@@ -84,91 +87,6 @@ namespace DotNetTransformer.Math.Transform {
 				S r = ctor(dim);
 				collection.Add(dim, r);
 				return r;
-			}
-		}
-
-		private abstract class FlipRotateSet : FiniteSet<T>
-		{
-			protected readonly byte _dim;
-			protected FlipRotateSet(byte dimensions) {
-				_dim = dimensions;
-			}
-			protected bool IsRotational(int swaps, int vertex) {
-				for(int i = 1; i < _dim; i <<= 1)
-					vertex ^= vertex >> i;
-				return ((swaps ^ vertex) & 1) == 0;
-			}
-
-			public override long Count {
-				get {
-					long c = 1L;
-					for(byte i = 1; i < _dim; c *= ++i) ;
-					return c << _dim;
-				}
-			}
-			public override bool Contains(T item) {
-				return (item._value & (_vert << (_dim << 2))) == 0 &&
-					item.Permutation.ReducibleTo(_dim);
-			}
-			public override IEnumerator<T> GetEnumerator() {
-				int c = 1 << _dim;
-				P i = new P();
-				foreach(P p in i.GetRange<P>(i, _dim))
-					for(int v = 0; v < c; ++v)
-						yield return new T(p, v);
-			}
-		}
-		private class FlipRotateGroup : FlipRotateSet, IFiniteGroup<T>
-		{
-			public FlipRotateGroup(byte dimensions) : base(dimensions) { }
-
-			public T IdentityElement { get { return None; } }
-		}
-		private sealed class ReflectionsSet : FlipRotateSet
-		{
-			public ReflectionsSet(byte dimensions) : base(dimensions) { }
-
-			public override long Count {
-				get {
-					return base.Count >> 1;
-				}
-			}
-			public override bool Contains(T item) {
-				return base.Contains(item) && item.IsReflection;
-			}
-			public override IEnumerator<T> GetEnumerator() {
-				int c = 1 << _dim;
-				P i = new P();
-				foreach(P p in i.GetRange<P>(i, _dim)) {
-					int s = p.SwapsCount;
-					for(int v = 0; v < c; ++v)
-						if(!IsRotational(s, v))
-							yield return new T(p, v);
-				}
-			}
-		}
-		private sealed class RotationsGroup : FlipRotateGroup
-		{
-			public RotationsGroup(byte dimensions) : base(dimensions) { }
-
-			public override long Count {
-				get {
-					long c = base.Count;
-					return c - (c >> 1);
-				}
-			}
-			public override bool Contains(T item) {
-				return base.Contains(item) && item.IsRotation;
-			}
-			public override IEnumerator<T> GetEnumerator() {
-				int c = 1 << _dim;
-				P i = new P();
-				foreach(P p in i.GetRange<P>(i, _dim)) {
-					int s = p.SwapsCount;
-					for(int v = 0; v < c; ++v)
-						if(IsRotational(s, v))
-							yield return new T(p, v);
-				}
 			}
 		}
 
@@ -222,7 +140,9 @@ namespace DotNetTransformer.Math.Transform {
 			return FiniteGroupExtension.Times<T>(this, count);
 		}
 
-		public override int GetHashCode() { return _value; }
+		public override int GetHashCode() {
+			return Permutation.GetHashCode() ^ Vertex;
+		}
 		public override bool Equals(object o) {
 			return o is T && Equals((T)o);
 		}

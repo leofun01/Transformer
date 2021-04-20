@@ -27,6 +27,8 @@
 									<summary><code>OctahedralGroup</code></summary>
 									<ul>
 										<li><a href="docs/svg/OctahedralGroup/CayleyGraph_2e_6af_4b_440x440.svg"><code>CayleyGraph_2e_6af_4b_440x440.svg</code></a></li>
+										<li><a href="docs/svg/OctahedralGroup/CayleyGraph_2e_6af_4b_440x440-v2.svg"><code>CayleyGraph_2e_6af_4b_440x440-v2.svg</code></a></li>
+										<li><a href="docs/svg/OctahedralGroup/CayleyGraph_2e_6af_4b_440x440-v3.svg"><code>CayleyGraph_2e_6af_4b_440x440-v3.svg</code></a></li>
 										<li><a href="docs/svg/OctahedralGroup/CayleyGraph_3e_2f_3a_4b_440x440.svg"><code>CayleyGraph_3e_2f_3a_4b_440x440.svg</code></a></li>
 									</ul>
 								</details>
@@ -128,14 +130,19 @@
 								<details open="open">
 									<summary><code>Transform</code></summary>
 									<ul>
-										<li><a href="DotNetTransformer/Math/Transform/FlipRotate16D.cs"><code>FlipRotate16D.cs</code></a></li>
 										<li><a href="DotNetTransformer/Math/Transform/FlipRotate2D.cs"><code>FlipRotate2D.cs</code></a></li>
 										<li><a href="DotNetTransformer/Math/Transform/FlipRotate3D.cs"><code>FlipRotate3D.cs</code></a></li>
 										<li><a href="DotNetTransformer/Math/Transform/FlipRotate4D.cs"><code>FlipRotate4D.cs</code></a></li>
 										<li><a href="DotNetTransformer/Math/Transform/FlipRotate8D.cs"><code>FlipRotate8D.cs</code></a></li>
+										<li><a href="DotNetTransformer/Math/Transform/FlipRotate16D.cs"><code>FlipRotate16D.cs</code></a></li>
 										<li><a href="DotNetTransformer/Math/Transform/FlipRotateExtension.cs"><code>FlipRotateExtension.cs</code></a></li>
+										<li><a href="DotNetTransformer/Math/Transform/FlipRotateGroup.cs"><code>FlipRotateGroup.cs</code></a></li>
+										<li><a href="DotNetTransformer/Math/Transform/FlipRotateSet.cs"><code>FlipRotateSet.cs</code></a></li>
 										<li><a href="DotNetTransformer/Math/Transform/IFlipRotate.cs"><code>IFlipRotate.cs</code></a></li>
 										<li><a href="DotNetTransformer/Math/Transform/Polygon120.cs"><code>Polygon120.cs</code></a></li>
+										<li><a href="DotNetTransformer/Math/Transform/ReflectionsSet.cs"><code>ReflectionsSet.cs</code></a></li>
+										<li><a href="DotNetTransformer/Math/Transform/RotationsGroup.cs"><code>RotationsGroup.cs</code></a></li>
+										<li><a href="DotNetTransformer/Math/Transform/SetType.cs"><code>SetType.cs</code></a></li>
 									</ul>
 								</details>
 							</li>

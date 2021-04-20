@@ -27,12 +27,15 @@ namespace DotNetTransformer.Math.Set {
 			return Equals(obj as IFiniteSet<T>);
 		}
 		public override int GetHashCode() {
-			int hash = (int)Count;
+			int hash = 0;
 			foreach(T item in this)
 				hash ^= item.GetHashCode();
-			return hash;
+			long c = Count;
+			return hash ^ (int)(c >> 32 ^ c);
 		}
 		public virtual bool IsSubsetOf(ISet<T> other) {
+			IFiniteSet<T> o = other as IFiniteSet<T>;
+			if(o != null) return IsSubsetOf(o);
 			return ReferenceEquals(this, other) || (
 				!ReferenceEquals(other, null)
 				&& !this.Exist<T>(e => !other.Contains(e))

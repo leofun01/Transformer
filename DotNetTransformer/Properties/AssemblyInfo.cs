@@ -7,7 +7,8 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("DotNetTransformer")]
-[assembly: AssemblyCopyright("Copyright © leofun01 2018-2020")]
+[assembly: AssemblyCopyright("Copyright © 2018-2021 leofun01")]
+// Full text of license available in ../../LICENSE
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -16,5 +17,5 @@ using System.Runtime.InteropServices;
 
 [assembly: Guid("02d87708-8e86-40e8-8be5-35ddef6292ed")]
 
-[assembly: AssemblyVersion("0.8.1.1")]
-[assembly: AssemblyFileVersion("0.8.1.1")]
+[assembly: AssemblyVersion("0.8.1.2")]
+[assembly: AssemblyFileVersion("0.8.1.2")]
