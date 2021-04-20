@@ -7,7 +7,8 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Test")]
-[assembly: AssemblyCopyright("Copyright © leofun01 2018-2020")]
+[assembly: AssemblyCopyright("Copyright © 2018-2021 leofun01")]
+// Full text of license available in ../../../LICENSE
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -15,5 +16,5 @@ using System.Runtime.InteropServices;
 
 [assembly: Guid("10c7802e-080d-4b00-a3c7-d33bc9e47b97")]
 
-[assembly: AssemblyVersion("0.8.0.1")]
-[assembly: AssemblyFileVersion("0.8.0.1")]
+[assembly: AssemblyVersion("0.8.1.2")]
+[assembly: AssemblyFileVersion("0.8.1.2")]
