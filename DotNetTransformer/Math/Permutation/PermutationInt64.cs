@@ -130,6 +130,17 @@ namespace DotNetTransformer.Math.Permutation {
 		public bool ReducibleTo(int length) {
 			return (_value & (-1L << (length << _s))) == 0L;
 		}
+		public P Swap(int i, int j) {
+			if(i < 0 || i >= _count) _throwOutOfRange(i, "i");
+			if(j < 0 || j >= _count) _throwOutOfRange(j, "j");
+			return new P(_swap(i, j, Value) ^ _mix);
+		}
+		private static long _swap(int i, int j, long v) {
+			i <<= _s;
+			j <<= _s;
+			long c = ((v >> i) ^ (v >> j)) & _mask;
+			return v ^ (c << i) ^ (c << j);
+		}
 
 		public P GetNextPermutation(int maxLength, Order<int> match) {
 			int[] a = ToArray();
@@ -330,6 +341,16 @@ namespace DotNetTransformer.Math.Permutation {
 				);
 			sb.Append(" }.");
 			throw new ArgumentException(sb.ToString());
+		}
+		[DebuggerStepThrough]
+		private static void _throwOutOfRange(int value, string name) {
+			throw new ArgumentOutOfRangeException(
+				name, value, string.Format(
+					CultureInfo.InvariantCulture,
+					"Argument \"{0}\" is out of range ({1}, {2}).",
+					name, 0, _count
+				)
+			);
 		}
 
 		public static bool operator ==(P l, P r) { return l.Equals(r); }

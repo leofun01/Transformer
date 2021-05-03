@@ -13,6 +13,7 @@ namespace DotNetTransformer.Math.Permutation {
 		int SwapsCount { get; }
 
 		bool ReducibleTo(int length);
+		T Swap(int i, int j);
 
 		T GetNextPermutation(int maxLength);
 		T GetPrevPermutation(int maxLength);
