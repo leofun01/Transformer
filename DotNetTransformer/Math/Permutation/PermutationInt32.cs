@@ -138,11 +138,23 @@ namespace DotNetTransformer.Math.Permutation {
 		}
 
 		public P GetNextPermutation(int maxLength, Order<int> match) {
-			int[] a = ToArray();
-			a.ApplyNextPermutation<int>(maxLength, match);
-			int r = 0;
-			for(int i = 0; i < _count; ++i)
-				r |= a[i] << (i << _s);
+			if(maxLength > _count) maxLength = _count;
+			int v = Value, r = v;
+			const int shift = 1 << _s;
+			int n = 0, i, prev, curr = v & _mask;
+			do {
+				prev = curr;
+				v >>= shift;
+				curr = v & _mask;
+			} while(++n < maxLength && match(prev, curr));
+			v = r;
+			if(n < maxLength) {
+				for(i = 0; match(v & _mask, curr); ++i)
+					v >>= shift;
+				r = _swap(i, n, r);
+			}
+			for(i = 0; i < --n; ++i)
+				r = _swap(i, n, r);
 			return new P(r ^ _mix);
 		}
 		public P GetNextPermutation(int maxLength) {
@@ -228,7 +240,7 @@ namespace DotNetTransformer.Math.Permutation {
 		public int[] ToArray() {
 			int v = Value;
 			int[] a = new int[_count];
-			int i = 0;
+			byte i = 0;
 			do {
 				a[i] = v & _mask;
 				v >>= 1 << _s;
