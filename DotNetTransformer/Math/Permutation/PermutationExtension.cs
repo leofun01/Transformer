@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using DotNetTransformer.Extensions;
 using DotNetTransformer.Math.Set;
@@ -89,6 +90,16 @@ namespace DotNetTransformer.Math.Permutation {
 				a[n] = a[i];
 				a[i] = t;
 			}
+		}
+		public static void ApplyNextPermutation<T>(this T[] a, int maxLength)
+			where T : IComparable<T>
+		{
+			ApplyNextPermutation<T>(a, maxLength, (T l, T r) => l != null && l.CompareTo(r) >= 0);
+		}
+		public static void ApplyPrevPermutation<T>(this T[] a, int maxLength)
+			where T : IComparable<T>
+		{
+			ApplyNextPermutation<T>(a, maxLength, (T l, T r) => l != null && l.CompareTo(r) <= 0);
 		}
 		public static void ApplyNextPermutation(this int[] a, int maxLength) {
 			ApplyNextPermutation<int>(a, maxLength, (int l, int r) => l >= r);
