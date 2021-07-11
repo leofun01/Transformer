@@ -74,11 +74,9 @@ namespace DotNetTransformer.Math.Permutation {
 			return r;
 		}
 
-		public static void ApplyNextPermutation<T>(this T[] a, int maxLength, IEnumerable<int> indexes, Order<T> match) {
+		public static void ApplyNextPermutation<T>(this T[] a, IEnumerable<int> indexes, Order<T> match) {
 			if(a == null || indexes == null) return;
 			if(match == null) throw new ArgumentNullException();
-			int length = a.GetLength(0);
-			if(length > maxLength) length = maxLength;
 			IEnumerator<int> ie = indexes.GetEnumerator();
 			bool moved = ie.MoveNext();
 			if(!moved) return;
@@ -102,15 +100,15 @@ namespace DotNetTransformer.Math.Permutation {
 			}
 			stack.Clear();
 		}
-		public static void ApplyNextPermutation<T>(this T[] a, int maxLength, IEnumerable<int> indexes)
+		public static void ApplyNextPermutation<T>(this T[] a, IEnumerable<int> indexes)
 			where T : IComparable<T>
 		{
-			ApplyNextPermutation<T>(a, maxLength, indexes, (T l, T r) => l != null && l.CompareTo(r) >= 0);
+			ApplyNextPermutation<T>(a, indexes, (T l, T r) => l != null && l.CompareTo(r) >= 0);
 		}
-		public static void ApplyPrevPermutation<T>(this T[] a, int maxLength, IEnumerable<int> indexes)
+		public static void ApplyPrevPermutation<T>(this T[] a, IEnumerable<int> indexes)
 			where T : IComparable<T>
 		{
-			ApplyNextPermutation<T>(a, maxLength, indexes, (T l, T r) => l != null && l.CompareTo(r) <= 0);
+			ApplyNextPermutation<T>(a, indexes, (T l, T r) => l != null && l.CompareTo(r) <= 0);
 		}
 
 		public static void ApplyNextPermutation<T>(this T[] a, int maxLength, Order<T> match) {
