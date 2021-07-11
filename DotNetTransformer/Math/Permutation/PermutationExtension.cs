@@ -75,6 +75,8 @@ namespace DotNetTransformer.Math.Permutation {
 		}
 
 		public static void ApplyNextPermutation<T>(this T[] a, int maxLength, Order<T> match) {
+			if(a == null) return;
+			if(match == null) throw new ArgumentNullException();
 			int length = a.GetLength(0);
 			if(length > maxLength) length = maxLength;
 			int n = 0, i;
