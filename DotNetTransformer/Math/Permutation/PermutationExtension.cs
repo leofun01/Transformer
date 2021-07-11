@@ -112,12 +112,6 @@ namespace DotNetTransformer.Math.Permutation {
 		{
 			ApplyNextPermutation<T>(a, maxLength, indexes, (T l, T r) => l != null && l.CompareTo(r) <= 0);
 		}
-		public static void ApplyNextPermutation(this int[] a, int maxLength, IEnumerable<int> indexes) {
-			ApplyNextPermutation<int>(a, maxLength, indexes, (int l, int r) => l >= r);
-		}
-		public static void ApplyPrevPermutation(this int[] a, int maxLength, IEnumerable<int> indexes) {
-			ApplyNextPermutation<int>(a, maxLength, indexes, (int l, int r) => l <= r);
-		}
 
 		public static void ApplyNextPermutation<T>(this T[] a, int maxLength, Order<T> match) {
 			if(a == null) return;
@@ -147,12 +141,6 @@ namespace DotNetTransformer.Math.Permutation {
 			where T : IComparable<T>
 		{
 			ApplyNextPermutation<T>(a, maxLength, (T l, T r) => l != null && l.CompareTo(r) <= 0);
-		}
-		public static void ApplyNextPermutation(this int[] a, int maxLength) {
-			ApplyNextPermutation<int>(a, maxLength, (int l, int r) => l >= r);
-		}
-		public static void ApplyPrevPermutation(this int[] a, int maxLength) {
-			ApplyNextPermutation<int>(a, maxLength, (int l, int r) => l <= r);
 		}
 
 		public static IEnumerable<T> GetRange<T>(this T start, T stop, int maxLength)
