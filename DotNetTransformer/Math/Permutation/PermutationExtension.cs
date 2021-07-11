@@ -82,8 +82,8 @@ namespace DotNetTransformer.Math.Permutation {
 			int n = 0, i;
 			while(++n < length && match(a[n - 1], a[n])) ;
 			if(n < length) {
-				for(i = 0; match(a[i], a[n]); ++i) ;
 				T t = a[n];
+				for(i = 0; match(a[i], t); ++i) ;
 				a[n] = a[i];
 				a[i] = t;
 			}
