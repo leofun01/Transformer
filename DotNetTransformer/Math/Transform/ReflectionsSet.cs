@@ -1,3 +1,15 @@
+//	ReflactionsSet.cs
+//	
+//	Based on :
+//		Math
+//			Set theory
+//			Abstract algebra
+//				Group theory
+//					Finite group
+//					Symmetry group
+//	
+//	Author   : leofun01
+
 using System.Collections.Generic;
 using DotNetTransformer.Extensions;
 using DotNetTransformer.Math.Permutation;

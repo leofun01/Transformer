@@ -1,3 +1,15 @@
+//	FlipRotate4D.cs
+//	
+//	Based on :
+//		Math
+//			Abstract algebra
+//				Group theory
+//					Finite group
+//					Symmetry group
+//					Non-commutative group (non-abelian group)
+//	
+//	Author   : leofun01
+
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;

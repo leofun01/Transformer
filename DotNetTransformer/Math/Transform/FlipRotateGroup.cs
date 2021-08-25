@@ -1,3 +1,14 @@
+//	FlipRotateGroup.cs
+//	
+//	Based on :
+//		Math
+//			Abstract algebra
+//				Group theory
+//					Finite group
+//					Symmetry group
+//	
+//	Author   : leofun01
+
 using DotNetTransformer.Extensions;
 using DotNetTransformer.Math.Group;
 using DotNetTransformer.Math.Permutation;

@@ -1,3 +1,5 @@
+//	Delegate.cs
+
 namespace DotNetTransformer.Extensions {
 	public delegate T Generator<T>(T arg);
 

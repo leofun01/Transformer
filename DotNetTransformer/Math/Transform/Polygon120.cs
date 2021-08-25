@@ -1,3 +1,15 @@
+//	Polygon120.cs
+//	
+//	Based on :
+//		Math
+//			Abstract algebra
+//				Group theory
+//					Finite group
+//					Dihedral group
+//					Symmetry group
+//	
+//	Author   : leofun01
+
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
