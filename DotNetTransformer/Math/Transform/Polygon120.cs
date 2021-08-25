@@ -19,15 +19,15 @@ namespace DotNetTransformer.Math.Transform {
 
 		private const byte _count = 240;
 		private const byte _mod = 120;
-		public static readonly FiniteGroup<T> AllValues;
 
 		/// <summary> No changes | 360 degree rotation. </summary>
 		public static T None { get { return new T(); } }
 		/// <summary> Horizontal flip. Reflection across y-axis. </summary>
 		public static T FlipX { get { return new T(1); } }
 		/// <summary> Vertical flip. Reflection across x-axis. </summary>
-		public static T FlipY { get { return new T(1 + _mod); } }
+		public static T FlipY { get { return new T(1 ^ _mod); } }
 
+		public static readonly IFiniteGroup<T> AllValues;
 		static Polygon120() {
 			AllValues = new DihedralGroupD120();
 		}
@@ -36,7 +36,6 @@ namespace DotNetTransformer.Math.Transform {
 		{
 			public DihedralGroupD120() { }
 
-			public override T IdentityElement { get { return None; } }
 			public override long Count { get { return _count; } }
 			public override bool Contains(T item) { return true; }
 			public override IEnumerator<T> GetEnumerator() {

@@ -130,13 +130,36 @@ namespace DotNetTransformer.Math.Permutation {
 		public bool ReducibleTo(int length) {
 			return (_value & (-1L << (length << _s))) == 0L;
 		}
+		public P Swap(int i, int j) {
+			if(i < 0 || i >= _count) _throwOutOfRange(i, "i");
+			if(j < 0 || j >= _count) _throwOutOfRange(j, "j");
+			return new P(_swap(i, j, Value) ^ _mix);
+		}
+		private static long _swap(int i, int j, long v) {
+			i <<= _s;
+			j <<= _s;
+			long c = ((v >> i) ^ (v >> j)) & _mask;
+			return v ^ (c << i) ^ (c << j);
+		}
 
 		public P GetNextPermutation(int maxLength, Order<int> match) {
-			int[] a = ToArray();
-			a.ApplyNextPermutation<int>(maxLength, match);
-			long r = 0;
-			for(int i = 0; i < _count; ++i)
-				r |= (long)a[i] << (i << _s);
+			if(maxLength > _count) maxLength = _count;
+			long v = Value, r = v;
+			const int shift = 1 << _s;
+			int n = 0, i, prev, curr = (int)(v & _mask);
+			do {
+				prev = curr;
+				v >>= shift;
+				curr = (int)(v & _mask);
+			} while(++n < maxLength && match(prev, curr));
+			v = r;
+			if(n < maxLength) {
+				for(i = 0; match((int)(v & _mask), curr); ++i)
+					v >>= shift;
+				r = _swap(i, n, r);
+			}
+			for(i = 0; i < --n; ++i)
+				r = _swap(i, n, r);
 			return new P(r ^ _mix);
 		}
 		public P GetNextPermutation(int maxLength) {
@@ -225,7 +248,7 @@ namespace DotNetTransformer.Math.Permutation {
 		public int[] ToArray() {
 			long v = Value;
 			int[] a = new int[_count];
-			int i = 0;
+			byte i = 0;
 			do {
 				a[i] = (int)(v & _mask);
 				v >>= 1 << _s;
@@ -330,6 +353,16 @@ namespace DotNetTransformer.Math.Permutation {
 				);
 			sb.Append(" }.");
 			throw new ArgumentException(sb.ToString());
+		}
+		[DebuggerStepThrough]
+		private static void _throwOutOfRange(int value, string name) {
+			throw new ArgumentOutOfRangeException(
+				name, value, string.Format(
+					CultureInfo.InvariantCulture,
+					"Argument \"{0}\" is out of range ({1}, {2}).",
+					name, 0, _count
+				)
+			);
 		}
 
 		public static bool operator ==(P l, P r) { return l.Equals(r); }

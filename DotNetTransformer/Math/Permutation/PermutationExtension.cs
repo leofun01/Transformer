@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using DotNetTransformer.Extensions;
 using DotNetTransformer.Math.Set;
@@ -73,28 +74,71 @@ namespace DotNetTransformer.Math.Permutation {
 			return r;
 		}
 
+		public static void ApplyNextPermutation<T>(this T[] a, IEnumerable<int> indexes, Order<T> match) {
+			if(a == null || indexes == null) return;
+			if(match == null) throw new ArgumentNullException();
+			IEnumerator<int> ie = indexes.GetEnumerator();
+			bool moved = ie.MoveNext();
+			if(!moved) return;
+			int n = ie.Current, p = n;
+			Stack<int> stack = new Stack<int>();
+			do
+				stack.Push(n);
+			while((moved = ie.MoveNext()) && match(a[p = n], a[n = ie.Current]));
+			if(moved) {
+				T t = a[n];
+				ie = indexes.GetEnumerator();
+				while(ie.MoveNext() && match(a[p = ie.Current], t)) ;
+				a[n] = a[p];
+				a[p] = t;
+			}
+			ie = indexes.GetEnumerator();
+			while(ie.MoveNext() && (n = ie.Current) < (p = stack.Pop())) {
+				T t = a[n];
+				a[n] = a[p];
+				a[p] = t;
+			}
+			stack.Clear();
+		}
+		public static void ApplyNextPermutation<T>(this T[] a, IEnumerable<int> indexes)
+			where T : IComparable<T>
+		{
+			ApplyNextPermutation<T>(a, indexes, (T l, T r) => l != null && l.CompareTo(r) >= 0);
+		}
+		public static void ApplyPrevPermutation<T>(this T[] a, IEnumerable<int> indexes)
+			where T : IComparable<T>
+		{
+			ApplyNextPermutation<T>(a, indexes, (T l, T r) => l != null && l.CompareTo(r) <= 0);
+		}
+
 		public static void ApplyNextPermutation<T>(this T[] a, int maxLength, Order<T> match) {
+			if(a == null) return;
+			if(match == null) throw new ArgumentNullException();
 			int length = a.GetLength(0);
 			if(length > maxLength) length = maxLength;
-			int n = 0, i;
+			int n = 0, p = 0;
 			while(++n < length && match(a[n - 1], a[n])) ;
 			if(n < length) {
-				for(i = 0; match(a[i], a[n]); ++i) ;
 				T t = a[n];
-				a[n] = a[i];
-				a[i] = t;
+				while(match(a[p], t)) ++p;
+				a[n] = a[p];
+				a[p] = t;
 			}
-			for(i = 0; i < --n; ++i) {
+			for(p = 0; p < --n; ++p) {
 				T t = a[n];
-				a[n] = a[i];
-				a[i] = t;
+				a[n] = a[p];
+				a[p] = t;
 			}
 		}
-		public static void ApplyNextPermutation(this int[] a, int maxLength) {
-			ApplyNextPermutation<int>(a, maxLength, (int l, int r) => l >= r);
+		public static void ApplyNextPermutation<T>(this T[] a, int maxLength)
+			where T : IComparable<T>
+		{
+			ApplyNextPermutation<T>(a, maxLength, (T l, T r) => l != null && l.CompareTo(r) >= 0);
 		}
-		public static void ApplyPrevPermutation(this int[] a, int maxLength) {
-			ApplyNextPermutation<int>(a, maxLength, (int l, int r) => l <= r);
+		public static void ApplyPrevPermutation<T>(this T[] a, int maxLength)
+			where T : IComparable<T>
+		{
+			ApplyNextPermutation<T>(a, maxLength, (T l, T r) => l != null && l.CompareTo(r) <= 0);
 		}
 
 		public static IEnumerable<T> GetRange<T>(this T start, T stop, int maxLength)
