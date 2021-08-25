@@ -69,8 +69,8 @@ namespace DotNetTransformer.Math.Set {
 			where S : ISubSet<T, S>
 		{
 			return ReferenceEquals(_this, other) || (
-				other.IsSupersetOf<T, S>(_this)
-				&& _this.IsSupersetOf<T, S>(other)
+				other.IsSupersetOf<T, S>(_this) &&
+				_this.IsSupersetOf<T, S>(other)
 			);
 		}
 		public static bool EqualsSupersets<T, S>(this S _this, S other)
@@ -78,8 +78,8 @@ namespace DotNetTransformer.Math.Set {
 			where S : ISuperSet<T, S>
 		{
 			return ReferenceEquals(_this, other) || (
-				other.IsSubsetOf<T, S>(_this)
-				&& _this.IsSubsetOf<T, S>(other)
+				other.IsSubsetOf<T, S>(_this) &&
+				_this.IsSubsetOf<T, S>(other)
 			);
 		}
 		public static bool Equals<T, U, S>(this U _this, S other)
@@ -88,8 +88,18 @@ namespace DotNetTransformer.Math.Set {
 			where S : ISet<T>
 		{
 			return ReferenceEquals(_this, other) || (
-				other.IsSupersetOf<T, S>(_this)
-				&& _this.IsSupersetOf(other)
+				other.IsSupersetOf<T, S>(_this) &&
+				_this.IsSupersetOf(other)
+			);
+		}
+		public static bool Equals<T, U, S>(this S _this, U other)
+			where T : IEquatable<T>
+			where U : ISubSet<T, S>, ISuperSet<T, S>
+			where S : ISet<T>
+		{
+			return ReferenceEquals(_this, other) || (
+				_this.IsSupersetOf<T, S>(other) &&
+				other.IsSupersetOf(_this)
 			);
 		}
 	}

@@ -8,7 +8,7 @@
 <h2 id="description">Description</h2>
 
 The main idea of project "Transformer" is
-using group theory in programming
+usage of group theory in programming
 to achieve the most efficient solutions.
 
 <h2 id="directory-structure">Directory structure</h2>
@@ -27,6 +27,8 @@ to achieve the most efficient solutions.
 									<summary><code>OctahedralGroup</code></summary>
 									<ul>
 										<li><a href="docs/svg/OctahedralGroup/CayleyGraph_2e_6af_4b_440x440.svg"><code>CayleyGraph_2e_6af_4b_440x440.svg</code></a></li>
+										<li><a href="docs/svg/OctahedralGroup/CayleyGraph_2e_6af_4b_440x440-v2.svg"><code>CayleyGraph_2e_6af_4b_440x440-v2.svg</code></a></li>
+										<li><a href="docs/svg/OctahedralGroup/CayleyGraph_2e_6af_4b_440x440-v3.svg"><code>CayleyGraph_2e_6af_4b_440x440-v3.svg</code></a></li>
 										<li><a href="docs/svg/OctahedralGroup/CayleyGraph_3e_2f_3a_4b_440x440.svg"><code>CayleyGraph_3e_2f_3a_4b_440x440.svg</code></a></li>
 									</ul>
 								</details>
@@ -47,7 +49,7 @@ to achieve the most efficient solutions.
 						<summary><code>txt</code></summary>
 						<ul>
 							<li><a href="docs/txt/Tesseract_16_v1.txt"><code>Tesseract_16_v1.txt</code></a></li>
-							<li><a href="docs/txt/TesseractResearchResult.txt"><code>TesseractResearchResult.txt</code></a></li>
+							<li><a href="docs/txt/hypercube-symmetries.md"><code>hypercube-symmetries.md</code></a></li>
 						</ul>
 					</details>
 				</li>
@@ -128,14 +130,19 @@ to achieve the most efficient solutions.
 								<details open="open">
 									<summary><code>Transform</code></summary>
 									<ul>
-										<li><a href="DotNetTransformer/Math/Transform/FlipRotate16D.cs"><code>FlipRotate16D.cs</code></a></li>
 										<li><a href="DotNetTransformer/Math/Transform/FlipRotate2D.cs"><code>FlipRotate2D.cs</code></a></li>
 										<li><a href="DotNetTransformer/Math/Transform/FlipRotate3D.cs"><code>FlipRotate3D.cs</code></a></li>
 										<li><a href="DotNetTransformer/Math/Transform/FlipRotate4D.cs"><code>FlipRotate4D.cs</code></a></li>
 										<li><a href="DotNetTransformer/Math/Transform/FlipRotate8D.cs"><code>FlipRotate8D.cs</code></a></li>
+										<li><a href="DotNetTransformer/Math/Transform/FlipRotate16D.cs"><code>FlipRotate16D.cs</code></a></li>
 										<li><a href="DotNetTransformer/Math/Transform/FlipRotateExtension.cs"><code>FlipRotateExtension.cs</code></a></li>
+										<li><a href="DotNetTransformer/Math/Transform/FlipRotateGroup.cs"><code>FlipRotateGroup.cs</code></a></li>
+										<li><a href="DotNetTransformer/Math/Transform/FlipRotateSet.cs"><code>FlipRotateSet.cs</code></a></li>
 										<li><a href="DotNetTransformer/Math/Transform/IFlipRotate.cs"><code>IFlipRotate.cs</code></a></li>
 										<li><a href="DotNetTransformer/Math/Transform/Polygon120.cs"><code>Polygon120.cs</code></a></li>
+										<li><a href="DotNetTransformer/Math/Transform/ReflectionsSet.cs"><code>ReflectionsSet.cs</code></a></li>
+										<li><a href="DotNetTransformer/Math/Transform/RotationsGroup.cs"><code>RotationsGroup.cs</code></a></li>
+										<li><a href="DotNetTransformer/Math/Transform/SetType.cs"><code>SetType.cs</code></a></li>
 									</ul>
 								</details>
 							</li>
@@ -172,6 +179,7 @@ to achieve the most efficient solutions.
 										<li><a href="DotNetTransformer/Test/Test_vs2013.csproj"><code>Test_vs2013.csproj</code></a></li>
 										<li><a href="DotNetTransformer/Test/Test_vs2015.csproj"><code>Test_vs2015.csproj</code></a></li>
 										<li><a href="DotNetTransformer/Test/Test_vs2017.csproj"><code>Test_vs2017.csproj</code></a></li>
+										<li><a href="DotNetTransformer/Test/Test_vs2019.csproj"><code>Test_vs2019.csproj</code></a></li>
 									</ul>
 								</details>
 							</li>
@@ -190,6 +198,7 @@ to achieve the most efficient solutions.
 							<li><a href="DotNetTransformer/DotNetTransformer_vs2013.csproj"><code>DotNetTransformer_vs2013.csproj</code></a></li>
 							<li><a href="DotNetTransformer/DotNetTransformer_vs2015.csproj"><code>DotNetTransformer_vs2015.csproj</code></a></li>
 							<li><a href="DotNetTransformer/DotNetTransformer_vs2017.csproj"><code>DotNetTransformer_vs2017.csproj</code></a></li>
+							<li><a href="DotNetTransformer/DotNetTransformer_vs2019.csproj"><code>DotNetTransformer_vs2019.csproj</code></a></li>
 						</ul>
 					</details>
 				</li>
@@ -221,6 +230,7 @@ to achieve the most efficient solutions.
 				<li><a href="VS/Transformer_vs2013.sln"><code>Transformer_vs2013.sln</code></a></li>
 				<li><a href="VS/Transformer_vs2015.sln"><code>Transformer_vs2015.sln</code></a></li>
 				<li><a href="VS/Transformer_vs2017.sln"><code>Transformer_vs2017.sln</code></a></li>
+				<li><a href="VS/Transformer_vs2019.sln"><code>Transformer_vs2019.sln</code></a></li>
 			</ul>
 		</details>
 	</li>

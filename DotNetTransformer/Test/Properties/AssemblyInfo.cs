@@ -9,7 +9,8 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Test")]
-[assembly: AssemblyCopyright("Copyright © leofun01 2018-2020")]
+[assembly: AssemblyCopyright("Copyright © 2018-2021 leofun01")]
+// Full text of license available in ../../../LICENSE
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -22,5 +23,5 @@ using System.Runtime.InteropServices;
 //		Minor Version 
 //		Build Number
 //		Revision
-[assembly: AssemblyVersion("0.8.0.1")]
-[assembly: AssemblyFileVersion("0.8.0.1")]
+[assembly: AssemblyVersion("0.8.1.2")]
+[assembly: AssemblyFileVersion("0.8.1.2")]
