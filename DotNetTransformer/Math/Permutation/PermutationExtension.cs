@@ -111,6 +111,33 @@ namespace DotNetTransformer.Math.Permutation {
 			ApplyNextPermutation<T>(a, indexes, (T l, T r) => l != null && l.CompareTo(r) <= 0);
 		}
 
+		public static void ApplyNextPermutation<T>(this T[] a, int maxLength, int indexMask, Order<T> match) {
+			int length = a.GetLength(0);
+			if(length > maxLength) length = maxLength;
+			indexMask &= (1 << length) - 1;
+			ApplyNextPermutation<T>(a,
+				new Collections.EnumerableConverter<int, int>(
+					EnumerableExtension.GetRange<int>(indexMask, 0, (int v) => v >> 1),
+					(int v) => {
+						int s = 0;
+						while((indexMask >> s) != v) ++s;
+						return s;
+					},
+					(int v) => (v & 1) != 0
+				), match
+			);
+		}
+		public static void ApplyNextPermutation<T>(this T[] a, int maxLength, int indexMask)
+			where T : IComparable<T>
+		{
+			ApplyNextPermutation<T>(a, maxLength, indexMask, (T l, T r) => l != null && l.CompareTo(r) >= 0);
+		}
+		public static void ApplyPrevPermutation<T>(this T[] a, int maxLength, int indexMask)
+			where T : IComparable<T>
+		{
+			ApplyNextPermutation<T>(a, maxLength, indexMask, (T l, T r) => l != null && l.CompareTo(r) <= 0);
+		}
+
 		public static void ApplyNextPermutation<T>(this T[] a, int maxLength, Order<T> match) {
 			if(a == null) return;
 			if(match == null) throw new ArgumentNullException();
